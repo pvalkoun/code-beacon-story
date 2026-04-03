@@ -129,3 +129,4 @@
 .docs-prose th { @apply border px-3 py-2 text-left font-semibold bg-muted text-sm; }
 .docs-prose td { @apply border px-3 py-2 text-sm; }
 .docs-prose code { @apply bg-muted px-1.5 py-0.5 rounded text-sm font-mono; }
+.docs-prose .code-block code { @apply bg-transparent px-0 py-0 rounded-none; }
