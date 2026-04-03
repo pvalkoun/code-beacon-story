@@ -34,7 +34,7 @@ const Index = () => {
               <Feature icon={Code2} text="Full API reference" />
               <Feature icon={Plug} text="Twilio & Genesys integrations" />
             </div>
-            <Button asChild className="w-full group-hover:bg-primary/90">
+            <Button asChild className="w-full bg-accent text-accent-foreground hover:bg-accent/90 font-semibold">
               <Link to="/products/scp">
                 Get Started <ArrowRight className="ml-2 h-4 w-4" />
               </Link>
