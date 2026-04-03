@@ -221,8 +221,6 @@ export function DocSidebar() {
           collapsed={collapsed}
           currentPath={location.pathname}
         />
-          </SidebarGroupContent>
-        </SidebarGroup>
 
         <SidebarGroup>
           <SidebarGroupLabel>Export</SidebarGroupLabel>
