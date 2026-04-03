@@ -242,28 +242,80 @@ export function DocSidebar() {
   );
 }
 
-function CollapsibleCategory({
-  label,
-  defaultOpen,
+function ApiCategoryAccordion({
+  categories,
+  endpoints,
+  productId,
   collapsed,
-  children,
+  currentPath,
 }: {
-  label: string;
-  defaultOpen: boolean;
+  categories: string[];
+  endpoints: { id: string; name: string; method: string; category: string }[];
+  productId: string;
   collapsed: boolean;
-  children: React.ReactNode;
+  currentPath: string;
 }) {
-  const [open, setOpen] = useState(defaultOpen);
-
-  if (collapsed) return <>{children}</>;
+  const activeCategory = categories.find(cat =>
+    endpoints.filter(ep => ep.category === cat).some(ep => currentPath.includes(ep.id))
+  );
+  const [openCategory, setOpenCategory] = useState<string | null>(activeCategory || null);
 
   return (
-    <Collapsible open={open} onOpenChange={setOpen}>
-      <CollapsibleTrigger className="flex w-full items-center justify-between px-3 py-1.5 text-[10px] uppercase tracking-wider text-sidebar-foreground/50 font-semibold mt-2 hover:text-sidebar-foreground/80 cursor-pointer">
-        <span>{label}</span>
-        {open ? <ChevronDown className="h-3 w-3" /> : <ChevronRight className="h-3 w-3" />}
-      </CollapsibleTrigger>
-      <CollapsibleContent>{children}</CollapsibleContent>
-    </Collapsible>
+    <SidebarGroup>
+      <SidebarGroupLabel>API Reference</SidebarGroupLabel>
+      <SidebarGroupContent>
+        <SidebarMenu>
+          {categories.map(cat => {
+            const catEndpoints = endpoints.filter(ep => ep.category === cat);
+            const isOpen = openCategory === cat;
+
+            if (collapsed) {
+              return catEndpoints.map(ep => (
+                <SidebarMenuItem key={ep.id}>
+                  <SidebarMenuButton asChild>
+                    <NavLink
+                      to={`/products/${productId}/api/${ep.id}`}
+                      activeClassName="bg-sidebar-accent text-sidebar-primary font-medium"
+                      className="flex items-center gap-2 pl-6"
+                    >
+                      <Code2 className="h-4 w-4" />
+                    </NavLink>
+                  </SidebarMenuButton>
+                </SidebarMenuItem>
+              ));
+            }
+
+            return (
+              <Collapsible
+                key={cat}
+                open={isOpen}
+                onOpenChange={(open) => setOpenCategory(open ? cat : null)}
+              >
+                <CollapsibleTrigger className="flex w-full items-center justify-between px-3 py-1.5 text-[10px] uppercase tracking-wider text-sidebar-foreground/50 font-semibold mt-2 hover:text-sidebar-foreground/80 cursor-pointer">
+                  <span>{cat}</span>
+                  {isOpen ? <ChevronDown className="h-3 w-3" /> : <ChevronRight className="h-3 w-3" />}
+                </CollapsibleTrigger>
+                <CollapsibleContent>
+                  {catEndpoints.map(ep => (
+                    <SidebarMenuItem key={ep.id}>
+                      <SidebarMenuButton asChild>
+                        <NavLink
+                          to={`/products/${productId}/api/${ep.id}`}
+                          activeClassName="bg-sidebar-accent text-sidebar-primary font-medium"
+                          className="flex items-center gap-2 pl-6"
+                        >
+                          <MethodBadge method={ep.method} />
+                          <span className="text-xs truncate">{ep.name}</span>
+                        </NavLink>
+                      </SidebarMenuButton>
+                    </SidebarMenuItem>
+                  ))}
+                </CollapsibleContent>
+              </Collapsible>
+            );
+          })}
+        </SidebarMenu>
+      </SidebarGroupContent>
+    </SidebarGroup>
   );
 }
