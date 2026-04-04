@@ -21,7 +21,7 @@ import { getIntegrationsForProduct } from "@/data/integrationData";
 import { MethodBadge } from "@/components/MethodBadge";
 import { Button } from "@/components/ui/button";
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible";
-import transunionLogo from "@/assets/transunion-logo.png";
+import { TransUnionLogo } from "@/components/TransUnionLogo";
 
 export function DocSidebar() {
   const location = useLocation();
@@ -41,7 +41,7 @@ export function DocSidebar() {
         <SidebarHeader className="p-4 border-b border-sidebar-border">
           {!collapsed && (
             <NavLink to="/" className="flex items-center gap-2">
-              <img src={transunionLogo} alt="TransUnion" className="h-6" />
+              <TransUnionLogo className="h-5 w-auto text-sidebar-foreground" />
               <span className="text-sidebar-foreground font-semibold text-sm">Developer Docs</span>
             </NavLink>
           )}
