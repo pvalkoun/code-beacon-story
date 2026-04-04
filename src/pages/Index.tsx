@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Shield, Palette, ArrowRight, BookOpen, Code2, Plug } from "lucide-react";
+import { Shield, Palette, ArrowRight, BookOpen, Code2 } from "lucide-react";
 
 const Index = () => {
   return (
