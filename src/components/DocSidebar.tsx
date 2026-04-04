@@ -21,6 +21,7 @@ import { getIntegrationsForProduct } from "@/data/integrationData";
 import { MethodBadge } from "@/components/MethodBadge";
 import { Button } from "@/components/ui/button";
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible";
+import transunionLogo from "@/assets/transunion-logo.png";
 
 export function DocSidebar() {
   const location = useLocation();
@@ -39,9 +40,9 @@ export function DocSidebar() {
       <Sidebar collapsible="icon">
         <SidebarHeader className="p-4 border-b border-sidebar-border">
           {!collapsed && (
-            <NavLink to="/" className="flex items-center gap-2 text-sidebar-foreground font-bold text-lg">
-              <span className="text-sidebar-primary">TCS</span>
-              <span>Developer Docs</span>
+            <NavLink to="/" className="flex items-center gap-2">
+              <img src={transunionLogo} alt="TransUnion" className="h-6" />
+              <span className="text-sidebar-foreground font-semibold text-sm">Developer Docs</span>
             </NavLink>
           )}
         </SidebarHeader>
@@ -84,29 +85,39 @@ export function DocSidebar() {
               </SidebarMenu>
             </SidebarGroupContent>
           </SidebarGroup>
-          <SidebarGroup>
-            <SidebarGroupLabel>Integrations</SidebarGroupLabel>
-            <SidebarGroupContent>
-              <SidebarMenu>
-                <SidebarMenuItem>
-                  <SidebarMenuButton asChild>
-                    <NavLink to="/integrations/twilio" activeClassName="bg-sidebar-accent text-sidebar-primary font-medium">
-                      <Plug className="h-4 w-4 mr-2" />
-                      {!collapsed && <span>Twilio</span>}
-                    </NavLink>
-                  </SidebarMenuButton>
-                </SidebarMenuItem>
-                <SidebarMenuItem>
-                  <SidebarMenuButton asChild>
-                    <NavLink to="/integrations/genesys" activeClassName="bg-sidebar-accent text-sidebar-primary font-medium">
-                      <Plug className="h-4 w-4 mr-2" />
-                      {!collapsed && <span>Genesys Cloud CX</span>}
-                    </NavLink>
-                  </SidebarMenuButton>
-                </SidebarMenuItem>
-              </SidebarMenu>
-            </SidebarGroupContent>
-          </SidebarGroup>
+          <Collapsible>
+            <SidebarGroup>
+              <CollapsibleTrigger className="flex w-full items-center justify-between px-3 py-1.5 text-xs font-semibold text-sidebar-foreground/70 hover:text-sidebar-foreground cursor-pointer">
+                <span className="flex items-center gap-2">
+                  <Plug className="h-4 w-4" />
+                  {!collapsed && <span>Integrations</span>}
+                </span>
+                {!collapsed && <ChevronRight className="h-3 w-3 transition-transform [[data-state=open]>&]:rotate-90" />}
+              </CollapsibleTrigger>
+              <CollapsibleContent>
+                <SidebarGroupContent>
+                  <SidebarMenu>
+                    <SidebarMenuItem>
+                      <SidebarMenuButton asChild>
+                        <NavLink to="/integrations/twilio" activeClassName="bg-sidebar-accent text-sidebar-primary font-medium">
+                          <Plug className="h-4 w-4 mr-2" />
+                          {!collapsed && <span>Twilio</span>}
+                        </NavLink>
+                      </SidebarMenuButton>
+                    </SidebarMenuItem>
+                    <SidebarMenuItem>
+                      <SidebarMenuButton asChild>
+                        <NavLink to="/integrations/genesys" activeClassName="bg-sidebar-accent text-sidebar-primary font-medium">
+                          <Plug className="h-4 w-4 mr-2" />
+                          {!collapsed && <span>Genesys Cloud CX</span>}
+                        </NavLink>
+                      </SidebarMenuButton>
+                    </SidebarMenuItem>
+                  </SidebarMenu>
+                </SidebarGroupContent>
+              </CollapsibleContent>
+            </SidebarGroup>
+          </Collapsible>
         </SidebarContent>
       </Sidebar>
     );

@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Shield, Palette, ArrowRight, BookOpen, Code2, Plug } from "lucide-react";
+import { Shield, Palette, ArrowRight, BookOpen, Code2 } from "lucide-react";
 
 const Index = () => {
   return (
@@ -32,7 +32,6 @@ const Index = () => {
             <div className="space-y-2 mb-4">
               <Feature icon={BookOpen} text="Step-by-step setup guide" />
               <Feature icon={Code2} text="Full API reference" />
-              <Feature icon={Plug} text="Twilio & Genesys integrations" />
             </div>
             <Button asChild className="w-full bg-accent text-accent-foreground hover:bg-accent/90 font-semibold">
               <Link to="/products/scp">
@@ -58,7 +57,6 @@ const Index = () => {
             <div className="space-y-2 mb-4">
               <Feature icon={BookOpen} text="Step-by-step setup guide" />
               <Feature icon={Code2} text="Full API reference" />
-              <Feature icon={Plug} text="Twilio & Genesys integrations" />
             </div>
             <Button asChild className="w-full bg-accent text-accent-foreground hover:bg-accent/90 font-semibold">
               <Link to="/products/bcd">
