@@ -4,6 +4,7 @@ import { endpointFieldDocs } from "@/data/apiFieldDocs";
 import { CodeBlock } from "@/components/CodeBlock";
 import { MethodBadge } from "@/components/MethodBadge";
 import type { FieldDoc } from "@/data/apiFieldDocs";
+import { AlertTriangle } from "lucide-react";
 
 function FieldTable({ title, fields }: { title: string; fields: FieldDoc[] }) {
   return (

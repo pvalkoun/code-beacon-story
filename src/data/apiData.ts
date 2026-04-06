@@ -11,6 +11,7 @@ export interface ApiEndpoint {
   headers?: { key: string; value: string }[];
   errorBody?: string;
   product?: ("scp" | "bcd" | "common")[];
+  imageRequirements?: string[];
 }
 
 export const apiEndpoints: ApiEndpoint[] = [
