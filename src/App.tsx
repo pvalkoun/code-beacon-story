@@ -11,6 +11,7 @@ import SetupGuide from "./pages/SetupGuide";
 import ApiEndpointPage from "./pages/ApiEndpointPage";
 import IntegrationPage from "./pages/IntegrationPage";
 import Changelog from "./pages/Changelog";
+import ChangelogSubscribe from "./pages/ChangelogSubscribe";
 import PreCallAuth from "./pages/PreCallAuth";
 import AnalyticsPage from "./pages/AnalyticsPage";
 import VerifySubscription from "./pages/VerifySubscription";
