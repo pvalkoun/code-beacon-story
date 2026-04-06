@@ -124,11 +124,11 @@ export default function Changelog() {
             </div>
 
             {status === "success" ? (
-              <div className="flex items-center gap-3 p-4 bg-green-50 dark:bg-green-950/20 rounded-lg border border-green-200 dark:border-green-900">
-                <CheckCircle2 className="h-5 w-5 text-green-600 shrink-0" />
+              <div className="flex items-center gap-3 p-4 bg-accent/10 rounded-lg border border-accent/30">
+                <CheckCircle2 className="h-5 w-5 text-primary shrink-0" />
                 <div>
-                  <p className="text-sm font-medium text-green-800 dark:text-green-200">Check your email!</p>
-                  <p className="text-sm text-green-700 dark:text-green-300">We've sent a verification link to {email}. Please verify to start receiving updates.</p>
+                  <p className="text-sm font-medium">Check your email!</p>
+                  <p className="text-sm text-muted-foreground">We've sent a verification link to {email}. Please verify to start receiving updates.</p>
                 </div>
               </div>
             ) : (
