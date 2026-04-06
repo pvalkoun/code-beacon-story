@@ -13,6 +13,7 @@ import IntegrationPage from "./pages/IntegrationPage";
 import Changelog from "./pages/Changelog";
 import PreCallAuth from "./pages/PreCallAuth";
 import AnalyticsPage from "./pages/AnalyticsPage";
+import VerifySubscription from "./pages/VerifySubscription";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -34,6 +35,7 @@ const App = () => (
             <Route path="/pre-call-auth" element={<PreCallAuth />} />
             <Route path="/resources/analytics" element={<AnalyticsPage />} />
             <Route path="/changelog" element={<Changelog />} />
+            <Route path="/changelog/verify" element={<VerifySubscription />} />
           </Route>
           <Route path="*" element={<NotFound />} />
         </Routes>
