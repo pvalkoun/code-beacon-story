@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import { useSearchParams } from "react-router-dom";
-import { supabase } from "@/integrations/supabase/client";
 import { Card, CardContent } from "@/components/ui/card";
 import { CheckCircle2, XCircle, Loader2 } from "lucide-react";
 
@@ -19,13 +18,6 @@ export default function VerifySubscription() {
 
     const verify = async () => {
       try {
-        const { data, error } = await supabase.functions.invoke("changelog-verify", {
-          body: null,
-          headers: {},
-        });
-
-        // Use fetch directly since we need query params
-        const projectId = import.meta.env.VITE_SUPABASE_URL?.replace("https://", "").split(".")[0];
         const res = await fetch(
           `${import.meta.env.VITE_SUPABASE_URL}/functions/v1/changelog-verify?token=${token}`,
           {

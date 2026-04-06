@@ -13,6 +13,7 @@ import IntegrationPage from "./pages/IntegrationPage";
 import Changelog from "./pages/Changelog";
 import PreCallAuth from "./pages/PreCallAuth";
 import AnalyticsPage from "./pages/AnalyticsPage";
+import VerifySubscription from "./pages/VerifySubscription";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
