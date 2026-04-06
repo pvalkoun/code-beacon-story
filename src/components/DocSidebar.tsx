@@ -34,6 +34,61 @@ export function DocSidebar() {
   const productId = pathParts[2] as "scp" | "bcd" | "cno" | undefined;
   const product = products.find(p => p.id === productId);
   const isIntegrationsSection = pathParts[3] === "integrations";
+  const isWebhookSection = location.pathname.startsWith("/resources/webhooks");
+
+  // Webhook section sidebar
+  if (isWebhookSection) {
+    return (
+      <Sidebar collapsible="icon">
+        <SidebarHeader className="p-4 border-b border-sidebar-border">
+          {!collapsed && (
+            <div>
+              <Button
+                variant="ghost"
+                size="sm"
+                onClick={() => navigate("/")}
+                className="mb-2 -ml-2 text-sidebar-foreground hover:text-sidebar-primary text-xs"
+              >
+                <ChevronLeft className="h-3 w-3 mr-1" />
+                All Products
+              </Button>
+              <div className="flex items-center gap-2">
+                <Bell className="h-5 w-5 text-sidebar-primary" />
+                <span className="font-bold text-sidebar-foreground">Webhooks</span>
+              </div>
+            </div>
+          )}
+        </SidebarHeader>
+        <SidebarContent>
+          <SidebarGroup>
+            <SidebarGroupLabel>Overview</SidebarGroupLabel>
+            <SidebarGroupContent>
+              <SidebarMenu>
+                <SidebarMenuItem>
+                  <SidebarMenuButton asChild>
+                    <NavLink to="/resources/webhooks" end activeClassName="bg-sidebar-accent text-sidebar-primary font-medium">
+                      <BookOpen className="h-4 w-4 mr-2" />
+                      {!collapsed && <span>Introduction</span>}
+                    </NavLink>
+                  </SidebarMenuButton>
+                </SidebarMenuItem>
+                <SidebarMenuItem>
+                  <SidebarMenuButton asChild>
+                    <NavLink to="/resources/webhooks/guide" activeClassName="bg-sidebar-accent text-sidebar-primary font-medium">
+                      <BookOpen className="h-4 w-4 mr-2" />
+                      {!collapsed && <span>Setup Guide</span>}
+                    </NavLink>
+                  </SidebarMenuButton>
+                </SidebarMenuItem>
+              </SidebarMenu>
+            </SidebarGroupContent>
+          </SidebarGroup>
+
+          <WebhookApiAccordion collapsed={collapsed} currentPath={location.pathname} />
+        </SidebarContent>
+      </Sidebar>
+    );
+  }
 
   // Home-level sidebar
   if (!product && !isIntegrationsSection) {
