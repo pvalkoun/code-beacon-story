@@ -21,7 +21,7 @@ import { getIntegrationsForProduct } from "@/data/integrationData";
 import { MethodBadge } from "@/components/MethodBadge";
 import { Button } from "@/components/ui/button";
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible";
-import { TransUnionLogo } from "@/components/TransUnionLogo";
+import tuLogo from "@/assets/transunion-favicon.png";
 
 export function DocSidebar() {
   const location = useLocation();
