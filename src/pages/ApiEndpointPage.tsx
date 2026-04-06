@@ -128,6 +128,19 @@ export default function ApiEndpointPage() {
         </>
       )}
 
+      {endpoint.errorBody && (
+        <>
+          <h2>Error Response</h2>
+          <div className="flex items-center gap-2 mb-2">
+            <span className="inline-flex items-center px-2 py-0.5 rounded text-xs font-bold bg-red-100 text-red-800">
+              400
+            </span>
+            <span className="text-sm text-muted-foreground">Bad Request</span>
+          </div>
+          <CodeBlock code={endpoint.errorBody} title="Error Response" language="json" />
+        </>
+      )}
+
       {endpoint.responseStatus === 204 && !endpoint.responseBody && (
         <>
           <h2>Response</h2>
