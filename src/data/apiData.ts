@@ -11,6 +11,7 @@ export interface ApiEndpoint {
   headers?: { key: string; value: string }[];
   errorBody?: string;
   product?: ("scp" | "bcd" | "common")[];
+  imageRequirements?: string[];
 }
 
 export const apiEndpoints: ApiEndpoint[] = [
@@ -569,7 +570,8 @@ export const apiEndpoints: ApiEndpoint[] = [
     name: "Create Image Profile",
     method: "POST",
     path: "/ccid/sdpr/v4/admin/account/{accountId}/image-profile",
-    description: "Upload an image profile for use with Branded Call Display. Submit a public image URL and receive an internal TransUnion image URL and profile ID that can be referenced in caller profiles.\n\n**Image Requirements:** The image must be exactly **256×256 pixels**, in **BMP format**, and under **200 KB** in size. Images that do not meet these requirements will be rejected with a 400 error.",
+    description: "Upload an image profile for use with Branded Call Display. Submit a public image URL and receive an internal TransUnion image URL and profile ID that can be referenced in caller profiles.",
+    imageRequirements: ["Image must be exactly 256×256 pixels", "Image must be in BMP format", "Image file size must be less than 200 KB"],
     errorBody: `{
   "error": "IMAGE_VALIDATION_FAILED",
   "message": "Image does not meet requirements",
