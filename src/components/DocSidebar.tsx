@@ -18,6 +18,7 @@ import { Home, Shield, Palette, BookOpen, Code2, Plug, ChevronLeft, ChevronDown,
 import { products } from "@/data/productData";
 import { getEndpointsForProduct, getCategories } from "@/data/apiData";
 import { getIntegrationsForProduct } from "@/data/integrationData";
+import { webhookEndpoints, webhookCategories } from "@/data/webhookData";
 import { MethodBadge } from "@/components/MethodBadge";
 import { Button } from "@/components/ui/button";
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible";
