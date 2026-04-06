@@ -1,12 +1,7 @@
-import { useState } from "react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
 import { Link } from "react-router-dom";
-import { Bell, CheckCircle2, AlertCircle } from "lucide-react";
-import { supabase } from "@/integrations/supabase/client";
+import { Bell } from "lucide-react";
 
 interface ChangelogEntry {
   date: string;
@@ -40,83 +35,7 @@ const changelog: ChangelogEntry[] = [
   },
 ];
 
-const FREE_EMAIL_DOMAINS = [
-  "gmail.com", "yahoo.com", "hotmail.com", "outlook.com", "aol.com",
-  "icloud.com", "mail.com", "protonmail.com", "zoho.com", "yandex.com",
-  "gmx.com", "live.com", "msn.com", "me.com", "fastmail.com",
-  "tutanota.com",
-];
-
 export default function Changelog() {
-  const [firstName, setFirstName] = useState("");
-  const [lastName, setLastName] = useState("");
-  const [email, setEmail] = useState("");
-  const [companyName, setCompanyName] = useState("");
-  const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
-  const [errorMsg, setErrorMsg] = useState("");
-
-  const validateWorkEmail = (email: string): string | null => {
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!emailRegex.test(email)) return "Please enter a valid email address";
-    const domain = email.toLowerCase().split("@")[1];
-    if (FREE_EMAIL_DOMAINS.includes(domain)) return "Please use a work email address (not Gmail, Yahoo, etc.)";
-    return null;
-  };
-
-  const handleSubscribe = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setErrorMsg("");
-
-    if (firstName.trim().length < 2) {
-      setErrorMsg("First name must be at least 2 characters");
-      return;
-    }
-    if (lastName.trim().length < 2) {
-      setErrorMsg("Last name must be at least 2 characters");
-      return;
-    }
-    if (companyName.trim().length < 2) {
-      setErrorMsg("Company name is required");
-      return;
-    }
-
-    const emailError = validateWorkEmail(email);
-    if (emailError) {
-      setErrorMsg(emailError);
-      return;
-    }
-
-    setStatus("loading");
-
-    try {
-      const { data, error } = await supabase.functions.invoke("changelog-subscribe", {
-        body: {
-          first_name: firstName.trim(),
-          last_name: lastName.trim(),
-          email: email.trim().toLowerCase(),
-          company_name: companyName.trim(),
-        },
-      });
-
-      if (error) {
-        setStatus("error");
-        setErrorMsg("Something went wrong. Please try again.");
-        return;
-      }
-
-      if (data?.error) {
-        setStatus("error");
-        setErrorMsg(data.error);
-        return;
-      }
-
-      setStatus("success");
-    } catch {
-      setStatus("error");
-      setErrorMsg("Something went wrong. Please try again.");
-    }
-  };
-
   return (
     <div className="docs-prose">
       <h1>Changelog</h1>
@@ -124,87 +43,27 @@ export default function Changelog() {
         Recent updates and additions to the TruContact Solutions API platform.
       </p>
 
-      {/* Subscription Form */}
+      {/* Subscribe CTA */}
       <div className="not-prose mt-6 mb-10">
         <Card className="bg-accent/5 border-accent/20">
           <CardContent className="p-6">
-            <div className="flex items-start gap-3 mb-4">
-              <Bell className="h-5 w-5 text-primary mt-0.5" />
-              <div>
-                <h3 className="text-base font-semibold">Subscribe to Updates</h3>
-                <p className="text-sm text-muted-foreground">
-                  Get notified when we publish new API changes, features, and updates. Work email required.
-                </p>
-              </div>
-            </div>
-
-            {status === "success" ? (
-              <div className="flex items-center gap-3 p-4 bg-accent/10 rounded-lg border border-accent/30">
-                <CheckCircle2 className="h-5 w-5 text-primary shrink-0" />
+            <div className="flex items-center justify-between gap-4 flex-wrap">
+              <div className="flex items-start gap-3">
+                <Bell className="h-5 w-5 text-primary mt-0.5" />
                 <div>
-                  <p className="text-sm font-medium">Check your email!</p>
-                  <p className="text-sm text-muted-foreground">We've sent a verification link to {email}. Please verify to start receiving updates.</p>
+                  <h3 className="text-base font-semibold">Stay up to date</h3>
+                  <p className="text-sm text-muted-foreground">
+                    Get notified when we publish new API changes, features, and updates.
+                  </p>
                 </div>
               </div>
-            ) : (
-              <form onSubmit={handleSubscribe} className="space-y-3">
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                  <div>
-                    <Label htmlFor="sub-first-name" className="sr-only">First Name</Label>
-                    <Input
-                      id="sub-first-name"
-                      placeholder="First name"
-                      value={firstName}
-                      onChange={(e) => setFirstName(e.target.value)}
-                      disabled={status === "loading"}
-                    />
-                  </div>
-                  <div>
-                    <Label htmlFor="sub-last-name" className="sr-only">Last Name</Label>
-                    <Input
-                      id="sub-last-name"
-                      placeholder="Last name"
-                      value={lastName}
-                      onChange={(e) => setLastName(e.target.value)}
-                      disabled={status === "loading"}
-                    />
-                  </div>
-                </div>
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                  <div>
-                    <Label htmlFor="sub-email" className="sr-only">Work Email</Label>
-                    <Input
-                      id="sub-email"
-                      type="email"
-                      placeholder="name@company.com"
-                      value={email}
-                      onChange={(e) => setEmail(e.target.value)}
-                      disabled={status === "loading"}
-                    />
-                  </div>
-                  <div>
-                    <Label htmlFor="sub-company" className="sr-only">Company Name</Label>
-                    <Input
-                      id="sub-company"
-                      placeholder="Company name"
-                      value={companyName}
-                      onChange={(e) => setCompanyName(e.target.value)}
-                      disabled={status === "loading"}
-                    />
-                  </div>
-                </div>
-                <Button type="submit" disabled={status === "loading"} className="w-full sm:w-auto">
-                  {status === "loading" ? "Subscribing..." : "Subscribe"}
-                </Button>
-              </form>
-            )}
-
-            {errorMsg && (
-              <div className="flex items-center gap-2 mt-3 text-sm text-destructive">
-                <AlertCircle className="h-4 w-4 shrink-0" />
-                {errorMsg}
-              </div>
-            )}
+              <Link
+                to="/changelog/subscribe"
+                className="inline-flex items-center justify-center rounded-md bg-primary text-primary-foreground px-4 py-2 text-sm font-medium hover:bg-primary/90 transition-colors no-underline"
+              >
+                Subscribe to Updates
+              </Link>
+            </div>
           </CardContent>
         </Card>
       </div>
