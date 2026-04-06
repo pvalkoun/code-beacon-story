@@ -201,7 +201,12 @@ exports.handler = async function (context, event, callback) {
       },
       {
         title: "What Happens",
-        content: "- Twilio initiates the call and posts a `StatusCallback` webhook with `CallStatus=initiated`\n- Your Function posts JSON to the CCID endpoint:\n\n```json\n{\n  \"from\": \"tel:+15557654321\",\n  \"to\": \"tel:+15551234567\"\n}\n```"
+        content: "- Twilio initiates the call and posts a `StatusCallback` webhook with `CallStatus=initiated`\n- Your Function posts JSON to the CCID endpoint:",
+        code: `{
+  "from": "tel:+15557654321",
+  "to": "tel:+15551234567"
+}`,
+        language: "json"
       },
       {
         title: "Step 9 — Test & Troubleshoot",
