@@ -52,13 +52,13 @@ export function DocSidebar() {
             <SidebarGroupContent>
               <SidebarMenu>
                 <SidebarMenuItem>
-55:                   <SidebarMenuButton asChild>
-56:                     <NavLink to="/" end activeClassName="bg-sidebar-accent text-sidebar-primary font-medium">
-57:                       <Home className="h-4 w-4 mr-2" />
-58:                       {!collapsed && <span>Home</span>}
-59:                     </NavLink>
-60:                   </SidebarMenuButton>
-61:                 </SidebarMenuItem>
+                  <SidebarMenuButton asChild>
+                    <NavLink to="/" end activeClassName="bg-sidebar-accent text-sidebar-primary font-medium">
+                      <Home className="h-4 w-4 mr-2" />
+                      {!collapsed && <span>Home</span>}
+                    </NavLink>
+                  </SidebarMenuButton>
+                </SidebarMenuItem>
                 <SidebarMenuItem>
                   <SidebarMenuButton asChild>
                     <NavLink to="/changelog" activeClassName="bg-sidebar-accent text-sidebar-primary font-medium">
