@@ -14,7 +14,7 @@ import {
   SidebarHeader,
   useSidebar,
 } from "@/components/ui/sidebar";
-import { Home, Shield, Palette, BookOpen, Code2, Plug, ChevronLeft, ChevronDown, ChevronRight, Download, ClipboardList } from "lucide-react";
+import { Home, Shield, Palette, BookOpen, Code2, Plug, ChevronLeft, ChevronDown, ChevronRight, Download, ClipboardList, Phone } from "lucide-react";
 import { products } from "@/data/productData";
 import { getEndpointsForProduct, getCategories } from "@/data/apiData";
 import { getIntegrationsForProduct } from "@/data/integrationData";
@@ -56,6 +56,14 @@ export function DocSidebar() {
                     <NavLink to="/" end activeClassName="bg-sidebar-accent text-sidebar-primary font-medium">
                       <Home className="h-4 w-4 mr-2" />
                       {!collapsed && <span>Home</span>}
+                    </NavLink>
+                  </SidebarMenuButton>
+                </SidebarMenuItem>
+                <SidebarMenuItem>
+                  <SidebarMenuButton asChild>
+                    <NavLink to="/pre-call-auth" activeClassName="bg-sidebar-accent text-sidebar-primary font-medium">
+                      <Phone className="h-4 w-4 mr-2" />
+                      {!collapsed && <span>Pre-Call Authentication</span>}
                     </NavLink>
                   </SidebarMenuButton>
                 </SidebarMenuItem>
