@@ -14,6 +14,16 @@ interface ChangelogEntry {
 const changelog: ChangelogEntry[] = [
   {
     date: "2026-04-06",
+    title: "Changelog Email Notifications",
+    description:
+      "You can now subscribe to receive email notifications whenever we publish updates to the TruContact Solutions API platform. Sign up with your work email to stay informed about new features, API changes, and platform improvements — delivered straight to your inbox.",
+    tags: ["New Feature", "Email"],
+    links: [
+      { label: "Subscribe Now", to: "/changelog/subscribe" },
+    ],
+  },
+  {
+    date: "2026-04-06",
     title: "Analytics API Documentation",
     description:
       "Added Analytics API reference under a new Resources section with full authentication flow, corrected endpoint paths (/ccid/analytics/v1/admin/account/{accountId}/tn and /tns), per-TN and account-wide call performance metrics for BCD and SCP services, cursor-based pagination, and detailed response schema references.",
