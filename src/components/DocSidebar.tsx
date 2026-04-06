@@ -41,7 +41,7 @@ export function DocSidebar() {
         <SidebarHeader className="p-4 border-b border-sidebar-border">
           {!collapsed && (
             <NavLink to="/" className="flex items-center gap-2">
-              <TransUnionLogo className="h-6 w-6 text-sidebar-primary" />
+              <img src={tuLogo} alt="TransUnion" className="h-6 w-6" />
               <span className="text-sidebar-foreground font-semibold text-sm">Developer Docs</span>
             </NavLink>
           )}
