@@ -14,10 +14,9 @@ import {
   SidebarHeader,
   useSidebar,
 } from "@/components/ui/sidebar";
-import { Home, Shield, Palette, BookOpen, Code2, Plug, ChevronLeft, ChevronDown, ChevronRight, Download, ClipboardList, Phone, Tag, BarChart3, FolderOpen, Bell } from "lucide-react";
+import { Home, Shield, Palette, BookOpen, Code2, Plug, ChevronLeft, ChevronDown, ChevronRight, Download, ClipboardList, Phone, Tag, BarChart3, Bell } from "lucide-react";
 import { products } from "@/data/productData";
 import { getEndpointsForProduct, getCategories } from "@/data/apiData";
-import { getIntegrationsForProduct } from "@/data/integrationData";
 import { webhookEndpoints, webhookCategories } from "@/data/webhookData";
 import { MethodBadge } from "@/components/MethodBadge";
 import { Button } from "@/components/ui/button";
