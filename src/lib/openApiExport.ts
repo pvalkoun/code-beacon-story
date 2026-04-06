@@ -98,7 +98,13 @@ export function generateOpenApiSpec(): Record<string, unknown> {
         content: {
           "application/json": {
             schema: requestSchema,
-            example: JSON.parse(ep.requestBody.replace(/\{\{[^}]+\}\}/g, '"placeholder"')),
+            ...((() => {
+              try {
+                return { example: JSON.parse(ep.requestBody!.replace(/\{\{[^}]+\}\}/g, '"placeholder"')) };
+              } catch {
+                return {};
+              }
+            })()),
           },
         },
       };
