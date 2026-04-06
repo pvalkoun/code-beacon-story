@@ -69,6 +69,23 @@ export default function ApiEndpointPage() {
 
       <p>{endpoint.description}</p>
 
+      {endpoint.imageRequirements && endpoint.imageRequirements.length > 0 && (
+        <div className="flex items-start gap-3 p-4 mb-6 rounded-lg border border-accent bg-accent/10">
+          <AlertTriangle className="h-5 w-5 text-accent-foreground mt-0.5 shrink-0" />
+          <div>
+            <p className="font-semibold text-sm mb-2 !mt-0">Image Requirements</p>
+            <ul className="!mb-0 text-sm space-y-1">
+              {endpoint.imageRequirements.map((req, i) => (
+                <li key={i}>{req}</li>
+              ))}
+            </ul>
+            <p className="text-xs text-muted-foreground mt-2 !mb-0">
+              Images that do not meet these requirements will be rejected with a 400 error.
+            </p>
+          </div>
+        </div>
+      )}
+
       {fieldDocs?.pathParams && fieldDocs.pathParams.length > 0 && (
         <FieldTable title="Path Parameters" fields={fieldDocs.pathParams} />
       )}
