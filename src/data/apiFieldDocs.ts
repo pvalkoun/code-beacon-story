@@ -252,7 +252,7 @@ export const endpointFieldDocs: Record<string, EndpointFieldDocs> = {
       { path: "account_id", type: "String", required: true, description: "The account this image profile belongs to" },
       { path: "image_url", type: "String", required: true, description: "Internal TransUnion-hosted image URL" },
       { path: "public_image_url", type: "String", required: true, description: "Original public URL submitted" },
-      { path: "service[]", type: "Array", required: true, description: "Service configuration with current partner statuses" },
+      { path: "partner[]", type: "Array", required: true, description: "Carrier partner statuses" },
       { path: "created_by", type: "String", required: true, description: "Creator user ID" },
       { path: "created_date", type: "DateTime", required: true, description: "Creation timestamp" },
     ],
