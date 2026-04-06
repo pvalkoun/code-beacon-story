@@ -89,7 +89,7 @@ Deno.serve(async (req) => {
     // Get all verified subscribers
     const { data: subscribers, error } = await supabase
       .from("changelog_subscribers")
-      .select("email, name")
+      .select("email, first_name")
       .eq("verified", true);
 
     if (error) {
