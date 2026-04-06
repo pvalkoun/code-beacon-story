@@ -67,8 +67,16 @@ export default function Changelog() {
     e.preventDefault();
     setErrorMsg("");
 
-    if (name.trim().length < 2) {
-      setErrorMsg("Name must be at least 2 characters");
+    if (firstName.trim().length < 2) {
+      setErrorMsg("First name must be at least 2 characters");
+      return;
+    }
+    if (lastName.trim().length < 2) {
+      setErrorMsg("Last name must be at least 2 characters");
+      return;
+    }
+    if (companyName.trim().length < 2) {
+      setErrorMsg("Company name is required");
       return;
     }
 
@@ -82,7 +90,12 @@ export default function Changelog() {
 
     try {
       const { data, error } = await supabase.functions.invoke("changelog-subscribe", {
-        body: { name: name.trim(), email: email.trim().toLowerCase() },
+        body: {
+          first_name: firstName.trim(),
+          last_name: lastName.trim(),
+          email: email.trim().toLowerCase(),
+          company_name: companyName.trim(),
+        },
       });
 
       if (error) {
