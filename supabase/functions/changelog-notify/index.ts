@@ -69,8 +69,7 @@ Deno.serve(async (req) => {
       (token && serviceRoleKey && token === serviceRoleKey)
     );
     
-    // Auth temporarily bypassed for notification trigger
-    if (false && !isAuthorized) {
+    if (!isAuthorized) {
       return new Response(JSON.stringify({ error: "Unauthorized" }), {
         status: 401,
         headers: { ...corsHeaders, "Content-Type": "application/json" },
