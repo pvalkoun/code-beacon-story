@@ -20,6 +20,7 @@ const App = () => (
       <Toaster />
       <Sonner />
       <BrowserRouter>
+        <ScrollToTop />
         <Routes>
           <Route element={<DocLayout />}>
             <Route path="/" element={<Index />} />
