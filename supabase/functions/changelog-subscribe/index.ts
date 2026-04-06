@@ -18,10 +18,24 @@ Deno.serve(async (req) => {
   }
 
   try {
-    const { name, email } = await req.json();
+    const { first_name, last_name, email, company_name } = await req.json();
 
-    if (!name || typeof name !== "string" || name.trim().length < 2) {
-      return new Response(JSON.stringify({ error: "Name is required (min 2 characters)" }), {
+    if (!first_name || typeof first_name !== "string" || first_name.trim().length < 2) {
+      return new Response(JSON.stringify({ error: "First name is required (min 2 characters)" }), {
+        status: 400,
+        headers: { ...corsHeaders, "Content-Type": "application/json" },
+      });
+    }
+
+    if (!last_name || typeof last_name !== "string" || last_name.trim().length < 2) {
+      return new Response(JSON.stringify({ error: "Last name is required (min 2 characters)" }), {
+        status: 400,
+        headers: { ...corsHeaders, "Content-Type": "application/json" },
+      });
+    }
+
+    if (!company_name || typeof company_name !== "string" || company_name.trim().length < 2) {
+      return new Response(JSON.stringify({ error: "Company name is required" }), {
         status: 400,
         headers: { ...corsHeaders, "Content-Type": "application/json" },
       });
