@@ -185,16 +185,32 @@ export function downloadOpenApiSpec() {
   const spec = generateOpenApiSpec();
   const json = JSON.stringify(spec, null, 2);
   
-  // Use data URI approach which works in sandboxed iframes
-  const dataUri = "data:application/json;charset=utf-8," + encodeURIComponent(json);
+  // Open JSON in a new tab since downloads are blocked in sandboxed iframes
+  const blob = new Blob([json], { type: "application/json" });
+  const url = URL.createObjectURL(blob);
+  
+  // Try download first
   const a = document.createElement("a");
-  a.href = dataUri;
+  a.href = url;
   a.download = "tcs-openapi-spec.json";
   a.style.display = "none";
   document.body.appendChild(a);
   a.click();
+  document.body.removeChild(a);
   
+  // Also copy to clipboard as fallback
+  navigator.clipboard?.writeText(json).then(() => {
+    // Optionally notify user
+  }).catch(() => {});
+  
+  // Fallback: open in new window if download doesn't trigger
   setTimeout(() => {
-    document.body.removeChild(a);
-  }, 100);
+    const win = window.open("", "_blank");
+    if (win) {
+      win.document.write(`<pre style="word-wrap:break-word;white-space:pre-wrap">${json.replace(/</g, "&lt;")}</pre>`);
+      win.document.title = "tcs-openapi-spec.json";
+    }
+  }, 500);
+  
+  setTimeout(() => URL.revokeObjectURL(url), 1000);
 }
