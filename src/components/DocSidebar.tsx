@@ -193,6 +193,14 @@ export function DocSidebar() {
                         <SidebarMenu className="ml-4 border-l border-sidebar-border pl-2 mt-1">
                         <SidebarMenuItem>
                           <SidebarMenuButton asChild>
+                            <NavLink to="/integrations/five9" activeClassName="bg-sidebar-accent text-sidebar-primary font-medium" className="text-xs">
+                              <Plug className="h-3.5 w-3.5 mr-2" />
+                              {!collapsed && <span>Five9</span>}
+                            </NavLink>
+                          </SidebarMenuButton>
+                        </SidebarMenuItem>
+                        <SidebarMenuItem>
+                          <SidebarMenuButton asChild>
                             <NavLink to="/integrations/twilio" activeClassName="bg-sidebar-accent text-sidebar-primary font-medium" className="text-xs">
                               <Plug className="h-3.5 w-3.5 mr-2" />
                               {!collapsed && <span>Twilio</span>}
