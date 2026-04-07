@@ -96,6 +96,7 @@ export function DocLayout() {
           <main className="flex-1 p-6 md:p-8 lg:p-10 max-w-5xl">
             <Outlet />
           </main>
+          <BackToTop />
         </div>
       </div>
     </SidebarProvider>
