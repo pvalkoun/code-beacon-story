@@ -60,7 +60,7 @@ export default function ProductOverview() {
             <Plug className="h-8 w-8 text-primary mb-3" />
             <h3 className="font-semibold mb-1">Integrations</h3>
             <p className="text-sm text-muted-foreground mb-3">
-              {integrations.map(i => i.platform).join(", ")} guides
+              {integrations.length > 0 ? `${integrations.map(i => i.platform).join(", ")} guides` : "Platform integration guides"}
             </p>
             <Button asChild size="sm" variant="outline" className="mt-auto">
               <Link to={`/integrations/${integrations[0]?.id || "twilio"}`}>
