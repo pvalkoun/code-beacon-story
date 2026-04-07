@@ -47,6 +47,51 @@ import amazonConnectCloudwatchLogs from "@/assets/amazon-connect/amazon-connect-
 
 export const integrations: Integration[] = [
   {
+    id: "five9",
+    name: "Five9 Integration",
+    platform: "Five9",
+    description: "Native integration between TransUnion TruContact Solutions and Five9 — all configuration is managed directly within the Five9 portal with no custom development required.",
+    products: ["scp", "bcd"],
+    sections: [
+      {
+        title: "Overview",
+        content: "Five9 is a leading cloud contact center platform trusted by thousands of enterprises worldwide. Founded in 2001 and headquartered in San Jose, California, Five9 provides a comprehensive suite of cloud-based contact center software including inbound, outbound, and blended omnichannel solutions powered by AI and automation.\n\nTransUnion and Five9 have partnered to deliver a tight, native integration for TruContact Caller Identity solutions. Unlike other platforms that require custom middleware, serverless functions, or webhook handlers, the Five9 integration is fully managed within the Five9 portal — no custom code, no external hosting, and no additional infrastructure to maintain."
+      },
+      {
+        title: "Why Five9 + TransUnion?",
+        content: "- Purpose-built native integration — no custom development required\n- All configuration is completed within the Five9 administration portal\n- Automatic STIR/SHAKEN token signing on outbound calls\n- Support for both Branded Call Display (BCD) and Spoofed Call Protection (SCP)\n- Real-time call authentication with minimal added latency\n- Enterprise-grade reliability backed by Five9's cloud infrastructure\n- Simplified onboarding — get up and running in minutes, not days"
+      },
+      {
+        title: "Prerequisites",
+        content: "Before enabling the TransUnion integration in Five9, ensure you have:\n\n- An active Five9 account with administrator access\n- A TransUnion TCS account with completed onboarding (Account, TCS, Feature, Caller Profile, and TN Asset)\n- Your TransUnion API key\n- The telephone numbers (TNs) you wish to authenticate must be provisioned in both Five9 and TCS"
+      },
+      {
+        title: "How It Works",
+        content: "The Five9 integration operates seamlessly behind the scenes:\n\n1. An agent or campaign initiates an outbound call through Five9\n2. Five9 automatically triggers a pre-call authentication request to TransUnion's CCID endpoint\n3. TransUnion validates the caller identity and signs the call with a STIR/SHAKEN token\n4. The call is placed with full attestation, ensuring the recipient sees a verified caller identity\n\nThis entire flow is handled natively by Five9 — there is no need to build or maintain any external integration logic."
+      },
+      {
+        title: "Configuration Steps",
+        content: "All setup is performed within the Five9 VCC Administrator portal:\n\n1. Log in to your Five9 Virtual Contact Center (VCC) Administrator\n2. Navigate to the TransUnion integration settings (contact your Five9 account team for exact menu location as it may vary by release)\n3. Enter your TransUnion API key\n4. Configure the telephone numbers you want to authenticate\n5. Enable the integration\n6. Five9 will begin authenticating outbound calls automatically"
+      },
+      {
+        title: "Supported Products",
+        content: "| Product | Description |\n|---------|-------------|\n| Branded Call Display (BCD) | Display your verified business name, logo, and call reason on the recipient's phone |\n| Spoofed Call Protection (SCP) | Protect your telephone numbers from being spoofed by bad actors |\n| Pre-Call Authentication | STIR/SHAKEN token signing for call attestation |"
+      },
+      {
+        title: "Testing & Verification",
+        content: "After enabling the integration:\n\n1. Place a test outbound call from Five9\n2. Verify on the recipient's device that the call displays as verified\n3. Check the Five9 call logs to confirm the STIR/SHAKEN authentication was applied\n4. If using BCD, confirm the business name and branding appear on the recipient's phone"
+      },
+      {
+        title: "Troubleshooting",
+        content: "| Issue | Possible Cause | Solution |\n|-------|----------------|----------|\n| Calls not showing as verified | Integration not enabled | Verify the TransUnion integration is active in Five9 VCC Administrator |\n| Authentication failures | Invalid API key | Confirm the TransUnion API key is correct and active |\n| TN not authenticated | TN not provisioned in TCS | Ensure the telephone number is registered in your TCS Caller Profile |\n| Branding not displaying | BCD feature not enabled | Confirm BCD is enabled in your TCS account and the caller profile is approved |"
+      },
+      {
+        title: "Support & Resources",
+        content: "| Type | Contact |\n|------|--------|\n| Five9 Technical Support | Contact your Five9 account team or visit the Five9 Support Portal |\n| TransUnion TCS Support | PDLTCSProductOps@transunion.com |\n| API Key Requests | Your TransUnion account manager |\n| General Inquiries | PDLTCSProductOps@transunion.com |"
+      }
+    ]
+  },
+  {
     id: "twilio",
     name: "Twilio Integration",
     platform: "Twilio",
