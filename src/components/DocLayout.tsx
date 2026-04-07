@@ -39,6 +39,26 @@ function useBreadcrumbs() {
     const ig = getIntegration(parts[1]);
     crumbs.push({ label: "Integrations", path: "/" });
     if (ig) crumbs.push({ label: ig.platform, path: `/integrations/${parts[1]}` });
+  } else if (parts[0] === "pre-call-auth") {
+    crumbs.push({ label: "Pre-Call Authentication", path: "/pre-call-auth" });
+  } else if (parts[0] === "resources" && parts[1] === "analytics") {
+    crumbs.push({ label: "Resources", path: "/" });
+    crumbs.push({ label: "Analytics", path: "/resources/analytics" });
+  } else if (parts[0] === "resources" && parts[1] === "webhooks") {
+    crumbs.push({ label: "Resources", path: "/" });
+    crumbs.push({ label: "Webhooks", path: "/resources/webhooks" });
+    if (parts[2] === "guide") {
+      crumbs.push({ label: "Setup Guide", path: "/resources/webhooks/guide" });
+    } else if (parts[2] === "api" && parts[3]) {
+      crumbs.push({ label: "API Reference", path: "/resources/webhooks" });
+      crumbs.push({ label: parts[3].replace(/-/g, " ").replace(/\b\w/g, c => c.toUpperCase()), path: `/resources/webhooks/api/${parts[3]}` });
+    }
+  } else if (parts[0] === "changelog") {
+    crumbs.push({ label: "Resources", path: "/" });
+    crumbs.push({ label: "Changelog", path: "/changelog" });
+    if (parts[1] === "subscribe") {
+      crumbs.push({ label: "Subscribe", path: "/changelog/subscribe" });
+    }
   }
 
   return crumbs;
