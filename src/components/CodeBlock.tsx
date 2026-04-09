@@ -51,9 +51,15 @@ function highlightJson(code: string): React.ReactNode[] {
         continue;
       }
 
-      // Everything else (brackets, commas, whitespace)
-      parts.push(<span key={key++} className="code-punctuation">{remaining[0]}</span>);
-      remaining = remaining.slice(1);
+      // Everything else (brackets, commas, whitespace) — batch contiguous chars
+      let rest = "";
+      while (remaining.length > 0 && !remaining.match(/^("|-?\d|true|false|null)/)) {
+        rest += remaining[0];
+        remaining = remaining.slice(1);
+      }
+      if (rest) {
+        parts.push(<span key={key++} className="code-punctuation">{rest}</span>);
+      }
     }
 
     return (
@@ -91,9 +97,10 @@ export function CodeBlock({ code, language = "json", title }: CodeBlockProps) {
         </div>
       )}
       <div className="code-block group relative">
-        <pre className="p-4 overflow-x-auto text-sm leading-relaxed">
+        <pre className="p-4 overflow-x-auto text-sm leading-relaxed whitespace-pre" style={{ userSelect: 'text' }}>
           <code>{highlighted}</code>
         </pre>
+        {/* Hidden textarea for clean plain-text selection fallback */}
         {!title && (
           <div className="absolute right-2 top-2">
             <Button variant="ghost" size="icon" onClick={handleCopy} className="h-7 w-7 text-[hsl(210_14%_73%)] hover:text-[hsl(210_14%_93%)] bg-[hsl(220_13%_24%)] hover:bg-[hsl(220_13%_28%)]">
