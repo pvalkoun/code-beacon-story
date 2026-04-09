@@ -51,9 +51,15 @@ function highlightJson(code: string): React.ReactNode[] {
         continue;
       }
 
-      // Everything else (brackets, commas, whitespace)
-      parts.push(<span key={key++} className="code-punctuation">{remaining[0]}</span>);
-      remaining = remaining.slice(1);
+      // Everything else (brackets, commas, whitespace) — batch contiguous chars
+      let rest = "";
+      while (remaining.length > 0 && !remaining.match(/^("|-?\d|true|false|null)/)) {
+        rest += remaining[0];
+        remaining = remaining.slice(1);
+      }
+      if (rest) {
+        parts.push(<span key={key++} className="code-punctuation">{rest}</span>);
+      }
     }
 
     return (
