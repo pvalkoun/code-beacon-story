@@ -35,7 +35,7 @@ jobs:
       - name: Build
         run: npm run build
         env:
-          VITE_BASE_PATH: /developers
+          VITE_BASE_PATH: /code-beacon-story
 
       - name: Setup Pages
         uses: actions/configure-pages@v5
