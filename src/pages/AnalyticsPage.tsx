@@ -23,7 +23,7 @@ const singleTnResponse = `{
     "bcd": [
       {
         "bcd_name": "My Campaign",
-        "type": "rich",
+        "type": "rich-bcd",
         "service_providers": [
           {
             "service_provider_name": "att",
@@ -62,7 +62,7 @@ const allTnsResponse = `{
         "bcd": [
           {
             "bcd_name": "My Campaign",
-            "type": "rich",
+            "type": "rich-bcd",
             "service_providers": [
               {
                 "service_provider_name": "att",
@@ -295,7 +295,7 @@ export default function AnalyticsPage() {
           </thead>
           <tbody>
             <tr className="border-b"><td className="py-2 px-3 font-mono text-xs">bcd_name</td><td className="py-2 px-3 text-xs">string</td><td className="py-2 px-3 text-muted-foreground">Campaign or caller profile name</td></tr>
-            <tr className="border-b"><td className="py-2 px-3 font-mono text-xs">type</td><td className="py-2 px-3 text-xs">string</td><td className="py-2 px-3 text-muted-foreground">BCD type (e.g. "rich", "basic")</td></tr>
+            <tr className="border-b"><td className="py-2 px-3 font-mono text-xs">type</td><td className="py-2 px-3 text-xs">string</td><td className="py-2 px-3 text-muted-foreground">BCD type (e.g. "rich-bcd", "basic")</td></tr>
             <tr className="border-b"><td className="py-2 px-3 font-mono text-xs">service_providers[].service_provider_name</td><td className="py-2 px-3 text-xs">string</td><td className="py-2 px-3 text-muted-foreground">Carrier name</td></tr>
             <tr className="border-b"><td className="py-2 px-3 font-mono text-xs">service_providers[].count</td><td className="py-2 px-3 text-xs">integer</td><td className="py-2 px-3 text-muted-foreground">Total call count</td></tr>
             <tr className="border-b"><td className="py-2 px-3 font-mono text-xs">service_providers[].answer_rate</td><td className="py-2 px-3 text-xs">number</td><td className="py-2 px-3 text-muted-foreground">Ratio of answered calls (0–1)</td></tr>
