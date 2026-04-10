@@ -1,4 +1,4 @@
-import { Outlet } from "react-router-dom";
+import { Outlet, Link } from "react-router-dom";
 import BackToTop from "@/components/BackToTop";
 import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
 import { DocSidebar } from "@/components/DocSidebar";
@@ -79,7 +79,7 @@ export function DocLayout() {
                   <BreadcrumbItem key={crumb.path}>
                     {i < crumbs.length - 1 ? (
                       <>
-                        <BreadcrumbLink href={crumb.path}>{crumb.label}</BreadcrumbLink>
+                        <BreadcrumbLink asChild><Link to={crumb.path}>{crumb.label}</Link></BreadcrumbLink>
                         <BreadcrumbSeparator />
                       </>
                     ) : (
