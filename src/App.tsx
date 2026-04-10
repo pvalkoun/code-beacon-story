@@ -22,12 +22,14 @@ import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
 
+const basename = import.meta.env.VITE_BASE_PATH || "/";
+
 const App = () => (
   <QueryClientProvider client={queryClient}>
     <TooltipProvider>
       <Toaster />
       <Sonner />
-     <BrowserRouter>  
+     <BrowserRouter basename={basename}>  
         <ScrollToTop />
         <Routes>
           <Route element={<DocLayout />}>
