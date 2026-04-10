@@ -79,7 +79,7 @@ export function DocLayout() {
                   <BreadcrumbItem key={crumb.path}>
                     {i < crumbs.length - 1 ? (
                       <>
-                        <BreadcrumbLink href={crumb.path}>{crumb.label}</BreadcrumbLink>
+                        <BreadcrumbLink asChild><Link to={crumb.path}>{crumb.label}</Link></BreadcrumbLink>
                         <BreadcrumbSeparator />
                       </>
                     ) : (
