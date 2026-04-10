@@ -1,7 +1,6 @@
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Link } from "react-router-dom";
-import { Bell } from "lucide-react";
 
 interface ChangelogEntry {
   date: string;
@@ -12,16 +11,6 @@ interface ChangelogEntry {
 }
 
 const changelog: ChangelogEntry[] = [
-  {
-    date: "2026-04-06",
-    title: "Changelog Email Notifications",
-    description:
-      "You can now subscribe to receive email notifications whenever we publish updates to the TruContact Solutions API platform. Sign up with your work email to stay informed about new features, API changes, and platform improvements — delivered straight to your inbox.",
-    tags: ["New Feature", "Email"],
-    links: [
-      { label: "Subscribe Now", to: "/changelog/subscribe" },
-    ],
-  },
   {
     date: "2026-04-06",
     title: "Analytics API Documentation",
@@ -53,32 +42,7 @@ export default function Changelog() {
         Recent updates and additions to the TruContact Solutions API platform.
       </p>
 
-      {/* Subscribe CTA */}
-      <div className="not-prose mt-6 mb-10">
-        <Card className="bg-accent/5 border-accent/20">
-          <CardContent className="p-6">
-            <div className="flex items-center justify-between gap-4 flex-wrap">
-              <div className="flex items-start gap-3">
-                <Bell className="h-5 w-5 text-primary mt-0.5" />
-                <div>
-                  <h3 className="text-base font-semibold">Stay up to date</h3>
-                  <p className="text-sm text-muted-foreground">
-                    Get notified when we publish new API changes, features, and updates.
-                  </p>
-                </div>
-              </div>
-              <Link
-                to="/changelog/subscribe"
-                className="inline-flex items-center justify-center rounded-md bg-primary text-primary-foreground px-4 py-2 text-sm font-medium hover:bg-primary/90 transition-colors no-underline"
-              >
-                Subscribe to Updates
-              </Link>
-            </div>
-          </CardContent>
-        </Card>
-      </div>
-
-      <div className="space-y-6 not-prose">
+      <div className="space-y-6 not-prose mt-6">
         {changelog.map((entry, i) => (
           <Card key={i} className="border-l-4 border-l-primary">
             <CardContent className="p-6">

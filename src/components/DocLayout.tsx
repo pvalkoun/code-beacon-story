@@ -57,9 +57,6 @@ function useBreadcrumbs() {
   } else if (parts[0] === "changelog") {
     crumbs.push({ label: "Resources", path: "/" });
     crumbs.push({ label: "Changelog", path: "/changelog" });
-    if (parts[1] === "subscribe") {
-      crumbs.push({ label: "Subscribe", path: "/changelog/subscribe" });
-    }
   }
 
   return crumbs;
