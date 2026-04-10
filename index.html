@@ -26,6 +26,19 @@
   <meta name="twitter:title" content="TruContact Developer Docs — Trusted Call Solutions">
   <meta property="og:description" content="Developer documentation for TransUnion TruContact Trusted Call Solutions. API reference, setup guides, and integration docs for Spoofed Call Protection and Branded Call Display.">
   <meta name="twitter:description" content="Developer documentation for TransUnion TruContact Trusted Call Solutions. API reference, setup guides, and integration docs for Spoofed Call Protection and Branded Call Display.">
+  <!-- GitHub Pages SPA redirect handler -->
+  <script type="text/javascript">
+    (function(l) {
+      if (l.search[1] === '/') {
+        var decoded = l.search.slice(1).split('&').map(function(s) {
+          return s.replace(/~and~/g, '&')
+        }).join('?');
+        window.history.replaceState(null, null,
+          l.pathname + decoded + l.hash
+        );
+      }
+    }(window.location))
+  </script>
 </head>
 
   <body>
