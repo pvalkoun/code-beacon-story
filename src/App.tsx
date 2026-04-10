@@ -11,10 +11,8 @@ import SetupGuide from "./pages/SetupGuide";
 import ApiEndpointPage from "./pages/ApiEndpointPage";
 import IntegrationPage from "./pages/IntegrationPage";
 import Changelog from "./pages/Changelog";
-import ChangelogSubscribe from "./pages/ChangelogSubscribe";
 import PreCallAuth from "./pages/PreCallAuth";
 import AnalyticsPage from "./pages/AnalyticsPage";
-import VerifySubscription from "./pages/VerifySubscription";
 import WebhookOverview from "./pages/WebhookOverview";
 import WebhookSetupGuide from "./pages/WebhookSetupGuide";
 import WebhookEndpointPage from "./pages/WebhookEndpointPage";
@@ -41,8 +39,6 @@ const App = () => (
             <Route path="/pre-call-auth" element={<PreCallAuth />} />
             <Route path="/resources/analytics" element={<AnalyticsPage />} />
             <Route path="/changelog" element={<Changelog />} />
-            <Route path="/changelog/subscribe" element={<ChangelogSubscribe />} />
-            <Route path="/changelog/verify" element={<VerifySubscription />} />
             <Route path="/resources/webhooks" element={<WebhookOverview />} />
             <Route path="/resources/webhooks/guide" element={<WebhookSetupGuide />} />
             <Route path="/resources/webhooks/api/:endpointId" element={<WebhookEndpointPage />} />
