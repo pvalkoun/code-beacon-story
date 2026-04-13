@@ -418,7 +418,7 @@ client.calls.create(
         title: "Step 4 — Create Call Rule",
         content: "Call Rules allow you to execute data actions automatically as part of your outbound campaign workflow.\n\n1. Go to **Admin** → **Outbound** → **Rule Management**\n2. Click **Create New Rule** or **Add Rule** (+) icon\n3. Set **Rule Name**: `TU CCID Authentication Rule`\n4. Configure the rule with **Call Authentication** category",
         images: [
-          { src: genesysCallRule, alt: "Genesys Cloud — Call Rule Set creation", caption: "Creating a new Call Rule Set with the Pre-Call rule" }
+          { src: genesysCallRule, alt: "Genesys Cloud — Call Rule Set creation", caption: "Creating a new Call Rule Set with the Call Authentication rule" }
         ]
       },
       {
