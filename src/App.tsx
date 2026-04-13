@@ -36,7 +36,7 @@ const App = () => (
             <Route path="/products/:productId/guide" element={<SetupGuide />} />
             <Route path="/products/:productId/api/:endpointId" element={<ApiEndpointPage />} />
             <Route path="/integrations/:integrationId" element={<IntegrationPage />} />
-            <Route path="/pre-call-auth" element={<PreCallAuth />} />
+            <Route path="/call-auth" element={<PreCallAuth />} />
             <Route path="/resources/analytics" element={<AnalyticsPage />} />
             <Route path="/changelog" element={<Changelog />} />
             <Route path="/resources/webhooks" element={<WebhookOverview />} />
