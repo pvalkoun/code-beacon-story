@@ -18,7 +18,7 @@ const PreCallAuth = () => {
 
       <p>
         A standards-based REST API for verifying caller identity using <strong>IETF RFC 8224</strong> and the <strong>ATIS SHAKEN</strong> framework. 
-        Pre-Call Authentication is a <strong>prerequisite</strong> for both Spoofed Call Protection and Branded Call Display to function.
+        Call Authentication is a <strong>prerequisite</strong> for both Spoofed Call Protection and Branded Call Display to function.
       </p>
 
       <div className="flex items-start gap-3 p-4 mb-6 rounded-lg border border-accent bg-accent/10">
