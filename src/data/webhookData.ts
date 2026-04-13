@@ -303,34 +303,20 @@ export const webhookFieldDocs: Record<string, WebhookEndpointFieldDocs> = {
   "wb-update": {
     pathParams: [
       { path: "accountId", type: "String", required: true, description: "The account ID for the webhook to update" },
+      { path: "webhookId", type: "String", required: true, description: "The unique webhook identifier returned during registration" },
     ],
     requestFields: [
-      { path: "(same as Register)", type: "—", required: false, description: "Submit the full updated payload with modified values. All fields from the Register endpoint apply.", constraints: "Changes take effect immediately" },
+      { path: "(same as Register)", type: "—", required: false, description: "Submit the full updated payload with modified values. All fields from the Register endpoint apply. Set state to PAUSED or ACTIVE to pause or resume deliveries.", constraints: "Changes take effect immediately" },
     ],
     responseFields: [
       { path: "id", type: "String", required: true, description: "The webhook ID that was updated" },
       { path: "message", type: "String", required: true, description: "Confirmation message" },
     ],
   },
-  "wb-pause": {
-    pathParams: [
-      { path: "accountId", type: "String", required: true, description: "The account ID whose webhook should be paused" },
-    ],
-    responseFields: [
-      { path: "state", type: "String", required: true, description: "Updated webhook state", constraints: "PAUSED" },
-    ],
-  },
-  "wb-resume": {
-    pathParams: [
-      { path: "accountId", type: "String", required: true, description: "The account ID whose webhook should be resumed" },
-    ],
-    responseFields: [
-      { path: "state", type: "String", required: true, description: "Updated webhook state", constraints: "ACTIVE" },
-    ],
-  },
   "wb-delete": {
     pathParams: [
       { path: "accountId", type: "String", required: true, description: "The account ID whose webhook should be deleted" },
+      { path: "webhookId", type: "String", required: true, description: "The unique webhook identifier to delete" },
     ],
     responseFields: [
       { path: "message", type: "String", required: true, description: "Confirmation message" },
@@ -340,6 +326,7 @@ export const webhookFieldDocs: Record<string, WebhookEndpointFieldDocs> = {
   "wb-logs": {
     pathParams: [
       { path: "accountId", type: "String", required: true, description: "The account ID to retrieve delivery logs for" },
+      { path: "webhookId", type: "String", required: true, description: "The unique webhook identifier to retrieve logs for" },
     ],
     responseFields: [
       { path: "logs[].timestamp", type: "DateTime", required: true, description: "ISO 8601 timestamp of the delivery attempt" },
