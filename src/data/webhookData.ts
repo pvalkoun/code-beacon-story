@@ -251,10 +251,10 @@ export const webhookEndpoints: WebhookEndpoint[] = [
     responseStatus: 200,
   },
 
-  // ── Lifecycle ──
+  // ── Webhook Management (continued) ──
   {
     id: "wb-delete",
-    category: "Lifecycle",
+    category: "Webhook Management",
     name: "Delete Webhook",
     method: "DELETE",
     path: "/ccid/webhook/v1/account/{{accountId}}/webhook/{{webhookId}}",
@@ -402,7 +402,7 @@ export const webhookFieldDocs: Record<string, WebhookEndpointFieldDocs> = {
   },
 };
 
-export const webhookCategories = ["Account Setup", "Webhook Management", "Lifecycle", "Delivery Logs"];
+export const webhookCategories = ["Account Setup", "Webhook Management", "Delivery Logs"];
 
 export const getWebhookEndpoint = (id: string) => webhookEndpoints.find(e => e.id === id);
 
