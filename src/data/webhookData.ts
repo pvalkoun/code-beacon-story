@@ -138,6 +138,52 @@ export const webhookEndpoints: WebhookEndpoint[] = [
     responseStatus: 200,
   },
   {
+    id: "wb-get",
+    category: "Webhook Management",
+    name: "Get Webhook",
+    method: "GET",
+    path: "/ccid/webhook/v1/account/{{accountId}}/webhook/{{webhookId}}",
+    description: "Retrieve the full configuration of an existing webhook by its webhook ID, including registered scopes, event filters, authentication settings, and current state.",
+    headers: [
+      { key: "Content-Type", value: "application/json" },
+    ],
+    responseBody: `{
+  "id": "69c239466c81b511de9cb409",
+  "webhook_name": "Webhook Notifications",
+  "description": "Receive real-time status updates for BCD assets",
+  "state": "ACTIVE",
+  "max_retry": 5,
+  "auth_type": "auth",
+  "email": [
+    "ops-team@example.com"
+  ],
+  "services": [
+    {
+      "name": "sdpr",
+      "entities": [
+        {
+          "type": "account",
+          "data": {
+            "webhook_url": "https://demo.myapp.com/account",
+            "event_types": [
+              {
+                "event_type": "vetting_status",
+                "trigger_on": ["VETTING_SUCCESSFUL"]
+              },
+              {
+                "event_type": "partner_status",
+                "trigger_on": ["*"]
+              }
+            ]
+          }
+        }
+      ]
+    }
+  ]
+}`,
+    responseStatus: 200,
+  },
+  {
     id: "wb-update",
     category: "Webhook Management",
     name: "Update Webhook",
@@ -298,6 +344,22 @@ export const webhookFieldDocs: Record<string, WebhookEndpointFieldDocs> = {
       { path: "id", type: "String", required: true, description: "Unique webhook identifier assigned by the system" },
       { path: "webhook_name", type: "String", required: true, description: "The registered webhook name" },
       { path: "state", type: "String", required: true, description: "Current state of the webhook", constraints: "ACTIVE | PAUSED" },
+    ],
+  },
+  "wb-get": {
+    pathParams: [
+      { path: "accountId", type: "String", required: true, description: "The account ID for the webhook to retrieve" },
+      { path: "webhookId", type: "String", required: true, description: "The unique webhook identifier returned during registration" },
+    ],
+    responseFields: [
+      { path: "id", type: "String", required: true, description: "Unique webhook identifier" },
+      { path: "webhook_name", type: "String", required: true, description: "The registered webhook name" },
+      { path: "description", type: "String", required: false, description: "Description of the webhook purpose" },
+      { path: "state", type: "String", required: true, description: "Current state of the webhook", constraints: "ACTIVE | PAUSED" },
+      { path: "max_retry", type: "Integer", required: true, description: "Maximum retry attempts for failed deliveries" },
+      { path: "auth_type", type: "String", required: true, description: "Authentication method configured", constraints: "auth | token | none" },
+      { path: "email", type: "Array", required: false, description: "Notification email addresses" },
+      { path: "services", type: "Array", required: true, description: "Registered service scopes and event filters" },
     ],
   },
   "wb-update": {
