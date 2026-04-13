@@ -142,8 +142,8 @@ export const webhookEndpoints: WebhookEndpoint[] = [
     category: "Webhook Management",
     name: "Update Webhook",
     method: "POST",
-    path: "/ccid/webhook/v1/account/{{accountId}}/webhook",
-    description: "Update an existing webhook configuration. Submit the full updated payload including any new scopes, event types, URLs, or authentication changes. Changes take effect immediately on the delivery engine.",
+    path: "/ccid/webhook/v1/account/{{accountId}}/webhook/{{webhookId}}",
+    description: "Update an existing webhook configuration by its webhook ID. Submit the full updated payload including any new scopes, event types, URLs, or authentication changes. To pause or resume a webhook, update the state field to PAUSED or ACTIVE respectively. Changes take effect immediately on the delivery engine.",
     headers: [
       { key: "Content-Type", value: "application/json" },
     ],
@@ -207,42 +207,12 @@ export const webhookEndpoints: WebhookEndpoint[] = [
 
   // ── Lifecycle ──
   {
-    id: "wb-pause",
-    category: "Lifecycle",
-    name: "Pause Webhook",
-    method: "PUT",
-    path: "/ccid/webhook/v1/account/{{accountId}}/webhook/pause",
-    description: "Temporarily pause all webhook deliveries for the specified account. While paused, no event notifications will be sent to the registered endpoint. Use the Resume endpoint to reactivate deliveries.",
-    headers: [
-      { key: "Content-Type", value: "application/json" },
-    ],
-    responseBody: `{
-  "state": "PAUSED"
-}`,
-    responseStatus: 200,
-  },
-  {
-    id: "wb-resume",
-    category: "Lifecycle",
-    name: "Resume Webhook",
-    method: "PUT",
-    path: "/ccid/webhook/v1/account/{{accountId}}/webhook/resume",
-    description: "Resume webhook deliveries after a pause. The webhook state returns to ACTIVE and event notifications will resume immediately for all configured scopes and event types.",
-    headers: [
-      { key: "Content-Type", value: "application/json" },
-    ],
-    responseBody: `{
-  "state": "ACTIVE"
-}`,
-    responseStatus: 200,
-  },
-  {
     id: "wb-delete",
     category: "Lifecycle",
     name: "Delete Webhook",
     method: "DELETE",
-    path: "/ccid/webhook/v1/account/{{accountId}}/webhook",
-    description: "Permanently delete the webhook configuration for the specified account. This removes the entire webhook object including all registered scopes, event filters, and delivery history. This action cannot be undone.",
+    path: "/ccid/webhook/v1/account/{{accountId}}/webhook/{{webhookId}}",
+    description: "Permanently delete the webhook configuration for the specified account and webhook ID. This removes the entire webhook object including all registered scopes, event filters, and delivery history. This action cannot be undone.",
     headers: [
       { key: "Content-Type", value: "application/json" },
     ],
@@ -259,8 +229,8 @@ export const webhookEndpoints: WebhookEndpoint[] = [
     category: "Delivery Logs",
     name: "Get Delivery Logs",
     method: "GET",
-    path: "/ccid/webhook/v1/account/{{accountId}}/webhook/logs",
-    description: "Retrieve the delivery log history for the webhook registered on this account. Logs include timestamps, payloads sent, HTTP response codes from your endpoint, retry attempt counts, and delivery status. Use these logs for debugging integration issues and monitoring delivery health.",
+    path: "/ccid/webhook/v1/account/{{accountId}}/webhook/{{webhookId}}/logs",
+    description: "Retrieve the delivery log history for the specified webhook. Logs include timestamps, payloads sent, HTTP response codes from your endpoint, retry attempt counts, and delivery status. Use these logs for debugging integration issues and monitoring delivery health.",
     headers: [
       { key: "Content-Type", value: "application/json" },
     ],
