@@ -119,7 +119,7 @@ export const integrations: Integration[] = [
       },
       {
         title: "Step 2 — Create a Function",
-        content: "1. Inside your service, click the **Add +** button\n2. Select **Add Function**\n3. Name it: `/pre-call-init-callback-neustar`\n4. A blank function editor will appear",
+        content: "1. Inside your service, click the **Add +** button\n2. Select **Add Function**\n3. Name it: `/call-init-callback-neustar`\n4. A blank function editor will appear",
         images: [
           { src: twilioCreateFunction, alt: "Twilio Console — Functions and Assets overview", caption: "The Functions and Assets overview with 'Create your function' prompt" },
           { src: twilioFunctionEditor, alt: "Twilio Console — Blank function editor", caption: "The newly created blank function editor ready for code" }
@@ -128,7 +128,7 @@ export const integrations: Integration[] = [
       {
         title: "Step 3 — Paste the Function Code",
         content: "Paste the following code into your Twilio Function editor. This function intercepts the call initiation event and sends the caller information to the CCID endpoint for authentication.",
-        code: `// Filename: pre-call-init-callback-neustar.js
+        code: `// Filename: call-init-callback-neustar.js
 
 exports.handler = async function (context, event, callback) {
   // Safely pull the Neustar API key from environment
@@ -226,7 +226,7 @@ exports.handler = async function (context, event, callback) {
       },
       {
         title: "Step 7 — Copy the Function URL",
-        content: "After deployment, click **Copy URL** to get the function's public URL:\n\n`https://your-domain-1234.twil.io/pre-call-init-callback-neustar`\n\nYou'll need this URL in the next step to configure the `/Calls` API.",
+        content: "After deployment, click **Copy URL** to get the function's public URL:\n\n`https://your-domain-1234.twil.io/call-init-callback-neustar`\n\nYou'll need this URL in the next step to configure the `/Calls` API.",
         images: [
           { src: twilioCopyUrl, alt: "Twilio Console — Copy URL after deployment", caption: "Copy the deployed function URL to use as StatusCallback" }
         ]
@@ -239,7 +239,7 @@ exports.handler = async function (context, event, callback) {
   --data-urlencode "To=+15551234567" \\
   --data-urlencode "From=+15557654321" \\
   --data-urlencode "Url=https://handler.twilio.com/twiml/YourTwiMLBinOrAppUrl" \\
-  --data-urlencode "StatusCallback=https://your-domain-1234.twil.io/pre-call-init-callback-neustar" \\
+  --data-urlencode "StatusCallback=https://your-domain-1234.twil.io/call-init-callback-neustar" \\
   --data-urlencode "StatusCallbackEvent=initiated" \\
   -u "ACxxxxxxxxxxxxxxxxxxxxxxxxxxxx:your_auth_token"`,
         language: "bash"
@@ -266,7 +266,7 @@ await client.calls.create({
   to: '+15551234567',
   from: '+15557654321',
   url: 'https://handler.twilio.com/twiml/YourTwiMLBinOrAppUrl',
-  statusCallback: 'https://your-domain-1234.twil.io/pre-call-init-callback-neustar',
+  statusCallback: 'https://your-domain-1234.twil.io/call-init-callback-neustar',
   statusCallbackEvent: ['initiated'],
 });`,
         language: "javascript"
@@ -281,7 +281,7 @@ client.calls.create(
     to='+15551234567',
     from_='+15557654321',
     url='https://handler.twilio.com/twiml/YourTwiMLBinOrAppUrl',
-    status_callback='https://your-domain-1234.twil.io/pre-call-init-callback-neustar',
+    status_callback='https://your-domain-1234.twil.io/call-init-callback-neustar',
     status_callback_event=['initiated']
 )`,
         language: "python"
@@ -423,9 +423,9 @@ client.calls.create(
       },
       {
         title: "Step 4.1 — Configure Call Rule Action",
-        content: "1. Within the rule, set **Category**: `Pre-Call` — this ensures authentication happens before the call is placed\n2. Configure **Condition**:\n   - Column: `phoneNumber`\n   - Operator: `is Greater Than`\n   - Value: `0`\n   - This ensures the rule runs for all valid phone numbers\n3. Set **Action Type**: `Data Action`\n4. Select **Integration**: `TU AS Integration`\n5. Select **Action**: `Authenticate Caller ID`\n6. Map **toNumber** to the contact's phone number field\n7. Click **Save**",
+        content: "1. Within the rule, set **Category**: `Call` — this ensures authentication happens before the call is placed\n2. Configure **Condition**:\n   - Column: `phoneNumber`\n   - Operator: `is Greater Than`\n   - Value: `0`\n   - This ensures the rule runs for all valid phone numbers\n3. Set **Action Type**: `Data Action`\n4. Select **Integration**: `TU AS Integration`\n5. Select **Action**: `Authenticate Caller ID`\n6. Map **toNumber** to the contact's phone number field\n7. Click **Save**",
         images: [
-          { src: genesysRuleConfig, alt: "Genesys Cloud — Call Rule condition and action configuration", caption: "Configuring the Pre-Call rule with condition, data action, and parameter mapping" }
+          { src: genesysRuleConfig, alt: "Genesys Cloud — Call Rule condition and action configuration", caption: "Configuring the Call rule with condition, data action, and parameter mapping" }
         ]
       },
       {
@@ -437,7 +437,7 @@ client.calls.create(
       },
       {
         title: "How It Works",
-        content: "Once configured, here's what happens for each outbound call:\n\n1. Campaign selects next contact from contact list\n2. Pre-call rule executes (TU CCID Authentication Rule)\n3. Data action calls TransUnion API with `fromNumber` and `toNumber`\n4. TransUnion API authenticates the call\n5. Authentication token deposited in call session registry\n6. Outbound call is placed\n7. Receiving carrier verifies call using the token\n8. Call displays as verified/authenticated to recipient\n\n**Token Management:**\n- The TransUnion API deposits an authentication token in the call session registry\n- When the call is received, the carrier verifies the token to confirm legitimacy\n- No additional configuration required — token management is handled automatically"
+        content: "Once configured, here's what happens for each outbound call:\n\n1. Campaign selects next contact from contact list\n2. Call rule executes (TU CCID Authentication Rule)\n3. Data action calls TransUnion API with `fromNumber` and `toNumber`\n4. TransUnion API authenticates the call\n5. Authentication token deposited in call session registry\n6. Outbound call is placed\n7. Receiving carrier verifies call using the token\n8. Call displays as verified/authenticated to recipient\n\n**Token Management:**\n- The TransUnion API deposits an authentication token in the call session registry\n- When the call is received, the carrier verifies the token to confirm legitimacy\n- No additional configuration required — token management is handled automatically"
       },
       {
         title: "Reporting & Monitoring",
@@ -453,7 +453,7 @@ client.calls.create(
       },
       {
         title: "Best Practices",
-        content: "**Security:**\n- Always enable HIPAA/Secure Data in production\n- Protect API keys — do not share or expose in logs\n- Regularly rotate API keys per TransUnion's recommendations\n\n**Performance:**\n- Set appropriate timeout values (60 seconds recommended)\n- Implement error handling in call flows\n- Monitor data action execution times and success rates\n\n**Campaign Configuration:**\n- Test rules with a small contact list before full deployment\n- Monitor campaign performance after enabling CCID authentication\n- Use pre-call rules to ensure authentication happens before dialing\n- Verify contact list phone numbers are in correct format (10 digits)\n- Review campaign analytics to measure impact on answer rates"
+        content: "**Security:**\n- Always enable HIPAA/Secure Data in production\n- Protect API keys — do not share or expose in logs\n- Regularly rotate API keys per TransUnion's recommendations\n\n**Performance:**\n- Set appropriate timeout values (60 seconds recommended)\n- Implement error handling in call flows\n- Monitor data action execution times and success rates\n\n**Campaign Configuration:**\n- Test rules with a small contact list before full deployment\n- Monitor campaign performance after enabling CCID authentication\n- Use call rules to ensure authentication happens before dialing\n- Verify contact list phone numbers are in correct format (10 digits)\n- Review campaign analytics to measure impact on answer rates"
       }
     ]
   },
@@ -461,12 +461,12 @@ client.calls.create(
     id: "plivo",
     name: "Plivo Integration",
     platform: "Plivo",
-    description: "Integrate TransUnion pre-call authentication with Plivo using PHLO visual workflows to validate destination numbers via the CCID API before initiating outbound calls.",
+    description: "Integrate TransUnion call authentication with Plivo using PHLO visual workflows to validate destination numbers via the CCID API before initiating outbound calls.",
     products: ["scp", "bcd"],
     sections: [
       {
         title: "Overview",
-        content: "This guide explains how to integrate Plivo PHLO with the TransUnion CCID API to perform pre-call authentication before initiating a call. The flow validates the destination number using the CCID endpoint, then initiates the call and plays a notification message upon connection."
+        content: "This guide explains how to integrate Plivo PHLO with the TransUnion CCID API to perform call authentication before initiating a call. The flow validates the destination number using the CCID endpoint, then initiates the call and plays a notification message upon connection."
       },
       {
         title: "Use Case",
@@ -519,7 +519,7 @@ client.calls.create(
     id: "amazon-connect",
     name: "Amazon Connect Integration",
     platform: "Amazon Connect",
-    description: "Integrate TransUnion CCID call verification with Amazon Connect using AWS Lambda and Secrets Manager for secure, automated pre-call authentication of outbound calls.",
+    description: "Integrate TransUnion CCID call verification with Amazon Connect using AWS Lambda and Secrets Manager for secure, automated call authentication of outbound calls.",
     products: ["scp", "bcd"],
     sections: [
       {
@@ -587,7 +587,7 @@ client.calls.create(
     id: "nice-incontact",
     name: "NICE inContact Integration",
     platform: "NICE inContact",
-    description: "Integrate TransUnion CCID pre-call authentication with NICE inContact (CXone) using Studio scripts to authenticate outbound calls via the CCID REST API.",
+    description: "Integrate TransUnion CCID call authentication with NICE inContact (CXone) using Studio scripts to authenticate outbound calls via the CCID REST API.",
     products: ["scp", "bcd"],
     sections: [
       {
@@ -669,7 +669,7 @@ ELSE
       },
       {
         title: "Step 6 — Deploy to Production",
-        content: "1. Save the script with a production-ready name (e.g., `Integration_TransUnion_PROD`)\n2. Assign the script to your outbound campaign or skill\n3. Configure the script to execute as a **pre-call** action\n4. Monitor the first batch of calls to ensure authentication is working correctly"
+        content: "1. Save the script with a production-ready name (e.g., `Integration_TransUnion_PROD`)\n2. Assign the script to your outbound campaign or skill\n3. Configure the script to execute as a **call** action\n4. Monitor the first batch of calls to ensure authentication is working correctly"
       },
       {
         title: "Using SpoofPass Variable",
