@@ -28,7 +28,7 @@ export default function WebhookOverview() {
           "Scoped delivery at Account, Caller Profile, or TN level",
           "Configurable retry policy with failure email alerts",
           "Full delivery log history for debugging and monitoring",
-          "Lifecycle management — pause, resume, and update at any time",
+          "Lifecycle management — update status to pause or resume at any time",
         ].map((b, i) => (
           <li key={i} className="flex items-start gap-2">
             <CheckCircle2 className="h-5 w-5 text-accent mt-0.5 shrink-0" />
@@ -58,7 +58,7 @@ export default function WebhookOverview() {
           {
             icon: RefreshCw,
             title: "4. Monitor & Manage",
-            desc: "Review delivery logs, pause/resume delivery, and update your configuration at any time.",
+            desc: "Review delivery logs, update the webhook state to pause or resume delivery, and modify your configuration at any time.",
           },
         ].map((item, i) => (
           <Card key={i} className="hover:shadow-md transition-shadow">

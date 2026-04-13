@@ -142,8 +142,8 @@ export const webhookEndpoints: WebhookEndpoint[] = [
     category: "Webhook Management",
     name: "Update Webhook",
     method: "POST",
-    path: "/ccid/webhook/v1/account/{{accountId}}/webhook",
-    description: "Update an existing webhook configuration. Submit the full updated payload including any new scopes, event types, URLs, or authentication changes. Changes take effect immediately on the delivery engine.",
+    path: "/ccid/webhook/v1/account/{{accountId}}/webhook/{{webhookId}}",
+    description: "Update an existing webhook configuration by its webhook ID. Submit the full updated payload including any new scopes, event types, URLs, or authentication changes. To pause or resume a webhook, update the state field to PAUSED or ACTIVE respectively. Changes take effect immediately on the delivery engine.",
     headers: [
       { key: "Content-Type", value: "application/json" },
     ],
@@ -207,42 +207,12 @@ export const webhookEndpoints: WebhookEndpoint[] = [
 
   // ── Lifecycle ──
   {
-    id: "wb-pause",
-    category: "Lifecycle",
-    name: "Pause Webhook",
-    method: "PUT",
-    path: "/ccid/webhook/v1/account/{{accountId}}/webhook/pause",
-    description: "Temporarily pause all webhook deliveries for the specified account. While paused, no event notifications will be sent to the registered endpoint. Use the Resume endpoint to reactivate deliveries.",
-    headers: [
-      { key: "Content-Type", value: "application/json" },
-    ],
-    responseBody: `{
-  "state": "PAUSED"
-}`,
-    responseStatus: 200,
-  },
-  {
-    id: "wb-resume",
-    category: "Lifecycle",
-    name: "Resume Webhook",
-    method: "PUT",
-    path: "/ccid/webhook/v1/account/{{accountId}}/webhook/resume",
-    description: "Resume webhook deliveries after a pause. The webhook state returns to ACTIVE and event notifications will resume immediately for all configured scopes and event types.",
-    headers: [
-      { key: "Content-Type", value: "application/json" },
-    ],
-    responseBody: `{
-  "state": "ACTIVE"
-}`,
-    responseStatus: 200,
-  },
-  {
     id: "wb-delete",
     category: "Lifecycle",
     name: "Delete Webhook",
     method: "DELETE",
-    path: "/ccid/webhook/v1/account/{{accountId}}/webhook",
-    description: "Permanently delete the webhook configuration for the specified account. This removes the entire webhook object including all registered scopes, event filters, and delivery history. This action cannot be undone.",
+    path: "/ccid/webhook/v1/account/{{accountId}}/webhook/{{webhookId}}",
+    description: "Permanently delete the webhook configuration for the specified account and webhook ID. This removes the entire webhook object including all registered scopes, event filters, and delivery history. This action cannot be undone.",
     headers: [
       { key: "Content-Type", value: "application/json" },
     ],
@@ -259,8 +229,8 @@ export const webhookEndpoints: WebhookEndpoint[] = [
     category: "Delivery Logs",
     name: "Get Delivery Logs",
     method: "GET",
-    path: "/ccid/webhook/v1/account/{{accountId}}/webhook/logs",
-    description: "Retrieve the delivery log history for the webhook registered on this account. Logs include timestamps, payloads sent, HTTP response codes from your endpoint, retry attempt counts, and delivery status. Use these logs for debugging integration issues and monitoring delivery health.",
+    path: "/ccid/webhook/v1/account/{{accountId}}/webhook/{{webhookId}}/logs",
+    description: "Retrieve the delivery log history for the specified webhook. Logs include timestamps, payloads sent, HTTP response codes from your endpoint, retry attempt counts, and delivery status. Use these logs for debugging integration issues and monitoring delivery health.",
     headers: [
       { key: "Content-Type", value: "application/json" },
     ],
@@ -333,34 +303,20 @@ export const webhookFieldDocs: Record<string, WebhookEndpointFieldDocs> = {
   "wb-update": {
     pathParams: [
       { path: "accountId", type: "String", required: true, description: "The account ID for the webhook to update" },
+      { path: "webhookId", type: "String", required: true, description: "The unique webhook identifier returned during registration" },
     ],
     requestFields: [
-      { path: "(same as Register)", type: "—", required: false, description: "Submit the full updated payload with modified values. All fields from the Register endpoint apply.", constraints: "Changes take effect immediately" },
+      { path: "(same as Register)", type: "—", required: false, description: "Submit the full updated payload with modified values. All fields from the Register endpoint apply. Set state to PAUSED or ACTIVE to pause or resume deliveries.", constraints: "Changes take effect immediately" },
     ],
     responseFields: [
       { path: "id", type: "String", required: true, description: "The webhook ID that was updated" },
       { path: "message", type: "String", required: true, description: "Confirmation message" },
     ],
   },
-  "wb-pause": {
-    pathParams: [
-      { path: "accountId", type: "String", required: true, description: "The account ID whose webhook should be paused" },
-    ],
-    responseFields: [
-      { path: "state", type: "String", required: true, description: "Updated webhook state", constraints: "PAUSED" },
-    ],
-  },
-  "wb-resume": {
-    pathParams: [
-      { path: "accountId", type: "String", required: true, description: "The account ID whose webhook should be resumed" },
-    ],
-    responseFields: [
-      { path: "state", type: "String", required: true, description: "Updated webhook state", constraints: "ACTIVE" },
-    ],
-  },
   "wb-delete": {
     pathParams: [
       { path: "accountId", type: "String", required: true, description: "The account ID whose webhook should be deleted" },
+      { path: "webhookId", type: "String", required: true, description: "The unique webhook identifier to delete" },
     ],
     responseFields: [
       { path: "message", type: "String", required: true, description: "Confirmation message" },
@@ -370,6 +326,7 @@ export const webhookFieldDocs: Record<string, WebhookEndpointFieldDocs> = {
   "wb-logs": {
     pathParams: [
       { path: "accountId", type: "String", required: true, description: "The account ID to retrieve delivery logs for" },
+      { path: "webhookId", type: "String", required: true, description: "The unique webhook identifier to retrieve logs for" },
     ],
     responseFields: [
       { path: "logs[].timestamp", type: "DateTime", required: true, description: "ISO 8601 timestamp of the delivery attempt" },
