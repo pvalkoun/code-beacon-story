@@ -29,7 +29,7 @@ const PreCallAuth = () => {
             Every outbound call must be authenticated through the CCID service before{" "}
             <Link to="/products/scp" className="text-primary hover:underline">Spoofed Call Protection</Link> or{" "}
             <Link to="/products/bcd" className="text-primary hover:underline">Branded Call Display</Link> features can take effect. 
-            Without pre-call authentication, calls will not receive STIR/SHAKEN attestation and branded content will not be displayed.
+            Without call authentication, calls will not receive STIR/SHAKEN attestation and branded content will not be displayed.
           </p>
         </div>
       </div>
