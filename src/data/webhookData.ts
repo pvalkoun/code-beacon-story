@@ -138,6 +138,52 @@ export const webhookEndpoints: WebhookEndpoint[] = [
     responseStatus: 200,
   },
   {
+    id: "wb-get",
+    category: "Webhook Management",
+    name: "Get Webhook",
+    method: "GET",
+    path: "/ccid/webhook/v1/account/{{accountId}}/webhook/{{webhookId}}",
+    description: "Retrieve the full configuration of an existing webhook by its webhook ID, including registered scopes, event filters, authentication settings, and current state.",
+    headers: [
+      { key: "Content-Type", value: "application/json" },
+    ],
+    responseBody: `{
+  "id": "69c239466c81b511de9cb409",
+  "webhook_name": "Webhook Notifications",
+  "description": "Receive real-time status updates for BCD assets",
+  "state": "ACTIVE",
+  "max_retry": 5,
+  "auth_type": "auth",
+  "email": [
+    "ops-team@example.com"
+  ],
+  "services": [
+    {
+      "name": "sdpr",
+      "entities": [
+        {
+          "type": "account",
+          "data": {
+            "webhook_url": "https://demo.myapp.com/account",
+            "event_types": [
+              {
+                "event_type": "vetting_status",
+                "trigger_on": ["VETTING_SUCCESSFUL"]
+              },
+              {
+                "event_type": "partner_status",
+                "trigger_on": ["*"]
+              }
+            ]
+          }
+        }
+      ]
+    }
+  ]
+}`,
+    responseStatus: 200,
+  },
+  {
     id: "wb-update",
     category: "Webhook Management",
     name: "Update Webhook",
