@@ -123,7 +123,7 @@ export function DocSidebar() {
               <SidebarMenu>
                 <SidebarMenuItem>
                   <SidebarMenuButton asChild>
-                    <NavLink to="/pre-call-auth" activeClassName="bg-sidebar-accent text-sidebar-primary font-medium">
+                    <NavLink to="/call-auth" activeClassName="bg-sidebar-accent text-sidebar-primary font-medium">
                       <Phone className="h-4 w-4 mr-2" />
                       {!collapsed && <span>Call Authentication</span>}
                     </NavLink>

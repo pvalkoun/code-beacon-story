@@ -40,8 +40,8 @@ function useBreadcrumbs() {
     const ig = getIntegration(parts[1]);
     crumbs.push({ label: "Integrations", path: "/" });
     if (ig) crumbs.push({ label: ig.platform, path: `/integrations/${parts[1]}` });
-  } else if (parts[0] === "pre-call-auth") {
-    crumbs.push({ label: "Call Authentication", path: "/pre-call-auth" });
+  } else if (parts[0] === "call-auth") {
+    crumbs.push({ label: "Call Authentication", path: "/call-auth" });
   } else if (parts[0] === "resources" && parts[1] === "analytics") {
     crumbs.push({ label: "Resources", path: "/" });
     crumbs.push({ label: "Analytics", path: "/resources/analytics" });

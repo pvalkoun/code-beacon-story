@@ -33,7 +33,7 @@ export const products: Product[] = [
       "Standards-compliant with IETF RFC 8224 and ATIS SHAKEN"
     ],
     isExternal: true,
-    externalPath: "/pre-call-auth",
+    externalPath: "/call-auth",
     setupSteps: []
   },
   {
