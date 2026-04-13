@@ -67,7 +67,7 @@ export const integrations: Integration[] = [
       },
       {
         title: "How It Works",
-        content: "The Five9 integration operates seamlessly behind the scenes:\n\n1. An agent or campaign initiates an outbound call through Five9\n2. Five9 automatically triggers a pre-call authentication request to TransUnion's CCID endpoint\n3. TransUnion validates the caller identity and signs the call with a STIR/SHAKEN token\n4. The call is placed with full attestation, ensuring the recipient sees a verified caller identity\n\nThis entire flow is handled natively by Five9 — there is no need to build or maintain any external integration logic."
+        content: "The Five9 integration operates seamlessly behind the scenes:\n\n1. An agent or campaign initiates an outbound call through Five9\n2. Five9 automatically triggers a call authentication request to TransUnion's CCID endpoint\n3. TransUnion validates the caller identity and signs the call with a STIR/SHAKEN token\n4. The call is placed with full attestation, ensuring the recipient sees a verified caller identity\n\nThis entire flow is handled natively by Five9 — there is no need to build or maintain any external integration logic."
       },
       {
         title: "Configuration Steps",
@@ -95,7 +95,7 @@ export const integrations: Integration[] = [
     id: "twilio",
     name: "Twilio Integration",
     platform: "Twilio",
-    description: "Integrate TransUnion pre-call authentication with Twilio to digitally sign outbound calls using a Twilio Function that triggers on call initiation.",
+    description: "Integrate TransUnion Call Authentication with Twilio to digitally sign outbound calls using a Twilio Function that triggers on call initiation.",
     products: ["scp", "bcd"],
     sections: [
       {
@@ -296,7 +296,7 @@ client.calls.create(
     id: "genesys",
     name: "Genesys Cloud CX Integration",
     platform: "Genesys Cloud CX",
-    description: "Integrate TransUnion Certified Caller ID (CCID) Authentication with Genesys Cloud CX using Web Services Data Actions for real-time pre-call authentication of outbound calls.",
+    description: "Integrate TransUnion Certified Caller ID (CCID) Authentication with Genesys Cloud CX using Web Services Data Actions for real-time call authentication of outbound calls.",
     products: ["scp", "bcd"],
     sections: [
       {
@@ -416,9 +416,9 @@ client.calls.create(
       },
       {
         title: "Step 4 — Create Call Rule",
-        content: "Call Rules allow you to execute data actions automatically as part of your outbound campaign workflow.\n\n1. Go to **Admin** → **Outbound** → **Rule Management**\n2. Click **Create New Rule** or **Add Rule** (+) icon\n3. Set **Rule Name**: `TU CCID Authentication Rule`\n4. Configure the rule with **Pre-Call** category",
+        content: "Call Rules allow you to execute data actions automatically as part of your outbound campaign workflow.\n\n1. Go to **Admin** → **Outbound** → **Rule Management**\n2. Click **Create New Rule** or **Add Rule** (+) icon\n3. Set **Rule Name**: `TU CCID Authentication Rule`\n4. Configure the rule with **Call Authentication** category",
         images: [
-          { src: genesysCallRule, alt: "Genesys Cloud — Call Rule Set creation", caption: "Creating a new Call Rule Set with the Pre-Call rule" }
+          { src: genesysCallRule, alt: "Genesys Cloud — Call Rule Set creation", caption: "Creating a new Call Rule Set with the Call Authentication rule" }
         ]
       },
       {
