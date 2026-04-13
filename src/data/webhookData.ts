@@ -346,6 +346,22 @@ export const webhookFieldDocs: Record<string, WebhookEndpointFieldDocs> = {
       { path: "state", type: "String", required: true, description: "Current state of the webhook", constraints: "ACTIVE | PAUSED" },
     ],
   },
+  "wb-get": {
+    pathParams: [
+      { path: "accountId", type: "String", required: true, description: "The account ID for the webhook to retrieve" },
+      { path: "webhookId", type: "String", required: true, description: "The unique webhook identifier returned during registration" },
+    ],
+    responseFields: [
+      { path: "id", type: "String", required: true, description: "Unique webhook identifier" },
+      { path: "webhook_name", type: "String", required: true, description: "The registered webhook name" },
+      { path: "description", type: "String", required: false, description: "Description of the webhook purpose" },
+      { path: "state", type: "String", required: true, description: "Current state of the webhook", constraints: "ACTIVE | PAUSED" },
+      { path: "max_retry", type: "Integer", required: true, description: "Maximum retry attempts for failed deliveries" },
+      { path: "auth_type", type: "String", required: true, description: "Authentication method configured", constraints: "auth | token | none" },
+      { path: "email", type: "Array", required: false, description: "Notification email addresses" },
+      { path: "services", type: "Array", required: true, description: "Registered service scopes and event filters" },
+    ],
+  },
   "wb-update": {
     pathParams: [
       { path: "accountId", type: "String", required: true, description: "The account ID for the webhook to update" },
