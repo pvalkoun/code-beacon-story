@@ -221,22 +221,53 @@ export const endpointFieldDocs: Record<string, EndpointFieldDocs> = {
     ],
   },
 
+  "create-image": {
+    pathParams: [
+      { path: "accountId", type: "String", required: true, description: "Unique identifier of the account", constraints: "Length between 4 and 10" },
+    ],
+    requestFields: [
+      { path: "url", type: "String", required: true, description: "Publicly accessible URL of the image to upload", constraints: "Must be a valid URL; image must be 256×256 px, JPEG/PNG/BMP format, < 270 KB" },
+    ],
+    responseFields: [
+      { path: "id", type: "String", required: true, description: "Unique image ID assigned by the system — use as image_id when creating an image profile" },
+      { path: "url", type: "String", required: true, description: "CDN-accessible URL of the processed image" },
+    ],
+  },
+
+  "get-image": {
+    pathParams: [
+      { path: "accountId", type: "String", required: true, description: "Unique identifier of the account" },
+      { path: "imageId", type: "String", required: true, description: "Unique image ID" },
+    ],
+    responseFields: [
+      { path: "id", type: "String", required: true, description: "Image ID" },
+      { path: "url", type: "String", required: true, description: "CDN-accessible URL of the image" },
+    ],
+  },
+
+  "delete-image": {
+    pathParams: [
+      { path: "accountId", type: "String", required: true, description: "Unique identifier of the account" },
+      { path: "imageId", type: "String", required: true, description: "Unique image ID to delete", constraints: "Must not be referenced by any active image profiles" },
+    ],
+  },
+
   "create-image-profile": {
     pathParams: [
       { path: "accountId", type: "String", required: true, description: "Unique identifier of the account", constraints: "Length between 4 and 10" },
     ],
     requestFields: [
-      { path: "public_image_url", type: "String", required: true, description: "Publicly accessible URL of the image to use as the brand logo", constraints: "Must be a valid HTTPS URL; image must be 256×256 px, BMP format, < 200 KB" },
-      { path: "partner[]", type: "Array", required: true, description: "Carrier partner configurations" },
-      { path: "partner[].name", type: "String", required: true, description: "Carrier partner name", constraints: "att, verizon, or tmobile" },
-      { path: "partner[].status", type: "String", required: true, description: "Initial review status", constraints: "Use TU-Review-Requested to submit for TransUnion review" },
+      { path: "name", type: "String", required: true, description: "Name for the image profile" },
+      { path: "image_id", type: "String", required: true, description: "ID of the previously uploaded image (from Create Image response)" },
     ],
     responseFields: [
       { path: "id", type: "String", required: true, description: "Unique image profile ID assigned by the system", constraints: "24-character hex string" },
-      { path: "account_id", type: "String", required: true, description: "The account this image profile belongs to" },
-      { path: "image_url", type: "String", required: true, description: "Internal TransUnion-hosted URL for the processed image" },
-      { path: "public_image_url", type: "String", required: true, description: "The original public URL submitted" },
-      { path: "partner[]", type: "Array", required: true, description: "Carrier partner statuses" },
+      { path: "image_id", type: "String", required: true, description: "ID of the linked image" },
+      { path: "image_url", type: "String", required: true, description: "CDN URL of the image" },
+      { path: "partner_status", type: "Object", required: true, description: "Carrier partner vetting statuses", constraints: "Keys: att, verizon, tmobile" },
+      { path: "vetting", type: "Object", required: true, description: "Overall vetting status and timestamp" },
+      { path: "vetting.status", type: "String", required: true, description: "Vetting status", constraints: "e.g. VETTING_SUBMITTED, VETTING_SUCCESSFUL" },
+      { path: "vetting.status_timestamp", type: "DateTime", required: true, description: "Timestamp of the vetting status", constraints: "RFC 1123 format" },
       { path: "created_by", type: "String", required: true, description: "User who created the image profile" },
       { path: "created_date", type: "DateTime", required: true, description: "Creation timestamp", constraints: "RFC 1123 format" },
     ],
@@ -249,12 +280,19 @@ export const endpointFieldDocs: Record<string, EndpointFieldDocs> = {
     ],
     responseFields: [
       { path: "id", type: "String", required: true, description: "Image profile ID" },
+      { path: "name", type: "String", required: true, description: "Image profile name" },
       { path: "account_id", type: "String", required: true, description: "The account this image profile belongs to" },
-      { path: "image_url", type: "String", required: true, description: "Internal TransUnion-hosted image URL" },
-      { path: "public_image_url", type: "String", required: true, description: "Original public URL submitted" },
-      { path: "partner[]", type: "Array", required: true, description: "Carrier partner statuses" },
+      { path: "image_id", type: "String", required: true, description: "ID of the linked image" },
+      { path: "image_url", type: "String", required: true, description: "CDN URL of the image" },
+      { path: "partner_data", type: "Object", required: true, description: "Carrier-specific CDN URLs populated after vetting approval", constraints: "Keys: att, verizon, tmobile" },
+      { path: "partner_status", type: "Object", required: true, description: "Carrier partner statuses", constraints: "Keys: att, verizon, tmobile" },
+      { path: "vetting", type: "Object", required: true, description: "Vetting status and timestamp" },
+      { path: "vetting.status", type: "String", required: true, description: "Vetting status", constraints: "e.g. VETTING_SUBMITTED, VETTING_SUCCESSFUL" },
+      { path: "vetting.status_timestamp", type: "DateTime", required: true, description: "Timestamp of the vetting status" },
       { path: "created_by", type: "String", required: true, description: "Creator user ID" },
       { path: "created_date", type: "DateTime", required: true, description: "Creation timestamp" },
+      { path: "updated_by", type: "String", required: true, description: "User who last updated the profile" },
+      { path: "updated_date", type: "DateTime", required: true, description: "Last update timestamp" },
     ],
   },
 
