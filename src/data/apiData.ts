@@ -736,8 +736,7 @@ export const apiEndpoints: ApiEndpoint[] = [
   },
 
 
-    requestBody: `{
-  "public_image_url": "https://example.com/logo.png",
+
   "partner": [
     {
       "name": "att",
