@@ -10,7 +10,7 @@ export interface ApiEndpoint {
   responseStatus?: number;
   headers?: { key: string; value: string }[];
   errorBody?: string;
-  product?: ("scp" | "bcd" | "common")[];
+  product?: ("scp" | "bcd" | "cno" | "common")[];
   imageRequirements?: string[];
 }
 
@@ -398,7 +398,8 @@ export const apiEndpoints: ApiEndpoint[] = [
     "RICH-BCD",
     "AUTH-BCD",
     "NAME-BCD",
-    "SPOOF-CALL-PROTECTION"
+    "SPOOF-CALL-PROTECTION",
+    "CNO"
   ],
   "service": [
     {
@@ -437,6 +438,23 @@ export const apiEndpoints: ApiEndpoint[] = [
     },
     {
       "name": "RICH-BCD",
+      "partner": [
+        {
+          "name": "att",
+          "status": "Enable-Requested"
+        },
+        {
+          "name": "tmobile",
+          "status": "Enable-Requested"
+        },
+        {
+          "name": "verizon",
+          "status": "Enable-Requested"
+        }
+      ]
+    },
+    {
+      "name": "CNO",
       "partner": [
         {
           "name": "att",
@@ -472,7 +490,8 @@ export const apiEndpoints: ApiEndpoint[] = [
     "RICH-BCD",
     "AUTH-BCD",
     "NAME-BCD",
-    "SPOOF-CALL-PROTECTION"
+    "SPOOF-CALL-PROTECTION",
+    "CNO"
   ],
   "service": [
     {
@@ -511,6 +530,23 @@ export const apiEndpoints: ApiEndpoint[] = [
     },
     {
       "name": "RICH-BCD",
+      "partner": [
+        {
+          "name": "att",
+          "status": "Enable-Completed"
+        },
+        {
+          "name": "tmobile",
+          "status": "Enable-Completed"
+        },
+        {
+          "name": "verizon",
+          "status": "Enable-Completed"
+        }
+      ]
+    },
+    {
+      "name": "CNO",
       "partner": [
         {
           "name": "att",
