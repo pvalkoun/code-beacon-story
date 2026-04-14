@@ -1053,6 +1053,26 @@ export const apiEndpoints: ApiEndpoint[] = [
           "caller_profile": "Your Company Name_BCD_Rich_20260225-212320"
         }
       ]
+    },
+    {
+      "name": "CNO",
+      "partner": [
+        {
+          "name": "att",
+          "status": "Enable-Requested",
+          "caller_profile": "Your Company Name_CNO_20260225-212320"
+        },
+        {
+          "name": "verizon",
+          "status": "Enable-Requested",
+          "caller_profile": "Your Company Name_CNO_20260225-212320"
+        },
+        {
+          "name": "tmobile",
+          "status": "Enable-Requested",
+          "caller_profile": "Your Company Name_CNO_20260225-212320"
+        }
+      ]
     }
   ],
   "created_by": "user_v4_api_prod",
@@ -1124,6 +1144,26 @@ export const apiEndpoints: ApiEndpoint[] = [
           "name": "tmobile",
           "status": "Enable-Requested",
           "caller_profile": "Your Company Name_BCD_Rich_20260225-212320"
+        }
+      ]
+    },
+    {
+      "name": "CNO",
+      "partner": [
+        {
+          "name": "att",
+          "status": "Enable-Requested",
+          "caller_profile": "Your Company Name_CNO_20260225-212320"
+        },
+        {
+          "name": "verizon",
+          "status": "Enable-Requested",
+          "caller_profile": "Your Company Name_CNO_20260225-212320"
+        },
+        {
+          "name": "tmobile",
+          "status": "Enable-Requested",
+          "caller_profile": "Your Company Name_CNO_20260225-212320"
         }
       ]
     }
