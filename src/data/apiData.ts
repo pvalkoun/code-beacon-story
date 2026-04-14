@@ -920,18 +920,15 @@ export const apiEndpoints: ApiEndpoint[] = [
     headers: [{ key: "Accept", value: "application/json" }],
     responseBody: `{
   "id": "699f684820a7a57a0a67c03a",
-  "name": "Your Company Name_BCD_Rich_20260225-212320",
+  "name": "Your Company Name_CNO_20260225-212320",
   "account_id": "x59tj8rtv1",
-  "branded_caller_name": "Your Company Name",
-  "call_reason": "Account Update",
-  "image_profile_id": "699f620c6ccc0121aeb7eef4",
   "service": [
     {
       "name": "CCID-ORIG",
       "partner": []
     },
     {
-      "name": "RICH-BCD",
+      "name": "CNO",
       "partner": [
         {
           "name": "att",
