@@ -10,7 +10,7 @@ export interface ApiEndpoint {
   responseStatus?: number;
   headers?: { key: string; value: string }[];
   errorBody?: string;
-  product?: ("scp" | "bcd" | "common")[];
+  product?: ("scp" | "bcd" | "cno" | "common")[];
   imageRequirements?: string[];
 }
 
@@ -398,7 +398,8 @@ export const apiEndpoints: ApiEndpoint[] = [
     "RICH-BCD",
     "AUTH-BCD",
     "NAME-BCD",
-    "SPOOF-CALL-PROTECTION"
+    "SPOOF-CALL-PROTECTION",
+    "CNO"
   ],
   "service": [
     {
@@ -437,6 +438,23 @@ export const apiEndpoints: ApiEndpoint[] = [
     },
     {
       "name": "RICH-BCD",
+      "partner": [
+        {
+          "name": "att",
+          "status": "Enable-Requested"
+        },
+        {
+          "name": "tmobile",
+          "status": "Enable-Requested"
+        },
+        {
+          "name": "verizon",
+          "status": "Enable-Requested"
+        }
+      ]
+    },
+    {
+      "name": "CNO",
       "partner": [
         {
           "name": "att",
@@ -472,7 +490,8 @@ export const apiEndpoints: ApiEndpoint[] = [
     "RICH-BCD",
     "AUTH-BCD",
     "NAME-BCD",
-    "SPOOF-CALL-PROTECTION"
+    "SPOOF-CALL-PROTECTION",
+    "CNO"
   ],
   "service": [
     {
@@ -511,6 +530,23 @@ export const apiEndpoints: ApiEndpoint[] = [
     },
     {
       "name": "RICH-BCD",
+      "partner": [
+        {
+          "name": "att",
+          "status": "Enable-Completed"
+        },
+        {
+          "name": "tmobile",
+          "status": "Enable-Completed"
+        },
+        {
+          "name": "verizon",
+          "status": "Enable-Completed"
+        }
+      ]
+    },
+    {
+      "name": "CNO",
       "partner": [
         {
           "name": "att",
@@ -807,6 +843,72 @@ export const apiEndpoints: ApiEndpoint[] = [
 }`,
     responseStatus: 201,
     product: ["bcd"]
+  },
+  {
+    id: "attach-cno-caller-profile",
+    category: "Caller Profile",
+    name: "Attach CNO Caller Profile",
+    method: "POST",
+    path: "/ccid/sdpr/v4/admin/account/{accountId}/caller-profile",
+    description: "Create a caller profile for Spam Tag Mitigation (CNO). The profile defines the CCID-ORIG and CNO service configuration with per-carrier partner statuses.",
+    headers: [{ key: "Content-Type", value: "application/json" }, { key: "Accept", value: "application/json" }],
+    requestBody: `{
+  "service": [
+    {
+      "name": "CCID-ORIG",
+      "partner": []
+    },
+    {
+      "name": "CNO",
+      "partner": [
+        {
+          "name": "att",
+          "status": "TU-Review-Requested"
+        },
+        {
+          "name": "tmobile",
+          "status": "TU-Review-Requested"
+        },
+        {
+          "name": "verizon",
+          "status": "TU-Review-Requested"
+        }
+      ]
+    }
+  ]
+}`,
+    responseBody: `{
+  "id": "699f684820a7a57a0a67c03a",
+  "name": "Your Company Name_CNO_20260225-212320",
+  "account_id": "x59tj8rtv1",
+  "service": [
+    {
+      "name": "CCID-ORIG",
+      "partner": []
+    },
+    {
+      "name": "CNO",
+      "partner": [
+        {
+          "name": "att",
+          "status": "TU-Review-Requested"
+        },
+        {
+          "name": "tmobile",
+          "status": "TU-Review-Requested"
+        },
+        {
+          "name": "verizon",
+          "status": "TU-Review-Requested"
+        }
+      ]
+    }
+  ],
+  "created_by": "user_v4_api_prod",
+  "created_date": "Wed, 25 Feb 2026 21:23:20 GMT"
+}`,
+    responseStatus: 201,
+    product: ["cno"]
   },
   {
     id: "get-caller-profile",
@@ -1261,7 +1363,7 @@ export const apiEndpoints: ApiEndpoint[] = [
 ];
 
 export const getEndpointsForProduct = (product: "scp" | "bcd" | "cno") => {
-  return apiEndpoints.filter(ep => ep.product?.includes(product as "scp" | "bcd") || ep.product?.includes("common"));
+  return apiEndpoints.filter(ep => ep.product?.includes(product as "scp" | "bcd" | "cno") || ep.product?.includes("common"));
 };
 
 export const getEndpointById = (id: string) => {

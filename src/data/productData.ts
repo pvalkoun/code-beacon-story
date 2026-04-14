@@ -82,8 +82,8 @@ export const products: Product[] = [
         step: 5,
         title: "Create Caller Profile",
         description: "Define your organization's calling identity.",
-        apiEndpointId: "attach-scp-caller-profile",
-        details: "Create a caller profile with CNO service configuration. Each carrier partner status will be set to TU-Review-Requested for initial validation."
+        apiEndpointId: "attach-cno-caller-profile",
+        details: "Create a caller profile with CNO service configuration. The profile name is auto-generated (e.g., xxxCNOxx). Each carrier partner status will be set to TU-Review-Requested for initial validation."
       },
       {
         step: 6,
