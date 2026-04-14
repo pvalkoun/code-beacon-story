@@ -599,6 +599,62 @@ export const apiEndpoints: ApiEndpoint[] = [
     product: ["common"]
   },
 
+  // ── Image ──
+  {
+    id: "create-image",
+    category: "Image",
+    name: "Create Image",
+    method: "POST",
+    path: "/ccid/sdpr/v4/admin/account/{accountId}/image",
+    description: "Upload an image via URL to the image service. The image is processed and stored internally. Save the returned id — it will be used as image_id when creating an image profile.",
+    imageRequirements: ["Image must be exactly 256×256 pixels", "Image must be in JPEG, PNG, or BMP format", "Image file size must be less than 270 KB"],
+    errorBody: `{
+  "error": "IMAGE_VALIDATION_FAILED",
+  "message": "Image does not meet requirements",
+  "details": [
+    "Image must be exactly 256x256 pixels",
+    "Image must be in JPEG, PNG, or BMP format",
+    "Image must be less than 270KB in size"
+  ]
+}`,
+    headers: [{ key: "Content-Type", value: "application/json" }, { key: "Accept", value: "application/json" }],
+    requestBody: `{
+  "url": "https://example.com/images/company-logo.jpeg"
+}`,
+    responseBody: `{
+  "id": "autogenetedimageid",
+  "url": "https://accessible-cdn-url.com/images/autogenetedimageid.png"
+}`,
+    responseStatus: 201,
+    product: ["bcd"]
+  },
+  {
+    id: "get-image",
+    category: "Image",
+    name: "Get Image",
+    method: "GET",
+    path: "/ccid/sdpr/v4/admin/account/{accountId}/image/{imageId}",
+    description: "Retrieve an image by ID, including its CDN URL.",
+    headers: [{ key: "Accept", value: "application/json" }],
+    responseBody: `{
+  "id": "autogenetedimageid",
+  "url": "https://accessible-cdn-url.com/images/autogenetedimageid.png"
+}`,
+    responseStatus: 200,
+    product: ["bcd"]
+  },
+  {
+    id: "delete-image",
+    category: "Image",
+    name: "Delete Image",
+    method: "DELETE",
+    path: "/ccid/sdpr/v4/admin/account/{accountId}/image/{imageId}",
+    description: "Delete an image from the account. The image must not be referenced by any active image profiles.",
+    headers: [{ key: "Accept", value: "application/json" }],
+    responseStatus: 204,
+    product: ["bcd"]
+  },
+
   // ── Image Profile ──
   {
     id: "create-image-profile",
@@ -606,8 +662,78 @@ export const apiEndpoints: ApiEndpoint[] = [
     name: "Create Image Profile",
     method: "POST",
     path: "/ccid/sdpr/v4/admin/account/{accountId}/image-profile",
-    description: "Upload an image profile for use with Branded Call Display. Submit a public image URL and receive an internal TransUnion image URL and profile ID that can be referenced in caller profiles.",
-    imageRequirements: ["Image must be exactly 256×256 pixels", "Image must be in BMP format", "Image file size must be less than 200 KB"],
+    description: "Create an image profile linked to a previously uploaded image. The image profile is submitted for vetting across all carrier partners. Poll the Get Image Profile endpoint until vetting is complete.",
+    headers: [{ key: "Content-Type", value: "application/json" }, { key: "Accept", value: "application/json" }],
+    requestBody: `{
+  "name": "imageProfileTest",
+  "image_id": "autogenetedimageid"
+}`,
+    responseBody: `{
+  "id": "69d4a87d7b3c6e58d402225e",
+  "image_id": "autogenetedimageid",
+  "image_url": "https://accessible-cdn-url.com/images/autogenetedimageid.png",
+  "partner_status": {
+    "att": "Vetting-Requested",
+    "verizon": "Vetting-Requested",
+    "tmobile": "Vetting-Requested"
+  },
+  "vetting": {
+    "status": "VETTING_SUBMITTED",
+    "status_timestamp": "Mon, 17 Oct 2022 00:00:00 GMT"
+  },
+  "created_by": "user_v4_api_prod",
+  "created_date": "Tue, 7 Apr 2026 06:47:25 GMT"
+}`,
+    responseStatus: 201,
+    product: ["bcd"]
+  },
+  {
+    id: "get-image-profile",
+    category: "Image Profile",
+    name: "Get Image Profile",
+    method: "GET",
+    path: "/ccid/sdpr/v4/admin/account/{accountId}/image-profile/{imageProfileId}",
+    description: "Retrieve an image profile by ID. After vetting is approved, partner_data will contain the carrier-specific CDN URLs.",
+    headers: [{ key: "Accept", value: "application/json" }],
+    responseBody: `{
+  "id": "69d4a87d7b3c6e58d402225e",
+  "name": "imageProfileTest",
+  "account_id": "x59tj8rtv1",
+  "image_id": "autogenetedimageid",
+  "image_url": "https://accessible-cdn-url.com/images/autogenetedimageid.png",
+  "partner_data": {
+    "att": "https://www.att-imageurl.com",
+    "verizon": "https://www.vzw-imageurl.com",
+    "tmobile": "uuid01-jfljsl00-Tmobile"
+  },
+  "partner_status": {
+    "att": "Enable-Completed",
+    "verizon": "Enable-Completed",
+    "tmobile": "Enable-Completed"
+  },
+  "vetting": {
+    "status": "VETTING_SUCCESSFUL",
+    "status_timestamp": "Mon, 17 Oct 2022 00:00:00 GMT"
+  },
+  "created_by": "user_v4_api_prod",
+  "created_date": "Tue, 7 Apr 2026 06:47:25 GMT",
+  "updated_by": "user_v4_api_prod",
+  "updated_date": "Tue, 8 Apr 2026 06:47:26 GMT"
+}`,
+    responseStatus: 200,
+    product: ["bcd"]
+  },
+  {
+    id: "delete-image-profile",
+    category: "Image Profile",
+    name: "Delete Image Profile",
+    method: "DELETE",
+    path: "/ccid/sdpr/v4/admin/account/{accountId}/image-profile/{imageProfileId}",
+    description: "Delete an image profile from an account. The image profile must not be referenced by any active caller profiles.",
+    headers: [{ key: "Accept", value: "application/json" }],
+    responseStatus: 204,
+    product: ["bcd"]
+  },
     errorBody: `{
   "error": "IMAGE_VALIDATION_FAILED",
   "message": "Image does not meet requirements",
