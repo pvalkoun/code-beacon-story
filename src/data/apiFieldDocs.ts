@@ -167,7 +167,7 @@ export const endpointFieldDocs: Record<string, EndpointFieldDocs> = {
     requestFields: [
       { path: "feature[]", type: "Array", required: true, description: "List of feature types to enable on the account", constraints: "Valid values include: AUTH-ONLY, RICH-BCD, AUTH-BCD, NAME-BCD, SPOOF-CALL-PROTECTION, CNO, DNO, SCP, and others" },
       { path: "service[]", type: "Array", required: false, description: "List of service objects defining carrier partner configurations for each feature" },
-      { path: "service[].name", type: "String", required: true, description: "The service/feature name to configure partners for", constraints: "Must match a valid feature name (e.g., SPOOF-CALL-PROTECTION, RICH-BCD, AUTH-BCD)" },
+      { path: "service[].name", type: "String", required: true, description: "The service/feature name to configure partners for", constraints: "Must match a valid feature name (e.g., SPOOF-CALL-PROTECTION, RICH-BCD, AUTH-BCD, CNO)" },
       { path: "service[].partner[]", type: "Array", required: true, description: "List of carrier partner configuration objects" },
       { path: "service[].partner[].name", type: "String", required: true, description: "Carrier partner name", constraints: "Must be one of: att, verizon, tmobile" },
       { path: "service[].partner[].status", type: "String", required: true, description: "Requested enablement status for the partner", constraints: "Use Enable-Requested to begin activation. Valid values: Enable-Requested, Disable-Requested, Suspend-Requested, Resume-Requested" },
@@ -309,6 +309,27 @@ export const endpointFieldDocs: Record<string, EndpointFieldDocs> = {
       { path: "service[]", type: "Array", required: true, description: "Service configuration with partner statuses" },
       { path: "created_by", type: "String", required: true, description: "User who created the profile" },
       { path: "created_date", type: "DateTime", required: true, description: "Creation timestamp" },
+    ],
+  },
+
+  "attach-cno-caller-profile": {
+    pathParams: [
+      { path: "accountId", type: "String", required: true, description: "Unique identifier of the account" },
+    ],
+    requestFields: [
+      { path: "service[]", type: "Array", required: true, description: "List of service objects for the caller profile" },
+      { path: "service[].name", type: "String", required: true, description: "Service name", constraints: "For CNO: include CCID-ORIG and CNO" },
+      { path: "service[].partner[]", type: "Array", required: true, description: "Carrier partner configurations" },
+      { path: "service[].partner[].name", type: "String", required: true, description: "Carrier partner name", constraints: "att, verizon, or tmobile" },
+      { path: "service[].partner[].status", type: "String", required: true, description: "Initial review status", constraints: "Use TU-Review-Requested to submit for TransUnion review" },
+    ],
+    responseFields: [
+      { path: "id", type: "String", required: true, description: "Unique caller profile ID assigned by the system", constraints: "24-character hex string" },
+      { path: "name", type: "String", required: true, description: "System-generated profile name (e.g., Your Company Name_CNO_20260225-212320)" },
+      { path: "account_id", type: "String", required: true, description: "The account this profile belongs to" },
+      { path: "service[]", type: "Array", required: true, description: "Service configuration echoed back with partner statuses" },
+      { path: "created_by", type: "String", required: true, description: "User who created the profile" },
+      { path: "created_date", type: "DateTime", required: true, description: "Creation timestamp", constraints: "RFC 1123 format" },
     ],
   },
 
