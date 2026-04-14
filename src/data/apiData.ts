@@ -845,6 +845,72 @@ export const apiEndpoints: ApiEndpoint[] = [
     product: ["bcd"]
   },
   {
+    id: "attach-cno-caller-profile",
+    category: "Caller Profile",
+    name: "Attach CNO Caller Profile",
+    method: "POST",
+    path: "/ccid/sdpr/v4/admin/account/{accountId}/caller-profile",
+    description: "Create a caller profile for Spam Tag Mitigation (CNO). The profile defines the CCID-ORIG and CNO service configuration with per-carrier partner statuses.",
+    headers: [{ key: "Content-Type", value: "application/json" }, { key: "Accept", value: "application/json" }],
+    requestBody: `{
+  "service": [
+    {
+      "name": "CCID-ORIG",
+      "partner": []
+    },
+    {
+      "name": "CNO",
+      "partner": [
+        {
+          "name": "att",
+          "status": "TU-Review-Requested"
+        },
+        {
+          "name": "tmobile",
+          "status": "TU-Review-Requested"
+        },
+        {
+          "name": "verizon",
+          "status": "TU-Review-Requested"
+        }
+      ]
+    }
+  ]
+}`,
+    responseBody: `{
+  "id": "699f684820a7a57a0a67c03a",
+  "name": "Your Company Name_CNO_20260225-212320",
+  "account_id": "x59tj8rtv1",
+  "service": [
+    {
+      "name": "CCID-ORIG",
+      "partner": []
+    },
+    {
+      "name": "CNO",
+      "partner": [
+        {
+          "name": "att",
+          "status": "TU-Review-Requested"
+        },
+        {
+          "name": "tmobile",
+          "status": "TU-Review-Requested"
+        },
+        {
+          "name": "verizon",
+          "status": "TU-Review-Requested"
+        }
+      ]
+    }
+  ],
+  "created_by": "user_v4_api_prod",
+  "created_date": "Wed, 25 Feb 2026 21:23:20 GMT"
+}`,
+    responseStatus: 201,
+    product: ["cno"]
+  },
+  {
     id: "get-caller-profile",
     category: "Caller Profile",
     name: "Get Caller Profile",
