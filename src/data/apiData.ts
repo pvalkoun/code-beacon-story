@@ -734,16 +734,8 @@ export const apiEndpoints: ApiEndpoint[] = [
     responseStatus: 204,
     product: ["bcd"]
   },
-    errorBody: `{
-  "error": "IMAGE_VALIDATION_FAILED",
-  "message": "Image does not meet requirements",
-  "details": [
-    "Image must be exactly 256x256 pixels",
-    "Image must be in BMP format",
-    "Image must be less than 200KB in size"
-  ]
-}`,
-    headers: [{ key: "Content-Type", value: "application/json" }, { key: "Accept", value: "application/json" }],
+
+
     requestBody: `{
   "public_image_url": "https://example.com/logo.png",
   "partner": [
