@@ -2,10 +2,35 @@ import { Link } from "react-router-dom";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Shield, Palette, ArrowRight, BookOpen, Code2, Phone, Tag } from "lucide-react";
+import { SEO, breadcrumbJsonLd, CANONICAL_ORIGIN } from "@/components/SEO";
 
 const Index = () => {
+  const jsonLd = [
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      name: "TransUnion",
+      url: CANONICAL_ORIGIN,
+      logo: `${CANONICAL_ORIGIN}/transunion-favicon.png`,
+      sameAs: ["https://www.transunion.com"],
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      name: "TruContact Developer Docs",
+      url: CANONICAL_ORIGIN,
+    },
+    breadcrumbJsonLd([{ name: "Home", path: "/" }]),
+  ];
+
   return (
     <div className="docs-prose">
+      <SEO
+        title="TruContact Developer Docs — Trusted Call Solutions"
+        description="Developer documentation for TransUnion TruContact Trusted Call Solutions: REST API reference, setup guides, and webhooks for Call Authentication, Spoofed Call Protection, Branded Call Display, and Spam Tag Mitigation."
+        keywords="TruContact, TransUnion, Branded Call Display, Spoofed Call Protection, CCID, SHAKEN, STIR, caller ID, branded calling, call authentication API"
+        jsonLd={jsonLd}
+      />
       <div className="mb-10">
         <h1 className="text-4xl font-bold mb-3">TruContact Trusted Call Solutions</h1>
         <p className="text-lg text-muted-foreground max-w-2xl">

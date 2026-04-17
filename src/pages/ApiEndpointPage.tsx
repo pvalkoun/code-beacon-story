@@ -3,6 +3,7 @@ import { getEndpointById } from "@/data/apiData";
 import { endpointFieldDocs } from "@/data/apiFieldDocs";
 import { CodeBlock } from "@/components/CodeBlock";
 import { MethodBadge } from "@/components/MethodBadge";
+import { SEO, breadcrumbJsonLd } from "@/components/SEO";
 import type { FieldDoc } from "@/data/apiFieldDocs";
 import { AlertTriangle } from "lucide-react";
 
@@ -49,7 +50,7 @@ function FieldTable({ title, fields }: { title: string; fields: FieldDoc[] }) {
 }
 
 export default function ApiEndpointPage() {
-  const { endpointId } = useParams<{ endpointId: string }>();
+  const { endpointId, productId } = useParams<{ endpointId: string; productId: string }>();
   const endpoint = getEndpointById(endpointId || "");
   const fieldDocs = endpointFieldDocs[endpointId || ""];
 
@@ -57,6 +58,25 @@ export default function ApiEndpointPage() {
 
   return (
     <div className="docs-prose">
+      <SEO
+        title={`${endpoint.method} ${endpoint.name} — ${productId?.toUpperCase()} API`}
+        description={`${endpoint.method} ${endpoint.path} — ${endpoint.description.slice(0, 155)}`}
+        keywords={`${endpoint.name}, ${endpoint.path}, TruContact API, ${productId?.toUpperCase()}, REST API`}
+        jsonLd={[
+          breadcrumbJsonLd([
+            { name: "Home", path: "/" },
+            { name: productId?.toUpperCase() || "Product", path: `/products/${productId}` },
+            { name: endpoint.name, path: `/products/${productId}/api/${endpointId}` },
+          ]),
+          {
+            "@context": "https://schema.org",
+            "@type": "TechArticle",
+            headline: `${endpoint.method} ${endpoint.name}`,
+            description: endpoint.description,
+            articleSection: "API Reference",
+          },
+        ]}
+      />
       <div className="flex items-center gap-3 mb-2">
         <MethodBadge method={endpoint.method} />
         <h1 className="!mb-0 !mt-0">{endpoint.name}</h1>
