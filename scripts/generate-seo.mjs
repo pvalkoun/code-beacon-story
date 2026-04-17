@@ -6,7 +6,10 @@ import { dirname, resolve } from "node:path";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const root = resolve(__dirname, "..");
-const ORIGIN = "https://tcs.mountainaiproject.com";
+const ORIGIN = "https://tcs-apis.github.io";
+const BASE_PATH = "/developers.html";
+// Build a canonical URL with hash routing for GH Pages SPA.
+const url = (route) => `${ORIGIN}${BASE_PATH}${route === "/" ? "" : `#${route}`}`;
 
 function extractIds(filePath) {
   const src = readFileSync(resolve(root, filePath), "utf8");
@@ -82,7 +85,7 @@ const sitemap = `<?xml version="1.0" encoding="UTF-8"?>
 ${uniqueUrls
   .map(
     u => `  <url>
-    <loc>${ORIGIN}${u.loc}</loc>
+    <loc>${url(u.loc)}</loc>
     <lastmod>${today}</lastmod>
     <changefreq>weekly</changefreq>
     <priority>${u.priority}</priority>
@@ -101,36 +104,36 @@ const llmsTxt = `# TruContact Developer Documentation
 
 ## Core
 
-- [Home](${ORIGIN}/): Product overview and entry point
-- [Call Authentication (CCID)](${ORIGIN}/call-auth): Required prerequisite for SCP and BCD; verifies caller identity
-- [Spoofed Call Protection (SCP)](${ORIGIN}/products/scp): Digitally sign outbound calls to prevent number spoofing
-- [Branded Call Display (BCD)](${ORIGIN}/products/bcd): Display brand name, logo, and call reason on recipient handsets
-- [Spam Tag Mitigation (CNO)](${ORIGIN}/products/cno): Prevent legitimate calls from being mislabeled as spam
+- [Home](${url("/")}): Product overview and entry point
+- [Call Authentication (CCID)](${url("/call-auth")}): Required prerequisite for SCP and BCD; verifies caller identity
+- [Spoofed Call Protection (SCP)](${url("/products/scp")}): Digitally sign outbound calls to prevent number spoofing
+- [Branded Call Display (BCD)](${url("/products/bcd")}): Display brand name, logo, and call reason on recipient handsets
+- [Spam Tag Mitigation (CNO)](${url("/products/cno")}): Prevent legitimate calls from being mislabeled as spam
 
 ## Setup Guides
 
-- [SCP Setup Guide](${ORIGIN}/products/scp/guide)
-- [BCD Setup Guide](${ORIGIN}/products/bcd/guide)
-- [CNO Setup Guide](${ORIGIN}/products/cno/guide)
-- [Webhook Setup Guide](${ORIGIN}/resources/webhooks/guide): Subscription lifecycle, event reference, and trigger keys
+- [SCP Setup Guide](${url("/products/scp/guide")})
+- [BCD Setup Guide](${url("/products/bcd/guide")})
+- [CNO Setup Guide](${url("/products/cno/guide")})
+- [Webhook Setup Guide](${url("/resources/webhooks/guide")}): Subscription lifecycle, event reference, and trigger keys
 
 ## API Reference
 
-${apiEntries.map(ep => `- [${ep.name}](${ORIGIN}/products/bcd/api/${ep.id})`).join("\n")}
+${apiEntries.map(ep => `- [${ep.name}](${url(`/products/bcd/api/${ep.id}`)})`).join("\n")}
 
 ## Webhooks
 
-- [Webhook Overview](${ORIGIN}/resources/webhooks)
-${webhookEntries.map(wb => `- [${wb.name}](${ORIGIN}/resources/webhooks/api/${wb.id})`).join("\n")}
+- [Webhook Overview](${url("/resources/webhooks")})
+${webhookEntries.map(wb => `- [${wb.name}](${url(`/resources/webhooks/api/${wb.id}`)})`).join("\n")}
 
 ## Resources
 
-- [Analytics API](${ORIGIN}/resources/analytics): BCD/SCP performance metrics by telephone number
-- [Changelog](${ORIGIN}/changelog)
+- [Analytics API](${url("/resources/analytics")}): BCD/SCP performance metrics by telephone number
+- [Changelog](${url("/changelog")})
 
 ## Integrations
 
-${integrationEntries.map(ig => `- [${ig.name}](${ORIGIN}/integrations/${ig.id})`).join("\n")}
+${integrationEntries.map(ig => `- [${ig.name}](${url(`/integrations/${ig.id}`)})`).join("\n")}
 `;
 
 writeFileSync(resolve(root, "public/llms.txt"), llmsTxt);

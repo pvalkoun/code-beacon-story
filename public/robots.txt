@@ -38,4 +38,4 @@ Allow: /
 User-agent: *
 Allow: /
 
-Sitemap: https://tcs.mountainaiproject.com/sitemap.xml
+Sitemap: https://tcs-apis.github.io/sitemap.xml

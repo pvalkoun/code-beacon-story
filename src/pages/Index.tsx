@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Shield, Palette, ArrowRight, BookOpen, Code2, Phone, Tag } from "lucide-react";
-import { SEO, breadcrumbJsonLd, CANONICAL_ORIGIN } from "@/components/SEO";
+import { SEO, breadcrumbJsonLd, CANONICAL_ORIGIN, CANONICAL_SITE_URL } from "@/components/SEO";
 
 const Index = () => {
   const jsonLd = [
@@ -10,7 +10,7 @@ const Index = () => {
       "@context": "https://schema.org",
       "@type": "Organization",
       name: "TransUnion",
-      url: CANONICAL_ORIGIN,
+      url: CANONICAL_SITE_URL,
       logo: `${CANONICAL_ORIGIN}/transunion-favicon.png`,
       sameAs: ["https://www.transunion.com"],
     },
@@ -18,7 +18,7 @@ const Index = () => {
       "@context": "https://schema.org",
       "@type": "WebSite",
       name: "TruContact Developer Docs",
-      url: CANONICAL_ORIGIN,
+      url: CANONICAL_SITE_URL,
     },
     breadcrumbJsonLd([{ name: "Home", path: "/" }]),
   ];
