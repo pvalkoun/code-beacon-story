@@ -142,8 +142,8 @@ export const webhookEndpoints: WebhookEndpoint[] = [
     category: "Webhook Management",
     name: "Get Webhook",
     method: "GET",
-    path: "/ccid/webhook/v1/account/{{accountId}}/webhook/{{webhookId}}",
-    description: "Retrieve the full configuration of an existing webhook by its webhook ID, including registered scopes, event filters, authentication settings, and current state.",
+    path: "/ccid/webhook/v1/account/{{accountId}}/webhook",
+    description: "Retrieve the full configuration of the webhook for this account, including registered scopes, event filters, authentication settings, and current state.",
     headers: [
       { key: "Content-Type", value: "application/json" },
     ],
@@ -188,8 +188,8 @@ export const webhookEndpoints: WebhookEndpoint[] = [
     category: "Webhook Management",
     name: "Update Webhook",
     method: "POST",
-    path: "/ccid/webhook/v1/account/{{accountId}}/webhook/{{webhookId}}",
-    description: "Update an existing webhook configuration by its webhook ID. Submit the full updated payload including any new scopes, event types, URLs, or authentication changes. To pause or resume a webhook, update the state field to PAUSED or ACTIVE respectively. Changes take effect immediately on the delivery engine.",
+    path: "/ccid/webhook/v1/account/{{accountId}}/webhook",
+    description: "Update the webhook configuration for this account. Submit the full updated payload including any new scopes, event types, URLs, or authentication changes. To pause or resume the webhook, update the state field to PAUSED or ACTIVE respectively. Changes take effect immediately on the delivery engine.",
     headers: [
       { key: "Content-Type", value: "application/json" },
     ],
@@ -257,8 +257,8 @@ export const webhookEndpoints: WebhookEndpoint[] = [
     category: "Webhook Management",
     name: "Delete Webhook",
     method: "DELETE",
-    path: "/ccid/webhook/v1/account/{{accountId}}/webhook/{{webhookId}}",
-    description: "Permanently delete the webhook configuration for the specified account and webhook ID. This removes the entire webhook object including all registered scopes, event filters, and delivery history. This action cannot be undone.",
+    path: "/ccid/webhook/v1/account/{{accountId}}/webhook",
+    description: "Permanently delete the webhook configuration for the specified account. This removes the entire webhook object including all registered scopes, event filters, and delivery history. This action cannot be undone.",
     headers: [
       { key: "Content-Type", value: "application/json" },
     ],
@@ -275,8 +275,8 @@ export const webhookEndpoints: WebhookEndpoint[] = [
     category: "Delivery Logs",
     name: "Get Delivery Logs",
     method: "GET",
-    path: "/ccid/webhook/v1/account/{{accountId}}/webhook/{{webhookId}}/logs",
-    description: "Retrieve the delivery log history for the specified webhook. Logs include timestamps, payloads sent, HTTP response codes from your endpoint, retry attempt counts, and delivery status. Use these logs for debugging integration issues and monitoring delivery health.",
+    path: "/ccid/webhook/v1/account/{{accountId}}/webhook/logs",
+    description: "Retrieve the delivery log history for the webhook. Logs include timestamps, payloads sent, HTTP response codes from your endpoint, retry attempt counts, and delivery status. Use these logs for debugging integration issues and monitoring delivery health.",
     headers: [
       { key: "Content-Type", value: "application/json" },
     ],
@@ -349,7 +349,6 @@ export const webhookFieldDocs: Record<string, WebhookEndpointFieldDocs> = {
   "wb-get": {
     pathParams: [
       { path: "accountId", type: "String", required: true, description: "The account ID for the webhook to retrieve" },
-      { path: "webhookId", type: "String", required: true, description: "The unique webhook identifier returned during registration" },
     ],
     responseFields: [
       { path: "id", type: "String", required: true, description: "Unique webhook identifier" },
@@ -365,7 +364,6 @@ export const webhookFieldDocs: Record<string, WebhookEndpointFieldDocs> = {
   "wb-update": {
     pathParams: [
       { path: "accountId", type: "String", required: true, description: "The account ID for the webhook to update" },
-      { path: "webhookId", type: "String", required: true, description: "The unique webhook identifier returned during registration" },
     ],
     requestFields: [
       { path: "(same as Register)", type: "—", required: false, description: "Submit the full updated payload with modified values. All fields from the Register endpoint apply. Set state to PAUSED or ACTIVE to pause or resume deliveries.", constraints: "Changes take effect immediately" },
@@ -378,7 +376,6 @@ export const webhookFieldDocs: Record<string, WebhookEndpointFieldDocs> = {
   "wb-delete": {
     pathParams: [
       { path: "accountId", type: "String", required: true, description: "The account ID whose webhook should be deleted" },
-      { path: "webhookId", type: "String", required: true, description: "The unique webhook identifier to delete" },
     ],
     responseFields: [
       { path: "message", type: "String", required: true, description: "Confirmation message" },
@@ -388,7 +385,6 @@ export const webhookFieldDocs: Record<string, WebhookEndpointFieldDocs> = {
   "wb-logs": {
     pathParams: [
       { path: "accountId", type: "String", required: true, description: "The account ID to retrieve delivery logs for" },
-      { path: "webhookId", type: "String", required: true, description: "The unique webhook identifier to retrieve logs for" },
     ],
     responseFields: [
       { path: "logs[].timestamp", type: "DateTime", required: true, description: "ISO 8601 timestamp of the delivery attempt" },
