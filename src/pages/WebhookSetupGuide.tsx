@@ -167,45 +167,6 @@ export default function WebhookSetupGuide() {
         </table>
       </div>
 
-      <h3>Caller Profile-Level Events</h3>
-      <div className="overflow-x-auto">
-        <table className="w-full text-sm border-collapse">
-          <thead>
-            <tr className="border-b">
-              <th className="text-left py-2 px-3 font-semibold">Status</th>
-              <th className="text-left py-2 px-3 font-semibold">Description</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr className="border-b"><td className="py-2 px-3"><code>Enable-Completed</code></td><td className="py-2 px-3 text-muted-foreground">Caller Profile successfully enabled after TU/Partner review</td></tr>
-            <tr className="border-b"><td className="py-2 px-3"><code>Enable-Failed</code></td><td className="py-2 px-3 text-muted-foreground">Caller Profile enablement was not successful</td></tr>
-            <tr className="border-b"><td className="py-2 px-3"><code>Suspend-Completed</code></td><td className="py-2 px-3 text-muted-foreground">All TNs under the Caller Profile were deactivated</td></tr>
-            <tr className="border-b"><td className="py-2 px-3"><code>Suspend-Failed</code></td><td className="py-2 px-3 text-muted-foreground">Suspension of Caller Profile TNs failed</td></tr>
-            <tr className="border-b"><td className="py-2 px-3"><code>Resume-Completed</code></td><td className="py-2 px-3 text-muted-foreground">Caller Profile and TNs successfully reactivated</td></tr>
-            <tr className="border-b last:border-b-0"><td className="py-2 px-3"><code>Resume-Failed</code></td><td className="py-2 px-3 text-muted-foreground">Resume request could not be completed</td></tr>
-          </tbody>
-        </table>
-      </div>
-
-      <h3>Account-Level Events</h3>
-      <div className="overflow-x-auto">
-        <table className="w-full text-sm border-collapse">
-          <thead>
-            <tr className="border-b">
-              <th className="text-left py-2 px-3 font-semibold">Status</th>
-              <th className="text-left py-2 px-3 font-semibold">Description</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr className="border-b"><td className="py-2 px-3"><code>Enable-Completed</code></td><td className="py-2 px-3 text-muted-foreground">Account feature provisioning completed by the partner</td></tr>
-            <tr className="border-b"><td className="py-2 px-3"><code>Enable-Failed</code></td><td className="py-2 px-3 text-muted-foreground">Account enablement failed, may require reprocessing</td></tr>
-            <tr className="border-b"><td className="py-2 px-3"><code>Suspend-Completed</code></td><td className="py-2 px-3 text-muted-foreground">All TNs under the account deactivated during suspension</td></tr>
-            <tr className="border-b"><td className="py-2 px-3"><code>Suspend-Failed</code></td><td className="py-2 px-3 text-muted-foreground">Account-level suspension failed</td></tr>
-            <tr className="border-b"><td className="py-2 px-3"><code>Resume-Completed</code></td><td className="py-2 px-3 text-muted-foreground">All TNs under the account reactivated after suspension</td></tr>
-            <tr className="border-b last:border-b-0"><td className="py-2 px-3"><code>Resume-Failed</code></td><td className="py-2 px-3 text-muted-foreground">Partner failed to resume services for the account</td></tr>
-          </tbody>
-        </table>
-      </div>
 
       <h2>Customer Requirements</h2>
       <ul>
