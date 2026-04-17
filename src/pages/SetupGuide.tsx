@@ -28,17 +28,13 @@ export default function SetupGuide() {
 
       {product.setupSteps.map((step) => {
         const endpoint = getEndpointById(step.apiEndpointId);
-        const stepId = `step-${step.step}`;
         return (
-          <div key={step.step} id={stepId} className="mb-10 pb-8 border-b last:border-b-0 group">
+          <div key={step.step} className="mb-10 pb-8 border-b last:border-b-0">
             <div className="flex items-center gap-3 mb-3">
               <div className="flex items-center justify-center h-9 w-9 rounded-full bg-primary text-primary-foreground font-bold text-sm shrink-0">
                 {step.step}
               </div>
               <h2 className="!mt-0 !mb-0">{step.title}</h2>
-              <a href={`#${stepId}`} aria-label={`Link to step ${step.step}`} className="anchor-link">
-                #
-              </a>
             </div>
 
             <p>{step.details}</p>

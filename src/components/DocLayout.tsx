@@ -15,7 +15,6 @@ import { useLocation } from "react-router-dom";
 import { products } from "@/data/productData";
 import { getEndpointById } from "@/data/apiData";
 import { getIntegration } from "@/data/integrationData";
-import { SearchTrigger } from "@/components/SearchTrigger";
 
 function useBreadcrumbs() {
   const location = useLocation();
@@ -74,7 +73,7 @@ export function DocLayout() {
           <header className="h-14 flex items-center gap-4 border-b px-4 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 sticky top-0 z-30">
             <SidebarTrigger />
             <Separator orientation="vertical" className="h-6" />
-            <Breadcrumb className="min-w-0 flex-1">
+            <Breadcrumb>
               <BreadcrumbList>
                 {crumbs.map((crumb, i) => (
                   <BreadcrumbItem key={crumb.path}>
@@ -90,9 +89,6 @@ export function DocLayout() {
                 ))}
               </BreadcrumbList>
             </Breadcrumb>
-            <div className="ml-auto flex items-center">
-              <SearchTrigger />
-            </div>
           </header>
           <main className="flex-1 p-6 md:p-8 lg:p-10 max-w-5xl">
             <Outlet />

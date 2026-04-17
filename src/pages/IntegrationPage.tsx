@@ -1,8 +1,6 @@
 import { useParams } from "react-router-dom";
 import { getIntegration } from "@/data/integrationData";
 import { CodeBlock } from "@/components/CodeBlock";
-import { AnchorHeading } from "@/components/AnchorHeading";
-import { slugify } from "@/lib/slug";
 
 export default function IntegrationPage() {
   const { integrationId } = useParams<{ integrationId: string }>();
@@ -17,7 +15,7 @@ export default function IntegrationPage() {
 
       {integration.sections.map((section, i) => (
         <div key={i}>
-          <AnchorHeading id={`section-${slugify(section.title)}`}>{section.title}</AnchorHeading>
+          <h2>{section.title}</h2>
           {section.content.split("\n").map((line, j) => {
             if (line.startsWith("- ")) {
               return <li key={j} className="ml-4">{formatInlineMarkdown(line.slice(2))}</li>;
