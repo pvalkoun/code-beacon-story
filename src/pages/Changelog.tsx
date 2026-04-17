@@ -1,6 +1,7 @@
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Link } from "react-router-dom";
+import { SEO, breadcrumbJsonLd } from "@/components/SEO";
 
 interface ChangelogEntry {
   date: string;
@@ -37,6 +38,15 @@ const changelog: ChangelogEntry[] = [
 export default function Changelog() {
   return (
     <div className="docs-prose">
+      <SEO
+        title="Changelog — TruContact Developer Docs"
+        description="Recent updates, new endpoints, and improvements to the TruContact Trusted Call Solutions developer platform."
+        keywords="TruContact changelog, API updates, release notes"
+        jsonLd={breadcrumbJsonLd([
+          { name: "Home", path: "/" },
+          { name: "Changelog", path: "/changelog" },
+        ])}
+      />
       <h1>Changelog</h1>
       <p className="text-lg text-muted-foreground">
         Recent updates and additions to the TruContact Solutions API platform.
