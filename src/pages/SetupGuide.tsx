@@ -5,7 +5,6 @@ import { CodeBlock } from "@/components/CodeBlock";
 import { MethodBadge } from "@/components/MethodBadge";
 import { Button } from "@/components/ui/button";
 import { ArrowRight } from "lucide-react";
-import { SEO, breadcrumbJsonLd } from "@/components/SEO";
 
 export default function SetupGuide() {
   const { productId } = useParams<{ productId: string }>();
@@ -15,30 +14,6 @@ export default function SetupGuide() {
 
   return (
     <div className="docs-prose">
-      <SEO
-        title={`${product.name} Setup Guide — TruContact`}
-        description={`Step-by-step setup guide for ${product.fullName}. ${product.tagline}`}
-        keywords={`${product.name} setup, ${productId?.toUpperCase()} configuration, TruContact integration guide`}
-        jsonLd={[
-          breadcrumbJsonLd([
-            { name: "Home", path: "/" },
-            { name: product.name, path: `/products/${productId}` },
-            { name: "Setup Guide", path: `/products/${productId}/guide` },
-          ]),
-          {
-            "@context": "https://schema.org",
-            "@type": "HowTo",
-            name: `${product.name} Setup`,
-            description: product.tagline,
-            step: product.setupSteps.map((s, i) => ({
-              "@type": "HowToStep",
-              position: i + 1,
-              name: s.title,
-              text: s.details,
-            })),
-          },
-        ]}
-      />
       <h1>{product.name} — Setup Guide</h1>
       <p className="text-lg text-muted-foreground">
         Follow these steps to configure {product.name} from start to finish.

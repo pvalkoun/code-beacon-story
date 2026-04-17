@@ -1,5 +1,5 @@
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { BrowserRouter, HashRouter, Route, Routes } from "react-router-dom";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -22,17 +22,12 @@ const queryClient = new QueryClient();
 
 const basename = import.meta.env.VITE_BASE_PATH || "/";
 
-// Use HashRouter when deployed to GitHub Pages (developers.html#/route).
-// Lovable preview & local dev use clean BrowserRouter URLs.
-const useHashRouting = import.meta.env.VITE_USE_HASH_ROUTER === "true";
-const Router = useHashRouting ? HashRouter : BrowserRouter;
-
 const App = () => (
   <QueryClientProvider client={queryClient}>
     <TooltipProvider>
       <Toaster />
       <Sonner />
-      <Router basename={useHashRouting ? undefined : basename}>
+     <BrowserRouter basename={basename}>  
         <ScrollToTop />
         <Routes>
           <Route element={<DocLayout />}>
@@ -50,7 +45,7 @@ const App = () => (
           </Route>
           <Route path="*" element={<NotFound />} />
         </Routes>
-      </Router>
+      </BrowserRouter>
     </TooltipProvider>
   </QueryClientProvider>
 );

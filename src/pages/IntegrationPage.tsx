@@ -1,7 +1,6 @@
 import { useParams } from "react-router-dom";
 import { getIntegration } from "@/data/integrationData";
 import { CodeBlock } from "@/components/CodeBlock";
-import { SEO, breadcrumbJsonLd } from "@/components/SEO";
 
 export default function IntegrationPage() {
   const { integrationId } = useParams<{ integrationId: string }>();
@@ -11,16 +10,6 @@ export default function IntegrationPage() {
 
   return (
     <div className="docs-prose">
-      <SEO
-        title={`${integration.name} — TruContact Integration Guide`}
-        description={integration.description}
-        keywords={`${integration.platform}, TruContact integration, ${integration.platform} branded calling, ${integration.platform} SHAKEN`}
-        jsonLd={breadcrumbJsonLd([
-          { name: "Home", path: "/" },
-          { name: "Integrations", path: "/" },
-          { name: integration.platform, path: `/integrations/${integrationId}` },
-        ])}
-      />
       <h1>{integration.name}</h1>
       <p className="text-lg text-muted-foreground">{integration.description}</p>
 

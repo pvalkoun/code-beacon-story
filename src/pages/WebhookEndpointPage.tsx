@@ -2,7 +2,6 @@ import { useParams } from "react-router-dom";
 import { getWebhookEndpoint, webhookFieldDocs } from "@/data/webhookData";
 import { CodeBlock } from "@/components/CodeBlock";
 import { MethodBadge } from "@/components/MethodBadge";
-import { SEO, breadcrumbJsonLd } from "@/components/SEO";
 import type { WebhookFieldDoc } from "@/data/webhookData";
 
 function FieldTable({ title, fields }: { title: string; fields: WebhookFieldDoc[] }) {
@@ -56,16 +55,6 @@ export default function WebhookEndpointPage() {
 
   return (
     <div className="docs-prose">
-      <SEO
-        title={`${endpoint.method} ${endpoint.name} — Webhook API`}
-        description={`${endpoint.method} ${endpoint.path} — ${endpoint.description.slice(0, 155)}`}
-        keywords={`TruContact webhook, ${endpoint.name}, ${endpoint.path}`}
-        jsonLd={breadcrumbJsonLd([
-          { name: "Home", path: "/" },
-          { name: "Webhooks", path: "/resources/webhooks" },
-          { name: endpoint.name, path: `/resources/webhooks/api/${endpointId}` },
-        ])}
-      />
       <div className="flex items-center gap-3 mb-2">
         <MethodBadge method={endpoint.method} />
         <h1 className="!mb-0 !mt-0">{endpoint.name}</h1>

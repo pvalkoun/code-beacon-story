@@ -2,20 +2,10 @@ import { CodeBlock } from "@/components/CodeBlock";
 import { MethodBadge } from "@/components/MethodBadge";
 import { Link } from "react-router-dom";
 import { AlertTriangle } from "lucide-react";
-import { SEO, breadcrumbJsonLd } from "@/components/SEO";
 
 const PreCallAuth = () => {
   return (
     <div className="docs-prose">
-      <SEO
-        title="Call Authentication (CCID) — TruContact Developer Docs"
-        description="REST API for verifying caller identity using IETF RFC 8224 and ATIS SHAKEN. Required prerequisite for Spoofed Call Protection and Branded Call Display."
-        keywords="CCID, Call Authentication, SHAKEN, STIR, RFC 8224, caller identity verification, TruContact"
-        jsonLd={breadcrumbJsonLd([
-          { name: "Home", path: "/" },
-          { name: "Call Authentication", path: "/call-auth" },
-        ])}
-      />
       <div className="flex items-center gap-3 mb-2">
         <MethodBadge method="POST" />
         <h1 className="!mb-0 !mt-0">Call Authentication (CCID)</h1>

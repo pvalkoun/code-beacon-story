@@ -4,7 +4,6 @@ import { getIntegrationsForProduct } from "@/data/integrationData";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { ArrowRight, CheckCircle2, BookOpen, Code2, Plug } from "lucide-react";
-import { SEO, breadcrumbJsonLd } from "@/components/SEO";
 
 export default function ProductOverview() {
   const { productId } = useParams<{ productId: string }>();
@@ -15,24 +14,6 @@ export default function ProductOverview() {
 
   return (
     <div className="docs-prose">
-      <SEO
-        title={`${product.fullName} — TruContact Developer Docs`}
-        description={product.tagline}
-        keywords={`${product.name}, ${product.fullName}, TruContact, TransUnion, ${productId?.toUpperCase()}, API documentation`}
-        jsonLd={[
-          breadcrumbJsonLd([
-            { name: "Home", path: "/" },
-            { name: product.name, path: `/products/${productId}` },
-          ]),
-          {
-            "@context": "https://schema.org",
-            "@type": "TechArticle",
-            headline: product.fullName,
-            description: product.description,
-            author: { "@type": "Organization", name: "TransUnion" },
-          },
-        ]}
-      />
       <h1>{product.fullName}</h1>
       <p className="text-lg text-muted-foreground">{product.tagline}</p>
 

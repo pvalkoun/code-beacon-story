@@ -2,21 +2,10 @@ import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { ArrowRight, CheckCircle2, BookOpen, Code2, Bell, Zap, Shield, RefreshCw } from "lucide-react";
-import { SEO, breadcrumbJsonLd } from "@/components/SEO";
 
 export default function WebhookOverview() {
   return (
     <div className="docs-prose">
-      <SEO
-        title="Webhook Notifications — TruContact Developer Docs"
-        description="Subscribe to real-time event notifications for accounts, caller profiles, and telephone numbers. Vetting status, partner enablement, and tagging changes pushed to your HTTPS endpoint."
-        keywords="TruContact webhooks, event notifications, vetting status, partner status, tagging status, callback URL"
-        jsonLd={breadcrumbJsonLd([
-          { name: "Home", path: "/" },
-          { name: "Resources", path: "/" },
-          { name: "Webhooks", path: "/resources/webhooks" },
-        ])}
-      />
       <h1>Webhook Notifications</h1>
       <p className="text-lg text-muted-foreground">
         Receive real-time status updates for your accounts, caller profiles, and telephone numbers
