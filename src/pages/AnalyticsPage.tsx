@@ -160,6 +160,16 @@ const allTnsParams: ParamRow[] = [
 export default function AnalyticsPage() {
   return (
     <div className="docs-prose">
+      <SEO
+        title="Analytics API — TruContact Developer Docs"
+        description="Query per-TN and account-wide analytics for Branded Call Display and Spoofed Call Protection: answer rates, call durations, signing volumes, and per-carrier breakdowns."
+        keywords="TruContact analytics, BCD metrics, SCP metrics, call analytics API, answer rate"
+        jsonLd={breadcrumbJsonLd([
+          { name: "Home", path: "/" },
+          { name: "Resources", path: "/" },
+          { name: "Analytics", path: "/resources/analytics" },
+        ])}
+      />
       <div className="mb-10">
         <h1 className="text-3xl font-bold mb-3">Analytics API</h1>
         <p className="text-lg text-muted-foreground max-w-3xl">
