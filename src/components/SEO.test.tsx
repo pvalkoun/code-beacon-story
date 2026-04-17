@@ -4,10 +4,12 @@ import { MemoryRouter } from "react-router-dom";
 import { HelmetProvider } from "react-helmet-async";
 import { SEO, breadcrumbJsonLd } from "@/components/SEO";
 
+type HelmetCtx = { helmet?: { title: { toString(): string }; meta: { toString(): string }; link: { toString(): string }; script: { toString(): string } } };
+
 function renderSEO(props: Parameters<typeof SEO>[0], path = "/") {
-  const helmetCtx: { helmet?: unknown } = {};
+  const helmetCtx: HelmetCtx = {};
   render(
-    <HelmetProvider context={helmetCtx}>
+    <HelmetProvider context={helmetCtx as never}>
       <MemoryRouter initialEntries={[path]}>
         <SEO {...props} />
       </MemoryRouter>
