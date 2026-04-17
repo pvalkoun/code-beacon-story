@@ -96,33 +96,73 @@ export default function WebhookSetupGuide() {
       <h3>TN-Level Event</h3>
       <CodeBlock code={sampleEventPayloads.tn} title="TN Status Change" language="json" />
 
-      <h2>Event Reference</h2>
+      <h2 id="event-reference">Event Reference</h2>
+      <p>
+        When subscribing to events in the <code>events[]</code> array of your webhook registration,
+        use the <strong>Event Type</strong> as the key and the <strong>Trigger Key</strong> as the value.
+        Trigger Keys are case-sensitive and must match exactly as shown below.
+      </p>
 
-      <h3>TN-Level Events</h3>
+      <div className="p-4 rounded-lg bg-muted/40 border mb-6 not-prose">
+        <p className="text-sm font-medium mb-2">Example: subscribing to vetting and tagging events</p>
+        <CodeBlock
+          language="json"
+          code={`"events": [
+  { "vetting_status": "VETTING_SUCCESSFUL" },
+  { "vetting_status": "VETTING_EXCEPTION" },
+  { "tagging_status": "TG" },
+  { "tagging_status": "AG" },
+  { "partner_status": "Enable-Completed" }
+]`}
+        />
+      </div>
+
+      <h3 id="event-triggers">Allowed Event Types and Trigger Values</h3>
       <div className="overflow-x-auto">
         <table className="w-full text-sm border-collapse">
           <thead>
             <tr className="border-b">
               <th className="text-left py-2 px-3 font-semibold">Event Type</th>
-              <th className="text-left py-2 px-3 font-semibold">Status</th>
-              <th className="text-left py-2 px-3 font-semibold">Description</th>
+              <th className="text-left py-2 px-3 font-semibold">Trigger Key</th>
+              <th className="text-left py-2 px-3 font-semibold">Display Label</th>
             </tr>
           </thead>
           <tbody>
-            <tr className="border-b"><td className="py-2 px-3 font-medium" rowSpan={2}>Vetting Status</td><td className="py-2 px-3"><code>Vetting-successful</code></td><td className="py-2 px-3 text-muted-foreground">TN passed vetting and is eligible for enablement</td></tr>
-            <tr className="border-b"><td className="py-2 px-3"><code>Vetting-Exception</code></td><td className="py-2 px-3 text-muted-foreground">TN failed vetting and requires remediation</td></tr>
-            <tr className="border-b"><td className="py-2 px-3 font-medium" rowSpan={8}>Partner Status</td><td className="py-2 px-3"><code>Enable-Completed</code></td><td className="py-2 px-3 text-muted-foreground">TN successfully activated by the partner</td></tr>
-            <tr className="border-b"><td className="py-2 px-3"><code>Enable-Failed</code></td><td className="py-2 px-3 text-muted-foreground">Partner activation was unsuccessful</td></tr>
-            <tr className="border-b"><td className="py-2 px-3"><code>Disable-Completed</code></td><td className="py-2 px-3 text-muted-foreground">TN successfully deactivated by the partner</td></tr>
-            <tr className="border-b"><td className="py-2 px-3"><code>Disable-Failed</code></td><td className="py-2 px-3 text-muted-foreground">TN deactivation could not be completed</td></tr>
-            <tr className="border-b"><td className="py-2 px-3"><code>Suspend-Completed</code></td><td className="py-2 px-3 text-muted-foreground">TN deactivated as part of a suspension action</td></tr>
-            <tr className="border-b"><td className="py-2 px-3"><code>Suspend-Failed</code></td><td className="py-2 px-3 text-muted-foreground">TN could not be suspended due to partner errors</td></tr>
-            <tr className="border-b"><td className="py-2 px-3"><code>Resume-Completed</code></td><td className="py-2 px-3 text-muted-foreground">TN successfully reactivated after suspension</td></tr>
-            <tr className="border-b"><td className="py-2 px-3"><code>Resume-Failed</code></td><td className="py-2 px-3 text-muted-foreground">Partner could not reactivate the TN</td></tr>
-            <tr className="border-b"><td className="py-2 px-3 font-medium" rowSpan={4}>Tagging Status</td><td className="py-2 px-3"><code>Tagged</code></td><td className="py-2 px-3 text-muted-foreground">TN successfully tagged with the approved caller name</td></tr>
-            <tr className="border-b"><td className="py-2 px-3"><code>Appeal Declined</code></td><td className="py-2 px-3 text-muted-foreground">Appeal was reviewed and rejected</td></tr>
-            <tr className="border-b"><td className="py-2 px-3"><code>Appeal Granted</code></td><td className="py-2 px-3 text-muted-foreground">Appeal approved, corrected tag will be applied</td></tr>
-            <tr className="border-b last:border-b-0"><td className="py-2 px-3"><code>Customer-Input Pending</code></td><td className="py-2 px-3 text-muted-foreground">Action required from customer before proceeding</td></tr>
+            <tr className="border-b"><td className="py-2 px-3 font-medium align-top" rowSpan={2}><code>vetting_status</code></td><td className="py-2 px-3"><code>VETTING_SUCCESSFUL</code></td><td className="py-2 px-3 text-muted-foreground">Vetting Successful</td></tr>
+            <tr className="border-b"><td className="py-2 px-3"><code>VETTING_EXCEPTION</code></td><td className="py-2 px-3 text-muted-foreground">Vetting Exception</td></tr>
+            <tr className="border-b"><td className="py-2 px-3 font-medium align-top" rowSpan={5}><code>tagging_status</code></td><td className="py-2 px-3"><code>TG</code></td><td className="py-2 px-3 text-muted-foreground">Tagged</td></tr>
+            <tr className="border-b"><td className="py-2 px-3"><code>AP</code></td><td className="py-2 px-3 text-muted-foreground">Appeal Pending</td></tr>
+            <tr className="border-b"><td className="py-2 px-3"><code>AG</code></td><td className="py-2 px-3 text-muted-foreground">Appeal Granted</td></tr>
+            <tr className="border-b"><td className="py-2 px-3"><code>AD</code></td><td className="py-2 px-3 text-muted-foreground">Appeal Declined</td></tr>
+            <tr className="border-b"><td className="py-2 px-3"><code>CIP</code></td><td className="py-2 px-3 text-muted-foreground">Customer Input Pending</td></tr>
+            <tr className="border-b"><td className="py-2 px-3 font-medium align-top" rowSpan={8}><code>partner_status</code></td><td className="py-2 px-3"><code>Enable-Completed</code></td><td className="py-2 px-3 text-muted-foreground">Enable Completed</td></tr>
+            <tr className="border-b"><td className="py-2 px-3"><code>Enable-Failed</code></td><td className="py-2 px-3 text-muted-foreground">Enable Failed</td></tr>
+            <tr className="border-b"><td className="py-2 px-3"><code>Disable-Completed</code></td><td className="py-2 px-3 text-muted-foreground">Disable Completed</td></tr>
+            <tr className="border-b"><td className="py-2 px-3"><code>Disable-Failed</code></td><td className="py-2 px-3 text-muted-foreground">Disable Failed</td></tr>
+            <tr className="border-b"><td className="py-2 px-3"><code>Suspend-Completed</code></td><td className="py-2 px-3 text-muted-foreground">Suspend Completed</td></tr>
+            <tr className="border-b"><td className="py-2 px-3"><code>Suspend-Failed</code></td><td className="py-2 px-3 text-muted-foreground">Suspend Failed</td></tr>
+            <tr className="border-b"><td className="py-2 px-3"><code>Resume-Completed</code></td><td className="py-2 px-3 text-muted-foreground">Resume Completed</td></tr>
+            <tr className="border-b last:border-b-0"><td className="py-2 px-3"><code>Resume-Failed</code></td><td className="py-2 px-3 text-muted-foreground">Resume Failed</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>Scope Applicability</h3>
+      <p>The following table shows which event types apply at each entity scope level:</p>
+      <div className="overflow-x-auto">
+        <table className="w-full text-sm border-collapse">
+          <thead>
+            <tr className="border-b">
+              <th className="text-left py-2 px-3 font-semibold">Event Type</th>
+              <th className="text-left py-2 px-3 font-semibold">Account</th>
+              <th className="text-left py-2 px-3 font-semibold">Caller Profile</th>
+              <th className="text-left py-2 px-3 font-semibold">TN</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr className="border-b"><td className="py-2 px-3"><code>vetting_status</code></td><td className="py-2 px-3 text-muted-foreground">—</td><td className="py-2 px-3 text-muted-foreground">—</td><td className="py-2 px-3">✓</td></tr>
+            <tr className="border-b"><td className="py-2 px-3"><code>tagging_status</code></td><td className="py-2 px-3 text-muted-foreground">—</td><td className="py-2 px-3 text-muted-foreground">—</td><td className="py-2 px-3">✓</td></tr>
+            <tr className="border-b last:border-b-0"><td className="py-2 px-3"><code>partner_status</code></td><td className="py-2 px-3">✓</td><td className="py-2 px-3">✓</td><td className="py-2 px-3">✓</td></tr>
           </tbody>
         </table>
       </div>
