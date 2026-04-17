@@ -13,7 +13,11 @@ export default function Changelog() {
 
       <div className="space-y-6 not-prose mt-6">
         {changelog.map((entry, i) => (
-          <Card key={i} className="border-l-4 border-l-primary">
+          <Card
+            key={i}
+            id={`entry-${entry.date}-${slugify(entry.title)}`}
+            className="border-l-4 border-l-primary"
+          >
             <CardContent className="p-6">
               <div className="flex items-center gap-3 mb-2">
                 <span className="text-sm font-mono text-muted-foreground">{entry.date}</span>
