@@ -6,7 +6,10 @@ import { dirname, resolve } from "node:path";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const root = resolve(__dirname, "..");
-const ORIGIN = "https://tcs.mountainaiproject.com";
+const ORIGIN = "https://tcs-apis.github.io";
+const BASE_PATH = "/developers.html";
+// Build a canonical URL with hash routing for GH Pages SPA.
+const url = (route) => `${ORIGIN}${BASE_PATH}${route === "/" ? "" : `#${route}`}`;
 
 function extractIds(filePath) {
   const src = readFileSync(resolve(root, filePath), "utf8");
@@ -82,7 +85,7 @@ const sitemap = `<?xml version="1.0" encoding="UTF-8"?>
 ${uniqueUrls
   .map(
     u => `  <url>
-    <loc>${ORIGIN}${u.loc}</loc>
+    <loc>${url(u.loc)}</loc>
     <lastmod>${today}</lastmod>
     <changefreq>weekly</changefreq>
     <priority>${u.priority}</priority>
