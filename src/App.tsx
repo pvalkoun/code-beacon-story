@@ -22,12 +22,17 @@ const queryClient = new QueryClient();
 
 const basename = import.meta.env.VITE_BASE_PATH || "/";
 
+// Use HashRouter when deployed to GitHub Pages (developers.html#/route).
+// Lovable preview & local dev use clean BrowserRouter URLs.
+const useHashRouting = import.meta.env.VITE_USE_HASH_ROUTER === "true";
+const Router = useHashRouting ? HashRouter : BrowserRouter;
+
 const App = () => (
   <QueryClientProvider client={queryClient}>
     <TooltipProvider>
       <Toaster />
       <Sonner />
-     <BrowserRouter basename={basename}>  
+      <Router basename={useHashRouting ? undefined : basename}>
         <ScrollToTop />
         <Routes>
           <Route element={<DocLayout />}>
