@@ -74,7 +74,12 @@ export default function WebhookOverview() {
       <h2>Supported Event Types</h2>
       <p>
         Webhooks can be configured to notify you of changes across three event categories,
-        scoped to the entity level that matters to your integration:
+        scoped to the entity level that matters to your integration. For the full list of
+        trigger keys to use in your registration payload, see the{" "}
+        <Link to="/resources/webhooks/guide#event-reference" className="text-primary underline">
+          Event Reference
+        </Link>
+        .
       </p>
 
       <div className="overflow-x-auto">
@@ -83,28 +88,34 @@ export default function WebhookOverview() {
             <tr className="border-b">
               <th className="text-left py-2 px-3 font-semibold">Event Type</th>
               <th className="text-left py-2 px-3 font-semibold">Scope Levels</th>
-              <th className="text-left py-2 px-3 font-semibold">Key Statuses</th>
+              <th className="text-left py-2 px-3 font-semibold">Example Trigger Keys</th>
             </tr>
           </thead>
           <tbody>
             <tr className="border-b">
-              <td className="py-2 px-3 font-medium">Vetting Status</td>
+              <td className="py-2 px-3 font-medium"><code>vetting_status</code></td>
               <td className="py-2 px-3">TN</td>
-              <td className="py-2 px-3 text-muted-foreground">Vetting-successful, Vetting-Exception</td>
+              <td className="py-2 px-3 text-muted-foreground"><code>VETTING_SUCCESSFUL</code>, <code>VETTING_EXCEPTION</code></td>
             </tr>
             <tr className="border-b">
-              <td className="py-2 px-3 font-medium">Partner Status</td>
+              <td className="py-2 px-3 font-medium"><code>partner_status</code></td>
               <td className="py-2 px-3">Account, Caller Profile, TN</td>
-              <td className="py-2 px-3 text-muted-foreground">Enable-Completed, Enable-Failed, Suspend-Completed, Resume-Completed</td>
+              <td className="py-2 px-3 text-muted-foreground"><code>Enable-Completed</code>, <code>Suspend-Completed</code>, <code>Resume-Completed</code></td>
             </tr>
             <tr className="border-b last:border-b-0">
-              <td className="py-2 px-3 font-medium">Tagging Status</td>
+              <td className="py-2 px-3 font-medium"><code>tagging_status</code></td>
               <td className="py-2 px-3">TN</td>
-              <td className="py-2 px-3 text-muted-foreground">Tagged, Appeal Declined, Appeal Granted, Customer-Input Pending</td>
+              <td className="py-2 px-3 text-muted-foreground"><code>TG</code>, <code>AG</code>, <code>AD</code>, <code>CIP</code></td>
             </tr>
           </tbody>
         </table>
       </div>
+
+      <p className="mt-3 text-sm">
+        <Link to="/resources/webhooks/guide#event-reference" className="text-primary underline">
+          View full Event Reference with all trigger keys →
+        </Link>
+      </p>
 
       <h2>Getting Started</h2>
       <div className="grid gap-4 md:grid-cols-2 not-prose">
