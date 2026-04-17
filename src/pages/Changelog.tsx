@@ -1,6 +1,7 @@
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Link } from "react-router-dom";
+import { SEO, breadcrumbJsonLd } from "@/components/SEO";
 
 interface ChangelogEntry {
   date: string;
