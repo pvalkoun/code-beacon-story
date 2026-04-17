@@ -130,3 +130,27 @@
 .docs-prose td { @apply border px-3 py-2 text-sm; }
 .docs-prose code { @apply bg-muted px-1.5 py-0.5 rounded text-sm font-mono; }
 .docs-prose .code-block code { @apply bg-transparent px-0 py-0 rounded-none; }
+
+/* Anchor offset so sticky header doesn't cover the section we jump to */
+:where([id]) { scroll-margin-top: 80px; }
+
+/* Brief highlight when navigating via #hash from the search palette */
+@keyframes search-target-flash {
+  0%   { background-color: hsl(var(--accent) / 0.45); box-shadow: 0 0 0 4px hsl(var(--accent) / 0.35); }
+  100% { background-color: transparent; box-shadow: 0 0 0 0 transparent; }
+}
+.search-target-highlight {
+  animation: search-target-flash 2s ease-out;
+  border-radius: 0.5rem;
+}
+
+/* Anchor link icon revealed on hover for headings and field rows */
+.anchor-link {
+  @apply opacity-0 ml-2 text-muted-foreground hover:text-foreground transition-opacity text-sm no-underline;
+}
+.group:hover > .anchor-link,
+.group:focus-within > .anchor-link,
+tr.group:hover .anchor-link,
+tr.group:focus-within .anchor-link {
+  opacity: 1;
+}
