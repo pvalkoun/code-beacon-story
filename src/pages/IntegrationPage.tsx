@@ -1,6 +1,8 @@
 import { useParams } from "react-router-dom";
 import { getIntegration } from "@/data/integrationData";
 import { CodeBlock } from "@/components/CodeBlock";
+import { AnchorHeading } from "@/components/AnchorHeading";
+import { slugify } from "@/lib/slug";
 
 export default function IntegrationPage() {
   const { integrationId } = useParams<{ integrationId: string }>();

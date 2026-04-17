@@ -1,12 +1,16 @@
 import { apiEndpoints } from "@/data/apiData";
+import { endpointFieldDocs } from "@/data/apiFieldDocs";
 import { products } from "@/data/productData";
-import { webhookEndpoints } from "@/data/webhookData";
+import { webhookEndpoints, webhookFieldDocs } from "@/data/webhookData";
 import { integrations } from "@/data/integrationData";
 import { changelog } from "@/data/changelogData";
+import { fieldAnchorId, slugify } from "@/lib/slug";
 
 export type SearchGroup =
   | "Endpoints"
+  | "Endpoint Fields"
   | "Webhooks"
+  | "Webhook Fields"
   | "Setup Guides"
   | "Products"
   | "Integrations"
@@ -20,56 +24,106 @@ export interface SearchItem {
   subtitle?: string;
   description?: string;
   body?: string;
-  to: string;
-  meta?: string; // e.g. HTTP method, tag list — useful for matching
+  to: string; // includes optional #hash
+  meta?: string;
+}
+
+/** Resolve which product page to route an endpoint to. */
+function endpointRouteProduct(ep: { product?: ("scp" | "bcd" | "cno" | "common")[] }): string {
+  const products = ep.product ?? ["common"];
+  if (products.length === 0 || (products.length === 1 && products[0] === "common")) {
+    return "scp"; // common endpoints — pick scp as a sensible default
+  }
+  return products.find((p) => p !== "common") ?? "scp";
 }
 
 function buildIndex(): SearchItem[] {
   const items: SearchItem[] = [];
 
-  // API endpoints — grouped per product (one entry per product they belong to)
+  // ─── API endpoints ───────────────────────────────────────────────
   for (const ep of apiEndpoints) {
-    const productIds = ep.product?.length ? ep.product : ["common"];
-    for (const productId of productIds) {
-      // Skip "common" duplicates — we still want one entry. Use first product or 'common' route via first product page.
-      // Pick a sensible product to route to: prefer non-common product id mapping to a real product page.
-      const routeProduct =
-        productId === "common"
-          ? // common endpoints are reachable from any product; pick the first real product the endpoint also lists, else default to scp
-            (ep.product?.find((p) => p !== "common") ?? "scp")
-          : productId;
+    const routeProduct = endpointRouteProduct(ep);
+    const base = `/products/${routeProduct}/api/${ep.id}`;
 
-      items.push({
-        id: `endpoint-${routeProduct}-${ep.id}`,
-        group: "Endpoints",
-        title: ep.name,
-        subtitle: `${ep.method} ${ep.path}`,
-        description: ep.description,
-        body: `${ep.category} ${ep.requestBody ?? ""} ${ep.responseBody ?? ""}`,
-        to: `/products/${routeProduct}/api/${ep.id}`,
-        meta: `${ep.method} ${ep.category}`,
-      });
+    items.push({
+      id: `endpoint-${routeProduct}-${ep.id}`,
+      group: "Endpoints",
+      title: ep.name,
+      subtitle: `${ep.method} ${ep.path}`,
+      description: ep.description,
+      body: `${ep.category}`,
+      to: `${base}#overview`,
+      meta: `${ep.method} ${ep.category}`,
+    });
 
-      // For "common" endpoints we only emit once, regardless of how many products list them
-      if (productId === "common") break;
+    // Per-field entries from apiFieldDocs
+    const docs = endpointFieldDocs[ep.id];
+    if (docs) {
+      const sections: { key: "pathParams" | "requestFields" | "responseFields"; section: string; label: string }[] = [
+        { key: "pathParams", section: "path-params", label: "Path param" },
+        { key: "requestFields", section: "request-fields", label: "Request field" },
+        { key: "responseFields", section: "response-fields", label: "Response field" },
+      ];
+      for (const { key, section, label } of sections) {
+        const fields = docs[key];
+        if (!fields) continue;
+        for (const f of fields) {
+          items.push({
+            id: `endpoint-${routeProduct}-${ep.id}-${section}-${f.path}`,
+            group: "Endpoint Fields",
+            title: f.path,
+            subtitle: `${label} • ${ep.name}`,
+            description: f.description,
+            body: `${f.type} ${f.constraints ?? ""}`,
+            to: `${base}#${section}-${fieldAnchorId(f.path)}`,
+            meta: `${ep.method}`,
+          });
+        }
+      }
     }
   }
 
-  // Webhook endpoints
+  // ─── Webhook endpoints ───────────────────────────────────────────
   for (const ep of webhookEndpoints) {
+    const base = `/resources/webhooks/api/${ep.id}`;
     items.push({
       id: `webhook-${ep.id}`,
       group: "Webhooks",
       title: ep.name,
       subtitle: `${ep.method} ${ep.path}`,
       description: ep.description,
-      body: `${ep.category} ${ep.requestBody ?? ""} ${ep.responseBody ?? ""}`,
-      to: `/resources/webhooks/api/${ep.id}`,
+      body: ep.category,
+      to: `${base}#overview`,
       meta: `${ep.method} ${ep.category}`,
     });
+
+    const docs = webhookFieldDocs?.[ep.id];
+    if (docs) {
+      const sections: { key: "pathParams" | "requestFields" | "responseFields"; section: string; label: string }[] = [
+        { key: "pathParams", section: "path-params", label: "Path param" },
+        { key: "requestFields", section: "request-fields", label: "Request field" },
+        { key: "responseFields", section: "response-fields", label: "Response field" },
+      ];
+      for (const { key, section, label } of sections) {
+        const fields = docs[key];
+        if (!fields) continue;
+        for (const f of fields) {
+          items.push({
+            id: `webhook-${ep.id}-${section}-${f.path}`,
+            group: "Webhook Fields",
+            title: f.path,
+            subtitle: `${label} • ${ep.name}`,
+            description: f.description,
+            body: `${f.type} ${f.constraints ?? ""}`,
+            to: `${base}#${section}-${fieldAnchorId(f.path)}`,
+            meta: ep.method,
+          });
+        }
+      }
+    }
   }
 
-  // Products + their setup steps
+  // ─── Products + setup steps ──────────────────────────────────────
   for (const product of products) {
     items.push({
       id: `product-${product.id}`,
@@ -87,16 +141,15 @@ function buildIndex(): SearchItem[] {
           id: `guide-${product.id}-${step.step}`,
           group: "Setup Guides",
           title: `${product.name}: ${step.title}`,
-          subtitle: `Step ${step.step} of the setup guide`,
+          subtitle: `Step ${step.step}`,
           description: step.description,
           body: step.details,
-          to: `/products/${product.id}/guide`,
+          to: `/products/${product.id}/guide#step-${step.step}`,
         });
       }
     }
   }
 
-  // Webhook setup guide page (general)
   items.push({
     id: "guide-webhooks",
     group: "Setup Guides",
@@ -106,7 +159,7 @@ function buildIndex(): SearchItem[] {
     to: "/resources/webhooks/guide",
   });
 
-  // Integrations
+  // ─── Integrations + their sections ───────────────────────────────
   for (const ig of integrations) {
     items.push({
       id: `integration-${ig.id}`,
@@ -114,12 +167,23 @@ function buildIndex(): SearchItem[] {
       title: `${ig.platform} Integration`,
       subtitle: ig.products.map((p) => p.toUpperCase()).join(" • "),
       description: ig.description,
-      body: ig.sections.map((s) => `${s.title} ${s.content}`).join(" "),
+      body: ig.sections.map((s) => s.title).join(" "),
       to: `/integrations/${ig.id}`,
     });
+    for (const section of ig.sections) {
+      items.push({
+        id: `integration-${ig.id}-${slugify(section.title)}`,
+        group: "Integrations",
+        title: `${ig.platform}: ${section.title}`,
+        subtitle: "Section",
+        description: section.content.slice(0, 160),
+        body: section.content,
+        to: `/integrations/${ig.id}#section-${slugify(section.title)}`,
+      });
+    }
   }
 
-  // Changelog entries
+  // ─── Changelog ───────────────────────────────────────────────────
   for (const entry of changelog) {
     items.push({
       id: `changelog-${entry.date}-${entry.title}`,
@@ -128,48 +192,18 @@ function buildIndex(): SearchItem[] {
       subtitle: entry.date,
       description: entry.description,
       body: entry.tags.join(" "),
-      to: "/changelog",
+      to: `/changelog#entry-${entry.date}-${slugify(entry.title)}`,
       meta: entry.tags.join(" "),
     });
   }
 
-  // Static top-level pages
+  // ─── Static pages ────────────────────────────────────────────────
   items.push(
-    {
-      id: "page-home",
-      group: "Pages",
-      title: "Home",
-      description: "TruContact Trusted Call Solutions documentation overview",
-      to: "/",
-    },
-    {
-      id: "page-call-auth",
-      group: "Pages",
-      title: "Call Authentication (PCA)",
-      description: "Required prerequisite for SCP and BCD",
-      to: "/call-auth",
-    },
-    {
-      id: "page-analytics",
-      group: "Pages",
-      title: "Analytics API",
-      description: "Per-TN and account-wide call performance metrics",
-      to: "/resources/analytics",
-    },
-    {
-      id: "page-webhooks",
-      group: "Pages",
-      title: "Webhooks Overview",
-      description: "Subscribe to events and receive callbacks",
-      to: "/resources/webhooks",
-    },
-    {
-      id: "page-changelog",
-      group: "Pages",
-      title: "Changelog",
-      description: "Recent updates and additions to the platform",
-      to: "/changelog",
-    },
+    { id: "page-home", group: "Pages", title: "Home", description: "TruContact Trusted Call Solutions documentation overview", to: "/" },
+    { id: "page-call-auth", group: "Pages", title: "Call Authentication (PCA)", description: "Required prerequisite for SCP and BCD", to: "/call-auth" },
+    { id: "page-analytics", group: "Pages", title: "Analytics API", description: "Per-TN and account-wide call performance metrics", to: "/resources/analytics" },
+    { id: "page-webhooks", group: "Pages", title: "Webhooks Overview", description: "Subscribe to events and receive callbacks", to: "/resources/webhooks" },
+    { id: "page-changelog", group: "Pages", title: "Changelog", description: "Recent updates and additions to the platform", to: "/changelog" },
   );
 
   return items;
@@ -179,7 +213,9 @@ export const searchIndex: SearchItem[] = buildIndex();
 
 export const groupOrder: SearchGroup[] = [
   "Endpoints",
+  "Endpoint Fields",
   "Webhooks",
+  "Webhook Fields",
   "Setup Guides",
   "Products",
   "Integrations",
