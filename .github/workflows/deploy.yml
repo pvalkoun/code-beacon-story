@@ -37,6 +37,21 @@ jobs:
         env:
           VITE_BASE_PATH: /code-beacon-story
 
+      - name: Build flat single-file site
+        run: npm run build:flat
+
+      - name: Commit flat-site.html
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          if ! git diff --quiet flat-site.html; then
+            git add flat-site.html
+            git commit -m "chore: update flat-site.html [skip ci]"
+            git push
+          else
+            echo "flat-site.html unchanged"
+          fi
+
       - name: Setup Pages
         uses: actions/configure-pages@v5
 
