@@ -9,26 +9,48 @@ export default function WebhookOverview() {
       <h1>Webhook Notifications</h1>
       <p className="text-lg text-muted-foreground">
         Receive real-time status updates for your accounts, caller profiles, and telephone numbers
-        without polling the API.
+        without polling the API for status updates or any actionable events.
       </p>
 
       <p>
-        Webhooks allow you to subscribe to event notifications so your systems are automatically
-        informed when important status changes occur on the TruContact platform. Instead of
-        repeatedly polling API endpoints, TransUnion pushes updates directly to your registered
-        HTTPS endpoint as soon as events happen — such as vetting completion, partner enablement,
-        or tagging changes.
+        Webhooks allow you to subscribe to event notifications from the TruContact Trusted Call
+        Solutions platform. When important changes occur, TransUnion automatically sends event
+        payloads to your secure HTTPS endpoint, enabling your systems to react instantly.
       </p>
+
+      <h2>What events can you receive?</h2>
+      <p>
+        You can subscribe to notifications for key lifecycle and operational events, including:
+      </p>
+      <ul>
+        <li>Vetting status updates</li>
+        <li>Partner enablement changes</li>
+        <li>Tagging status changes</li>
+      </ul>
+
+      <p>Events can be scoped by:</p>
+      <ul>
+        <li>Account</li>
+        <li>Caller Profile</li>
+        <li>Telephone Number (TN)</li>
+      </ul>
+
+      <p>You can also filter subscriptions by service, such as:</p>
+      <ul>
+        <li>BCD</li>
+        <li>CNO</li>
+        <li>SCP</li>
+      </ul>
 
       <h2>Key Benefits</h2>
       <ul className="space-y-2">
         {[
-          "Real-time notifications — no polling required",
-          "Subscribe to specific event types and services (BCD, SCP, CNO)",
-          "Scoped delivery at Account, Caller Profile, or TN level",
-          "Configurable retry policy with failure email alerts",
-          "Full delivery log history for debugging and monitoring",
-          "Lifecycle management — update status to pause or resume at any time",
+          "Real-time notifications — eliminate polling and reduce API calls",
+          "Targeted subscriptions — only receive events you care about",
+          "Flexible scoping — account, profile, or TN level delivery",
+          "Reliable retries — configurable retry policy with failure email alerts",
+          "Delivery visibility — full event delivery history for troubleshooting",
+          "Lifecycle control — pause or resume webhook delivery at any time",
         ].map((b, i) => (
           <li key={i} className="flex items-start gap-2">
             <CheckCircle2 className="h-5 w-5 text-accent mt-0.5 shrink-0" />
@@ -43,12 +65,12 @@ export default function WebhookOverview() {
           {
             icon: Shield,
             title: "1. Enable Webhook Service",
-            desc: "Enable the WB service on your AAM account to unlock webhook registration.",
+            desc: "Enable the WB service on your AAM account and assign the WB_COMPANY_ADMIN role to unlock webhook registration.",
           },
           {
             icon: Bell,
             title: "2. Register Your Endpoint",
-            desc: "Provide your HTTPS callback URL, authentication, and choose which events and scopes to subscribe to.",
+            desc: "Provide your HTTPS callback URL, encrypted authentication credentials, and choose which events and scopes to subscribe to.",
           },
           {
             icon: Zap,
@@ -58,7 +80,7 @@ export default function WebhookOverview() {
           {
             icon: RefreshCw,
             title: "4. Monitor & Manage",
-            desc: "Review delivery logs, update the webhook state to pause or resume delivery, and modify your configuration at any time.",
+            desc: "Update the webhook state to pause or resume delivery, modify your configuration, and receive cool-off email alerts on repeated failures.",
           },
         ].map((item, i) => (
           <Card key={i} className="hover:shadow-md transition-shadow">
@@ -100,7 +122,9 @@ export default function WebhookOverview() {
             <tr className="border-b">
               <td className="py-2 px-3 font-medium"><code>partner_status</code></td>
               <td className="py-2 px-3">Account, Caller Profile, TN</td>
-              <td className="py-2 px-3 text-muted-foreground"><code>Enable-Completed</code>, <code>Suspend-Completed</code>, <code>Resume-Completed</code></td>
+              <td className="py-2 px-3 text-muted-foreground">
+                <code>Enable-Completed</code>, <code>Enable-Failed</code>, <code>Disable-Completed</code>, <code>Disable-Failed</code>, <code>Suspend-Completed</code>, <code>Suspend-Failed</code>, <code>Resume-Completed</code>, <code>Resume-Failed</code>
+              </td>
             </tr>
             <tr className="border-b last:border-b-0">
               <td className="py-2 px-3 font-medium"><code>tagging_status</code></td>
