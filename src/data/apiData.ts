@@ -879,7 +879,7 @@ export const apiEndpoints: ApiEndpoint[] = [
     name: "Attach CNO Caller Profile",
     method: "POST",
     path: "/ccid/sdpr/v4/admin/account/{accountId}/caller-profile",
-    description: "Create a caller profile for Spam Tag Mitigation (CNO). The profile defines the CCID-ORIG and CNO service configuration with per-carrier partner statuses.",
+    description: "Create a caller profile for Caller Name Optimization (CNO). The profile defines the CCID-ORIG and CNO service configuration with per-carrier partner statuses.",
     headers: [{ key: "Content-Type", value: "application/json" }, { key: "Accept", value: "application/json" }],
     requestBody: `{
   "service": [

@@ -25,7 +25,7 @@ const Index = () => {
               <CardTitle className="text-xl">Call Authentication</CardTitle>
             </div>
             <CardDescription className="text-sm leading-relaxed">
-              Verify Caller Identity in real-time before Branding calls or to stop spoofed calls. This is prerequisite for both Branded Call Display and Spoofed Call Protection.
+              Verify Caller Identity in real-time before Branding calls or to stop spoofed calls. This is prerequisite for both Rich/Auth Branded Call Display and Spoofed Call Protection.
             </CardDescription>
           </CardHeader>
           <CardContent className="mt-auto">
@@ -47,10 +47,10 @@ const Index = () => {
               <div className="p-2.5 rounded-lg bg-accent/10">
                 <Tag className="h-6 w-6 text-accent" />
               </div>
-              <CardTitle className="text-xl">Spam Tag Mitigation (CNO)</CardTitle>
+              <CardTitle className="text-xl">Caller Name Optimization</CardTitle>
             </div>
             <CardDescription className="text-sm leading-relaxed">
-              Prevent your legitimate calls from being mislabeled as spam or fraud by carrier analytics engines.
+              Registers verified business telephone numbers to mitigate spam tagging and blocking. Manage name on landline devices.
             </CardDescription>
           </CardHeader>
           <CardContent className="mt-auto">
