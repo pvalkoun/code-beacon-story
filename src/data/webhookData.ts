@@ -32,17 +32,82 @@ export const webhookEndpoints: WebhookEndpoint[] = [
     category: "Account Setup",
     name: "Enable Webhook Service",
     method: "PUT",
-    path: "/ccid/aam/v1/admin/company/{{accountId}}",
-    description: "Enable the Webhook (WB) service on an existing AAM account. This is a prerequisite before registering any webhook endpoints. The account must already exist in AAM — use this endpoint to add webhook capability to it.",
+    path: "/ccid/aam/v2/admin/company/{{accountId}}",
+    description: "Enable the Webhook (WB) service on an existing AAM enterprise account. This is a prerequisite before registering any webhook endpoints. Submit the full account payload with the WB service entry included in the service array.",
     headers: [
       { key: "Content-Type", value: "application/json" },
     ],
     requestBody: `{
-  "enableWB": true
+  "name": "user_sample_enterprise_01",
+  "type": "ENTERPRISE",
+  "status": "ACTIVE",
+  "relationship": "DIRECT",
+  "parent_account": [
+    "x0vo1z7q11"
+  ],
+  "billing": {
+    "id": "willdefine",
+    "model": "OTHER",
+    "frequency": "MONTHLY"
+  },
+  "service": [
+    {
+      "type": "WB"
+    }
+  ],
+  "child_account_enabled": false,
+  "start_date": "Fri, 4 Apr 2025 18:18:49 GMT",
+  "end_date": "Sat, 4 Apr 2026 18:18:49 GMT",
+  "application": [
+    "CCID",
+    "TCS"
+  ]
 }`,
     responseBody: `{
-  "accountId": "acc_12345",
+  "accountId": "x0369a4otu",
   "message": "Account updated"
+}`,
+    responseStatus: 200,
+  },
+  {
+    id: "wb-create-user",
+    category: "Account Setup",
+    name: "Create Webhook Admin User",
+    method: "POST",
+    path: "/ccid/aam/v2/admin/user",
+    description: "Create a user in AAM and assign the WB_COMPANY_ADMIN role so they can register, update, test, and manage webhooks for the account. Webhook management APIs are protected by service-specific authorization — even existing company administrators must be explicitly granted the Webhook role. The company must already be subscribed to the Webhook service before this role can be assigned.",
+    headers: [
+      { key: "Content-Type", value: "application/json" },
+    ],
+    requestBody: `{
+  "user_id": "enterprise_company_admin_01",
+  "user_name": "enterprise_company_admin_01",
+  "company_id": "x0369a4otu",
+  "email": "user.lastname@transunion.com",
+  "first_name": "Lucky",
+  "last_name": "Seven",
+  "phone": "+1.7201234567",
+  "roles": {
+    "SDPR": [
+      "SDPR_ENTERPRISE_ADMIN"
+    ],
+    "AAM": [
+      "AAM_COMPANY_ADMIN"
+    ],
+    "WB": [
+      "WB_COMPANY_ADMIN"
+    ]
+  },
+  "comment": "Authorized enterprise admin access.",
+  "status": "ACTIVE",
+  "user_type": "API",
+  "application": [
+    "TCS"
+  ]
+}`,
+    responseBody: `{
+  "user_id": "enterprise_company_admin_01",
+  "message": "User created"
 }`,
     responseStatus: 200,
   },
@@ -54,23 +119,21 @@ export const webhookEndpoints: WebhookEndpoint[] = [
     name: "Register Webhook",
     method: "POST",
     path: "/ccid/webhook/v1/account/{{accountId}}/webhook",
-    description: "Register a new webhook endpoint for the specified account. The webhook configuration defines the callback URL, authentication credentials, retry behavior, notification email contacts, and the services and event scopes to subscribe to.",
+    description: "Register a new webhook endpoint for the specified account. The webhook configuration defines the callback URL, authentication credentials, retry behavior, notification email contacts, and the services and event scopes to subscribe to. Passwords and API keys must be encrypted (see the Encryption Utility in the Setup Guide) before being included in the payload.",
     headers: [
       { key: "Content-Type", value: "application/json" },
     ],
     requestBody: `{
-  "webhook_name": "Webhook Notifications",
-  "description": "Receive real-time status updates for BCD assets",
+  "webhook_name": "Webhook Notifications for Enterpise 01",
+  "description": "This space is for webhook description",
   "state": "ACTIVE",
   "max_retry": 5,
-  "email": [
-    "ops-team@example.com"
-  ],
-  "auth_type": "auth",
+  "email": ["user@example.com"],
+  "auth_type": "apiKey",
   "credentials": {
-    "username": "admin",
-    "password": "password",
-    "login_url": "https://demo.myapp.com/login"
+    "api_key": "apiKey",
+    "api_value": "X9aP7KqM2R8vZtYcH1fL",
+    "location": "Header"
   },
   "services": [
     {
@@ -89,7 +152,8 @@ export const webhookEndpoints: WebhookEndpoint[] = [
                 "event_type": "partner_status",
                 "trigger_on": ["*"]
               }
-            ]
+            ],
+            "features": ["AUTH-BCD"]
           }
         },
         {
@@ -103,10 +167,10 @@ export const webhookEndpoints: WebhookEndpoint[] = [
               },
               {
                 "event_type": "tagging_status",
-                "trigger_on": ["AG"]
+                "trigger_on": ["TG", "AG"]
               }
             ],
-            "features": ["NAME-BCD"]
+            "features": ["CNO"]
           }
         },
         {
@@ -119,7 +183,7 @@ export const webhookEndpoints: WebhookEndpoint[] = [
                 "trigger_on": ["Enable-Completed"]
               }
             ],
-            "features": ["NAME-BCD"]
+            "features": ["AUTH-BCD"]
           }
         }
       ]
@@ -128,11 +192,11 @@ export const webhookEndpoints: WebhookEndpoint[] = [
 }`,
     responseBody: `{
   "id": "69c239466c81b511de9cb409",
-  "webhook_name": "Webhook Notifications",
-  "description": "Receive real-time status updates for BCD assets",
+  "webhook_name": "Webhook Notifications for Enterpise 01",
+  "description": "This space is for webhook description",
   "state": "ACTIVE",
   "max_retry": 5,
-  "auth_type": "auth",
+  "auth_type": "apiKey",
   "services": [ ... ]
 }`,
     responseStatus: 200,
@@ -149,32 +213,33 @@ export const webhookEndpoints: WebhookEndpoint[] = [
     ],
     responseBody: `{
   "id": "69c239466c81b511de9cb409",
-  "webhook_name": "Webhook Notifications",
-  "description": "Receive real-time status updates for BCD assets",
+  "webhook_name": "Webhook Notifications for Enterpise 01",
+  "description": "This space is for webhook description",
   "state": "ACTIVE",
   "max_retry": 5,
-  "auth_type": "auth",
+  "auth_type": "apiKey",
   "email": [
-    "ops-team@example.com"
+    "user@example.com"
   ],
   "services": [
     {
       "name": "sdpr",
       "entities": [
         {
-          "type": "account",
+          "type": "tcsasset",
           "data": {
-            "webhook_url": "https://demo.myapp.com/account",
+            "webhook_url": "https://demo.myapp.com/asset",
             "event_types": [
               {
                 "event_type": "vetting_status",
                 "trigger_on": ["VETTING_SUCCESSFUL"]
               },
               {
-                "event_type": "partner_status",
-                "trigger_on": ["*"]
+                "event_type": "tagging_status",
+                "trigger_on": ["TG", "AG"]
               }
-            ]
+            ],
+            "features": ["CNO"]
           }
         }
       ]
@@ -194,13 +259,93 @@ export const webhookEndpoints: WebhookEndpoint[] = [
       { key: "Content-Type", value: "application/json" },
     ],
     requestBody: `{
-  "webhook_name": "Webhook Notifications",
+  "webhook_name": "Webhook Notifications for Enterpise 01",
   "description": "Updated webhook with callerprofile scope",
   "state": "ACTIVE",
   "max_retry": 5,
-  "email": [
-    "ops-team@example.com"
-  ],
+  "email": ["user@example.com"],
+  "auth_type": "apiKey",
+  "credentials": {
+    "api_key": "apiKey",
+    "api_value": "X9aP7KqM2R8vZtYcH1fL",
+    "location": "Header"
+  },
+  "services": [
+    {
+      "name": "sdpr",
+      "entities": [
+        {
+          "type": "tcsasset",
+          "data": {
+            "webhook_url": "https://demo.myapp.com/asset",
+            "event_types": [
+              {
+                "event_type": "vetting_status",
+                "trigger_on": ["VETTING_SUCCESSFUL"]
+              },
+              {
+                "event_type": "tagging_status",
+                "trigger_on": ["TG", "AG"]
+              }
+            ],
+            "features": ["CNO"]
+          }
+        },
+        {
+          "type": "callerprofile",
+          "data": {
+            "webhook_url": "https://demo.myapp.com/cp",
+            "event_types": [
+              {
+                "event_type": "partner_status",
+                "trigger_on": ["Enable-Completed"]
+              }
+            ],
+            "features": ["AUTH-BCD"]
+          }
+        }
+      ]
+    }
+  ]
+}`,
+    responseBody: `{
+  "id": "69c239466c81b511de9cb409",
+  "message": "Updated"
+}`,
+    responseStatus: 200,
+  },
+  {
+    id: "wb-delete",
+    category: "Webhook Management",
+    name: "Delete Webhook",
+    method: "DELETE",
+    path: "/ccid/webhook/v1/account/{{accountId}}/webhook",
+    description: "Permanently delete the webhook configuration for the specified account. This removes the entire webhook object including all registered scopes and event filters. This action cannot be undone.",
+    headers: [
+      { key: "Content-Type", value: "application/json" },
+    ],
+    responseBody: `{
+  "message": "Deleted",
+  "status": 200
+}`,
+    responseStatus: 200,
+  },
+  {
+    id: "wb-test",
+    category: "Webhook Management",
+    name: "Test Webhook Connectivity",
+    method: "POST",
+    path: "/ccid/webhook/v1/account/{{accountId}}/webhook/test",
+    description: "Test the connectivity of your configured callback endpoint(s) before registering the webhook. This validation confirms that each configured endpoint is reachable and operational, reducing the risk of delivery issues after activation. The response returns the HTTP status code returned by each endpoint.",
+    headers: [
+      { key: "Content-Type", value: "application/json" },
+    ],
+    requestBody: `{
+  "webhook_name": "Webhook Notifications for Enterpise 01",
+  "description": "This space is for webhook description",
+  "state": "ACTIVE",
+  "max_retry": 5,
+  "email": ["user@example.com"],
   "auth_type": "auth",
   "credentials": {
     "username": "admin",
@@ -216,15 +361,21 @@ export const webhookEndpoints: WebhookEndpoint[] = [
           "data": {
             "webhook_url": "https://demo.myapp.com/account",
             "event_types": [
-              {
-                "event_type": "vetting_status",
-                "trigger_on": ["VETTING_SUCCESSFUL"]
-              },
-              {
-                "event_type": "partner_status",
-                "trigger_on": ["*"]
-              }
-            ]
+              { "event_type": "vetting_status", "trigger_on": ["VETTING_SUCCESSFUL"] },
+              { "event_type": "partner_status", "trigger_on": ["*"] }
+            ],
+            "features": ["AUTH-BCD"]
+          }
+        },
+        {
+          "type": "tcsasset",
+          "data": {
+            "webhook_url": "https://demo.myapp.com/asset",
+            "event_types": [
+              { "event_type": "vetting_status", "trigger_on": ["VETTING_SUCCESSFUL"] },
+              { "event_type": "tagging_status", "trigger_on": ["TG", "AG"] }
+            ],
+            "features": ["CNO"]
           }
         },
         {
@@ -232,12 +383,9 @@ export const webhookEndpoints: WebhookEndpoint[] = [
           "data": {
             "webhook_url": "https://demo.myapp.com/cp",
             "event_types": [
-              {
-                "event_type": "partner_status",
-                "trigger_on": ["Enable-Completed"]
-              }
+              { "event_type": "partner_status", "trigger_on": ["Enable-Completed"] }
             ],
-            "features": ["NAME-BCD"]
+            "features": ["AUTH-BCD"]
           }
         }
       ]
@@ -245,62 +393,40 @@ export const webhookEndpoints: WebhookEndpoint[] = [
   ]
 }`,
     responseBody: `{
-  "id": "69c239466c81b511de9cb409",
-  "message": "Updated"
-}`,
-    responseStatus: 200,
-  },
-
-  // ── Webhook Management (continued) ──
-  {
-    id: "wb-delete",
-    category: "Webhook Management",
-    name: "Delete Webhook",
-    method: "DELETE",
-    path: "/ccid/webhook/v1/account/{{accountId}}/webhook",
-    description: "Permanently delete the webhook configuration for the specified account. This removes the entire webhook object including all registered scopes, event filters, and delivery history. This action cannot be undone.",
-    headers: [
-      { key: "Content-Type", value: "application/json" },
-    ],
-    responseBody: `{
-  "message": "Deleted",
-  "status": 200
-}`,
-    responseStatus: 200,
-  },
-
-  // ── Delivery Logs ──
-  {
-    id: "wb-logs",
-    category: "Delivery Logs",
-    name: "Get Delivery Logs",
-    method: "GET",
-    path: "/ccid/webhook/v1/account/{{accountId}}/webhook/logs",
-    description: "Retrieve the delivery log history for the webhook. Logs include timestamps, payloads sent, HTTP response codes from your endpoint, retry attempt counts, and delivery status. Use these logs for debugging integration issues and monitoring delivery health.",
-    headers: [
-      { key: "Content-Type", value: "application/json" },
-    ],
-    responseBody: `{
-  "logs": [
-    {
-      "timestamp": "2026-03-02T14:45:10Z",
-      "event_type": "partner_status",
-      "entity_type": "account",
-      "payload": { "current_status": "Enable Completed" },
-      "response_code": 200,
-      "retry_count": 0,
-      "status": "delivered"
+  "urls": {
+    "account": {
+      "url": "https://demo.myapp.com/account",
+      "status_code": 200
     },
-    {
-      "timestamp": "2026-03-02T14:55:12Z",
-      "event_type": "vetting_status",
-      "entity_type": "TN",
-      "payload": { "current_status": "Vetting-successful" },
-      "response_code": 500,
-      "retry_count": 3,
-      "status": "failed"
+    "tcsasset": {
+      "url": "https://demo.myapp.com/asset",
+      "status_code": 200
+    },
+    "callerprofile": {
+      "url": "https://demo.myapp.com/cp",
+      "status_code": 200
     }
-  ]
+  }
+}`,
+    responseStatus: 200,
+  },
+
+  // ── Encryption Utility ──
+  {
+    id: "wb-encrypt",
+    category: "Encryption Utility",
+    name: "Encrypt Secret",
+    method: "POST",
+    path: "/ccid/webhook/v1/encrypt",
+    description: "Convert a plain-text secret (password or API key) into an encrypted value accepted by the webhook registration APIs. Plain-text passwords or API keys are never accepted by webhook APIs — the platform cannot reliably determine whether an incoming value is encrypted unless it conforms to the approved encryption format. This API can be used repeatedly and supports encrypting any single plain-text input.",
+    headers: [
+      { key: "Content-Type", value: "application/json" },
+    ],
+    requestBody: `{
+  "value": "myPlainTextPasswordOrApiKey"
+}`,
+    responseBody: `{
+  "encrypted_value": "X9aP7KqM2R8vZtYcH1fL"
 }`,
     responseStatus: 200,
   },
@@ -312,10 +438,42 @@ export const webhookFieldDocs: Record<string, WebhookEndpointFieldDocs> = {
       { path: "accountId", type: "String", required: true, description: "The unique account identifier from AAM", constraints: "Must be a valid, existing AAM account ID" },
     ],
     requestFields: [
-      { path: "enableWB", type: "Boolean", required: true, description: "Set to true to enable the Webhook microservice for this account", constraints: "true | false" },
+      { path: "name", type: "String", required: true, description: "Account name" },
+      { path: "type", type: "String", required: true, description: "Account type", constraints: "ENTERPRISE" },
+      { path: "status", type: "String", required: true, description: "Account status", constraints: "ACTIVE | INACTIVE" },
+      { path: "relationship", type: "String", required: true, description: "Account relationship", constraints: "DIRECT" },
+      { path: "parent_account", type: "Array<String>", required: false, description: "Parent account IDs" },
+      { path: "billing", type: "Object", required: true, description: "Billing configuration (id, model, frequency)" },
+      { path: "service[].type", type: "String", required: true, description: "Service type to enable. Include `WB` to enable Webhook service.", constraints: "WB | SDPR | other supported services" },
+      { path: "child_account_enabled", type: "Boolean", required: false, description: "Whether child accounts are allowed" },
+      { path: "start_date", type: "DateTime", required: true, description: "Account start date (RFC 1123)" },
+      { path: "end_date", type: "DateTime", required: true, description: "Account end date (RFC 1123)" },
+      { path: "application", type: "Array<String>", required: true, description: "Applications enabled on the account", constraints: "CCID, TCS" },
     ],
     responseFields: [
       { path: "accountId", type: "String", required: true, description: "The account ID that was updated" },
+      { path: "message", type: "String", required: true, description: "Confirmation message" },
+    ],
+  },
+  "wb-create-user": {
+    requestFields: [
+      { path: "user_id", type: "String", required: true, description: "Unique user identifier" },
+      { path: "user_name", type: "String", required: true, description: "User display name" },
+      { path: "company_id", type: "String", required: true, description: "AAM company / account ID this user belongs to" },
+      { path: "email", type: "String", required: true, description: "User email address" },
+      { path: "first_name", type: "String", required: true, description: "First name" },
+      { path: "last_name", type: "String", required: true, description: "Last name" },
+      { path: "phone", type: "String", required: false, description: "Phone number" },
+      { path: "roles.WB", type: "Array<String>", required: true, description: "Webhook roles to assign", constraints: "WB_COMPANY_ADMIN" },
+      { path: "roles.SDPR", type: "Array<String>", required: false, description: "SDPR roles" },
+      { path: "roles.AAM", type: "Array<String>", required: false, description: "AAM roles" },
+      { path: "comment", type: "String", required: false, description: "Free-text comment" },
+      { path: "status", type: "String", required: true, description: "User status", constraints: "ACTIVE | INACTIVE" },
+      { path: "user_type", type: "String", required: true, description: "User type", constraints: "API | UI" },
+      { path: "application", type: "Array<String>", required: true, description: "Applications the user can access", constraints: "TCS" },
+    ],
+    responseFields: [
+      { path: "user_id", type: "String", required: true, description: "The user ID that was created" },
       { path: "message", type: "String", required: true, description: "Confirmation message" },
     ],
   },
@@ -328,17 +486,20 @@ export const webhookFieldDocs: Record<string, WebhookEndpointFieldDocs> = {
       { path: "description", type: "String", required: false, description: "Optional description of the webhook purpose" },
       { path: "state", type: "String", required: true, description: "Initial state of the webhook", constraints: "ACTIVE | PAUSED" },
       { path: "max_retry", type: "Integer", required: true, description: "Maximum number of retry attempts for failed deliveries", constraints: "Recommended: 3-5" },
-      { path: "email", type: "Array", required: false, description: "Email addresses or PDLs to notify after max retries are exhausted" },
-      { path: "auth_type", type: "String", required: true, description: "Authentication method for your callback endpoint", constraints: "auth | token | none" },
-      { path: "credentials.username", type: "String", required: false, description: "Username for Basic Auth (required if auth_type is 'auth')" },
-      { path: "credentials.password", type: "String", required: false, description: "Password for Basic Auth (required if auth_type is 'auth')" },
-      { path: "credentials.login_url", type: "String", required: false, description: "Login URL for token-based auth (required if auth_type is 'auth')" },
+      { path: "email", type: "Array", required: true, description: "Email addresses or PDLs to notify after max retries are exhausted and for cool-off events" },
+      { path: "auth_type", type: "String", required: true, description: "Authentication method for your callback endpoint", constraints: "oAuth | apiKey | none" },
+      { path: "credentials.username", type: "String", required: false, description: "Username for oAuth (required if auth_type is 'oAuth')" },
+      { path: "credentials.password", type: "String", required: false, description: "Encrypted password for oAuth (required if auth_type is 'oAuth'). Must be encrypted using the Encryption Utility." },
+      { path: "credentials.login_url", type: "String", required: false, description: "Login URL for oAuth token retrieval" },
+      { path: "credentials.api_key", type: "String", required: false, description: "API key name (required if auth_type is 'apiKey')" },
+      { path: "credentials.api_value", type: "String", required: false, description: "Encrypted API key value (required if auth_type is 'apiKey'). Must be encrypted using the Encryption Utility." },
+      { path: "credentials.location", type: "String", required: false, description: "Where to place the API key", constraints: "Header | Query Param" },
       { path: "services[].name", type: "String", required: true, description: "Service name to subscribe to", constraints: "e.g., sdpr" },
       { path: "services[].entities[].type", type: "String", required: true, description: "The entity scope level", constraints: "account | tcsasset | callerprofile" },
       { path: "services[].entities[].data.webhook_url", type: "String", required: true, description: "Your HTTPS callback URL for this scope", constraints: "Must be a valid HTTPS URL" },
       { path: "services[].entities[].data.event_types[].event_type", type: "String", required: true, description: "The event category to subscribe to", constraints: "vetting_status | partner_status | tagging_status" },
       { path: "services[].entities[].data.event_types[].trigger_on", type: "Array", required: true, description: "Specific status values to trigger on, or ['*'] for all", constraints: "See Event Reference for valid values" },
-      { path: "services[].entities[].data.features", type: "Array", required: false, description: "Feature filter for notifications", constraints: "e.g., NAME-BCD, RICH-BCD, SPOOF-CALL-PROTECTION" },
+      { path: "services[].entities[].data.features", type: "Array", required: true, description: "Feature filter for notifications. At least one feature must be configured. Use CNO for tagging_status events.", constraints: "CNO | AUTH-BCD | RICH-BCD | SPOOF-CALL-PROTECTION" },
     ],
     responseFields: [
       { path: "id", type: "String", required: true, description: "Unique webhook identifier assigned by the system" },
@@ -356,8 +517,8 @@ export const webhookFieldDocs: Record<string, WebhookEndpointFieldDocs> = {
       { path: "description", type: "String", required: false, description: "Description of the webhook purpose" },
       { path: "state", type: "String", required: true, description: "Current state of the webhook", constraints: "ACTIVE | PAUSED" },
       { path: "max_retry", type: "Integer", required: true, description: "Maximum retry attempts for failed deliveries" },
-      { path: "auth_type", type: "String", required: true, description: "Authentication method configured", constraints: "auth | token | none" },
-      { path: "email", type: "Array", required: false, description: "Notification email addresses" },
+      { path: "auth_type", type: "String", required: true, description: "Authentication method configured", constraints: "oAuth | apiKey | none" },
+      { path: "email", type: "Array", required: true, description: "Notification email addresses" },
       { path: "services", type: "Array", required: true, description: "Registered service scopes and event filters" },
     ],
   },
@@ -382,23 +543,29 @@ export const webhookFieldDocs: Record<string, WebhookEndpointFieldDocs> = {
       { path: "status", type: "Integer", required: true, description: "HTTP status code", constraints: "200" },
     ],
   },
-  "wb-logs": {
+  "wb-test": {
     pathParams: [
-      { path: "accountId", type: "String", required: true, description: "The account ID to retrieve delivery logs for" },
+      { path: "accountId", type: "String", required: true, description: "The account ID under which the webhook will be configured" },
+    ],
+    requestFields: [
+      { path: "(same as Register)", type: "—", required: false, description: "Submit the full webhook payload to test. The endpoint(s) are invoked synchronously to verify reachability and authentication." },
     ],
     responseFields: [
-      { path: "logs[].timestamp", type: "DateTime", required: true, description: "ISO 8601 timestamp of the delivery attempt" },
-      { path: "logs[].event_type", type: "String", required: true, description: "The event type that triggered this delivery" },
-      { path: "logs[].entity_type", type: "String", required: true, description: "The entity scope (account, TN, or Caller Profile)" },
-      { path: "logs[].payload", type: "Object", required: true, description: "The event payload that was delivered" },
-      { path: "logs[].response_code", type: "Integer", required: true, description: "HTTP status code returned by your endpoint" },
-      { path: "logs[].retry_count", type: "Integer", required: true, description: "Number of delivery retry attempts" },
-      { path: "logs[].status", type: "String", required: true, description: "Final delivery status", constraints: "delivered | failed | retrying" },
+      { path: "urls.<scope>.url", type: "String", required: true, description: "The webhook URL that was tested" },
+      { path: "urls.<scope>.status_code", type: "Integer", required: true, description: "HTTP status code returned by the endpoint", constraints: "2xx indicates success" },
+    ],
+  },
+  "wb-encrypt": {
+    requestFields: [
+      { path: "value", type: "String", required: true, description: "The plain-text secret (password or API key) to encrypt" },
+    ],
+    responseFields: [
+      { path: "encrypted_value", type: "String", required: true, description: "The encrypted value to use as `credentials.password` (oAuth) or `credentials.api_value` (apiKey) when registering a webhook" },
     ],
   },
 };
 
-export const webhookCategories = ["Account Setup", "Webhook Management", "Delivery Logs"];
+export const webhookCategories = ["Account Setup", "Encryption Utility", "Webhook Management"];
 
 export const getWebhookEndpoint = (id: string) => webhookEndpoints.find(e => e.id === id);
 
@@ -408,53 +575,91 @@ export const getWebhookEndpointsByCategory = (category: string) =>
 // ── Sample Event Payloads ──
 export const sampleEventPayloads = {
   account: `{
-  "id": "Event_Account_01",
-  "type": "Status changes",
-  "event_create_date": "2026-03-02T14:45:10Z",
+  "id": "f1h6i7j9-3e2g-4f46-gh8i-6k7j8f9g0h1i",
+  "event_create_date": "2026-04-20T14:45:10Z",
   "entity": {
     "type": "account",
     "account_id": "acc_12345"
   },
-  "data": {
-    "previous_status": "Enable Processing",
-    "current_status": "Enable Completed"
-  },
+  "data": [
+    {
+      "type": "vetting_status",
+      "current_status": "VETTING_SUCCESSFUL",
+      "previous_status": "VETTING_EXCEPTION"
+    }
+  ],
   "retryPolicy": {
     "attempt": 1,
     "waittime_in_seconds": 30
   }
 }`,
   callerProfile: `{
-  "id": "evt_01CPUPDATE123",
-  "type": "Caller Profile status",
-  "event_create_date": "2026-03-02T14:55:12Z",
+  "id": "e0g5h6i8-2d1f-4e35-fg7h-5j6i7e8f9g0h",
+  "event_create_date": "2026-04-20T14:55:12Z",
   "entity": {
-    "type": "Caller Profile",
-    "id": "cp_9988",
-    "accountId": "acc_12345"
+    "type": "callerprofile",
+    "id": "6762897023d6164ac81f92e8",
+    "name": "caller profile name1",
+    "account_id": "neustar"
   },
-  "data": {
-    "previous_status": "Suspend-Requested",
-    "current_status": "Suspend-Processing"
-  },
+  "data": [
+    {
+      "type": "partner_status",
+      "current_status": "Enable-Completed",
+      "previous_status": "Enable-Failed"
+    }
+  ],
   "retryPolicy": {
     "attempt": 1,
     "waittime_in_seconds": 30
   }
 }`,
   tn: `{
-  "id": "Event-002",
-  "type": "Status Changes",
-  "event_create_date": "2026-03-02T14:30:22Z",
+  "id": "a3f1c2d4-8e7b-4a91-bc3d-1f2e3a4b5c6d",
+  "event_create_date": "2026-04-20T14:30:22.452Z",
   "entity": {
-    "type": "TN",
-    "tn": "+919876543210",
-    "accountId": "acc_12345",
-    "callerProfileId": "cp_9988"
+    "type": "tcsasset",
+    "account_id": "acc_12345",
+    "tn": "+1.97774581001",
+    "callerProfileId": "Priya_CNO_20251022-130308"
   },
-  "data": {
-    "previous_status": "Vetting-failed",
-    "current_status": "Vetting-requested"
+  "data": [
+    {
+      "type": "vetting_status",
+      "current_status": "VETTING_SUCCESSFUL",
+      "previous_status": "VETTING_EXCEPTION"
+    },
+    {
+      "type": "tagging_status",
+      "current_status": "TG",
+      "previous_status": "AG"
+    }
+  ],
+  "retryPolicy": {
+    "attempt": 1,
+    "waittime_in_seconds": 30
   }
 }`,
+};
+
+// ── Cool-Off Notification Email Sample ──
+export const coolOffEmailSample = {
+  subject: "CCID Webhook Notification - Account {{accountId}}",
+  body: `Dear Customer,
+
+We are writing to inform you that webhook delivery for your account has been temporarily paused (cool-off) due to repeated delivery failures to your registered endpoint.
+
+Account ID: {{accountId}}
+Failure Reason: Endpoint returned non-2xx HTTP status after maximum retry attempts
+Cool-Off Duration: 60 minutes
+Delivery Will Resume At: {{resumeTimestamp}}
+Notification Timestamp: {{notificationTimestamp}}
+
+To resume normal delivery, please ensure your webhook endpoint is reachable and returns an HTTP 2xx response within the configured timeout window. Once the cool-off period expires, the platform will automatically retry delivery.
+
+If your endpoint continues to fail after the cool-off period, delivery may be paused again and your webhook may be moved to an inactive state requiring manual reactivation.
+
+For assistance, please contact TransUnion Support.
+
+— TransUnion TruContact Trusted Call Solutions`,
 };
