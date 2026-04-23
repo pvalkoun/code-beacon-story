@@ -50,7 +50,7 @@ const Index = () => {
               <CardTitle className="text-xl">Caller Name Optimization</CardTitle>
             </div>
             <CardDescription className="text-sm leading-relaxed">
-              Registers verified business telephone numbers to mitigate spam tagging and blocking. Manage name on landline devices.
+              Registers verified business telephone numbers with terminating telecom service providers to mitigate spam tagging and blocking. CNO also includes reputation monitoring and remediation.
             </CardDescription>
           </CardHeader>
           <CardContent className="mt-auto">
