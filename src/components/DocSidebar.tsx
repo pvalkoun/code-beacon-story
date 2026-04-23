@@ -133,7 +133,7 @@ export function DocSidebar() {
                   <SidebarMenuButton asChild>
                     <NavLink to="/products/cno" activeClassName="bg-sidebar-accent text-sidebar-primary font-medium">
                       <Tag className="h-4 w-4 mr-2" />
-                      {!collapsed && <span>Spam Tag Mitigation</span>}
+                      {!collapsed && <span>Caller Name Optimization</span>}
                     </NavLink>
                   </SidebarMenuButton>
                 </SidebarMenuItem>

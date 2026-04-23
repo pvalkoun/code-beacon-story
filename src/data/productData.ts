@@ -38,16 +38,18 @@ export const products: Product[] = [
   },
   {
     id: "cno",
-    name: "Spam Tag Mitigation (CNO)",
-    fullName: "TruContact Spam Tag Mitigation",
-    tagline: "Prevent your legitimate calls from being mislabeled as spam or fraud",
-    description: "Spam Tag Mitigation, powered by Calling Name Optimization (CNO), ensures your legitimate outbound calls are not incorrectly flagged as spam, scam, or fraud by carrier analytics engines. By registering and validating your calling numbers, you protect your call delivery rates and maintain your organization's reputation across all major carrier networks.",
+    name: "Caller Name Optimization",
+    fullName: "Caller Name Optimization",
+    tagline: "Register verified business telephone numbers to mitigate spam tagging and blocking",
+    description: "Registers verified business telephone numbers with terminating telecom service providers to mitigate spam tagging and blocking. CNO includes reputation monitoring and remediation and provides the ability to manage how caller name appears on landline devices.",
     benefits: [
-      "Prevent legitimate calls from being labeled as spam",
+      "Register verified business numbers",
+      "Help reduce legitimate calls from being labeled as spam",
       "Improve call delivery and answer rates",
       "Protect your organization's calling reputation",
       "Real-time monitoring of spam tag status across carriers",
-      "Automated remediation for mislabeled numbers"
+      "Automated remediation for mislabeled numbers",
+      "Landline name management"
     ],
     setupSteps: [
       {
