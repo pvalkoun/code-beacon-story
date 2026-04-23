@@ -229,8 +229,8 @@ export const endpointFieldDocs: Record<string, EndpointFieldDocs> = {
       { path: "url", type: "String", required: true, description: "Publicly accessible URL of the image to upload", constraints: "Must be a valid URL; image must be 256×256 px, JPEG/PNG/BMP format, < 270 KB" },
     ],
     responseFields: [
-      { path: "id", type: "String", required: true, description: "Unique image ID assigned by the system — use as image_id when creating an image profile" },
-      { path: "url", type: "String", required: true, description: "CDN-accessible URL of the processed image" },
+      { path: "id", type: "String", required: true, description: "Unique image ID assigned by the system" },
+      { path: "image_url", type: "String", required: true, description: "CDN-accessible URL of the processed image — use as image_url when creating an image profile" },
     ],
   },
 
@@ -241,7 +241,7 @@ export const endpointFieldDocs: Record<string, EndpointFieldDocs> = {
     ],
     responseFields: [
       { path: "id", type: "String", required: true, description: "Image ID" },
-      { path: "url", type: "String", required: true, description: "CDN-accessible URL of the image" },
+      { path: "image_url", type: "String", required: true, description: "CDN-accessible URL of the image" },
     ],
   },
 
@@ -258,12 +258,11 @@ export const endpointFieldDocs: Record<string, EndpointFieldDocs> = {
     ],
     requestFields: [
       { path: "name", type: "String", required: true, description: "Name for the image profile" },
-      { path: "image_id", type: "String", required: true, description: "ID of the previously uploaded image (from Create Image response)" },
+      { path: "image_url", type: "String", required: true, description: "CDN URL of the previously uploaded image (from Create Image response)" },
     ],
     responseFields: [
       { path: "id", type: "String", required: true, description: "Unique image profile ID assigned by the system", constraints: "24-character hex string" },
-      { path: "image_id", type: "String", required: true, description: "ID of the linked image" },
-      { path: "image_url", type: "String", required: true, description: "CDN URL of the image" },
+      { path: "image_url", type: "String", required: true, description: "CDN URL of the linked image" },
       { path: "partner_status", type: "Object", required: true, description: "Carrier partner vetting statuses", constraints: "Keys: att, verizon, tmobile" },
       { path: "vetting", type: "Object", required: true, description: "Overall vetting status and timestamp" },
       { path: "vetting.status", type: "String", required: true, description: "Vetting status", constraints: "e.g. VETTING_SUBMITTED, VETTING_SUCCESSFUL" },
@@ -282,10 +281,8 @@ export const endpointFieldDocs: Record<string, EndpointFieldDocs> = {
       { path: "id", type: "String", required: true, description: "Image profile ID" },
       { path: "name", type: "String", required: true, description: "Image profile name" },
       { path: "account_id", type: "String", required: true, description: "The account this image profile belongs to" },
-      { path: "image_id", type: "String", required: true, description: "ID of the linked image" },
-      { path: "image_url", type: "String", required: true, description: "CDN URL of the image" },
-      { path: "partner_data", type: "Object", required: true, description: "Carrier-specific CDN URLs populated after vetting approval", constraints: "Keys: att, verizon, tmobile" },
-      { path: "partner_status", type: "Object", required: true, description: "Carrier partner statuses", constraints: "Keys: att, verizon, tmobile" },
+      { path: "image_url", type: "String", required: true, description: "CDN URL of the linked image" },
+      { path: "partner_status", type: "Object", required: true, description: "Carrier partner statuses populated after vetting approval", constraints: "Keys: att, verizon, tmobile" },
       { path: "vetting", type: "Object", required: true, description: "Vetting status and timestamp" },
       { path: "vetting.status", type: "String", required: true, description: "Vetting status", constraints: "e.g. VETTING_SUBMITTED, VETTING_SUCCESSFUL" },
       { path: "vetting.status_timestamp", type: "DateTime", required: true, description: "Timestamp of the vetting status" },
