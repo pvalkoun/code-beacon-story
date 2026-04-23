@@ -56,7 +56,7 @@ const PreCallAuth = () => {
 
       <h2>Base URL</h2>
       <p>All requests must be made over HTTPS. Plain HTTP is rejected. TLS 1.2 or higher is required.</p>
-      <CodeBlock code="https://authn.ccid.neustar.biz/ccid/authn/v2" />
+      <CodeBlock code="https://tcs.ccid.neustar.biz/ccid/authn/v2" />
 
       <div className="flex items-start gap-3 p-4 my-4 rounded-lg border border-accent bg-accent/10">
         <AlertTriangle className="h-5 w-5 text-accent-foreground mt-0.5 shrink-0" />
@@ -163,7 +163,7 @@ const PreCallAuth = () => {
 
       <h2>Request Body Example</h2>
       <CodeBlock code={`curl --location \\
-  'https://authn.ccid.neustar.biz/ccid/authn/v2/identity?apiKey=YOUR_API_KEY' \\
+  'https://tcs.ccid.neustar.biz/ccid/authn/v2/identity?apiKey=YOUR_API_KEY' \\
   --header 'Content-Type: application/json' \\
   --header 'Accept: application/json' \\
   --data '{

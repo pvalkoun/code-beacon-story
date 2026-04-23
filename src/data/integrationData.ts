@@ -104,7 +104,7 @@ export const integrations: Integration[] = [
       },
       {
         title: "What You'll Build",
-        content: "- A Twilio Function that:\n- Receives Twilio `StatusCallback` for `CallStatus=initiated`\n- Sends a POST to `https://authn.ccid.neustar.biz/ccid/authn/v2/identity?apiKey=<from env>`\n- Prefixes phone numbers with `tel:`\n- Includes `from`, `to`, and `Origid` (`AccountSid`) in the JSON body\n- The `/Calls` API configuration that triggers this function on call initiation"
+        content: "- A Twilio Function that:\n- Receives Twilio `StatusCallback` for `CallStatus=initiated`\n- Sends a POST to `https://tcs.ccid.neustar.biz/ccid/authn/v2/identity?apiKey=<from env>`\n- Prefixes phone numbers with `tel:`\n- Includes `from`, `to`, and `Origid` (`AccountSid`) in the JSON body\n- The `/Calls` API configuration that triggers this function on call initiation"
       },
       {
         title: "Prerequisites",
@@ -171,7 +171,7 @@ exports.handler = async function (context, event, callback) {
   };
 
   // Build target URL with apiKey from env
-  const baseUrl = 'https://authn.ccid.neustar.biz/ccid/authn/v2/identity';
+  const baseUrl = 'https://tcs.ccid.neustar.biz/ccid/authn/v2/identity';
   const url = \`\${baseUrl}?apiKey=\${encodeURIComponent(neustarApiKey)}\`;
 
   try {
@@ -313,7 +313,7 @@ client.calls.create(
       },
       {
         title: "Genesys Prerequisites",
-        content: "Before beginning the integration, ensure you have:\n\n- **Genesys Cloud CX Admin Access** — Required permissions to create integrations and data actions\n- **TransUnion API Key** — Provided by TransUnion as part of the onboarding process\n- **Valid Phone Numbers** — Outbound phone numbers configured in Genesys Cloud CX\n- **Network Access** — Ensure your Genesys Cloud environment can reach `https://authn.ccid.neustar.biz`\n\n**Required Genesys Cloud Permissions:**\n- Integrations > Integration > Add, Edit, View\n- Integrations > Action > Add, Edit, View"
+        content: "Before beginning the integration, ensure you have:\n\n- **Genesys Cloud CX Admin Access** — Required permissions to create integrations and data actions\n- **TransUnion API Key** — Provided by TransUnion as part of the onboarding process\n- **Valid Phone Numbers** — Outbound phone numbers configured in Genesys Cloud CX\n- **Network Access** — Ensure your Genesys Cloud environment can reach `https://tcs.ccid.neustar.biz`\n\n**Required Genesys Cloud Permissions:**\n- Integrations > Integration > Add, Edit, View\n- Integrations > Action > Add, Edit, View"
       },
       {
         title: "Step 1 — Create Integration",
@@ -386,7 +386,7 @@ client.calls.create(
       },
       {
         title: "Step 3.2 — Configuration",
-        content: "Configure the HTTP request details to call the TransUnion CCID API.\n\n1. **HTTP Method**: Select `POST`\n2. **Request URL Template**: `https://authn.ccid.neustar.biz/ccid/authn/v2/identity?apiKey=<APIKEY>`\n   - Replace `<APIKEY>` with the actual API key provided by TransUnion\n3. **Execution Timeout**: Set to `60` seconds\n4. **Request Body Template**:",
+        content: "Configure the HTTP request details to call the TransUnion CCID API.\n\n1. **HTTP Method**: Select `POST`\n2. **Request URL Template**: `https://tcs.ccid.neustar.biz/ccid/authn/v2/identity?apiKey=<APIKEY>`\n   - Replace `<APIKEY>` with the actual API key provided by TransUnion\n3. **Execution Timeout**: Set to `60` seconds\n4. **Request Body Template**:",
         code: `{"from":"tel:+1\${input.fromNumber}","to":"tel:+1\${input.toNumber}"}`,
         language: "json",
         images: [
@@ -482,7 +482,7 @@ client.calls.create(
       },
       {
         title: "Step 2 — Configure CCID HTTP Request",
-        content: "1. Drag an **HTTP Request** node into the canvas\n2. Name it: `Pre Call Authentication with CCID`\n3. Configure the following settings:\n   - **Method**: `POST`\n   - **Endpoint**: `https://authn.ccid.neustar.biz/ccid/authn/v2/identity`\n4. Under **Params**:\n   - `apiKey` = `<your_api_key>`\n5. Under **Body** (JSON):",
+        content: "1. Drag an **HTTP Request** node into the canvas\n2. Name it: `Pre Call Authentication with CCID`\n3. Configure the following settings:\n   - **Method**: `POST`\n   - **Endpoint**: `https://tcs.ccid.neustar.biz/ccid/authn/v2/identity`\n4. Under **Params**:\n   - `apiKey` = `<your_api_key>`\n5. Under **Body** (JSON):",
         code: `{
   "from": "tel:+1{{Start.http.params.from}}",
   "to": "tel:+1{{Start.http.params.to}}"
@@ -507,7 +507,7 @@ client.calls.create(
       },
       {
         title: "Troubleshooting",
-        content: "| Issue | Cause | Solution |\n|-------|-------|----------|\n| 401/403 errors | Invalid or missing API key | Verify the `apiKey` parameter and endpoint URL |\n| 4xx errors | Incorrect phone number format | Ensure numbers use `tel:+E.164` format |\n| Call not connecting | Plivo number permissions | Verify Plivo number permissions and caller ID validation |\n| HTTP timeout | Network connectivity | Check network access to `authn.ccid.neustar.biz` |\n| No notification played | Node connection issue | Verify all nodes are properly connected in the flow |"
+        content: "| Issue | Cause | Solution |\n|-------|-------|----------|\n| 401/403 errors | Invalid or missing API key | Verify the `apiKey` parameter and endpoint URL |\n| 4xx errors | Incorrect phone number format | Ensure numbers use `tel:+E.164` format |\n| Call not connecting | Plivo number permissions | Verify Plivo number permissions and caller ID validation |\n| HTTP timeout | Network connectivity | Check network access to `tcs.ccid.neustar.biz` |\n| No notification played | Node connection issue | Verify all nodes are properly connected in the flow |"
       },
       {
         title: "Best Practices",
@@ -618,7 +618,7 @@ global:customfrom=" <tel:1{Global:CallerID}>"
 global:customto=" <tel:1{global:contacttoaddress}>"
 
 //Define Endpoint
-hostname="https://authn.ccid.neustar.biz/ccid/authn/v2/identity"
+hostname="https://tcs.ccid.neustar.biz/ccid/authn/v2/identity"
 
 //Define Auth API Key
 apikey="<YOUR_API_KEY>"
@@ -677,7 +677,7 @@ ELSE
       },
       {
         title: "Troubleshooting",
-        content: "| Issue | Cause | Solution |\n|-------|-------|----------|\n| `webServiceError=1` | API call failed | Check `TUAuthError` variable for status description |\n| Incorrect phone format | Global variables not populated | Verify `Global:CallerID` and `global:contacttoaddress` are set |\n| 401/403 errors | Invalid API key | Verify the `apikey` variable value; contact TransUnion |\n| Timeout errors | Network connectivity | Ensure NICE inContact can reach `authn.ccid.neustar.biz` |\n| Script not executing | Not assigned to campaign | Assign the script to the outbound skill or campaign |"
+        content: "| Issue | Cause | Solution |\n|-------|-------|----------|\n| `webServiceError=1` | API call failed | Check `TUAuthError` variable for status description |\n| Incorrect phone format | Global variables not populated | Verify `Global:CallerID` and `global:contacttoaddress` are set |\n| 401/403 errors | Invalid API key | Verify the `apikey` variable value; contact TransUnion |\n| Timeout errors | Network connectivity | Ensure NICE inContact can reach `tcs.ccid.neustar.biz` |\n| Script not executing | Not assigned to campaign | Assign the script to the outbound skill or campaign |"
       },
       {
         title: "Best Practices",
@@ -781,7 +781,7 @@ npm install --production`,
   },
   "stirshaken": {
     "apiKey": "<YOUR_CCID_API_KEY_FROM_TRANSUNION>",
-    "apiUrl": "https://authn.ccid.neustar.biz/stir/v1/signing"
+    "apiUrl": "https://tcs.ccid.neustar.biz/stir/v1/signing"
   },
   "monitoring": {
     "enabled": false
