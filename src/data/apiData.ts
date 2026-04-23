@@ -693,7 +693,7 @@ export const apiEndpoints: ApiEndpoint[] = [
     name: "Get Image Profile",
     method: "GET",
     path: "/ccid/sdpr/v4/admin/account/{accountId}/image-profile/{imageProfileId}",
-    description: "Retrieve an image profile by ID. After vetting is approved, partner_data will contain the carrier-specific CDN URLs.",
+    description: "Retrieve an image profile by ID. After vetting is approved, partner_status will reflect Enable-Completed for each carrier.",
     headers: [{ key: "Accept", value: "application/json" }],
     responseBody: `{
   "id": "69d4a87d7b3c6e58d402225e",
