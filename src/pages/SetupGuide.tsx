@@ -27,7 +27,7 @@ export default function SetupGuide() {
       </div>
 
       {product.setupSteps.map((step) => {
-        const endpoint = getEndpointById(step.apiEndpointId);
+        const endpoint = step.apiEndpointId ? getEndpointById(step.apiEndpointId) : undefined;
         return (
           <div key={step.step} className="mb-10 pb-8 border-b last:border-b-0">
             <div className="flex items-center gap-3 mb-3">
@@ -57,6 +57,16 @@ export default function SetupGuide() {
                 <Button asChild variant="link" size="sm" className="mt-2 px-0">
                   <Link to={`/products/${productId}/api/${endpoint.id}`}>
                     View full API reference <ArrowRight className="ml-1 h-3 w-3" />
+                  </Link>
+                </Button>
+              </div>
+            )}
+
+            {step.externalLink && (
+              <div className="mt-4 p-4 rounded-lg border bg-card">
+                <Button asChild size="sm" variant="outline">
+                  <Link to={step.externalLink.to}>
+                    {step.externalLink.label} <ArrowRight className="ml-1 h-3 w-3" />
                   </Link>
                 </Button>
               </div>

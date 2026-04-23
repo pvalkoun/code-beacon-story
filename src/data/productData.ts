@@ -16,6 +16,8 @@ export interface SetupStep {
   description: string;
   apiEndpointId: string;
   details: string;
+  /** Optional internal link rendered in place of the API endpoint card. */
+  externalLink?: { label: string; to: string };
 }
 
 export const products: Product[] = [
@@ -93,6 +95,14 @@ export const products: Product[] = [
         description: "Add your telephone numbers for spam tag monitoring.",
         apiEndpointId: "create-tn-asset",
         details: "Register each telephone number (TN) as an asset and link it to your caller profile. Use full_ownership: true for numbers you own directly, or full_ownership: false for BYOC numbers."
+      },
+      {
+        step: 7,
+        title: "Register for Webhooks",
+        description: "Subscribe to real-time spam tag and appeal notifications via webhook.",
+        apiEndpointId: "",
+        details: "Spam tag mitigation is event-driven — register for webhook notifications to receive real-time updates when tagging status changes, appeals are granted or declined, and partner enablement events occur. This eliminates the need to poll for status and ensures your team is notified immediately when remediation is required.",
+        externalLink: { label: "View Webhook Notifications Setup Guide", to: "/resources/webhooks/guide" }
       }
     ]
   },
@@ -165,6 +175,14 @@ export const products: Product[] = [
         description: "Add your telephone numbers for branded display.",
         apiEndpointId: "create-tn-asset",
         details: "Register each telephone number (TN) and link it to your branded caller profile. Use full_ownership: true for numbers you own directly, or full_ownership: false for BYOC numbers managed through third-party carriers like Twilio or Genesys."
+      },
+      {
+        step: 9,
+        title: "Register for Webhooks",
+        description: "Subscribe to real-time vetting, partner enablement, and image profile notifications.",
+        apiEndpointId: "",
+        details: "BCD setup involves carrier vetting and per-partner enablement that progresses asynchronously. Register for webhook notifications to receive real-time updates when image profile vetting completes, partner enablement transitions occur (Enable-Completed, Enable-Failed, Suspend-Completed, etc.), and TN-level vetting succeeds — eliminating the need to poll status endpoints.",
+        externalLink: { label: "View Webhook Notifications Setup Guide", to: "/resources/webhooks/guide" }
       }
     ]
   },
@@ -223,6 +241,14 @@ export const products: Product[] = [
         description: "Add your telephone numbers to be protected.",
         apiEndpointId: "create-tn-asset",
         details: "Register each telephone number (TN) as an asset and link it to your caller profile. Use full_ownership: true for numbers you own directly, or full_ownership: false for BYOC numbers managed through third-party carriers like Twilio or Genesys."
+      },
+      {
+        step: 7,
+        title: "Register for Webhooks",
+        description: "Subscribe to real-time vetting and partner enablement notifications.",
+        apiEndpointId: "",
+        details: "SCP relies on per-carrier partner enablement that progresses asynchronously. Register for webhook notifications to receive real-time updates when partner_status transitions occur (Enable-Completed, Enable-Failed, Suspend-Completed, Resume-Completed, etc.) for each TN — eliminating the need to poll status endpoints.",
+        externalLink: { label: "View Webhook Notifications Setup Guide", to: "/resources/webhooks/guide" }
       }
     ]
   }
