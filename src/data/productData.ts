@@ -174,7 +174,7 @@ export const products: Product[] = [
         title: "Register Phone Numbers",
         description: "Add your telephone numbers for branded display.",
         apiEndpointId: "create-tn-asset",
-        details: "Register each telephone number (TN) and link it to your branded caller profile. Use full_ownership: true for numbers you own directly, or full_ownership: false for BYOC numbers managed through third-party carriers like Twilio or Genesys."
+        details: "Register each telephone number (TN) as an asset and link it to the BCD caller profile created in the previous step (e.g., Your Company Name_BCD_Rich_20260225-212320). Pass its id as caller_profile_id in the request — the response will echo the profile name under caller_profile and within each RICH-BCD partner_data entry. Use full_ownership: true for numbers you own directly, or full_ownership: false for BYOC numbers managed through third-party carriers like Twilio or Genesys."
       },
       {
         step: 9,
