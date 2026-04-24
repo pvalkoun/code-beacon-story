@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { ArrowRight, CheckCircle2, BookOpen, Code2, Bell, Zap, Shield, RefreshCw } from "lucide-react";
+import { ArrowRight, CheckCircle2, BookOpen, Code2, Bell, Zap, Shield, RefreshCw, FileJson } from "lucide-react";
 
 export default function WebhookOverview() {
   return (
@@ -142,7 +142,7 @@ export default function WebhookOverview() {
       </p>
 
       <h2>Getting Started</h2>
-      <div className="grid gap-4 md:grid-cols-2 not-prose">
+      <div className="grid gap-4 md:grid-cols-3 not-prose">
         <Card className="hover:shadow-md transition-shadow flex flex-col">
           <CardContent className="p-5 flex flex-col flex-1">
             <BookOpen className="h-8 w-8 text-primary mb-3" />
@@ -167,6 +167,20 @@ export default function WebhookOverview() {
             <Button asChild size="sm" variant="outline" className="mt-auto">
               <Link to="/resources/webhooks/api/wb-enable-account">
                 View APIs <ArrowRight className="ml-1 h-3 w-3" />
+              </Link>
+            </Button>
+          </CardContent>
+        </Card>
+        <Card className="hover:shadow-md transition-shadow flex flex-col">
+          <CardContent className="p-5 flex flex-col flex-1">
+            <FileJson className="h-8 w-8 text-primary mb-3" />
+            <h3 className="font-semibold mb-1">OpenAPI Spec</h3>
+            <p className="text-sm text-muted-foreground mb-3">
+              Download the complete OpenAPI 3.0.3 spec with current request/response examples
+            </p>
+            <Button asChild size="sm" variant="outline" className="mt-auto">
+              <Link to="/resources/webhooks/openapi">
+                Download Spec <ArrowRight className="ml-1 h-3 w-3" />
               </Link>
             </Button>
           </CardContent>

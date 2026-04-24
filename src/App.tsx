@@ -16,6 +16,7 @@ import AnalyticsPage from "./pages/AnalyticsPage";
 import WebhookOverview from "./pages/WebhookOverview";
 import WebhookSetupGuide from "./pages/WebhookSetupGuide";
 import WebhookEndpointPage from "./pages/WebhookEndpointPage";
+import WebhookOpenApiExport from "./pages/WebhookOpenApiExport";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -43,6 +44,7 @@ const App = () => (
             <Route path="/changelog" element={<Changelog />} />
             <Route path="/resources/webhooks" element={<WebhookOverview />} />
             <Route path="/resources/webhooks/guide" element={<WebhookSetupGuide />} />
+            <Route path="/resources/webhooks/openapi" element={<WebhookOpenApiExport />} />
             <Route path="/resources/webhooks/api/:endpointId" element={<WebhookEndpointPage />} />
           </Route>
           <Route path="*" element={<NotFound />} />

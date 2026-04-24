@@ -14,7 +14,8 @@ import {
   SidebarHeader,
   useSidebar,
 } from "@/components/ui/sidebar";
-import { Home, Shield, Palette, BookOpen, Code2, Plug, ChevronLeft, ChevronDown, ChevronRight, Download, ClipboardList, Phone, Tag, BarChart3, Bell } from "lucide-react";
+import { Home, Shield, Palette, BookOpen, Code2, Plug, ChevronLeft, ChevronDown, ChevronRight, Download, ClipboardList, Phone, Tag, BarChart3, Bell, FileJson } from "lucide-react";
+import { downloadWebhookOpenApiSpec } from "@/lib/openApiExport";
 import { products } from "@/data/productData";
 import { getEndpointsForProduct, getCategories } from "@/data/apiData";
 import { webhookEndpoints, webhookCategories } from "@/data/webhookData";
@@ -79,11 +80,33 @@ export function DocSidebar() {
                     </NavLink>
                   </SidebarMenuButton>
                 </SidebarMenuItem>
+                <SidebarMenuItem>
+                  <SidebarMenuButton asChild>
+                    <NavLink to="/resources/webhooks/openapi" activeClassName="bg-sidebar-accent text-sidebar-primary font-medium">
+                      <FileJson className="h-4 w-4 mr-2" />
+                      {!collapsed && <span>OpenAPI Spec</span>}
+                    </NavLink>
+                  </SidebarMenuButton>
+                </SidebarMenuItem>
               </SidebarMenu>
             </SidebarGroupContent>
           </SidebarGroup>
 
           <WebhookApiAccordion collapsed={collapsed} currentPath={location.pathname} />
+
+          <SidebarGroup>
+            <SidebarGroupLabel>Tools</SidebarGroupLabel>
+            <SidebarGroupContent>
+              <SidebarMenu>
+                <SidebarMenuItem>
+                  <SidebarMenuButton onClick={downloadWebhookOpenApiSpec}>
+                    <Download className="h-4 w-4 mr-2" />
+                    {!collapsed && <span>Download OpenAPI</span>}
+                  </SidebarMenuButton>
+                </SidebarMenuItem>
+              </SidebarMenu>
+            </SidebarGroupContent>
+          </SidebarGroup>
         </SidebarContent>
       </Sidebar>
     );
