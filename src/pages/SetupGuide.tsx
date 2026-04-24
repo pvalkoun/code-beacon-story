@@ -99,6 +99,13 @@ export default function SetupGuide() {
           </Button>
         </div>
       </div>
+      </div>
+
+      <aside className="hidden xl:block w-56 shrink-0">
+        <div className="sticky top-20">
+          <OnPageNav steps={product.setupSteps.map(s => ({ step: s.step, title: s.title }))} title="On this page" />
+        </div>
+      </aside>
     </div>
   );
 }
