@@ -545,7 +545,7 @@ export const webhookEndpoints: WebhookEndpoint[] = [
     category: "Authentication",
     name: "Encrypt Secret",
     method: "POST",
-    path: "/ccid/webhook/v1/encrypt",
+    path: "/ccid/webhook/v1/admin/webhook/encrypt",
     description: "Convert a plain-text secret (password or API key) into an encrypted value accepted by the webhook registration APIs. Plain-text passwords or API keys are never accepted by webhook APIs — the platform cannot reliably determine whether an incoming value is encrypted unless it conforms to the approved encryption format. This API can be used repeatedly and supports encrypting any single plain-text input.",
     headers: [
       { key: "Content-Type", value: "application/json" },
