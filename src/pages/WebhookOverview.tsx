@@ -37,40 +37,6 @@ export default function WebhookOverview() {
         ))}
       </ul>
 
-      <h2>How It Works</h2>
-      <div className="grid gap-4 md:grid-cols-2 not-prose mb-8">
-        {[
-          {
-            icon: Shield,
-            title: "1. Enable Webhook Service",
-            desc: "Enable the WB service on your AAM account and assign the WB_COMPANY_ADMIN role to unlock webhook registration.",
-          },
-          {
-            icon: Bell,
-            title: "2. Register Your Endpoint",
-            desc: "Provide your HTTPS callback URL, encrypted authentication credentials, and choose which events and scopes to subscribe to.",
-          },
-          {
-            icon: Zap,
-            title: "3. Receive Notifications",
-            desc: "TransUnion pushes event payloads to your endpoint in real-time as status changes occur.",
-          },
-          {
-            icon: RefreshCw,
-            title: "4. Monitor & Manage",
-            desc: "Update the webhook state to pause or resume delivery, modify your configuration, and receive cool-off email alerts on repeated failures.",
-          },
-        ].map((item, i) => (
-          <Card key={i} className="hover:shadow-md transition-shadow">
-            <CardContent className="p-5">
-              <item.icon className="h-8 w-8 text-primary mb-3" />
-              <h3 className="font-semibold mb-1">{item.title}</h3>
-              <p className="text-sm text-muted-foreground">{item.desc}</p>
-            </CardContent>
-          </Card>
-        ))}
-      </div>
-
       <h2>Supported Event Types</h2>
       <p>
         Webhooks can be configured to notify you of changes across three event categories,
