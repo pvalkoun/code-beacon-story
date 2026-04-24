@@ -284,6 +284,85 @@ export default function WebhookSetupGuide() {
 
       </div>
 
+      {/* ── Section 6 — Event Reference ── */}
+      <div id="step-6" className="mb-10 pb-8 border-b scroll-mt-24">
+        <div className="flex items-center gap-3 mb-3">
+          <div className="flex items-center justify-center h-9 w-9 rounded-full bg-primary text-primary-foreground font-bold text-sm shrink-0">
+            6
+          </div>
+          <h2 id="event-reference" className="!mt-0 !mb-0">Event Reference</h2>
+        </div>
+
+        <p>
+          When subscribing to events in the <code>event_types[]</code> array of your webhook
+          registration, use the <strong>Event Type</strong> as <code>event_type</code> and the{" "}
+          <strong>Trigger Key</strong>(s) as values in <code>trigger_on</code>. Trigger Keys are
+          case-sensitive and must match exactly as shown below.
+        </p>
+
+        <div className="p-4 rounded-lg bg-muted/40 border mb-6 not-prose">
+          <p className="text-sm font-medium mb-2">Example: subscribing to vetting and tagging events</p>
+          <CodeBlock
+            language="json"
+            code={`"event_types": [
+  { "event_type": "vetting_status", "trigger_on": ["VETTING_SUCCESSFUL", "VETTING_EXCEPTION"] },
+  { "event_type": "tagging_status", "trigger_on": ["TG", "AG"] },
+  { "event_type": "partner_status", "trigger_on": ["Enable-Completed"] }
+]`}
+          />
+        </div>
+
+        <h3 id="event-triggers">Allowed Event Types and Trigger Values</h3>
+        <div className="overflow-x-auto">
+          <table className="w-full text-sm border-collapse">
+            <thead>
+              <tr className="border-b">
+                <th className="text-left py-2 px-3 font-semibold">Event Type</th>
+                <th className="text-left py-2 px-3 font-semibold">Trigger Key</th>
+                <th className="text-left py-2 px-3 font-semibold">Display Label</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr className="border-b"><td className="py-2 px-3 font-medium align-top" rowSpan={2}><code>vetting_status</code></td><td className="py-2 px-3"><code>VETTING_SUCCESSFUL</code></td><td className="py-2 px-3 text-muted-foreground">Vetting Successful</td></tr>
+              <tr className="border-b"><td className="py-2 px-3"><code>VETTING_EXCEPTION</code></td><td className="py-2 px-3 text-muted-foreground">Vetting Exception</td></tr>
+              <tr className="border-b"><td className="py-2 px-3 font-medium align-top" rowSpan={5}><code>tagging_status</code></td><td className="py-2 px-3"><code>TG</code></td><td className="py-2 px-3 text-muted-foreground">Tagged</td></tr>
+              <tr className="border-b"><td className="py-2 px-3"><code>AP</code></td><td className="py-2 px-3 text-muted-foreground">Appeal Pending</td></tr>
+              <tr className="border-b"><td className="py-2 px-3"><code>AG</code></td><td className="py-2 px-3 text-muted-foreground">Appeal Granted</td></tr>
+              <tr className="border-b"><td className="py-2 px-3"><code>AD</code></td><td className="py-2 px-3 text-muted-foreground">Appeal Declined</td></tr>
+              <tr className="border-b"><td className="py-2 px-3"><code>CIP</code></td><td className="py-2 px-3 text-muted-foreground">Customer Input Pending</td></tr>
+              <tr className="border-b"><td className="py-2 px-3 font-medium align-top" rowSpan={8}><code>partner_status</code></td><td className="py-2 px-3"><code>Enable-Completed</code></td><td className="py-2 px-3 text-muted-foreground">Enable Completed</td></tr>
+              <tr className="border-b"><td className="py-2 px-3"><code>Enable-Failed</code></td><td className="py-2 px-3 text-muted-foreground">Enable Failed</td></tr>
+              <tr className="border-b"><td className="py-2 px-3"><code>Disable-Completed</code></td><td className="py-2 px-3 text-muted-foreground">Disable Completed</td></tr>
+              <tr className="border-b"><td className="py-2 px-3"><code>Disable-Failed</code></td><td className="py-2 px-3 text-muted-foreground">Disable Failed</td></tr>
+              <tr className="border-b"><td className="py-2 px-3"><code>Suspend-Completed</code></td><td className="py-2 px-3 text-muted-foreground">Suspend Completed</td></tr>
+              <tr className="border-b"><td className="py-2 px-3"><code>Suspend-Failed</code></td><td className="py-2 px-3 text-muted-foreground">Suspend Failed</td></tr>
+              <tr className="border-b"><td className="py-2 px-3"><code>Resume-Completed</code></td><td className="py-2 px-3 text-muted-foreground">Resume Completed</td></tr>
+              <tr className="border-b last:border-b-0"><td className="py-2 px-3"><code>Resume-Failed</code></td><td className="py-2 px-3 text-muted-foreground">Resume Failed</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h3>Scope Applicability</h3>
+        <p>The following table shows which event types apply at each entity scope level:</p>
+        <div className="overflow-x-auto">
+          <table className="w-full text-sm border-collapse">
+            <thead>
+              <tr className="border-b">
+                <th className="text-left py-2 px-3 font-semibold">Event Type</th>
+                <th className="text-left py-2 px-3 font-semibold">Account</th>
+                <th className="text-left py-2 px-3 font-semibold">Caller Profile</th>
+                <th className="text-left py-2 px-3 font-semibold">TN</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr className="border-b"><td className="py-2 px-3"><code>vetting_status</code></td><td className="py-2 px-3 text-muted-foreground">—</td><td className="py-2 px-3 text-muted-foreground">—</td><td className="py-2 px-3">✓</td></tr>
+              <tr className="border-b"><td className="py-2 px-3"><code>tagging_status</code></td><td className="py-2 px-3 text-muted-foreground">—</td><td className="py-2 px-3 text-muted-foreground">—</td><td className="py-2 px-3">✓</td></tr>
+              <tr className="border-b last:border-b-0"><td className="py-2 px-3"><code>partner_status</code></td><td className="py-2 px-3">✓</td><td className="py-2 px-3">✓</td><td className="py-2 px-3">✓</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
       {/* ── Section 7 — Event Payloads ── */}
       <div id="step-7" className="mb-10 pb-8 border-b scroll-mt-24">
         <div className="flex items-center gap-3 mb-3">
