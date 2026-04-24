@@ -31,6 +31,29 @@ export default function SetupGuide() {
         </p>
       </div>
 
+      <div className="not-prose mb-8 p-4 rounded-lg border bg-card">
+        <div className="flex items-center justify-between mb-3">
+          <h2 className="text-sm font-semibold !mt-0 !mb-0">Jump to a step</h2>
+          <span className="text-xs text-muted-foreground">{product.setupSteps.length} steps</span>
+        </div>
+        <div className="grid gap-2 sm:grid-cols-2 lg:grid-cols-3">
+          {product.setupSteps.map((step) => (
+            <a
+              key={step.step}
+              href={`#step-${step.step}`}
+              className="group flex items-center gap-3 p-2.5 rounded-md border bg-background hover:border-primary hover:shadow-sm transition-all"
+            >
+              <div className="flex items-center justify-center h-7 w-7 rounded-full bg-primary text-primary-foreground font-bold text-xs shrink-0">
+                {step.step}
+              </div>
+              <span className="text-sm font-medium truncate group-hover:text-primary transition-colors">
+                {step.title}
+              </span>
+            </a>
+          ))}
+        </div>
+      </div>
+
       {product.setupSteps.map((step) => {
         const endpoint = step.apiEndpointId
           ? getEndpointById(step.apiEndpointId, product.id === "pca" ? undefined : product.id)
