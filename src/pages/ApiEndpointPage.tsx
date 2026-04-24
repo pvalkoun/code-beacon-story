@@ -149,19 +149,21 @@ function FieldTable({
                     </td>
                   )}
                   <td className="py-2 px-3 text-xs text-muted-foreground">
-                    {f.constraints ? (
-                      restrictedMode ? (
+                    {restrictedMode ? (() => {
+                      const restricted = getRestrictedValues(f.constraints, exampleValue);
+                      if (!restricted || restricted.length === 0) {
+                        return <span className="text-muted-foreground">—</span>;
+                      }
+                      return (
                         <span
-                          className="italic line-through decoration-destructive/60"
+                          className="font-mono"
                           title="Restricted — do not use unless explicitly instructed by your TransUnion representative."
                         >
-                          {f.constraints}
+                          {restricted.join(", ")}
                         </span>
-                      ) : (
-                        f.constraints
-                      )
-                    ) : (
-                      "—"
+                      );
+                    })() : (
+                      f.constraints || "—"
                     )}
                   </td>
                 </tr>
