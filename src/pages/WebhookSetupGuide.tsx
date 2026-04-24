@@ -4,6 +4,7 @@ import { MethodBadge } from "@/components/MethodBadge";
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Mail, Lock } from "lucide-react";
 import { sampleEventPayloads, getWebhookEndpoint, coolOffEmailSample } from "@/data/webhookData";
+import { BaseUrlPanel } from "@/components/BaseUrlPanel";
 
 const setupSteps = [
   {
@@ -26,6 +27,8 @@ export default function WebhookSetupGuide() {
       <p className="text-lg text-muted-foreground">
         Follow these steps to configure webhook notifications from start to finish.
       </p>
+
+      <BaseUrlPanel note="Applies to every webhook management, test, encryption, and delivery-log endpoint in this guide." />
 
       <div className="p-4 rounded-lg bg-accent/10 border border-accent/20 mb-6">
         <p className="text-sm mb-0">

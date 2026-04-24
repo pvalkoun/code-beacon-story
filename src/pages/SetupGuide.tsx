@@ -5,6 +5,7 @@ import { CodeBlock } from "@/components/CodeBlock";
 import { MethodBadge } from "@/components/MethodBadge";
 import { Button } from "@/components/ui/button";
 import { ArrowRight } from "lucide-react";
+import { BaseUrlPanel } from "@/components/BaseUrlPanel";
 
 export default function SetupGuide() {
   const { productId } = useParams<{ productId: string }>();
@@ -18,6 +19,10 @@ export default function SetupGuide() {
       <p className="text-lg text-muted-foreground">
         Follow these steps to configure {product.name} from start to finish.
       </p>
+
+      {productId !== "pca" && (
+        <BaseUrlPanel note="Applies to all endpoints documented in this guide." />
+      )}
 
       <div className="p-4 rounded-lg bg-accent/10 border border-accent/20 mb-6">
         <p className="text-sm mb-0">
