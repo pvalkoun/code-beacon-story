@@ -95,7 +95,13 @@ function FieldTable({
                   )}
                 </td>
                 <td className="py-2 px-3 text-muted-foreground">{f.description}</td>
-                <td className="py-2 px-3 text-xs text-muted-foreground">{f.constraints || "—"}</td>
+                <td className="py-2 px-3 text-xs text-muted-foreground">
+                  {f.constraints ? (
+                    <HighlightedConstraints text={f.constraints} values={exampleValues} />
+                  ) : (
+                    "—"
+                  )}
+                </td>
               </tr>
             ))}
           </tbody>
@@ -111,6 +117,8 @@ export default function ApiEndpointPage() {
   const fieldDocs = endpointFieldDocs[endpointId || ""];
 
   if (!endpoint) return <div className="docs-prose"><h1>Endpoint not found</h1></div>;
+
+  const exampleValues = extractExampleValues(endpoint.requestBody, endpoint.responseBody);
 
   return (
     <div className="docs-prose">
@@ -144,7 +152,7 @@ export default function ApiEndpointPage() {
       )}
 
       {fieldDocs?.pathParams && fieldDocs.pathParams.length > 0 && (
-        <FieldTable title="Path Parameters" fields={fieldDocs.pathParams} />
+        <FieldTable title="Path Parameters" fields={fieldDocs.pathParams} exampleValues={exampleValues} />
       )}
 
       {endpoint.headers && endpoint.headers.length > 0 && (
@@ -174,7 +182,7 @@ export default function ApiEndpointPage() {
       )}
 
       {fieldDocs?.requestFields && fieldDocs.requestFields.length > 0 && (
-        <FieldTable title="Request Fields" fields={fieldDocs.requestFields} />
+        <FieldTable title="Request Fields" fields={fieldDocs.requestFields} exampleValues={exampleValues} />
       )}
 
       {endpoint.requestBody && (
@@ -185,7 +193,7 @@ export default function ApiEndpointPage() {
       )}
 
       {fieldDocs?.responseFields && fieldDocs.responseFields.length > 0 && (
-        <FieldTable title="Response Fields" fields={fieldDocs.responseFields} />
+        <FieldTable title="Response Fields" fields={fieldDocs.responseFields} exampleValues={exampleValues} />
       )}
 
       {endpoint.responseBody && (
