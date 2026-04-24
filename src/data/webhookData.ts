@@ -645,9 +645,10 @@ export const webhookFieldDocs: Record<string, WebhookEndpointFieldDocs> = {
       { path: "description", type: "String", required: false, description: "Description of the webhook purpose" },
       { path: "state", type: "String", required: true, description: "Current state of the webhook", constraints: "ACTIVE | PAUSED" },
       { path: "max_retry", type: "Integer", required: true, description: "Maximum retry attempts for failed deliveries" },
-      { path: "auth_type", type: "String", required: true, description: "Authentication method configured", constraints: "oAuth | apiKey | none" },
       { path: "email", type: "Array", required: true, description: "Notification email addresses" },
-      { path: "services", type: "Array", required: true, description: "Registered service scopes and event filters" },
+      { path: "auth_type", type: "String", required: true, description: "Authentication method configured", constraints: "oAuth | apiKey | none" },
+      { path: "credentials", type: "Object", required: false, description: "Auth credentials as registered. Encrypted secrets are returned in encrypted form; never re-disclosed in plain text." },
+      { path: "services", type: "Array", required: true, description: "Registered service scopes, entity bindings, event filters, and feature flags — mirrors the registration payload" },
     ],
   },
   "wb-update": {
