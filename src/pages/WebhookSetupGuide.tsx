@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import { ArrowRight, Mail, Lock } from "lucide-react";
 import { sampleEventPayloads, getWebhookEndpoint, coolOffEmailSample } from "@/data/webhookData";
 import { BaseUrlPanel } from "@/components/BaseUrlPanel";
+import { OnPageNav } from "@/components/OnPageNav";
 
 const setupSteps = [
   {
@@ -15,6 +16,16 @@ const setupSteps = [
   },
 ];
 
+const navSteps = [
+  { step: 1, title: "Enable Webhook Service" },
+  { step: 2, title: "User Role Creation" },
+  { step: 3, title: "Authentication" },
+  { step: 4, title: "Register Endpoint" },
+  { step: 5, title: "Test" },
+  { step: 6, title: "Event Payloads" },
+  { step: 7, title: "Cool-Off Email Notifications" },
+];
+
 export default function WebhookSetupGuide() {
   const userEndpoint = getWebhookEndpoint("wb-create-user");
   const encryptEndpoint = getWebhookEndpoint("wb-encrypt");
@@ -22,7 +33,8 @@ export default function WebhookSetupGuide() {
   const testEndpoint = getWebhookEndpoint("wb-test");
 
   return (
-    <div className="docs-prose">
+    <div className="flex gap-10 max-w-7xl">
+      <div className="docs-prose flex-1 min-w-0 max-w-3xl">
       <h1>Webhook Notifications — Setup Guide</h1>
       <p className="text-lg text-muted-foreground">
         Follow these steps to configure webhook notifications from start to finish.
@@ -42,7 +54,7 @@ export default function WebhookSetupGuide() {
       {setupSteps.map((step) => {
         const endpoint = getWebhookEndpoint(step.endpointId);
         return (
-          <div key={step.step} className="mb-10 pb-8 border-b">
+          <div key={step.step} id={`step-${step.step}`} className="mb-10 pb-8 border-b scroll-mt-24">
             <div className="flex items-center gap-3 mb-3">
               <div className="flex items-center justify-center h-9 w-9 rounded-full bg-primary text-primary-foreground font-bold text-sm shrink-0">
                 {step.step}
@@ -79,7 +91,7 @@ export default function WebhookSetupGuide() {
       })}
 
       {/* ── Section 2 — User Role Creation ── */}
-      <div className="mb-10 pb-8 border-b">
+      <div id="step-2" className="mb-10 pb-8 border-b scroll-mt-24">
         <div className="flex items-center gap-3 mb-3">
           <div className="flex items-center justify-center h-9 w-9 rounded-full bg-primary text-primary-foreground font-bold text-sm shrink-0">
             2
@@ -137,7 +149,7 @@ export default function WebhookSetupGuide() {
       </div>
 
       {/* ── Section 3 — Authentication ── */}
-      <div className="mb-10 pb-8 border-b">
+      <div id="step-3" className="mb-10 pb-8 border-b scroll-mt-24">
         <div className="flex items-center gap-3 mb-3">
           <div className="flex items-center justify-center h-9 w-9 rounded-full bg-primary text-primary-foreground font-bold text-sm shrink-0">
             3
@@ -195,7 +207,7 @@ export default function WebhookSetupGuide() {
       </div>
 
       {/* ── Section 4 — Register Your Webhook Endpoint ── */}
-      <div className="mb-10 pb-8 border-b">
+      <div id="step-4" className="mb-10 pb-8 border-b scroll-mt-24">
         <div className="flex items-center gap-3 mb-3">
           <div className="flex items-center justify-center h-9 w-9 rounded-full bg-primary text-primary-foreground font-bold text-sm shrink-0">
             4
@@ -234,7 +246,7 @@ export default function WebhookSetupGuide() {
       </div>
 
       {/* ── Section 5 — Test ── */}
-      <div className="mb-10 pb-8 border-b">
+      <div id="step-5" className="mb-10 pb-8 border-b scroll-mt-24">
         <div className="flex items-center gap-3 mb-3">
           <div className="flex items-center justify-center h-9 w-9 rounded-full bg-primary text-primary-foreground font-bold text-sm shrink-0">
             5
@@ -325,7 +337,7 @@ export default function WebhookSetupGuide() {
       </div>
 
       {/* ── Section 6 — Event Payloads ── */}
-      <div className="mb-10 pb-8 border-b">
+      <div id="step-6" className="mb-10 pb-8 border-b scroll-mt-24">
         <div className="flex items-center gap-3 mb-3">
           <div className="flex items-center justify-center h-9 w-9 rounded-full bg-primary text-primary-foreground font-bold text-sm shrink-0">
             6
@@ -350,7 +362,7 @@ export default function WebhookSetupGuide() {
       </div>
 
       {/* ── Section 7 — Cool-Off Email Notifications ── */}
-      <div className="mb-10 pb-8 border-b">
+      <div id="step-7" className="mb-10 pb-8 border-b scroll-mt-24">
         <div className="flex items-center gap-3 mb-3">
           <div className="flex items-center justify-center h-9 w-9 rounded-full bg-primary text-primary-foreground font-bold text-sm shrink-0">
             7
@@ -470,6 +482,13 @@ export default function WebhookSetupGuide() {
         <li>Share allow-listing details if your network restricts inbound traffic</li>
         <li>Designate a technical contact for setup, testing, and incident communication</li>
       </ul>
+      </div>
+
+      <aside className="hidden xl:block w-56 shrink-0">
+        <div className="sticky top-20">
+          <OnPageNav steps={navSteps} title="On this page" />
+        </div>
+      </aside>
     </div>
   );
 }
