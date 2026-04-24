@@ -4,12 +4,31 @@ import { endpointFieldDocs } from "@/data/apiFieldDocs";
 import { CodeBlock } from "@/components/CodeBlock";
 import { MethodBadge } from "@/components/MethodBadge";
 import type { FieldDoc } from "@/data/apiFieldDocs";
-import { AlertTriangle } from "lucide-react";
+import { AlertTriangle, Info } from "lucide-react";
 
-function FieldTable({ title, fields }: { title: string; fields: FieldDoc[] }) {
+function FieldTable({
+  title,
+  fields,
+  constraintsAdvisory,
+}: {
+  title: string;
+  fields: FieldDoc[];
+  constraintsAdvisory?: boolean;
+}) {
   return (
     <>
       <h2>{title}</h2>
+      {constraintsAdvisory && (
+        <div className="flex items-start gap-3 p-3 mb-4 rounded-lg border border-accent bg-accent/10">
+          <Info className="h-4 w-4 text-accent-foreground mt-0.5 shrink-0" />
+          <p className="text-sm !my-0">
+            <span className="font-semibold">Use the values shown in the example payload.</span>{" "}
+            The entries in the <span className="font-medium">Allowed values</span> column document the
+            full set the API accepts, but should only be used when explicitly instructed by your
+            TransUnion representative. The example values are pre-selected for successful onboarding.
+          </p>
+        </div>
+      )}
       <div className="overflow-x-auto">
         <table className="w-full text-sm border-collapse">
           <thead>
@@ -18,7 +37,9 @@ function FieldTable({ title, fields }: { title: string; fields: FieldDoc[] }) {
               <th className="text-left py-2 px-3 font-semibold">Type</th>
               <th className="text-left py-2 px-3 font-semibold">Required</th>
               <th className="text-left py-2 px-3 font-semibold">Description</th>
-              <th className="text-left py-2 px-3 font-semibold">Constraints</th>
+              <th className="text-left py-2 px-3 font-semibold">
+                {constraintsAdvisory ? "Allowed values (TU-guided)" : "Constraints"}
+              </th>
             </tr>
           </thead>
           <tbody>
@@ -38,7 +59,22 @@ function FieldTable({ title, fields }: { title: string; fields: FieldDoc[] }) {
                   )}
                 </td>
                 <td className="py-2 px-3 text-muted-foreground">{f.description}</td>
-                <td className="py-2 px-3 text-xs text-muted-foreground">{f.constraints || "—"}</td>
+                <td className="py-2 px-3 text-xs text-muted-foreground">
+                  {f.constraints ? (
+                    constraintsAdvisory ? (
+                      <span
+                        className="italic"
+                        title="Only use these values if instructed by your TransUnion representative. Otherwise follow the example payload."
+                      >
+                        {f.constraints}
+                      </span>
+                    ) : (
+                      f.constraints
+                    )
+                  ) : (
+                    "—"
+                  )}
+                </td>
               </tr>
             ))}
           </tbody>
@@ -117,7 +153,11 @@ export default function ApiEndpointPage() {
       )}
 
       {fieldDocs?.requestFields && fieldDocs.requestFields.length > 0 && (
-        <FieldTable title="Request Fields" fields={fieldDocs.requestFields} />
+        <FieldTable
+          title="Request Fields"
+          fields={fieldDocs.requestFields}
+          constraintsAdvisory={productId === "cno"}
+        />
       )}
 
       {endpoint.requestBody && (
