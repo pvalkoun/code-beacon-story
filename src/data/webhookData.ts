@@ -26,6 +26,29 @@ export interface WebhookEndpointFieldDocs {
 }
 
 export const webhookEndpoints: WebhookEndpoint[] = [
+  // ── Authentication ──
+  {
+    id: "wb-auth-token",
+    category: "Authentication",
+    name: "Create Auth Token",
+    method: "POST",
+    path: "/ccid/aam/v1/login",
+    description: "Authenticate with the TCS platform to obtain a JWT access token. The returned access token must be supplied in the Authorization header (Bearer) of all subsequent webhook management, test, encryption, and delivery log requests.",
+    headers: [
+      { key: "Content-Type", value: "application/json" },
+    ],
+    requestBody: `{
+  "userId": "{{adminUserId}}",
+  "password": "{{password}}"
+}`,
+    responseBody: `{
+  "status": "success",
+  "message": "Login is successful",
+  "accessToken": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIs...",
+  "refreshToken": "eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCIs..."
+}`,
+    responseStatus: 200,
+  },
   // ── Account Setup ──
   {
     id: "wb-enable-account",
