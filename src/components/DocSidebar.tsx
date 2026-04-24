@@ -196,6 +196,19 @@ export function DocSidebar() {
                     </NavLink>
                   </SidebarMenuButton>
                 </SidebarMenuItem>
+                <SidebarMenuItem>
+                  <SidebarMenuButton asChild>
+                    <NavLink to="/resources/webhooks" activeClassName="bg-sidebar-accent text-sidebar-primary font-medium">
+                      <Bell className="h-4 w-4 mr-2" />
+                      {!collapsed && (
+                        <>
+                          <span className="flex-1">Webhooks</span>
+                          <NewBadge />
+                        </>
+                      )}
+                    </NavLink>
+                  </SidebarMenuButton>
+                </SidebarMenuItem>
                 <Collapsible>
                   <SidebarMenuItem>
                     <CollapsibleTrigger asChild>
@@ -273,14 +286,9 @@ export function DocSidebar() {
                 </Collapsible>
                 <SidebarMenuItem>
                   <SidebarMenuButton asChild>
-                    <NavLink to="/resources/webhooks" activeClassName="bg-sidebar-accent text-sidebar-primary font-medium">
-                      <Bell className="h-4 w-4 mr-2" />
-                      {!collapsed && (
-                        <>
-                          <span className="flex-1">Webhooks</span>
-                          <NewBadge />
-                        </>
-                      )}
+                    <NavLink to="/changelog" activeClassName="bg-sidebar-accent text-sidebar-primary font-medium">
+                      <ClipboardList className="h-4 w-4 mr-2" />
+                      {!collapsed && <span>Changelog</span>}
                     </NavLink>
                   </SidebarMenuButton>
                 </SidebarMenuItem>
