@@ -420,6 +420,9 @@ export function DocSidebar() {
                     {!collapsed && <span>Setup Guide</span>}
                   </NavLink>
                 </SidebarMenuButton>
+                {!collapsed && location.pathname === `/products/${productId}/guide` && product!.setupSteps && (
+                  <SetupStepsNav steps={product!.setupSteps.map(s => ({ step: s.step, title: s.title }))} />
+                )}
               </SidebarMenuItem>
             </SidebarMenu>
           </SidebarGroupContent>
