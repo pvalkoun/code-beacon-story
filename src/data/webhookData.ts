@@ -266,7 +266,7 @@ export const webhookEndpoints: WebhookEndpoint[] = [
     name: "Get Webhook",
     method: "GET",
     path: "/ccid/webhook/v1/account/{{accountId}}/webhook",
-    description: "Retrieve the full configuration of the webhook for this account, including registered scopes, event filters, authentication settings, and current state.",
+    description: "Retrieve the full configuration of the webhook for this account. The response mirrors the payload submitted at registration — including all registered scopes, event filters, authentication settings, retry policy, and current state. Encrypted credential values are returned in their encrypted form and are never re-disclosed in plain text.",
     headers: [
       { key: "Content-Type", value: "application/json" },
     ],
@@ -276,14 +276,34 @@ export const webhookEndpoints: WebhookEndpoint[] = [
   "description": "This space is for webhook description",
   "state": "ACTIVE",
   "max_retry": 5,
+  "email": ["user@example.com"],
   "auth_type": "apiKey",
-  "email": [
-    "user@example.com"
-  ],
+  "credentials": {
+    "api_key": "apiKey",
+    "api_value": "X9aP7KqM2R8vZtYcH1fL",
+    "location": "Header"
+  },
   "services": [
     {
       "name": "sdpr",
       "entities": [
+        {
+          "type": "account",
+          "data": {
+            "webhook_url": "https://demo.myapp.com/account",
+            "event_types": [
+              {
+                "event_type": "vetting_status",
+                "trigger_on": ["VETTING_SUCCESSFUL"]
+              },
+              {
+                "event_type": "partner_status",
+                "trigger_on": ["*"]
+              }
+            ],
+            "features": ["AUTH-BCD"]
+          }
+        },
         {
           "type": "tcsasset",
           "data": {
@@ -299,6 +319,19 @@ export const webhookEndpoints: WebhookEndpoint[] = [
               }
             ],
             "features": ["CNO"]
+          }
+        },
+        {
+          "type": "callerprofile",
+          "data": {
+            "webhook_url": "https://demo.myapp.com/cp",
+            "event_types": [
+              {
+                "event_type": "partner_status",
+                "trigger_on": ["Enable-Completed"]
+              }
+            ],
+            "features": ["AUTH-BCD"]
           }
         }
       ]
@@ -612,9 +645,10 @@ export const webhookFieldDocs: Record<string, WebhookEndpointFieldDocs> = {
       { path: "description", type: "String", required: false, description: "Description of the webhook purpose" },
       { path: "state", type: "String", required: true, description: "Current state of the webhook", constraints: "ACTIVE | PAUSED" },
       { path: "max_retry", type: "Integer", required: true, description: "Maximum retry attempts for failed deliveries" },
-      { path: "auth_type", type: "String", required: true, description: "Authentication method configured", constraints: "oAuth | apiKey | none" },
       { path: "email", type: "Array", required: true, description: "Notification email addresses" },
-      { path: "services", type: "Array", required: true, description: "Registered service scopes and event filters" },
+      { path: "auth_type", type: "String", required: true, description: "Authentication method configured", constraints: "oAuth | apiKey | none" },
+      { path: "credentials", type: "Object", required: false, description: "Auth credentials as registered. Encrypted secrets are returned in encrypted form; never re-disclosed in plain text." },
+      { path: "services", type: "Array", required: true, description: "Registered service scopes, entity bindings, event filters, and feature flags — mirrors the registration payload" },
     ],
   },
   "wb-update": {

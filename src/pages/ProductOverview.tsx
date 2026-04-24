@@ -4,6 +4,7 @@ import { getIntegrationsForProduct } from "@/data/integrationData";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { ArrowRight, CheckCircle2, BookOpen, Code2, Plug } from "lucide-react";
+import { BaseUrlPanel } from "@/components/BaseUrlPanel";
 
 export default function ProductOverview() {
   const { productId } = useParams<{ productId: string }>();
@@ -18,6 +19,8 @@ export default function ProductOverview() {
       <p className="text-lg text-muted-foreground">{product.tagline}</p>
 
       <p>{product.description}</p>
+
+      <BaseUrlPanel note="Applies to all endpoints documented for this product." />
 
       <h2>Key Benefits</h2>
       <ul className="space-y-2">
