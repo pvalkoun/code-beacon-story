@@ -22,8 +22,9 @@ const navSteps = [
   { step: 3, title: "Authentication" },
   { step: 4, title: "Register Endpoint" },
   { step: 5, title: "Test" },
-  { step: 6, title: "Event Payloads" },
-  { step: 7, title: "Cool-Off Email Notifications" },
+  { step: 6, title: "Event Reference" },
+  { step: 7, title: "Event Payloads" },
+  { step: 8, title: "Cool-Off Email Notifications" },
 ];
 
 export default function WebhookSetupGuide() {
