@@ -639,7 +639,7 @@ export const webhookFieldDocs: Record<string, WebhookEndpointFieldDocs> = {
   },
 };
 
-export const webhookCategories = ["Account Setup", "Encryption Utility", "Webhook Management", "Delivery Logs"];
+export const webhookCategories = ["Authentication", "Account Setup", "Webhook Management", "Test and Delivery Logs"];
 
 export const getWebhookEndpoint = (id: string) => webhookEndpoints.find(e => e.id === id);
 
