@@ -91,7 +91,7 @@ export function DocLayout() {
               </BreadcrumbList>
             </Breadcrumb>
           </header>
-          <main className="flex-1 p-6 md:p-8 lg:p-10 max-w-5xl">
+          <main className="flex-1 p-6 md:p-8 lg:p-10">
             <Outlet />
           </main>
           <BackToTop />
