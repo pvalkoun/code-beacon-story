@@ -817,7 +817,7 @@ export const coolOffEmailSample = {
   subject: "CCID Webhook Notification - Account {{accountId}}",
   body: `Dear Customer,
 
-We are writing to inform you that webhook delivery for your account has been temporarily paused (cool-off) due to repeated delivery failures to your registered endpoint.
+We are writing to inform you that webhook delivery for your account has been temporarily suspended (cool-off) due to repeated delivery failures to your registered endpoint.
 
 Account ID: {{accountId}}
 Failure Reason: Endpoint returned non-2xx HTTP status after maximum retry attempts
