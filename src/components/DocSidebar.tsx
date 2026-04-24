@@ -24,6 +24,14 @@ import { Button } from "@/components/ui/button";
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible";
 import tuLogo from "@/assets/tu-icon.png";
 
+function NewBadge() {
+  return (
+    <span className="ml-2 inline-flex items-center rounded-sm bg-sidebar-primary/15 px-1.5 py-0.5 text-[9px] font-semibold uppercase tracking-wide text-sidebar-primary">
+      New
+    </span>
+  );
+}
+
 export function DocSidebar() {
   const location = useLocation();
   const navigate = useNavigate();
@@ -179,7 +187,12 @@ export function DocSidebar() {
                   <SidebarMenuButton asChild>
                     <NavLink to="/resources/analytics" activeClassName="bg-sidebar-accent text-sidebar-primary font-medium">
                       <BarChart3 className="h-4 w-4 mr-2" />
-                      {!collapsed && <span>Analytics</span>}
+                      {!collapsed && (
+                        <>
+                          <span className="flex-1">Analytics</span>
+                          <NewBadge />
+                        </>
+                      )}
                     </NavLink>
                   </SidebarMenuButton>
                 </SidebarMenuItem>
@@ -270,7 +283,12 @@ export function DocSidebar() {
                   <SidebarMenuButton asChild>
                     <NavLink to="/resources/webhooks" activeClassName="bg-sidebar-accent text-sidebar-primary font-medium">
                       <Bell className="h-4 w-4 mr-2" />
-                      {!collapsed && <span>Webhooks</span>}
+                      {!collapsed && (
+                        <>
+                          <span className="flex-1">Webhooks</span>
+                          <NewBadge />
+                        </>
+                      )}
                     </NavLink>
                   </SidebarMenuButton>
                 </SidebarMenuItem>
@@ -506,20 +524,24 @@ function ApiCategoryAccordion({
                   <span>{cat}</span>
                   {isOpen ? <ChevronDown className="h-3 w-3" /> : <ChevronRight className="h-3 w-3" />}
                 </button>
-                {isOpen && catEndpoints.map(ep => (
-                  <SidebarMenuItem key={ep.id}>
-                    <SidebarMenuButton asChild>
-                      <NavLink
-                        to={`/products/${productId}/api/${ep.id}`}
-                        activeClassName="bg-sidebar-accent text-sidebar-primary font-medium"
-                        className="flex items-center gap-2 pl-6"
-                      >
-                        <MethodBadge method={ep.method} />
-                        <span className="text-xs truncate">{ep.name}</span>
-                      </NavLink>
-                    </SidebarMenuButton>
-                  </SidebarMenuItem>
-                ))}
+                {isOpen && catEndpoints.map(ep => {
+                  const isNew = productId === "bcd" && (ep.id === "create-image" || ep.id === "get-image" || ep.id === "delete-image" || ep.id === "create-image-profile" || ep.id === "get-image-profile" || ep.id === "delete-image-profile");
+                  return (
+                    <SidebarMenuItem key={ep.id}>
+                      <SidebarMenuButton asChild>
+                        <NavLink
+                          to={`/products/${productId}/api/${ep.id}`}
+                          activeClassName="bg-sidebar-accent text-sidebar-primary font-medium"
+                          className="flex items-center gap-2 pl-6"
+                        >
+                          <MethodBadge method={ep.method} />
+                          <span className="text-xs truncate flex-1">{ep.name}</span>
+                          {isNew && <NewBadge />}
+                        </NavLink>
+                      </SidebarMenuButton>
+                    </SidebarMenuItem>
+                  );
+                })}
               </div>
             );
           })}

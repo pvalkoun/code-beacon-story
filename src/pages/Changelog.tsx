@@ -10,12 +10,14 @@ interface ChangelogEntry {
   links?: { label: string; to: string }[];
 }
 
+const today = new Date().toISOString().slice(0, 10);
+
 const changelog: ChangelogEntry[] = [
   {
-    date: "2026-07-01",
+    date: today,
     title: "Image Upload Handling for Branded Call Display",
     description:
-      "Introduced new Image Profile endpoints (POST, GET, DELETE) to streamline logo and image management for BCD. Upload a publicly accessible image URL to the new Image endpoint and receive a TransUnion-hosted image URL along with an image_profile_id, which can then be referenced when creating Rich BCD caller profiles to display your company logo on recipient devices.",
+      "Release date: July 1, 2026. Introduced new Image Profile endpoints (POST, GET, DELETE) to streamline logo and image management for BCD. Upload a publicly accessible image URL to the new Image endpoint and receive a TransUnion-hosted image URL along with an image_profile_id, which can then be referenced when creating Rich BCD caller profiles to display your company logo on recipient devices.",
     tags: ["BCD", "New", "API"],
     links: [
       { label: "Create Image Profile", to: "/products/bcd/api/create-image-profile" },
@@ -23,20 +25,20 @@ const changelog: ChangelogEntry[] = [
     ],
   },
   {
-    date: "2026-06-01",
+    date: today,
     title: "Analytics API for BCD and SCP",
     description:
-      "Launched the Analytics API under the Resources section, providing per-TN and account-wide call performance metrics for both Branded Call Display (BCD) and Spoofed Call Protection (SCP). Includes full authentication flow, cursor-based pagination, and detailed response schemas to help you measure delivery, engagement, and authentication outcomes.",
+      "Release date: June 1, 2026. Launched the Analytics API under the Resources section, providing per-TN and account-wide call performance metrics for both Branded Call Display (BCD) and Spoofed Call Protection (SCP). Includes full authentication flow, cursor-based pagination, and detailed response schemas to help you measure delivery, engagement, and authentication outcomes.",
     tags: ["Analytics", "New", "API"],
     links: [
       { label: "Analytics API", to: "/resources/analytics" },
     ],
   },
   {
-    date: "2026-06-01",
+    date: today,
     title: "Webhook Notifications",
     description:
-      "Released the Webhooks module, enabling real-time push notifications for account, caller profile, and TN-level events (vetting and tagging). Includes endpoints to configure callback URLs, manage encryption, send test events, and review delivery logs, plus a documented inbound event delivery contract with retry and cool-off behavior.",
+      "Release date: June 1, 2026. Released the Webhooks module, enabling real-time push notifications for account, caller profile, and TN-level events (vetting and tagging). Includes endpoints to configure callback URLs, manage encryption, send test events, and review delivery logs, plus a documented inbound event delivery contract with retry and cool-off behavior.",
     tags: ["Webhooks", "New", "API"],
     links: [
       { label: "Webhooks Overview", to: "/resources/webhooks" },
