@@ -46,6 +46,46 @@ function formatExampleValue(value: unknown): string | null {
   return String(value);
 }
 
+// Parse enum-style constraints like:
+//   "Must be one of: A, B, C"
+//   "Valid values: A, B"
+//   "Must be: SDPR (for TCS services)"
+//   '"success" or "failure"'
+// Returns the list of allowed values, or null if the constraint is not an enumerated set
+// (e.g. length/format constraints which apply to user-definable fields).
+function parseEnumConstraint(constraint: string | undefined): string[] | null {
+  if (!constraint) return null;
+  const enumPatterns = [
+    /^Must be one of:\s*(.+)$/i,
+    /^Valid values:\s*(.+)$/i,
+    /^Must be:\s*(.+)$/i,
+    /^One of:\s*(.+)$/i,
+  ];
+  for (const re of enumPatterns) {
+    const m = constraint.match(re);
+    if (m) {
+      // Strip parenthetical notes, then split on commas / "or"
+      const cleaned = m[1].replace(/\([^)]*\)/g, "").trim();
+      const parts = cleaned
+        .split(/,|\bor\b/i)
+        .map((s) => s.trim().replace(/^["']|["']$/g, ""))
+        .filter(Boolean);
+      return parts.length > 0 ? parts : null;
+    }
+  }
+  // Pattern: "X" or "Y"
+  const quotedOr = constraint.match(/^"([^"]+)"\s+or\s+"([^"]+)"$/);
+  if (quotedOr) return [quotedOr[1], quotedOr[2]];
+  return null;
+}
+
+function getRestrictedValues(constraint: string | undefined, exampleValue: string | null): string[] | null {
+  const allowed = parseEnumConstraint(constraint);
+  if (!allowed) return null;
+  if (!exampleValue) return allowed;
+  return allowed.filter((v) => v.toLowerCase() !== exampleValue.toLowerCase());
+}
+
 function FieldTable({
   title,
   fields,
@@ -109,19 +149,21 @@ function FieldTable({
                     </td>
                   )}
                   <td className="py-2 px-3 text-xs text-muted-foreground">
-                    {f.constraints ? (
-                      restrictedMode ? (
+                    {restrictedMode ? (() => {
+                      const restricted = getRestrictedValues(f.constraints, exampleValue);
+                      if (!restricted || restricted.length === 0) {
+                        return <span className="text-muted-foreground">—</span>;
+                      }
+                      return (
                         <span
-                          className="italic line-through decoration-destructive/60"
+                          className="font-mono"
                           title="Restricted — do not use unless explicitly instructed by your TransUnion representative."
                         >
-                          {f.constraints}
+                          {restricted.join(", ")}
                         </span>
-                      ) : (
-                        f.constraints
-                      )
-                    ) : (
-                      "—"
+                      );
+                    })() : (
+                      f.constraints || "—"
                     )}
                   </td>
                 </tr>
