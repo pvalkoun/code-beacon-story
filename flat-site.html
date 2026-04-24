@@ -1424,7 +1424,33 @@ For more information, see https://radix-ui.com/primitives/docs/components/${t.do
   ]
 }`,responseBody:`{
   "user_id": "enterprise_company_admin_01",
-  "message": "User created"
+  "user_name": "enterprise_company_admin_01",
+  "company_id": "x0369a4otu",
+  "email": "user.lastname@transunion.com",
+  "first_name": "Lucky",
+  "last_name": "Seven",
+  "phone": "+1.7201234567",
+  "roles": {
+    "SDPR": [
+      "SDPR_ENTERPRISE_ADMIN"
+    ],
+    "WB": [
+      "WB_COMPANY_ADMIN"
+    ],
+    "AAM": [
+      "AAM_COMPANY_ADMIN"
+    ]
+  },
+  "comment": "Authorized enterprise admin access.",
+  "status": "ACTIVE",
+  "user_type": "API",
+  "application": [
+    "TCS"
+  ],
+  "created_by": "neustaradminapi",
+  "created_date": "Thu, 9 Apr 2026 08:28:59 GMT",
+  "updated_by": "neustaradminapi",
+  "updated_date": "Thu, 9 Apr 2026 08:28:59 GMT"
 }`,responseStatus:200},{id:"wb-register",category:"Webhook Management",name:"Register Webhook",method:"POST",path:"/ccid/webhook/v1/account/{{accountId}}/webhook",description:"Register a new webhook endpoint for the specified account. The webhook configuration defines the callback URL, authentication credentials, retry behavior, notification email contacts, and the services and event scopes to subscribe to. Passwords and API keys must be encrypted (see the Encryption Utility in the Setup Guide) before being included in the payload.",headers:[{key:"Content-Type",value:"application/json"}],requestBody:`{
   "webhook_name": "Webhook Notifications for Enterpise 01",
   "description": "This space is for webhook description",
