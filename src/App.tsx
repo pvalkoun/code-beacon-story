@@ -16,7 +16,7 @@ import AnalyticsPage from "./pages/AnalyticsPage";
 import WebhookOverview from "./pages/WebhookOverview";
 import WebhookSetupGuide from "./pages/WebhookSetupGuide";
 import WebhookEndpointPage from "./pages/WebhookEndpointPage";
-import WebhookOpenApiExport from "./pages/WebhookOpenApiExport";
+
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
