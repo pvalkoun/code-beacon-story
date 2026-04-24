@@ -12,24 +12,35 @@ interface ChangelogEntry {
 
 const changelog: ChangelogEntry[] = [
   {
-    date: "2026-04-06",
-    title: "Analytics API Documentation",
+    date: "2026-07-01",
+    title: "Image Upload Handling for Branded Call Display",
     description:
-      "Added Analytics API reference under a new Resources section with full authentication flow, corrected endpoint paths (/ccid/analytics/v1/admin/account/{accountId}/tn and /tns), per-TN and account-wide call performance metrics for BCD and SCP services, cursor-based pagination, and detailed response schema references.",
-    tags: ["Analytics", "Updated", "API"],
+      "Introduced new Image Profile endpoints (POST, GET, DELETE) to streamline logo and image management for BCD. Upload a publicly accessible image URL to the new Image endpoint and receive a TransUnion-hosted image URL along with an image_profile_id, which can then be referenced when creating Rich BCD caller profiles to display your company logo on recipient devices.",
+    tags: ["BCD", "New", "API"],
+    links: [
+      { label: "Create Image Profile", to: "/products/bcd/api/create-image-profile" },
+      { label: "BCD Setup Guide", to: "/products/bcd/guide" },
+    ],
+  },
+  {
+    date: "2026-06-01",
+    title: "Analytics API for BCD and SCP",
+    description:
+      "Launched the Analytics API under the Resources section, providing per-TN and account-wide call performance metrics for both Branded Call Display (BCD) and Spoofed Call Protection (SCP). Includes full authentication flow, cursor-based pagination, and detailed response schemas to help you measure delivery, engagement, and authentication outcomes.",
+    tags: ["Analytics", "New", "API"],
     links: [
       { label: "Analytics API", to: "/resources/analytics" },
     ],
   },
   {
-    date: "2026-04-06",
-    title: "Image Profile API for Branded Call Display",
+    date: "2026-06-01",
+    title: "Webhook Notifications",
     description:
-      "Added new Image Profile endpoints (POST, GET, DELETE) to the BCD configuration flow. Image profiles allow you to upload a public image URL and receive an internal TransUnion-hosted image URL. The returned image_profile_id is used when creating Rich BCD caller profiles to display your company logo on recipient devices.",
-    tags: ["BCD", "New Feature", "API"],
+      "Released the Webhooks module, enabling real-time push notifications for account, caller profile, and TN-level events (vetting and tagging). Includes endpoints to configure callback URLs, manage encryption, send test events, and review delivery logs, plus a documented inbound event delivery contract with retry and cool-off behavior.",
+    tags: ["Webhooks", "New", "API"],
     links: [
-      { label: "Create Image Profile", to: "/products/bcd/api/create-image-profile" },
-      { label: "BCD Setup Guide", to: "/products/bcd/guide" },
+      { label: "Webhooks Overview", to: "/resources/webhooks" },
+      { label: "Webhooks Setup Guide", to: "/resources/webhooks/guide" },
     ],
   },
 ];
