@@ -74,7 +74,10 @@ export default function WebhookOverview() {
       <h2>Supported Event Types</h2>
       <p>
         Webhooks can be configured to notify you of changes across three event categories,
-        scoped to the entity level that matters to your integration.
+        scoped to the entity level that matters to your integration. Events can be scoped
+        by <strong>Account</strong>, <strong>Caller Profile</strong>, or <strong>Telephone
+        Number (TN)</strong>, and subscriptions can be filtered by service
+        (<strong>BCD</strong>, <strong>CNO</strong>, <strong>SCP</strong>).
       </p>
 
       <div className="overflow-x-auto">
