@@ -15,7 +15,8 @@ export default function SetupGuide() {
   if (!product) return <div>Product not found</div>;
 
   return (
-    <div className="docs-prose">
+    <div className="flex gap-10 max-w-7xl">
+      <div className="docs-prose flex-1 min-w-0 max-w-3xl">
       <h1>{product.name} — Setup Guide</h1>
       <p className="text-lg text-muted-foreground">
         Follow these steps to configure {product.name} from start to finish.
