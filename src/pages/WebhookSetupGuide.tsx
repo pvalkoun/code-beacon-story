@@ -304,8 +304,19 @@ export default function WebhookSetupGuide() {
         <h3>Caller Profile-Level Event</h3>
         <CodeBlock code={sampleEventPayloads.callerProfile} title="Caller Profile Status Change" language="json" />
 
-        <h3>TN-Level Event</h3>
-        <CodeBlock code={sampleEventPayloads.tn} title="TN Status Change" language="json" />
+        <h3>TN-Level Event — Vetting Status</h3>
+        <p>
+          Delivered when a TN's vetting outcome changes. These events occur during the
+          initial vetting lifecycle and are independent from spam-tag updates.
+        </p>
+        <CodeBlock code={sampleEventPayloads.tnVetting} title="TN Vetting Status Change" language="json" />
+
+        <h3>TN-Level Event — Tagging Status</h3>
+        <p>
+          Delivered when a carrier spam-tag (or appeal) status changes for a TN. These events
+          arrive on a separate cadence from vetting and relate to ongoing CNO monitoring.
+        </p>
+        <CodeBlock code={sampleEventPayloads.tnTagging} title="TN Tagging Status Change" language="json" />
       </div>
 
       {/* ── Section 7 — Cool-Off Email Notifications ── */}
