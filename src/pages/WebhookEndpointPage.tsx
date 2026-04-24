@@ -102,6 +102,18 @@ export default function WebhookEndpointPage() {
         <FieldTable title="Request Fields" fields={fieldDocs.requestFields} />
       )}
 
+      {(endpoint.id === "wb-register" || endpoint.id === "wb-update" || endpoint.id === "wb-test") && (
+        <>
+          <h3>Supported Authentication Types</h3>
+          <p>
+            The <code>auth_type</code> field controls how TransUnion authenticates outbound event
+            requests to your callback URL. Choose the tab that matches your endpoint and use the
+            credential shape shown below.
+          </p>
+          <AuthTypesPanel />
+        </>
+      )}
+
       {endpoint.requestBody && (
         <>
           <h2>Request Body Example</h2>
