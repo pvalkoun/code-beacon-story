@@ -6,97 +6,7 @@ import { MethodBadge } from "@/components/MethodBadge";
 import type { FieldDoc } from "@/data/apiFieldDocs";
 import { AlertTriangle } from "lucide-react";
 
-// Extract example value for a given dotted path (supports "a.b" and "a[].b") from a parsed JSON example.
-function getExampleValue(example: unknown, path: string): unknown {
-  if (example == null) return undefined;
-  const segments = path.split(".");
-  let current: unknown = example;
-  for (let seg of segments) {
-    const isArray = seg.endsWith("[]");
-    if (isArray) seg = seg.slice(0, -2);
-    if (current && typeof current === "object" && seg in (current as Record<string, unknown>)) {
-      current = (current as Record<string, unknown>)[seg];
-    } else {
-      return undefined;
-    }
-    if (isArray) {
-      if (Array.isArray(current) && current.length > 0) {
-        current = current[0];
-      } else {
-        return undefined;
-      }
-    }
-  }
-  return current;
-}
-
-function formatExampleValue(value: unknown): string | null {
-  if (value === undefined) return null;
-  if (value === null) return "null";
-  if (typeof value === "string") return value;
-  if (typeof value === "number" || typeof value === "boolean") return String(value);
-  if (Array.isArray(value)) {
-    if (value.length === 0) return "[]";
-    if (value.every((v) => typeof v !== "object" || v === null)) {
-      return value.map((v) => (typeof v === "string" ? v : JSON.stringify(v))).join(", ");
-    }
-    return JSON.stringify(value);
-  }
-  if (typeof value === "object") return JSON.stringify(value);
-  return String(value);
-}
-
-// Parse enum-style constraints like:
-//   "Must be one of: A, B, C"
-//   "Valid values: A, B"
-//   "Must be: SDPR (for TCS services)"
-//   '"success" or "failure"'
-// Returns the list of allowed values, or null if the constraint is not an enumerated set
-// (e.g. length/format constraints which apply to user-definable fields).
-function parseEnumConstraint(constraint: string | undefined): string[] | null {
-  if (!constraint) return null;
-  const enumPatterns = [
-    /^Must be one of:\s*(.+)$/i,
-    /^Valid values:\s*(.+)$/i,
-    /^Must be:\s*(.+)$/i,
-    /^One of:\s*(.+)$/i,
-  ];
-  for (const re of enumPatterns) {
-    const m = constraint.match(re);
-    if (m) {
-      // Strip parenthetical notes, then split on commas / "or"
-      const cleaned = m[1].replace(/\([^)]*\)/g, "").trim();
-      const parts = cleaned
-        .split(/,|\bor\b/i)
-        .map((s) => s.trim().replace(/^["']|["']$/g, ""))
-        .filter(Boolean);
-      return parts.length > 0 ? parts : null;
-    }
-  }
-  // Pattern: "X" or "Y"
-  const quotedOr = constraint.match(/^"([^"]+)"\s+or\s+"([^"]+)"$/);
-  if (quotedOr) return [quotedOr[1], quotedOr[2]];
-  return null;
-}
-
-function getRestrictedValues(constraint: string | undefined, exampleValue: string | null): string[] | null {
-  const allowed = parseEnumConstraint(constraint);
-  if (!allowed) return null;
-  if (!exampleValue) return allowed;
-  return allowed.filter((v) => v.toLowerCase() !== exampleValue.toLowerCase());
-}
-
-function FieldTable({
-  title,
-  fields,
-  restrictedMode,
-  exampleJson,
-}: {
-  title: string;
-  fields: FieldDoc[];
-  restrictedMode?: boolean;
-  exampleJson?: unknown;
-}) {
+function FieldTable({ title, fields }: { title: string; fields: FieldDoc[] }) {
   return (
     <>
       <h2>{title}</h2>
@@ -108,67 +18,29 @@ function FieldTable({
               <th className="text-left py-2 px-3 font-semibold">Type</th>
               <th className="text-left py-2 px-3 font-semibold">Required</th>
               <th className="text-left py-2 px-3 font-semibold">Description</th>
-              {restrictedMode && (
-                <th className="text-left py-2 px-3 font-semibold">Use this value</th>
-              )}
-              <th className="text-left py-2 px-3 font-semibold">
-                {restrictedMode ? "Restricted values" : "Constraints"}
-              </th>
+              <th className="text-left py-2 px-3 font-semibold">Constraints</th>
             </tr>
           </thead>
           <tbody>
-            {fields.map((f, i) => {
-              const exampleValue = restrictedMode
-                ? formatExampleValue(getExampleValue(exampleJson, f.path))
-                : null;
-              return (
-                <tr key={i} className="border-b last:border-b-0">
-                  <td className="py-2 px-3 font-mono text-xs">{f.path}</td>
-                  <td className="py-2 px-3">
-                    <span className="inline-flex items-center px-1.5 py-0.5 rounded text-xs font-medium bg-muted text-muted-foreground">
-                      {f.type}
-                    </span>
-                  </td>
-                  <td className="py-2 px-3">
-                    {f.required ? (
-                      <span className="text-xs font-semibold text-destructive">Required</span>
-                    ) : (
-                      <span className="text-xs text-muted-foreground">Optional</span>
-                    )}
-                  </td>
-                  <td className="py-2 px-3 text-muted-foreground">{f.description}</td>
-                  {restrictedMode && (
-                    <td className="py-2 px-3 text-xs">
-                      {exampleValue !== null ? (
-                        <code className="px-1.5 py-0.5 rounded bg-primary/10 text-primary font-mono break-all">
-                          {exampleValue}
-                        </code>
-                      ) : (
-                        <span className="text-muted-foreground">—</span>
-                      )}
-                    </td>
+            {fields.map((f, i) => (
+              <tr key={i} className="border-b last:border-b-0">
+                <td className="py-2 px-3 font-mono text-xs">{f.path}</td>
+                <td className="py-2 px-3">
+                  <span className="inline-flex items-center px-1.5 py-0.5 rounded text-xs font-medium bg-muted text-muted-foreground">
+                    {f.type}
+                  </span>
+                </td>
+                <td className="py-2 px-3">
+                  {f.required ? (
+                    <span className="text-xs font-semibold text-destructive">Required</span>
+                  ) : (
+                    <span className="text-xs text-muted-foreground">Optional</span>
                   )}
-                  <td className="py-2 px-3 text-xs text-muted-foreground">
-                    {restrictedMode ? (() => {
-                      const restricted = getRestrictedValues(f.constraints, exampleValue);
-                      if (!restricted || restricted.length === 0) {
-                        return <span className="text-muted-foreground">—</span>;
-                      }
-                      return (
-                        <span
-                          className="font-mono"
-                          title="Restricted — do not use unless explicitly instructed by your TransUnion representative."
-                        >
-                          {restricted.join(", ")}
-                        </span>
-                      );
-                    })() : (
-                      f.constraints || "—"
-                    )}
-                  </td>
-                </tr>
-              );
-            })}
+                </td>
+                <td className="py-2 px-3 text-muted-foreground">{f.description}</td>
+                <td className="py-2 px-3 text-xs text-muted-foreground">{f.constraints || "—"}</td>
+              </tr>
+            ))}
           </tbody>
         </table>
       </div>
@@ -245,19 +117,7 @@ export default function ApiEndpointPage() {
       )}
 
       {fieldDocs?.requestFields && fieldDocs.requestFields.length > 0 && (
-        <FieldTable
-          title="Request Fields"
-          fields={fieldDocs.requestFields}
-          restrictedMode={productId === "cno"}
-          exampleJson={(() => {
-            if (!endpoint.requestBody) return undefined;
-            try {
-              return JSON.parse(endpoint.requestBody);
-            } catch {
-              return undefined;
-            }
-          })()}
-        />
+        <FieldTable title="Request Fields" fields={fieldDocs.requestFields} />
       )}
 
       {endpoint.requestBody && (
