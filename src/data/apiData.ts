@@ -764,6 +764,7 @@ export const apiEndpoints: ApiEndpoint[] = [
 }`,
     responseBody: `{
   "id": "699f684820a7a57a0a67c03a",
+  "name": "Your Company Name_SCP_20260225-212320",
   "account_id": "x59tj8rtv1",
   "service": [
     {
