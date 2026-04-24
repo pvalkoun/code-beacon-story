@@ -98,12 +98,7 @@ export default function WebhookOverview() {
       <h2>Supported Event Types</h2>
       <p>
         Webhooks can be configured to notify you of changes across three event categories,
-        scoped to the entity level that matters to your integration. For the full list of
-        trigger keys to use in your registration payload, see the{" "}
-        <Link to="/resources/webhooks/guide#event-reference" className="text-primary underline">
-          Event Reference
-        </Link>
-        .
+        scoped to the entity level that matters to your integration.
       </p>
 
       <div className="overflow-x-auto">
