@@ -1,5 +1,6 @@
 import { apiEndpoints } from "@/data/apiData";
 import { endpointFieldDocs, type FieldDoc } from "@/data/apiFieldDocs";
+import { webhookEndpoints, webhookFieldDocs, sampleEventPayloads, type WebhookFieldDoc } from "@/data/webhookData";
 
 function fieldToSchemaProperty(field: FieldDoc): [string, Record<string, unknown>] {
   const prop: Record<string, unknown> = { description: field.description };
