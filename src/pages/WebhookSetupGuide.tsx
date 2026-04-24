@@ -133,25 +133,24 @@ export default function WebhookSetupGuide() {
         )}
       </div>
 
-      {/* ── Section 3 — Register Your Webhook Endpoint ── */}
+      {/* ── Section 3 — Authentication ── */}
       <div className="mb-10 pb-8 border-b">
         <div className="flex items-center gap-3 mb-3">
           <div className="flex items-center justify-center h-9 w-9 rounded-full bg-primary text-primary-foreground font-bold text-sm shrink-0">
             3
           </div>
-          <h2 className="!mt-0 !mb-0">Register Your Webhook Endpoint</h2>
+          <h2 className="!mt-0 !mb-0">Authentication</h2>
         </div>
 
-        <h3>3.1 Password and API Key Encryption</h3>
         <p>
-          For security and compliance reasons, plain-text passwords or API keys are{" "}
-          <strong>never accepted</strong> by webhook APIs. The platform cannot reliably determine
-          whether an incoming value is encrypted unless it conforms to the approved encryption
-          format. To ensure consistency with UI-based encryption, API consumers must explicitly
-          encrypt sensitive values before submission.
+          Webhook delivery can be secured with credentials that the platform attaches to every
+          outbound notification request to your endpoint. For security and compliance reasons,
+          plain-text passwords or API keys are <strong>never accepted</strong> by webhook APIs.
+          Any sensitive value must be encrypted via the Encryption Utility API before being
+          submitted in the webhook registration payload.
         </p>
 
-        <h4>Supported Authentication Types</h4>
+        <h3>Supported Authentication Types</h3>
         <p>When registering a webhook, you may choose one of the following authentication types:</p>
         <ul>
           <li><strong>none</strong> — No credentials required</li>
@@ -163,11 +162,14 @@ export default function WebhookSetupGuide() {
           <Lock className="h-5 w-5 text-accent mt-0.5 shrink-0" />
           <p className="text-sm mb-0">
             <strong>Important:</strong> Any password or API key must be encrypted before being
-            included in the webhook registration payload. Use the Encryption Utility API to convert
-            plain-text secrets into the approved encrypted format.
+            included in the webhook registration payload. Use the Encryption Utility API below to
+            convert plain-text secrets into the approved encrypted format. When using{" "}
+            <code>oAuth</code>, include the encrypted value as the <code>password</code>. When
+            using <code>apiKey</code>, include the encrypted value as <code>api_value</code>.
           </p>
         </div>
 
+        <h3 className="mt-8">Encryption Utility</h3>
         {encryptEndpoint && (
           <div className="mt-4 p-4 rounded-lg border bg-card">
             <div className="flex items-center gap-3 mb-3">
@@ -187,8 +189,17 @@ export default function WebhookSetupGuide() {
             </Button>
           </div>
         )}
+      </div>
 
-        <h3 className="mt-8">3.2 Register the Webhook</h3>
+      {/* ── Section 4 — Register Your Webhook Endpoint ── */}
+      <div className="mb-10 pb-8 border-b">
+        <div className="flex items-center gap-3 mb-3">
+          <div className="flex items-center justify-center h-9 w-9 rounded-full bg-primary text-primary-foreground font-bold text-sm shrink-0">
+            4
+          </div>
+          <h2 className="!mt-0 !mb-0">Register Your Webhook Endpoint</h2>
+        </div>
+
         <p>
           Register your HTTPS callback URL along with authentication credentials, retry
           configuration, notification emails, and the services and event scopes you want to
@@ -219,20 +230,20 @@ export default function WebhookSetupGuide() {
         )}
       </div>
 
-      {/* ── Section 4 — Verify your configuration ── */}
+      {/* ── Section 5 — Test ── */}
       <div className="mb-10 pb-8 border-b">
         <div className="flex items-center gap-3 mb-3">
           <div className="flex items-center justify-center h-9 w-9 rounded-full bg-primary text-primary-foreground font-bold text-sm shrink-0">
-            4
+            5
           </div>
-          <h2 className="!mt-0 !mb-0">Verify Your Configuration</h2>
+          <h2 className="!mt-0 !mb-0">Test</h2>
         </div>
 
         <p>
-          As part of the verification process, customers can test the connectivity of their API
-          endpoint(s) prior to webhook registration. This validation confirms that the configured
-          endpoint is reachable and operational, reducing the risk of delivery issues after
-          activation. The response returns the HTTP status code returned by each endpoint.
+          Customers can test the connectivity of their API endpoint(s) prior to (or after) webhook
+          registration. This validation confirms that the configured endpoint is reachable and
+          operational, reducing the risk of delivery issues after activation. The response returns
+          the HTTP status code returned by each endpoint.
         </p>
 
         {testEndpoint && (
@@ -252,6 +263,60 @@ export default function WebhookSetupGuide() {
                 View full API reference <ArrowRight className="ml-1 h-3 w-3" />
               </Link>
             </Button>
+          </div>
+        )}
+
+        <h3 className="mt-8">Example Responses from Setup Endpoints</h3>
+        <p>
+          For reference, here are example responses returned by the endpoints used earlier in the
+          setup flow. Use these to verify your integration is producing the expected output.
+        </p>
+
+        {setupSteps.map((step) => {
+          const ep = getWebhookEndpoint(step.endpointId);
+          if (!ep?.responseBody) return null;
+          return (
+            <div key={`test-${ep.id}`} className="mt-4">
+              <h4 className="!mb-2">{ep.name}</h4>
+              <div className="flex items-center gap-3 mb-2">
+                <MethodBadge method={ep.method} />
+                <code className="text-sm font-mono">{ep.path}</code>
+              </div>
+              <CodeBlock code={ep.responseBody} title={`Response — ${ep.responseStatus}`} language="json" />
+            </div>
+          );
+        })}
+
+        {userEndpoint?.responseBody && (
+          <div className="mt-4">
+            <h4 className="!mb-2">{userEndpoint.name}</h4>
+            <div className="flex items-center gap-3 mb-2">
+              <MethodBadge method={userEndpoint.method} />
+              <code className="text-sm font-mono">{userEndpoint.path}</code>
+            </div>
+            <CodeBlock code={userEndpoint.responseBody} title={`Response — ${userEndpoint.responseStatus}`} language="json" />
+          </div>
+        )}
+
+        {encryptEndpoint?.responseBody && (
+          <div className="mt-4">
+            <h4 className="!mb-2">{encryptEndpoint.name}</h4>
+            <div className="flex items-center gap-3 mb-2">
+              <MethodBadge method={encryptEndpoint.method} />
+              <code className="text-sm font-mono">{encryptEndpoint.path}</code>
+            </div>
+            <CodeBlock code={encryptEndpoint.responseBody} title={`Response — ${encryptEndpoint.responseStatus}`} language="json" />
+          </div>
+        )}
+
+        {registerEndpoint?.responseBody && (
+          <div className="mt-4">
+            <h4 className="!mb-2">{registerEndpoint.name}</h4>
+            <div className="flex items-center gap-3 mb-2">
+              <MethodBadge method={registerEndpoint.method} />
+              <code className="text-sm font-mono">{registerEndpoint.path}</code>
+            </div>
+            <CodeBlock code={registerEndpoint.responseBody} title={`Response — ${registerEndpoint.responseStatus}`} language="json" />
           </div>
         )}
       </div>
