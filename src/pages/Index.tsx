@@ -116,13 +116,6 @@ const Index = () => {
           </CardContent>
         </Card>
       </div>
-
-      <h2 className="text-2xl font-semibold mb-4">Quick Links</h2>
-      <div className="grid gap-3 md:grid-cols-3">
-        <QuickLink to="/call-auth" title="Call Authentication" description="Required prerequisite for SCP and BCD to function" />
-        <QuickLink to="/products/scp/guide" title="SCP Setup Guide" description="Configure spoofed call protection end-to-end" />
-        <QuickLink to="/products/bcd/guide" title="BCD Setup Guide" description="Set up branded call display for your numbers" />
-      </div>
     </div>
   );
 };
