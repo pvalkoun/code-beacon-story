@@ -171,20 +171,6 @@ export default function WebhookOverview() {
             </Button>
           </CardContent>
         </Card>
-        <Card className="hover:shadow-md transition-shadow flex flex-col">
-          <CardContent className="p-5 flex flex-col flex-1">
-            <FileJson className="h-8 w-8 text-primary mb-3" />
-            <h3 className="font-semibold mb-1">OpenAPI Spec</h3>
-            <p className="text-sm text-muted-foreground mb-3">
-              Download the complete OpenAPI 3.0.3 spec with current request/response examples
-            </p>
-            <Button asChild size="sm" variant="outline" className="mt-auto">
-              <Link to="/resources/webhooks/openapi">
-                Download Spec <ArrowRight className="ml-1 h-3 w-3" />
-              </Link>
-            </Button>
-          </CardContent>
-        </Card>
       </div>
     </div>
   );
