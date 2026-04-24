@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { ArrowRight, CheckCircle2, BookOpen, Code2, Bell, Zap, Shield, RefreshCw, FileJson } from "lucide-react";
+import { ArrowRight, CheckCircle2, BookOpen, Code2, Bell, Zap, Shield, RefreshCw } from "lucide-react";
 
 
 export default function WebhookOverview() {
@@ -13,7 +13,6 @@ export default function WebhookOverview() {
         without polling the API for status updates or any actionable events.
       </p>
 
-      <BaseUrlPanel note="Applies to every webhook management, test, encryption, and delivery-log endpoint in this section." />
 
       <p>
         Webhooks allow you to subscribe to event notifications from the TruContact Trusted Call
