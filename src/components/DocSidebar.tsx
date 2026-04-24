@@ -22,7 +22,6 @@ import { webhookEndpoints, webhookCategories } from "@/data/webhookData";
 import { MethodBadge } from "@/components/MethodBadge";
 import { Button } from "@/components/ui/button";
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible";
-import { SetupStepsNav } from "@/components/SetupStepsNav";
 import tuLogo from "@/assets/tu-icon.png";
 
 export function DocSidebar() {
@@ -420,9 +419,6 @@ export function DocSidebar() {
                     {!collapsed && <span>Setup Guide</span>}
                   </NavLink>
                 </SidebarMenuButton>
-                {!collapsed && location.pathname === `/products/${productId}/guide` && product!.setupSteps && (
-                  <SetupStepsNav steps={product!.setupSteps.map(s => ({ step: s.step, title: s.title }))} />
-                )}
               </SidebarMenuItem>
             </SidebarMenu>
           </SidebarGroupContent>

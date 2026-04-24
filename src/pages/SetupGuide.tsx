@@ -6,6 +6,7 @@ import { MethodBadge } from "@/components/MethodBadge";
 import { Button } from "@/components/ui/button";
 import { ArrowRight } from "lucide-react";
 import { BaseUrlPanel } from "@/components/BaseUrlPanel";
+import { OnPageNav } from "@/components/OnPageNav";
 
 export default function SetupGuide() {
   const { productId } = useParams<{ productId: string }>();
@@ -14,7 +15,8 @@ export default function SetupGuide() {
   if (!product) return <div>Product not found</div>;
 
   return (
-    <div className="docs-prose">
+    <div className="flex gap-10 max-w-7xl">
+      <div className="docs-prose flex-1 min-w-0 max-w-3xl">
       <h1>{product.name} — Setup Guide</h1>
       <p className="text-lg text-muted-foreground">
         Follow these steps to configure {product.name} from start to finish.
@@ -97,6 +99,13 @@ export default function SetupGuide() {
           </Button>
         </div>
       </div>
+      </div>
+
+      <aside className="hidden xl:block w-56 shrink-0">
+        <div className="sticky top-20">
+          <OnPageNav steps={product.setupSteps.map(s => ({ step: s.step, title: s.title }))} title="On this page" />
+        </div>
+      </aside>
     </div>
   );
 }
