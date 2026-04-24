@@ -74,28 +74,6 @@ export default function ProductOverview() {
         )}
       </div>
 
-      <h2>Configuration Steps at a Glance</h2>
-      <p className="text-sm text-muted-foreground">
-        A quick preview of what setup involves. Click any step to jump straight to its detailed instructions in the Setup Guide.
-      </p>
-      <div className="space-y-3 not-prose">
-        {product.setupSteps.map((step) => (
-          <Link
-            key={step.step}
-            to={`/products/${productId}/guide#step-${step.step}`}
-            className="group flex items-start gap-4 p-4 rounded-lg border bg-card hover:border-primary hover:shadow-sm transition-all"
-          >
-            <div className="flex items-center justify-center h-8 w-8 rounded-full bg-primary text-primary-foreground font-bold text-sm shrink-0">
-              {step.step}
-            </div>
-            <div className="flex-1 min-w-0">
-              <h3 className="font-semibold text-sm mb-0.5 group-hover:text-primary transition-colors">{step.title}</h3>
-              <p className="text-sm text-muted-foreground mb-0">{step.description}</p>
-            </div>
-            <ArrowRight className="h-4 w-4 text-muted-foreground group-hover:text-primary group-hover:translate-x-0.5 transition-all mt-1 shrink-0" />
-          </Link>
-        ))}
-      </div>
     </div>
   );
 }
