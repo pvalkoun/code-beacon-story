@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { ArrowRight, CheckCircle2, BookOpen, Code2, Bell, Zap, Shield, RefreshCw } from "lucide-react";
+import { ArrowRight, CheckCircle2, BookOpen, Code2 } from "lucide-react";
 
 
 export default function WebhookOverview() {
