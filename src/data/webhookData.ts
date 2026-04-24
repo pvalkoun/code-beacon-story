@@ -473,7 +473,7 @@ export const webhookEndpoints: WebhookEndpoint[] = [
   // ── Encryption Utility ──
   {
     id: "wb-encrypt",
-    category: "Encryption Utility",
+    category: "Authentication",
     name: "Encrypt Secret",
     method: "POST",
     path: "/ccid/webhook/v1/encrypt",
