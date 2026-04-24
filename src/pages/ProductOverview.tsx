@@ -8,7 +8,7 @@ import { ArrowRight, CheckCircle2, BookOpen, Code2, Plug } from "lucide-react";
 export default function ProductOverview() {
   const { productId } = useParams<{ productId: string }>();
   const product = getProduct(productId || "");
-  const integrations = getIntegrationsForProduct(productId || "");
+  const integrations = productId === "bcd" ? [] : getIntegrationsForProduct(productId || "");
 
   if (!product) return <div>Product not found</div>;
 
