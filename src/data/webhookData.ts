@@ -26,6 +26,29 @@ export interface WebhookEndpointFieldDocs {
 }
 
 export const webhookEndpoints: WebhookEndpoint[] = [
+  // ── Authentication ──
+  {
+    id: "wb-auth-token",
+    category: "Authentication",
+    name: "Create Auth Token",
+    method: "POST",
+    path: "/ccid/aam/v1/login",
+    description: "Authenticate with the TCS platform to obtain a JWT access token. The returned access token must be supplied in the Authorization header (Bearer) of all subsequent webhook management, test, encryption, and delivery log requests.",
+    headers: [
+      { key: "Content-Type", value: "application/json" },
+    ],
+    requestBody: `{
+  "userId": "{{adminUserId}}",
+  "password": "{{password}}"
+}`,
+    responseBody: `{
+  "status": "success",
+  "message": "Login is successful",
+  "accessToken": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIs...",
+  "refreshToken": "eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCIs..."
+}`,
+    responseStatus: 200,
+  },
   // ── Account Setup ──
   {
     id: "wb-enable-account",
@@ -334,7 +357,7 @@ export const webhookEndpoints: WebhookEndpoint[] = [
   // ── Delivery Logs ──
   {
     id: "wb-logs",
-    category: "Delivery Logs",
+    category: "Test and Delivery Logs",
     name: "Get Delivery Logs",
     method: "GET",
     path: "/ccid/webhook/v1/account/{{accountId}}/webhook/logs",
@@ -368,7 +391,7 @@ export const webhookEndpoints: WebhookEndpoint[] = [
   },
   {
     id: "wb-test",
-    category: "Webhook Management",
+    category: "Test and Delivery Logs",
     name: "Test Webhook Connectivity",
     method: "POST",
     path: "/ccid/webhook/v1/account/{{accountId}}/webhook/test",
@@ -450,7 +473,7 @@ export const webhookEndpoints: WebhookEndpoint[] = [
   // ── Encryption Utility ──
   {
     id: "wb-encrypt",
-    category: "Encryption Utility",
+    category: "Authentication",
     name: "Encrypt Secret",
     method: "POST",
     path: "/ccid/webhook/v1/encrypt",
@@ -616,7 +639,7 @@ export const webhookFieldDocs: Record<string, WebhookEndpointFieldDocs> = {
   },
 };
 
-export const webhookCategories = ["Account Setup", "Encryption Utility", "Webhook Management", "Delivery Logs"];
+export const webhookCategories = ["Authentication", "Account Setup", "Webhook Management", "Test and Delivery Logs"];
 
 export const getWebhookEndpoint = (id: string) => webhookEndpoints.find(e => e.id === id);
 
