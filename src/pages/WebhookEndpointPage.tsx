@@ -153,8 +153,11 @@ export default function WebhookEndpointPage() {
           <h3>Caller Profile-Level Event</h3>
           <CodeBlock code={sampleEventPayloads.callerProfile} title="Caller Profile Status Change" language="json" />
 
-          <h3>TN-Level Event</h3>
-          <CodeBlock code={sampleEventPayloads.tn} title="TN Status Change" language="json" />
+          <h3>TN-Level Event — Vetting Status</h3>
+          <CodeBlock code={sampleEventPayloads.tnVetting} title="TN Vetting Status Change" language="json" />
+
+          <h3>TN-Level Event — Tagging Status</h3>
+          <CodeBlock code={sampleEventPayloads.tnTagging} title="TN Tagging Status Change" language="json" />
         </>
       )}
     </div>
