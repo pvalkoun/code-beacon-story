@@ -45,12 +45,15 @@ const applyProductEndpointExample = (endpoint: ApiEndpoint, product?: Exclude<Ap
   }
 
   const example = TN_ASSET_PRODUCT_EXAMPLES[product];
+  const replaceToken = (value: string, search: string, replacement: string) => value.split(search).join(replacement);
 
   return {
     ...endpoint,
-    responseBody: endpoint.responseBody
-      .replaceAll(TN_ASSET_PRODUCT_EXAMPLES.bcd.callerProfileName, example.callerProfileName)
-      .replaceAll('"name": "RICH-BCD"', `"name": "${example.serviceName}"`),
+    responseBody: replaceToken(
+      replaceToken(endpoint.responseBody, TN_ASSET_PRODUCT_EXAMPLES.bcd.callerProfileName, example.callerProfileName),
+      '"name": "RICH-BCD"',
+      `"name": "${example.serviceName}"`,
+    ),
   };
 };
 
@@ -1428,7 +1431,7 @@ export const getEndpointsForProduct = (product: "scp" | "bcd" | "cno") => {
 };
 
 export const getEndpointById = (id: string, product?: Exclude<ApiProduct, "common">) => {
-  const endpoint = apiEndpoints.find(ep => ep.id === id && (!!product ? ep.product?.includes(product) : true))
+  const endpoint = apiEndpoints.find(ep => ep.id === id && (product ? ep.product?.includes(product) : true))
     ?? apiEndpoints.find(ep => ep.id === id && ep.product?.includes("common"))
     ?? apiEndpoints.find(ep => ep.id === id);
 
