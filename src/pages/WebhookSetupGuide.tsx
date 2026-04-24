@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import { ArrowRight, Mail, Lock } from "lucide-react";
 import { sampleEventPayloads, getWebhookEndpoint, coolOffEmailSample } from "@/data/webhookData";
 import { BaseUrlPanel } from "@/components/BaseUrlPanel";
+import { OnPageNav } from "@/components/OnPageNav";
 
 const setupSteps = [
   {
@@ -13,6 +14,16 @@ const setupSteps = [
     details: "Before registering a webhook, your AAM enterprise account must include the Webhook (WB) microservice in its service array. Use the AAM Update Company endpoint with the full enterprise payload — the WB entry in `service[]` enables the Webhook microservice for the account.",
     endpointId: "wb-enable-account",
   },
+];
+
+const navSteps = [
+  { step: 1, title: "Enable Webhook Service" },
+  { step: 2, title: "User Role Creation" },
+  { step: 3, title: "Authentication" },
+  { step: 4, title: "Register Endpoint" },
+  { step: 5, title: "Test" },
+  { step: 6, title: "Event Payloads" },
+  { step: 7, title: "Cool-Off Email Notifications" },
 ];
 
 export default function WebhookSetupGuide() {
