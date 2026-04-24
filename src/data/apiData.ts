@@ -1016,7 +1016,7 @@ export const apiEndpoints: ApiEndpoint[] = [
     name: "Create TN Account Asset",
     method: "POST",
     path: "/ccid/sdpr/v4/admin/account/{accountId}/orig/tcs/asset",
-    description: "Register a telephone number (TN) as an asset on the account and associate it with a caller profile created in the previous step. Pass the profile's id as caller_profile_id — the response echoes the profile name under caller_profile (e.g., Your Company Name_CNO_20260225-212320 for CNO, Your Company Name_BCD_Rich_20260225-212320 for BCD) and within each per-service partner_data entry. Use full_ownership: true when you own the number directly (carrier-vetted). This is the final step to enable call branding, spam tag mitigation, or spoof protection on specific numbers.",
+    description: "Register a telephone number (TN) as an asset on the account and associate it with a caller profile created in the previous step. The service shown in partner_data (RICH-BCD, SPOOF-CALL-PROTECTION, or CNO) and the caller_profile name in the response will match the service of the caller_profile_id you pass — e.g., Your Company Name_BCD_Rich_20260225-212320 for BCD, Your Company Name_SCP_20260225-212320 for SCP, or Your Company Name_CNO_20260225-212320 for CNO.",
     headers: [{ key: "Content-Type", value: "application/json" }, { key: "Accept", value: "application/json" }],
     requestBody: `{
   "full_ownership": true,
