@@ -784,7 +784,7 @@ export const sampleEventPayloads = {
     "waittime_in_seconds": 30
   }
 }`,
-  tn: `{
+  tnVetting: `{
   "id": "a3f1c2d4-8e7b-4a91-bc3d-1f2e3a4b5c6d",
   "event_create_date": "2026-04-20T14:30:22.452Z",
   "entity": {
@@ -798,7 +798,23 @@ export const sampleEventPayloads = {
       "type": "vetting_status",
       "current_status": "VETTING_SUCCESSFUL",
       "previous_status": "VETTING_EXCEPTION"
-    },
+    }
+  ],
+  "retryPolicy": {
+    "attempt": 1,
+    "waittime_in_seconds": 30
+  }
+}`,
+  tnTagging: `{
+  "id": "b4g2d3e5-9f8c-4b02-cd4e-2g3f4b5c6d7e",
+  "event_create_date": "2026-04-20T15:12:08.331Z",
+  "entity": {
+    "type": "tcsasset",
+    "account_id": "acc_12345",
+    "tn": "+1.97774581001",
+    "callerProfileId": "Priya_CNO_20251022-130308"
+  },
+  "data": [
     {
       "type": "tagging_status",
       "current_status": "TG",

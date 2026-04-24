@@ -386,7 +386,8 @@ export function generateWebhookOpenApiSpec(): Record<string, unknown> {
           examples: {
             account: { summary: "Account-level event", value: parseSafe(sampleEventPayloads.account) },
             callerProfile: { summary: "Caller Profile-level event", value: parseSafe(sampleEventPayloads.callerProfile) },
-            tn: { summary: "TN-level event", value: parseSafe(sampleEventPayloads.tn) },
+            tnVetting: { summary: "TN-level event — vetting status", value: parseSafe(sampleEventPayloads.tnVetting) },
+            tnTagging: { summary: "TN-level event — tagging status", value: parseSafe(sampleEventPayloads.tnTagging) },
           },
         },
       },
