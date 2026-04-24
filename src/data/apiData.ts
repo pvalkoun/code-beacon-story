@@ -1,3 +1,5 @@
+type ApiProduct = "scp" | "bcd" | "cno" | "common";
+
 export interface ApiEndpoint {
   id: string;
   category: string;
@@ -10,9 +12,50 @@ export interface ApiEndpoint {
   responseStatus?: number;
   headers?: { key: string; value: string }[];
   errorBody?: string;
-  product?: ("scp" | "bcd" | "cno" | "common")[];
+  product?: ApiProduct[];
   imageRequirements?: string[];
 }
+
+const TN_ASSET_ENDPOINT_IDS = new Set([
+  "create-tn-asset",
+  "create-tn-asset-byoc",
+  "update-tn-asset",
+  "get-tn-asset",
+  "list-tn-assets",
+]);
+
+const TN_ASSET_PRODUCT_EXAMPLES: Record<Exclude<ApiProduct, "common">, { callerProfileName: string; serviceName: string }> = {
+  bcd: {
+    callerProfileName: "Your Company Name_BCD_Rich_20260225-212320",
+    serviceName: "RICH-BCD",
+  },
+  cno: {
+    callerProfileName: "Your Company Name_CNO_20260225-212320",
+    serviceName: "CNO",
+  },
+  scp: {
+    callerProfileName: "Your Company Name_SCP_20260225-212320",
+    serviceName: "SPOOF-CALL-PROTECTION",
+  },
+};
+
+const applyProductEndpointExample = (endpoint: ApiEndpoint, product?: Exclude<ApiProduct, "common">) => {
+  if (!product || !TN_ASSET_ENDPOINT_IDS.has(endpoint.id) || !endpoint.responseBody) {
+    return endpoint;
+  }
+
+  const example = TN_ASSET_PRODUCT_EXAMPLES[product];
+  const replaceToken = (value: string, search: string, replacement: string) => value.split(search).join(replacement);
+
+  return {
+    ...endpoint,
+    responseBody: replaceToken(
+      replaceToken(endpoint.responseBody, TN_ASSET_PRODUCT_EXAMPLES.bcd.callerProfileName, example.callerProfileName),
+      '"name": "RICH-BCD"',
+      `"name": "${example.serviceName}"`,
+    ),
+  };
+};
 
 export const apiEndpoints: ApiEndpoint[] = [
   // ── Authentication ──
@@ -1387,8 +1430,12 @@ export const getEndpointsForProduct = (product: "scp" | "bcd" | "cno") => {
   return apiEndpoints.filter(ep => ep.product?.includes(product as "scp" | "bcd" | "cno") || ep.product?.includes("common"));
 };
 
-export const getEndpointById = (id: string) => {
-  return apiEndpoints.find(ep => ep.id === id);
+export const getEndpointById = (id: string, product?: Exclude<ApiProduct, "common">) => {
+  const endpoint = apiEndpoints.find(ep => ep.id === id && (product ? ep.product?.includes(product) : true))
+    ?? apiEndpoints.find(ep => ep.id === id && ep.product?.includes("common"))
+    ?? apiEndpoints.find(ep => ep.id === id);
+
+  return endpoint ? applyProductEndpointExample(endpoint, product) : undefined;
 };
 
 export const getCategories = (product?: "scp" | "bcd" | "cno") => {

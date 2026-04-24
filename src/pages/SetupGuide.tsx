@@ -32,7 +32,9 @@ export default function SetupGuide() {
       </div>
 
       {product.setupSteps.map((step) => {
-        const endpoint = step.apiEndpointId ? getEndpointById(step.apiEndpointId) : undefined;
+        const endpoint = step.apiEndpointId
+          ? getEndpointById(step.apiEndpointId, product.id === "pca" ? undefined : product.id)
+          : undefined;
         return (
           <div key={step.step} className="mb-10 pb-8 border-b last:border-b-0">
             <div className="flex items-center gap-3 mb-3">
