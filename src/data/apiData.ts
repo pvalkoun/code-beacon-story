@@ -1054,6 +1054,7 @@ export const apiEndpoints: ApiEndpoint[] = [
   },
   "caller_profile": "Your Company Name_BCD_Rich_20260225-212320",
   "caller_profile_id": "699f684820a7a57a0a67c03a",
+  "tagging_status": {},
   "partner_data": [
     {
       "name": "RICH-BCD",
@@ -1146,6 +1147,7 @@ export const apiEndpoints: ApiEndpoint[] = [
   },
   "caller_profile": "Your Company Name_BCD_Rich_20260225-212320",
   "caller_profile_id": "699f684820a7a57a0a67c03a",
+  "tagging_status": {},
   "partner_data": [
     {
       "name": "RICH-BCD",
@@ -1242,6 +1244,7 @@ export const apiEndpoints: ApiEndpoint[] = [
   },
   "caller_profile": "Your Company Name_BCD_Rich_20260225-212320",
   "caller_profile_id": "699f684820a7a57a0a67c03a",
+  "tagging_status": {},
   "partner_data": [
     {
       "name": "RICH-BCD",
