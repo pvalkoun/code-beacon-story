@@ -321,11 +321,11 @@ export default function WebhookSetupGuide() {
         )}
       </div>
 
-      {/* ── Section 5 — Event Payloads ── */}
+      {/* ── Section 6 — Event Payloads ── */}
       <div className="mb-10 pb-8 border-b">
         <div className="flex items-center gap-3 mb-3">
           <div className="flex items-center justify-center h-9 w-9 rounded-full bg-primary text-primary-foreground font-bold text-sm shrink-0">
-            5
+            6
           </div>
           <h2 className="!mt-0 !mb-0">Event Payloads</h2>
         </div>
