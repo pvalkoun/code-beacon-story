@@ -166,11 +166,11 @@ export function generateOpenApiSpec(): Record<string, unknown> {
     },
     servers: [
       {
-        url: "https://sdpr.ccid.neustar.biz",
+        url: "https://api-rst.ccid.neustar.biz",
         description: "Production",
       },
       {
-        url: "https://sdpr-uat.ccid.neustar.biz",
+        url: "https://api-uat-rst.ccid.neustar.biz",
         description: "UAT / Sandbox",
       },
     ],
@@ -413,8 +413,8 @@ export function generateWebhookOpenApiSpec(): Record<string, unknown> {
       },
     },
     servers: [
-      { url: "https://sdpr.ccid.neustar.biz", description: "Production" },
-      { url: "https://sdpr-uat.ccid.neustar.biz", description: "UAT / Sandbox" },
+      { url: "https://api-rst.ccid.neustar.biz", description: "Production" },
+      { url: "https://api-uat-rst.ccid.neustar.biz", description: "UAT / Sandbox" },
     ],
     components: {
       securitySchemes: {
