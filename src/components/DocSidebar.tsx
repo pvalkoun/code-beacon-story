@@ -24,6 +24,14 @@ import { Button } from "@/components/ui/button";
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible";
 import tuLogo from "@/assets/tu-icon.png";
 
+function NewBadge() {
+  return (
+    <span className="ml-2 inline-flex items-center rounded-sm bg-sidebar-primary/15 px-1.5 py-0.5 text-[9px] font-semibold uppercase tracking-wide text-sidebar-primary">
+      New
+    </span>
+  );
+}
+
 export function DocSidebar() {
   const location = useLocation();
   const navigate = useNavigate();
