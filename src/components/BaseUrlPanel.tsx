@@ -7,8 +7,8 @@ interface Env {
 }
 
 const DEFAULT_ENVS: Env[] = [
-  { label: "Production", url: "https://sdpr.ccid.neustar.biz", description: "Live traffic" },
-  { label: "UAT / Sandbox", url: "https://sdpr-uat.ccid.neustar.biz", description: "Testing & integration" },
+  { label: "Production", url: "https://api-rst.ccid.neustar.biz", description: "Live traffic" },
+  { label: "UAT / Sandbox", url: "https://api-uat-rst.ccid.neustar.biz", description: "Testing & integration" },
 ];
 
 interface BaseUrlPanelProps {
