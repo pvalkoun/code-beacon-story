@@ -54,14 +54,15 @@ export const webhookEndpoints: WebhookEndpoint[] = [
     id: "wb-enable-account",
     category: "Account Setup",
     name: "Enable Webhook Service",
-    method: "PUT",
-    path: "/ccid/aam/v2/admin/company/{{accountId}}",
-    description: "Enable the Webhook (WB) service on an existing AAM enterprise account. This is a prerequisite before registering any webhook endpoints. Submit the full account payload with the WB service entry included in the service array.",
+    method: "POST",
+    path: "/ccid/aam/v2/admin/account",
+    description: "Create (or provision) an AAM enterprise account with the Webhook (WB) service enabled. This is a prerequisite before registering any webhook endpoints — the WB service entry must be present in the service array alongside any other services (e.g. SDPR) the account uses.",
     headers: [
       { key: "Content-Type", value: "application/json" },
+      { key: "Accept", value: "application/json" },
     ],
     requestBody: `{
-  "name": "user_sample_enterprise_01",
+  "name": "user_sample enterprise_1",
   "type": "ENTERPRISE",
   "status": "ACTIVE",
   "relationship": "DIRECT",
@@ -69,11 +70,14 @@ export const webhookEndpoints: WebhookEndpoint[] = [
     "x0vo1z7q11"
   ],
   "billing": {
-    "id": "willdefine",
+    "id": "TEwilldefine",
     "model": "OTHER",
     "frequency": "MONTHLY"
   },
   "service": [
+    {
+      "type": "SDPR"
+    },
     {
       "type": "WB"
     }
@@ -87,10 +91,42 @@ export const webhookEndpoints: WebhookEndpoint[] = [
   ]
 }`,
     responseBody: `{
-  "accountId": "x0369a4otu",
-  "message": "Account updated"
+  "id": "xi0vhua3b4",
+  "name": "user_sample enterprise1",
+  "type": "ENTERPRISE",
+  "status": "ACTIVE",
+  "relationship": "DIRECT",
+  "parent_account": [
+    "x0vo1z7q11"
+  ],
+  "billing": {
+    "id": "TEwilldefine",
+    "model": "OTHER",
+    "frequency": "MONTHLY"
+  },
+  "service": [
+    {
+      "type": "SDPR",
+      "id": "xi0vhua3b4"
+    },
+    {
+      "type": "WB",
+      "id": "xi0vhua3b4"
+    }
+  ],
+  "child_account_enabled": false,
+  "start_date": "Fri, 4 Apr 2025 18:18:49 GMT",
+  "end_date": "Sat, 4 Apr 2026 18:18:49 GMT",
+  "application": [
+    "CCID",
+    "TCS"
+  ],
+  "created_by": "user_v4_api_prod",
+  "created_date": "Mon, 23 Mar 2026 16:42:42 GMT",
+  "updated_by": "user_v4_api_prod",
+  "updated_date": "Mon, 23 Mar 2026 16:42:42 GMT"
 }`,
-    responseStatus: 200,
+    responseStatus: 201,
   },
   {
     id: "wb-create-user",
