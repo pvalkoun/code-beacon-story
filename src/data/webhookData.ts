@@ -391,7 +391,7 @@ export const webhookEndpoints: WebhookEndpoint[] = [
   },
   {
     id: "wb-test",
-    category: "Webhook Management",
+    category: "Test and Delivery Logs",
     name: "Test Webhook Connectivity",
     method: "POST",
     path: "/ccid/webhook/v1/account/{{accountId}}/webhook/test",
