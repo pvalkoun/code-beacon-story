@@ -1,5 +1,5 @@
 import { useParams } from "react-router-dom";
-import { getWebhookEndpoint, webhookFieldDocs } from "@/data/webhookData";
+import { getWebhookEndpoint, webhookFieldDocs, sampleEventPayloads } from "@/data/webhookData";
 import { CodeBlock } from "@/components/CodeBlock";
 import { MethodBadge } from "@/components/MethodBadge";
 import type { WebhookFieldDoc } from "@/data/webhookData";
@@ -122,6 +122,26 @@ export default function WebhookEndpointPage() {
             <span className="text-sm text-muted-foreground">OK</span>
           </div>
           <CodeBlock code={endpoint.responseBody} title="Response" language="json" />
+        </>
+      )}
+
+      {endpoint.id === "wb-test" && (
+        <>
+          <h2>Expected Event Payloads</h2>
+          <p>
+            Once your webhook is registered and active, TransUnion will deliver event payloads to
+            your configured callback URL whenever a status change occurs. Use the examples below to
+            understand the payload shape your endpoint should expect for each entity scope.
+          </p>
+
+          <h3>Account-Level Event</h3>
+          <CodeBlock code={sampleEventPayloads.account} title="Account Status Change" language="json" />
+
+          <h3>Caller Profile-Level Event</h3>
+          <CodeBlock code={sampleEventPayloads.callerProfile} title="Caller Profile Status Change" language="json" />
+
+          <h3>TN-Level Event</h3>
+          <CodeBlock code={sampleEventPayloads.tn} title="TN Status Change" language="json" />
         </>
       )}
     </div>
