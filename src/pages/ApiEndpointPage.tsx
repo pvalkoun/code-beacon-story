@@ -6,7 +6,64 @@ import { MethodBadge } from "@/components/MethodBadge";
 import type { FieldDoc } from "@/data/apiFieldDocs";
 import { AlertTriangle } from "lucide-react";
 
-function FieldTable({ title, fields }: { title: string; fields: FieldDoc[] }) {
+// Extract literal string values used in the example payloads so we can
+// highlight matching tokens inside the "Constraints" column.
+function extractExampleValues(...sources: (string | undefined)[]): Set<string> {
+  const values = new Set<string>();
+  const stringLiteral = /"([^"\\]{1,80})"/g;
+  for (const src of sources) {
+    if (!src) continue;
+    let m: RegExpExecArray | null;
+    while ((m = stringLiteral.exec(src)) !== null) {
+      const v = m[1].trim();
+      // Skip obvious non-enum content: empty, contains spaces (sentences),
+      // template tokens, or pure punctuation.
+      if (!v) continue;
+      if (v.startsWith("{{") || v.includes(" ")) continue;
+      if (v.length < 2) continue;
+      values.add(v);
+    }
+  }
+  return values;
+}
+
+function escapeRegExp(s: string): string {
+  return s.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+}
+
+function HighlightedConstraints({ text, values }: { text: string; values: Set<string> }) {
+  if (!text || values.size === 0) return <>{text}</>;
+  // Build a single regex of all values, longest first to avoid partial overlaps.
+  const sorted = Array.from(values).sort((a, b) => b.length - a.length);
+  const pattern = new RegExp(`(${sorted.map(escapeRegExp).join("|")})`, "g");
+  const parts = text.split(pattern);
+  return (
+    <>
+      {parts.map((part, i) =>
+        values.has(part) ? (
+          <span
+            key={i}
+            className="inline-flex items-center px-1 py-0.5 rounded text-[11px] font-mono font-medium bg-accent/30 text-foreground border border-accent/50"
+          >
+            {part}
+          </span>
+        ) : (
+          <span key={i}>{part}</span>
+        )
+      )}
+    </>
+  );
+}
+
+function FieldTable({
+  title,
+  fields,
+  exampleValues,
+}: {
+  title: string;
+  fields: FieldDoc[];
+  exampleValues: Set<string>;
+}) {
   return (
     <>
       <h2>{title}</h2>
@@ -38,7 +95,13 @@ function FieldTable({ title, fields }: { title: string; fields: FieldDoc[] }) {
                   )}
                 </td>
                 <td className="py-2 px-3 text-muted-foreground">{f.description}</td>
-                <td className="py-2 px-3 text-xs text-muted-foreground">{f.constraints || "—"}</td>
+                <td className="py-2 px-3 text-xs text-muted-foreground">
+                  {f.constraints ? (
+                    <HighlightedConstraints text={f.constraints} values={exampleValues} />
+                  ) : (
+                    "—"
+                  )}
+                </td>
               </tr>
             ))}
           </tbody>
@@ -54,6 +117,8 @@ export default function ApiEndpointPage() {
   const fieldDocs = endpointFieldDocs[endpointId || ""];
 
   if (!endpoint) return <div className="docs-prose"><h1>Endpoint not found</h1></div>;
+
+  const exampleValues = extractExampleValues(endpoint.requestBody, endpoint.responseBody);
 
   return (
     <div className="docs-prose">
@@ -87,7 +152,7 @@ export default function ApiEndpointPage() {
       )}
 
       {fieldDocs?.pathParams && fieldDocs.pathParams.length > 0 && (
-        <FieldTable title="Path Parameters" fields={fieldDocs.pathParams} />
+        <FieldTable title="Path Parameters" fields={fieldDocs.pathParams} exampleValues={exampleValues} />
       )}
 
       {endpoint.headers && endpoint.headers.length > 0 && (
@@ -117,7 +182,7 @@ export default function ApiEndpointPage() {
       )}
 
       {fieldDocs?.requestFields && fieldDocs.requestFields.length > 0 && (
-        <FieldTable title="Request Fields" fields={fieldDocs.requestFields} />
+        <FieldTable title="Request Fields" fields={fieldDocs.requestFields} exampleValues={exampleValues} />
       )}
 
       {endpoint.requestBody && (
@@ -128,7 +193,7 @@ export default function ApiEndpointPage() {
       )}
 
       {fieldDocs?.responseFields && fieldDocs.responseFields.length > 0 && (
-        <FieldTable title="Response Fields" fields={fieldDocs.responseFields} />
+        <FieldTable title="Response Fields" fields={fieldDocs.responseFields} exampleValues={exampleValues} />
       )}
 
       {endpoint.responseBody && (
