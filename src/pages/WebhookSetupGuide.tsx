@@ -281,59 +281,6 @@ export default function WebhookSetupGuide() {
           </div>
         )}
 
-        <h3 className="mt-8">Example Responses from Setup Endpoints</h3>
-        <p>
-          For reference, here are example responses returned by the endpoints used earlier in the
-          setup flow. Use these to verify your integration is producing the expected output.
-        </p>
-
-        {setupSteps.map((step) => {
-          const ep = getWebhookEndpoint(step.endpointId);
-          if (!ep?.responseBody) return null;
-          return (
-            <div key={`test-${ep.id}`} className="mt-4">
-              <h4 className="!mb-2">{ep.name}</h4>
-              <div className="flex items-center gap-3 mb-2">
-                <MethodBadge method={ep.method} />
-                <code className="text-sm font-mono">{ep.path}</code>
-              </div>
-              <CodeBlock code={ep.responseBody} title={`Response — ${ep.responseStatus}`} language="json" />
-            </div>
-          );
-        })}
-
-        {userEndpoint?.responseBody && (
-          <div className="mt-4">
-            <h4 className="!mb-2">{userEndpoint.name}</h4>
-            <div className="flex items-center gap-3 mb-2">
-              <MethodBadge method={userEndpoint.method} />
-              <code className="text-sm font-mono">{userEndpoint.path}</code>
-            </div>
-            <CodeBlock code={userEndpoint.responseBody} title={`Response — ${userEndpoint.responseStatus}`} language="json" />
-          </div>
-        )}
-
-        {encryptEndpoint?.responseBody && (
-          <div className="mt-4">
-            <h4 className="!mb-2">{encryptEndpoint.name}</h4>
-            <div className="flex items-center gap-3 mb-2">
-              <MethodBadge method={encryptEndpoint.method} />
-              <code className="text-sm font-mono">{encryptEndpoint.path}</code>
-            </div>
-            <CodeBlock code={encryptEndpoint.responseBody} title={`Response — ${encryptEndpoint.responseStatus}`} language="json" />
-          </div>
-        )}
-
-        {registerEndpoint?.responseBody && (
-          <div className="mt-4">
-            <h4 className="!mb-2">{registerEndpoint.name}</h4>
-            <div className="flex items-center gap-3 mb-2">
-              <MethodBadge method={registerEndpoint.method} />
-              <code className="text-sm font-mono">{registerEndpoint.path}</code>
-            </div>
-            <CodeBlock code={registerEndpoint.responseBody} title={`Response — ${registerEndpoint.responseStatus}`} language="json" />
-          </div>
-        )}
       </div>
 
       {/* ── Section 6 — Event Payloads ── */}
