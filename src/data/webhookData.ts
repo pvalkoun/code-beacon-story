@@ -817,7 +817,7 @@ export const coolOffEmailSample = {
   subject: "CCID Webhook Notification - Account {{accountId}}",
   body: `Dear Customer,
 
-We are writing to inform you that webhook delivery for your account has been temporarily paused (cool-off) due to repeated delivery failures to your registered endpoint.
+We are writing to inform you that webhook delivery for your account has been temporarily suspended (cool-off) due to repeated delivery failures to your registered endpoint.
 
 Account ID: {{accountId}}
 Failure Reason: Endpoint returned non-2xx HTTP status after maximum retry attempts
@@ -827,7 +827,7 @@ Notification Timestamp: {{notificationTimestamp}}
 
 To resume normal delivery, please ensure your webhook endpoint is reachable and returns an HTTP 2xx response within the configured timeout window. Once the cool-off period expires, the platform will automatically retry delivery.
 
-If your endpoint continues to fail after the cool-off period, delivery may be paused again and your webhook may be moved to an inactive state requiring manual reactivation.
+If your endpoint continues to fail after the cool-off period, delivery may be suspended again and your webhook may be moved to an inactive state requiring manual reactivation.
 
 For assistance, please contact TransUnion Support.
 
