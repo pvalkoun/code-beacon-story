@@ -35,7 +35,7 @@ const Index = () => {
             </div>
             <Button asChild className="w-full bg-accent text-accent-foreground hover:bg-accent/90 font-semibold">
               <Link to="/call-auth">
-                Get Started <ArrowRight className="ml-2 h-4 w-4" />
+                Learn More <ArrowRight className="ml-2 h-4 w-4" />
               </Link>
             </Button>
           </CardContent>
@@ -60,7 +60,7 @@ const Index = () => {
             </div>
             <Button asChild className="w-full bg-accent text-accent-foreground hover:bg-accent/90 font-semibold">
               <Link to="/products/cno">
-                Get Started <ArrowRight className="ml-2 h-4 w-4" />
+                Learn More <ArrowRight className="ml-2 h-4 w-4" />
               </Link>
             </Button>
           </CardContent>
@@ -85,7 +85,7 @@ const Index = () => {
             </div>
             <Button asChild className="w-full bg-accent text-accent-foreground hover:bg-accent/90 font-semibold">
               <Link to="/products/bcd">
-                Get Started <ArrowRight className="ml-2 h-4 w-4" />
+                Learn More <ArrowRight className="ml-2 h-4 w-4" />
               </Link>
             </Button>
           </CardContent>
@@ -110,7 +110,7 @@ const Index = () => {
             </div>
             <Button asChild className="w-full bg-accent text-accent-foreground hover:bg-accent/90 font-semibold">
               <Link to="/products/scp">
-                Get Started <ArrowRight className="ml-2 h-4 w-4" />
+                Learn More <ArrowRight className="ml-2 h-4 w-4" />
               </Link>
             </Button>
           </CardContent>
