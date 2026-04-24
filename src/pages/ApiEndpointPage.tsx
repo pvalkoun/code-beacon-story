@@ -153,7 +153,11 @@ export default function ApiEndpointPage() {
       )}
 
       {fieldDocs?.requestFields && fieldDocs.requestFields.length > 0 && (
-        <FieldTable title="Request Fields" fields={fieldDocs.requestFields} />
+        <FieldTable
+          title="Request Fields"
+          fields={fieldDocs.requestFields}
+          constraintsAdvisory={productId === "cno"}
+        />
       )}
 
       {endpoint.requestBody && (
