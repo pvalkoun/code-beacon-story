@@ -330,6 +330,42 @@ export const webhookEndpoints: WebhookEndpoint[] = [
 }`,
     responseStatus: 200,
   },
+
+  // ── Delivery Logs ──
+  {
+    id: "wb-logs",
+    category: "Delivery Logs",
+    name: "Get Delivery Logs",
+    method: "GET",
+    path: "/ccid/webhook/v1/account/{{accountId}}/webhook/logs",
+    description: "Retrieve the delivery log history for the webhook. Logs include timestamps, payloads sent, HTTP response codes from your endpoint, retry attempt counts, and delivery status. Use these logs for debugging integration issues and monitoring delivery health.",
+    headers: [
+      { key: "Content-Type", value: "application/json" },
+    ],
+    responseBody: `{
+  "logs": [
+    {
+      "timestamp": "2026-03-02T14:45:10Z",
+      "event_type": "partner_status",
+      "entity_type": "account",
+      "payload": { "current_status": "Enable-Completed" },
+      "response_code": 200,
+      "retry_count": 0,
+      "status": "delivered"
+    },
+    {
+      "timestamp": "2026-03-02T14:55:12Z",
+      "event_type": "vetting_status",
+      "entity_type": "TN",
+      "payload": { "current_status": "VETTING_SUCCESSFUL" },
+      "response_code": 500,
+      "retry_count": 3,
+      "status": "failed"
+    }
+  ]
+}`,
+    responseStatus: 200,
+  },
   {
     id: "wb-test",
     category: "Webhook Management",
@@ -563,9 +599,24 @@ export const webhookFieldDocs: Record<string, WebhookEndpointFieldDocs> = {
       { path: "encrypted_value", type: "String", required: true, description: "The encrypted value to use as `credentials.password` (oAuth) or `credentials.api_value` (apiKey) when registering a webhook" },
     ],
   },
+  "wb-logs": {
+    pathParams: [
+      { path: "accountId", type: "String", required: true, description: "The account ID whose webhook delivery logs are being retrieved" },
+    ],
+    responseFields: [
+      { path: "logs", type: "Array", required: true, description: "List of webhook delivery log entries" },
+      { path: "logs[].timestamp", type: "String (ISO 8601)", required: true, description: "When the delivery attempt occurred (UTC)" },
+      { path: "logs[].event_type", type: "String", required: true, description: "Event type that triggered the delivery", constraints: "vetting_status | tagging_status | partner_status" },
+      { path: "logs[].entity_type", type: "String", required: true, description: "Scope level of the event", constraints: "account | callerprofile | TN" },
+      { path: "logs[].payload", type: "Object", required: true, description: "The event payload that was sent to your endpoint" },
+      { path: "logs[].response_code", type: "Integer", required: true, description: "HTTP status code returned by your endpoint" },
+      { path: "logs[].retry_count", type: "Integer", required: true, description: "Number of retry attempts made for this delivery" },
+      { path: "logs[].status", type: "String", required: true, description: "Final delivery outcome", constraints: "delivered | failed | pending" },
+    ],
+  },
 };
 
-export const webhookCategories = ["Account Setup", "Encryption Utility", "Webhook Management"];
+export const webhookCategories = ["Account Setup", "Encryption Utility", "Webhook Management", "Delivery Logs"];
 
 export const getWebhookEndpoint = (id: string) => webhookEndpoints.find(e => e.id === id);
 
