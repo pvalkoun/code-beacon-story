@@ -1708,7 +1708,7 @@ For more information, see https://radix-ui.com/primitives/docs/components/${t.do
       "status_code": 200
     }
   }
-}`,responseStatus:200},{id:"wb-encrypt",category:"Authentication",name:"Encrypt Secret",method:"POST",path:"/ccid/webhook/v1/encrypt",description:"Convert a plain-text secret (password or API key) into an encrypted value accepted by the webhook registration APIs. Plain-text passwords or API keys are never accepted by webhook APIs — the platform cannot reliably determine whether an incoming value is encrypted unless it conforms to the approved encryption format. This API can be used repeatedly and supports encrypting any single plain-text input.",headers:[{key:"Content-Type",value:"application/json"}],requestBody:`{
+}`,responseStatus:200},{id:"wb-encrypt",category:"Authentication",name:"Encrypt Secret",method:"POST",path:"/ccid/webhook/v1/admin/webhook/encrypt",description:"Convert a plain-text secret (password or API key) into an encrypted value accepted by the webhook registration APIs. Plain-text passwords or API keys are never accepted by webhook APIs — the platform cannot reliably determine whether an incoming value is encrypted unless it conforms to the approved encryption format. This API can be used repeatedly and supports encrypting any single plain-text input.",headers:[{key:"Content-Type",value:"application/json"}],requestBody:`{
   "value": "myPlainTextPasswordOrApiKey"
 }`,responseBody:`{
   "encrypted_value": "X9aP7KqM2R8vZtYcH1fL"
