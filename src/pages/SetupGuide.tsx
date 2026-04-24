@@ -6,6 +6,7 @@ import { MethodBadge } from "@/components/MethodBadge";
 import { Button } from "@/components/ui/button";
 import { ArrowRight } from "lucide-react";
 import { BaseUrlPanel } from "@/components/BaseUrlPanel";
+import { OnPageNav } from "@/components/OnPageNav";
 
 export default function SetupGuide() {
   const { productId } = useParams<{ productId: string }>();
