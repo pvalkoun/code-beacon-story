@@ -284,11 +284,11 @@ export default function WebhookSetupGuide() {
 
       </div>
 
-      {/* ── Section 6 — Event Payloads ── */}
-      <div id="step-6" className="mb-10 pb-8 border-b scroll-mt-24">
+      {/* ── Section 7 — Event Payloads ── */}
+      <div id="step-7" className="mb-10 pb-8 border-b scroll-mt-24">
         <div className="flex items-center gap-3 mb-3">
           <div className="flex items-center justify-center h-9 w-9 rounded-full bg-primary text-primary-foreground font-bold text-sm shrink-0">
-            6
+            7
           </div>
           <h2 className="!mt-0 !mb-0">Event Payloads</h2>
         </div>
@@ -320,11 +320,11 @@ export default function WebhookSetupGuide() {
         <CodeBlock code={sampleEventPayloads.tnTagging} title="TN Tagging Status Change" language="json" />
       </div>
 
-      {/* ── Section 7 — Cool-Off Email Notifications ── */}
-      <div id="step-7" className="mb-10 pb-8 border-b scroll-mt-24">
+      {/* ── Section 8 — Cool-Off Email Notifications ── */}
+      <div id="step-8" className="mb-10 pb-8 border-b scroll-mt-24">
         <div className="flex items-center gap-3 mb-3">
           <div className="flex items-center justify-center h-9 w-9 rounded-full bg-primary text-primary-foreground font-bold text-sm shrink-0">
-            7
+            8
           </div>
           <h2 className="!mt-0 !mb-0">Cool-Off Email Notifications</h2>
         </div>
