@@ -7,6 +7,8 @@ import type { FieldDoc } from "@/data/apiFieldDocs";
 import { AlertTriangle } from "lucide-react";
 
 function FieldTable({ title, fields }: { title: string; fields: FieldDoc[] }) {
+  const useSplitColumns = fields.some((f) => f.use !== undefined || f.restrictedValues !== undefined);
+
   return (
     <>
       <h2>{title}</h2>
@@ -18,7 +20,14 @@ function FieldTable({ title, fields }: { title: string; fields: FieldDoc[] }) {
               <th className="text-left py-2 px-3 font-semibold">Type</th>
               <th className="text-left py-2 px-3 font-semibold">Required</th>
               <th className="text-left py-2 px-3 font-semibold">Description</th>
-              <th className="text-left py-2 px-3 font-semibold">Constraints</th>
+              {useSplitColumns ? (
+                <>
+                  <th className="text-left py-2 px-3 font-semibold">Use</th>
+                  <th className="text-left py-2 px-3 font-semibold">Restricted Values</th>
+                </>
+              ) : (
+                <th className="text-left py-2 px-3 font-semibold">Constraints</th>
+              )}
             </tr>
           </thead>
           <tbody>
@@ -38,7 +47,14 @@ function FieldTable({ title, fields }: { title: string; fields: FieldDoc[] }) {
                   )}
                 </td>
                 <td className="py-2 px-3 text-muted-foreground">{f.description}</td>
-                <td className="py-2 px-3 text-xs text-muted-foreground">{f.constraints || "—"}</td>
+                {useSplitColumns ? (
+                  <>
+                    <td className="py-2 px-3 text-xs text-muted-foreground">{f.use || "—"}</td>
+                    <td className="py-2 px-3 text-xs text-muted-foreground">{f.restrictedValues || "—"}</td>
+                  </>
+                ) : (
+                  <td className="py-2 px-3 text-xs text-muted-foreground">{f.constraints || "—"}</td>
+                )}
               </tr>
             ))}
           </tbody>
