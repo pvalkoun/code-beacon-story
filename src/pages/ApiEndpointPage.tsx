@@ -49,8 +49,8 @@ function FieldTable({ title, fields }: { title: string; fields: FieldDoc[] }) {
 }
 
 export default function ApiEndpointPage() {
-  const { endpointId } = useParams<{ endpointId: string }>();
-  const endpoint = getEndpointById(endpointId || "");
+  const { productId, endpointId } = useParams<{ productId: "scp" | "bcd" | "cno"; endpointId: string }>();
+  const endpoint = getEndpointById(endpointId || "", productId);
   const fieldDocs = endpointFieldDocs[endpointId || ""];
 
   if (!endpoint) return <div className="docs-prose"><h1>Endpoint not found</h1></div>;

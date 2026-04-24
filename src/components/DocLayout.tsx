@@ -29,7 +29,8 @@ function useBreadcrumbs() {
       if (parts[2] === "guide") {
         crumbs.push({ label: "Setup Guide", path: `/products/${parts[1]}/guide` });
       } else if (parts[2] === "api" && parts[3]) {
-        const ep = getEndpointById(parts[3]);
+        const productId = parts[1] as "scp" | "bcd" | "cno";
+        const ep = getEndpointById(parts[3], productId);
         if (ep) {
           crumbs.push({ label: ep.category || "API Reference", path: `/products/${parts[1]}` });
           crumbs.push({ label: ep.name, path: `/products/${parts[1]}/api/${parts[3]}` });
