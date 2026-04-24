@@ -166,7 +166,33 @@ export const webhookEndpoints: WebhookEndpoint[] = [
 }`,
     responseBody: `{
   "user_id": "enterprise_company_admin_01",
-  "message": "User created"
+  "user_name": "enterprise_company_admin_01",
+  "company_id": "x0369a4otu",
+  "email": "user.lastname@transunion.com",
+  "first_name": "Lucky",
+  "last_name": "Seven",
+  "phone": "+1.7201234567",
+  "roles": {
+    "SDPR": [
+      "SDPR_ENTERPRISE_ADMIN"
+    ],
+    "WB": [
+      "WB_COMPANY_ADMIN"
+    ],
+    "AAM": [
+      "AAM_COMPANY_ADMIN"
+    ]
+  },
+  "comment": "Authorized enterprise admin access.",
+  "status": "ACTIVE",
+  "user_type": "API",
+  "application": [
+    "TCS"
+  ],
+  "created_by": "neustaradminapi",
+  "created_date": "Thu, 9 Apr 2026 08:28:59 GMT",
+  "updated_by": "neustaradminapi",
+  "updated_date": "Thu, 9 Apr 2026 08:28:59 GMT"
 }`,
     responseStatus: 200,
   },
