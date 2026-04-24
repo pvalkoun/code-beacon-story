@@ -94,7 +94,7 @@ export const products: Product[] = [
         title: "Register Phone Numbers",
         description: "Add your telephone numbers for spam tag monitoring.",
         apiEndpointId: "create-tn-asset",
-        details: "Register each telephone number (TN) as an asset and link it to your caller profile. Use full_ownership: true for numbers you own directly, or full_ownership: false for BYOC numbers."
+        details: "Register each telephone number (TN) as an asset and link it to the CNO caller profile created in the previous step (e.g., Your Company Name_CNO_20260225-212320). Pass its id as caller_profile_id in the request — the response will echo the profile name under caller_profile and within each CNO partner_data entry. Use full_ownership: true for numbers you own directly, or full_ownership: false for BYOC numbers."
       },
       {
         step: 7,
