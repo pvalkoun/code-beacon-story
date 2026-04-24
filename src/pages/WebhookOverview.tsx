@@ -20,30 +20,6 @@ export default function WebhookOverview() {
         payloads to your secure HTTPS endpoint, enabling your systems to react instantly.
       </p>
 
-      <h2>What events can you receive?</h2>
-      <p>
-        You can subscribe to notifications for key lifecycle and operational events, including:
-      </p>
-      <ul>
-        <li>Vetting status updates</li>
-        <li>Partner enablement changes</li>
-        <li>Tagging status changes</li>
-      </ul>
-
-      <p>Events can be scoped by:</p>
-      <ul>
-        <li>Account</li>
-        <li>Caller Profile</li>
-        <li>Telephone Number (TN)</li>
-      </ul>
-
-      <p>You can also filter subscriptions by service, such as:</p>
-      <ul>
-        <li>BCD</li>
-        <li>CNO</li>
-        <li>SCP</li>
-      </ul>
-
       <h2>Key Benefits</h2>
       <ul className="space-y-2">
         {[
