@@ -361,6 +361,7 @@ export default function WebhookSetupGuide() {
         </div>
       </div>
 
+      <h2>Customer Requirements</h2>
       <ul>
         <li>Provide a reachable HTTPS endpoint URL to receive notifications</li>
         <li>Choose an authentication method and keep credentials secure (encrypt secrets via the Encryption Utility before submission)</li>
