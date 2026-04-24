@@ -33,7 +33,8 @@ export default function WebhookSetupGuide() {
   const testEndpoint = getWebhookEndpoint("wb-test");
 
   return (
-    <div className="docs-prose">
+    <div className="flex gap-10 max-w-7xl">
+      <div className="docs-prose flex-1 min-w-0 max-w-3xl">
       <h1>Webhook Notifications — Setup Guide</h1>
       <p className="text-lg text-muted-foreground">
         Follow these steps to configure webhook notifications from start to finish.
