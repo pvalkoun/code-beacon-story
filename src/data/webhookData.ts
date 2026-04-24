@@ -357,7 +357,7 @@ export const webhookEndpoints: WebhookEndpoint[] = [
   // ── Delivery Logs ──
   {
     id: "wb-logs",
-    category: "Delivery Logs",
+    category: "Test and Delivery Logs",
     name: "Get Delivery Logs",
     method: "GET",
     path: "/ccid/webhook/v1/account/{{accountId}}/webhook/logs",
