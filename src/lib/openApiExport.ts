@@ -224,3 +224,244 @@ export function downloadOpenApiSpec() {
     alert("Failed to generate OpenAPI spec. Check console for details.");
   }
 }
+
+// ════════════════════════════════════════════════════════════
+// Webhook OpenAPI Spec
+// ════════════════════════════════════════════════════════════
+
+function webhookFieldToProperty(field: WebhookFieldDoc): [string, Record<string, unknown>] {
+  const prop: Record<string, unknown> = { description: field.description };
+  const cleanPath = field.path.replace(/\[\]/g, "").replace(/\.\*/g, "");
+
+  if (field.type.startsWith("Array")) {
+    prop.type = "array";
+    prop.items = { type: "string" };
+  } else if (field.type === "Object" || field.type === "Map") {
+    prop.type = "object";
+  } else if (field.type === "Boolean") {
+    prop.type = "boolean";
+  } else if (field.type === "Integer") {
+    prop.type = "integer";
+  } else if (field.type === "DateTime" || field.type.includes("ISO 8601")) {
+    prop.type = "string";
+    prop.format = "date-time";
+  } else {
+    prop.type = "string";
+  }
+
+  if (field.constraints) prop["x-constraints"] = field.constraints;
+  return [cleanPath, prop];
+}
+
+function webhookFieldsToSchema(fields: WebhookFieldDoc[]): Record<string, unknown> {
+  const properties: Record<string, unknown> = {};
+  const required: string[] = [];
+
+  for (const field of fields) {
+    if (field.path === "[]" || field.path.startsWith("[].")) continue;
+    const cleanPath = field.path.replace(/\[\]/g, "").replace(/\.\*/g, "");
+    if (cleanPath.includes("[].") || cleanPath.includes(".")) continue;
+    const [key, prop] = webhookFieldToProperty(field);
+    properties[key] = prop;
+    if (field.required) required.push(key);
+  }
+
+  const schema: Record<string, unknown> = { type: "object", properties };
+  if (required.length > 0) schema.required = required;
+  return schema;
+}
+
+export function generateWebhookOpenApiSpec(): Record<string, unknown> {
+  const paths: Record<string, Record<string, unknown>> = {};
+
+  for (const ep of webhookEndpoints) {
+    const openApiPath = ep.path.replace(/\{\{([^}]+)\}\}/g, "{$1}");
+
+    if (!paths[openApiPath]) paths[openApiPath] = {};
+
+    const method = ep.method.toLowerCase();
+    const operation: Record<string, unknown> = {
+      summary: ep.name,
+      description: ep.description,
+      operationId: ep.id,
+      tags: [ep.category],
+      security: [{ BearerAuth: [] }],
+    };
+
+    const fieldDoc = webhookFieldDocs[ep.id];
+
+    const paramMatches = openApiPath.match(/\{([^}]+)\}/g);
+    if (paramMatches) {
+      operation.parameters = paramMatches.map(p => {
+        const name = p.replace(/[{}]/g, "");
+        const paramDoc = fieldDoc?.pathParams?.find(f => f.path === name);
+        return {
+          name,
+          in: "path",
+          required: true,
+          description: paramDoc?.description || `The ${name} parameter`,
+          schema: { type: "string" },
+        };
+      });
+    }
+
+    if (ep.requestBody && (ep.method === "POST" || ep.method === "PUT")) {
+      const requestSchema = fieldDoc?.requestFields
+        ? webhookFieldsToSchema(fieldDoc.requestFields)
+        : { type: "object" };
+
+      let example: unknown;
+      try {
+        example = JSON.parse(ep.requestBody.replace(/\{\{[^}]+\}\}/g, '"placeholder"'));
+      } catch {
+        example = undefined;
+      }
+
+      operation.requestBody = {
+        required: true,
+        content: {
+          "application/json": {
+            schema: requestSchema,
+            ...(example ? { example } : {}),
+          },
+        },
+      };
+    }
+
+    const responses: Record<string, unknown> = {};
+    const statusCode = String(ep.responseStatus || 200);
+    const statusDesc =
+      ep.responseStatus === 200 ? "OK" :
+      ep.responseStatus === 201 ? "Created" :
+      ep.responseStatus === 204 ? "No Content" : "Success";
+
+    if (ep.responseBody) {
+      const responseSchema = fieldDoc?.responseFields
+        ? webhookFieldsToSchema(fieldDoc.responseFields)
+        : { type: "object" };
+
+      let example: unknown;
+      try {
+        example = JSON.parse(ep.responseBody);
+      } catch {
+        example = undefined;
+      }
+
+      responses[statusCode] = {
+        description: statusDesc,
+        content: {
+          "application/json": {
+            schema: responseSchema,
+            ...(example ? { example } : {}),
+          },
+        },
+      };
+    } else {
+      responses[statusCode] = { description: statusDesc };
+    }
+
+    responses["401"] = { description: "Unauthorized — invalid or expired access token" };
+    responses["404"] = { description: "Not Found — resource does not exist" };
+
+    operation.responses = responses;
+    paths[openApiPath][method] = operation;
+  }
+
+  // Document the callback (event delivery) contract via an x-webhooks block
+  const parseSafe = (s: string) => {
+    try { return JSON.parse(s); } catch { return undefined; }
+  };
+
+  const eventDeliveryOperation = {
+    summary: "Webhook Event Delivery (Inbound to your endpoint)",
+    description:
+      "When a subscribed event occurs, TransUnion sends an HTTP POST to the registered HTTPS callback URL. Your endpoint must respond with HTTP 2xx promptly. Repeated non-2xx responses trigger retries followed by a cool-off period and an email notification.",
+    operationId: "webhook-event-delivery",
+    tags: ["Event Delivery"],
+    requestBody: {
+      required: true,
+      content: {
+        "application/json": {
+          schema: { type: "object" },
+          examples: {
+            account: { summary: "Account-level event", value: parseSafe(sampleEventPayloads.account) },
+            callerProfile: { summary: "Caller Profile-level event", value: parseSafe(sampleEventPayloads.callerProfile) },
+            tn: { summary: "TN-level event", value: parseSafe(sampleEventPayloads.tn) },
+          },
+        },
+      },
+    },
+    responses: {
+      "200": { description: "Delivery acknowledged. Any 2xx response stops retries for this event." },
+      "4XX": { description: "Client error — delivery will be retried up to max_retry, then enter cool-off." },
+      "5XX": { description: "Server error — delivery will be retried up to max_retry, then enter cool-off." },
+    },
+  };
+
+  return {
+    openapi: "3.0.3",
+    info: {
+      title: "TransUnion TCS — Webhook Notifications API",
+      version: "1.0.0",
+      description:
+        "Webhook configuration, encryption, testing, and delivery log APIs for the TransUnion TruContact Trusted Call Solutions platform. Includes the inbound event delivery contract pushed to your registered HTTPS endpoint.",
+      contact: {
+        name: "TransUnion Customer Support",
+        email: "calleridsupport@transunion.com",
+        url: "https://www.transunion.com",
+      },
+    },
+    servers: [
+      { url: "https://sdpr.ccid.neustar.biz", description: "Production" },
+      { url: "https://sdpr-uat.ccid.neustar.biz", description: "UAT / Sandbox" },
+    ],
+    components: {
+      securitySchemes: {
+        BearerAuth: {
+          type: "http",
+          scheme: "bearer",
+          bearerFormat: "JWT",
+          description: "Obtain a JWT access token via the /ccid/aam/v1/login endpoint",
+        },
+      },
+    },
+    paths,
+    "x-webhooks": {
+      "event-delivery": { post: eventDeliveryOperation },
+    },
+  };
+}
+
+export function downloadWebhookOpenApiSpec() {
+  try {
+    const spec = generateWebhookOpenApiSpec();
+    const json = JSON.stringify(spec, null, 2);
+
+    const blob = new Blob([json], { type: "application/json" });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = "tcs-webhooks-openapi-spec.json";
+    a.style.display = "none";
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+
+    navigator.clipboard?.writeText(json).catch(() => {});
+
+    setTimeout(() => {
+      const win = window.open("", "_blank");
+      if (win) {
+        win.document.write(
+          `<!DOCTYPE html><html><head><title>tcs-webhooks-openapi-spec.json</title></head><body><pre style="word-wrap:break-word;white-space:pre-wrap;font-size:12px">${json.replace(/&/g, "&amp;").replace(/</g, "&lt;")}</pre></body></html>`
+        );
+        win.document.close();
+      }
+    }, 300);
+
+    setTimeout(() => URL.revokeObjectURL(url), 2000);
+  } catch (e) {
+    console.error("Failed to generate Webhook OpenAPI spec:", e);
+    alert("Failed to generate Webhook OpenAPI spec. Check console for details.");
+  }
+}
