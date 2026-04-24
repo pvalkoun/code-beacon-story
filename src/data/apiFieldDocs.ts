@@ -4,6 +4,8 @@ export interface FieldDoc {
   required: boolean;
   description: string;
   constraints?: string;
+  use?: string;
+  restrictedValues?: string;
 }
 
 export interface EndpointFieldDocs {
