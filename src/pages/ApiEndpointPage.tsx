@@ -206,7 +206,15 @@ export default function ApiEndpointPage() {
         <FieldTable
           title="Request Fields"
           fields={fieldDocs.requestFields}
-          constraintsAdvisory={productId === "cno"}
+          restrictedMode={productId === "cno"}
+          exampleJson={(() => {
+            if (!endpoint.requestBody) return undefined;
+            try {
+              return JSON.parse(endpoint.requestBody);
+            } catch {
+              return undefined;
+            }
+          })()}
         />
       )}
 
