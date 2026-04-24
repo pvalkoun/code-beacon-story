@@ -2,6 +2,7 @@ import { useParams } from "react-router-dom";
 import { getWebhookEndpoint, webhookFieldDocs, sampleEventPayloads } from "@/data/webhookData";
 import { CodeBlock } from "@/components/CodeBlock";
 import { MethodBadge } from "@/components/MethodBadge";
+import { AuthTypesPanel } from "@/components/AuthTypesPanel";
 import type { WebhookFieldDoc } from "@/data/webhookData";
 
 function FieldTable({ title, fields }: { title: string; fields: WebhookFieldDoc[] }) {
