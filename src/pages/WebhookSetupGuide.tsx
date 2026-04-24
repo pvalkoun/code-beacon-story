@@ -346,11 +346,11 @@ export default function WebhookSetupGuide() {
         <CodeBlock code={sampleEventPayloads.tn} title="TN Status Change" language="json" />
       </div>
 
-      {/* ── Section 6 — Cool-Off Email Notifications ── */}
+      {/* ── Section 7 — Cool-Off Email Notifications ── */}
       <div className="mb-10 pb-8 border-b">
         <div className="flex items-center gap-3 mb-3">
           <div className="flex items-center justify-center h-9 w-9 rounded-full bg-primary text-primary-foreground font-bold text-sm shrink-0">
-            6
+            7
           </div>
           <h2 className="!mt-0 !mb-0">Cool-Off Email Notifications</h2>
         </div>
