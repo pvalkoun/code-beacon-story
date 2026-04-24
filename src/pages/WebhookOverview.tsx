@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { ArrowRight, CheckCircle2, BookOpen, Code2, Bell, Zap, Shield, RefreshCw, FileJson } from "lucide-react";
-import { BaseUrlPanel } from "@/components/BaseUrlPanel";
+
 
 export default function WebhookOverview() {
   return (
