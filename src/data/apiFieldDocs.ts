@@ -167,7 +167,7 @@ export const endpointFieldDocs: Record<string, EndpointFieldDocs> = {
       { path: "accountId", type: "String", required: true, description: "Unique identifier of the account", constraints: "Length between 4 and 10" },
     ],
     requestFields: [
-      { path: "feature[]", type: "Array", required: true, description: "List of feature types to enable on the account", use: "AUTH-ONLY, RICH-BCD, AUTH-BCD, NAME-BCD, SPOOF-CALL-PROTECTION, CNO", restrictedValues: "DNO, SCP" },
+      { path: "feature[]", type: "Array", required: true, description: "List of feature types to enable on the account", use: "AUTH-ONLY, RICH-BCD, AUTH-BCD, NAME-BCD, SPOOF-CALL-PROTECTION, CNO", restrictedValues: "DNO" },
       { path: "service[]", type: "Array", required: false, description: "List of service objects defining carrier partner configurations for each feature", use: "Provide one service entry per feature being attached" },
       { path: "service[].name", type: "String", required: true, description: "The service/feature name to configure partners for", use: "SPOOF-CALL-PROTECTION, AUTH-BCD, RICH-BCD, NAME-BCD, AUTH-ONLY, CNO" },
       { path: "service[].partner[]", type: "Array", required: true, description: "List of carrier partner configuration objects", use: "Include one entry per carrier partner being enabled" },
