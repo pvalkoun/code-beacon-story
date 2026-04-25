@@ -349,6 +349,29 @@ export const endpointFieldDocs: Record<string, EndpointFieldDocs> = {
     ],
   },
 
+  "attach-auth-bcd-caller-profile": {
+    pathParams: [
+      { path: "accountId", type: "String", required: true, description: "Unique identifier of the account" },
+    ],
+    requestFields: [
+      { path: "branded_caller_name", type: "String", required: true, description: "The business name to display on recipient devices", use: "Length between 1 and 32 characters" },
+      { path: "service[]", type: "Array", required: true, description: "Service objects for AUTH-BCD configuration", use: "Two entries: CCID-ORIG and AUTH-BCD" },
+      { path: "service[].name", type: "String", required: true, description: "Service name", use: "CCID-ORIG, AUTH-BCD" },
+      { path: "service[].partner[]", type: "Array", required: true, description: "Carrier partner configurations", use: "Include one entry per carrier partner" },
+      { path: "service[].partner[].name", type: "String", required: true, description: "Carrier partner name", use: "att, verizon, tmobile" },
+      { path: "service[].partner[].status", type: "String", required: true, description: "Initial review status", use: "TU-Review-Requested" },
+    ],
+    responseFields: [
+      { path: "id", type: "String", required: true, description: "Unique caller profile ID", constraints: "24-character hex string" },
+      { path: "name", type: "String", required: true, description: "System-generated profile name (e.g., Your Company Name_BCD_Auth_20260225-212320)" },
+      { path: "account_id", type: "String", required: true, description: "The account this profile belongs to" },
+      { path: "branded_caller_name", type: "String", required: true, description: "The branded business name" },
+      { path: "service[]", type: "Array", required: true, description: "Service configuration with partner statuses" },
+      { path: "created_by", type: "String", required: true, description: "User who created the profile" },
+      { path: "created_date", type: "DateTime", required: true, description: "Creation timestamp", constraints: "RFC 1123 format" },
+    ],
+  },
+
   "attach-cno-caller-profile": {
     pathParams: [
       { path: "accountId", type: "String", required: true, description: "Unique identifier of the account" },

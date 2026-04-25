@@ -911,6 +911,74 @@ export const apiEndpoints: ApiEndpoint[] = [
     product: ["bcd"]
   },
   {
+    id: "attach-auth-bcd-caller-profile",
+    category: "Caller Profile",
+    name: "Attach AUTH-BCD Caller Profile",
+    method: "POST",
+    path: "/ccid/sdpr/v4/admin/account/{accountId}/caller-profile",
+    description: "Create a caller profile for AUTH-BCD (authenticated branded call display without rich content). Includes branded caller name and per-carrier partner statuses, but no call reason or image profile.",
+    headers: [{ key: "Content-Type", value: "application/json" }, { key: "Accept", value: "application/json" }],
+    requestBody: `{
+  "branded_caller_name": "Your Company Name",
+  "service": [
+    {
+      "name": "CCID-ORIG",
+      "partner": []
+    },
+    {
+      "name": "AUTH-BCD",
+      "partner": [
+        {
+          "name": "att",
+          "status": "TU-Review-Requested"
+        },
+        {
+          "name": "tmobile",
+          "status": "TU-Review-Requested"
+        },
+        {
+          "name": "verizon",
+          "status": "TU-Review-Requested"
+        }
+      ]
+    }
+  ]
+}`,
+    responseBody: `{
+  "id": "699f684820a7a57a0a67c03a",
+  "name": "Your Company Name_BCD_Auth_20260225-212320",
+  "account_id": "x59tj8rtv1",
+  "branded_caller_name": "Your Company Name",
+  "service": [
+    {
+      "name": "CCID-ORIG",
+      "partner": []
+    },
+    {
+      "name": "AUTH-BCD",
+      "partner": [
+        {
+          "name": "att",
+          "status": "TU-Review-Requested"
+        },
+        {
+          "name": "tmobile",
+          "status": "TU-Review-Requested"
+        },
+        {
+          "name": "verizon",
+          "status": "TU-Review-Requested"
+        }
+      ]
+    }
+  ],
+  "created_by": "user_v4_api_prod",
+  "created_date": "Wed, 25 Feb 2026 21:23:20 GMT"
+}`,
+    responseStatus: 201,
+    product: ["bcd"]
+  },
+  {
     id: "attach-cno-caller-profile",
     category: "Caller Profile",
     name: "Attach CNO Caller Profile",
