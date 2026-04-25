@@ -1096,15 +1096,41 @@ export const apiEndpoints: ApiEndpoint[] = [
     responseBody: `[
   {
     "id": "699f684820a7a57a0a67c03a",
-    "name": "Your Company Name_CNO_20260225-212320",
+    "name": "Your Company Name_BCD_Rich_20260225-212320",
     "account_id": "x59tj8rtv1",
+    "branded_caller_name": "Your Company Name",
+    "call_reason": "Account Update",
+    "image_profile_id": "699f620c6ccc0121aeb7eef4",
     "service": [
       {
         "name": "CCID-ORIG",
         "partner": []
       },
       {
-        "name": "CNO",
+        "name": "RICH-BCD",
+        "partner": [
+          {
+            "name": "att",
+            "status": "Enable-Completed"
+          }
+        ]
+      }
+    ],
+    "created_by": "user_v4_api_prod",
+    "created_date": "Wed, 25 Feb 2026 21:23:20 GMT"
+  },
+  {
+    "id": "699f684820a7a57a0a67c03b",
+    "name": "Your Company Name_BCD_Auth_20260225-212320",
+    "account_id": "x59tj8rtv1",
+    "branded_caller_name": "Your Company Name",
+    "service": [
+      {
+        "name": "CCID-ORIG",
+        "partner": []
+      },
+      {
+        "name": "AUTH-BCD",
         "partner": [
           {
             "name": "att",
