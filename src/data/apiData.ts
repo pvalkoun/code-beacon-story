@@ -1112,6 +1112,14 @@ export const apiEndpoints: ApiEndpoint[] = [
           {
             "name": "att",
             "status": "Enable-Completed"
+          },
+          {
+            "name": "tmobile",
+            "status": "Enable-Completed"
+          },
+          {
+            "name": "verizon",
+            "status": "Enable-Completed"
           }
         ]
       }
@@ -1134,6 +1142,14 @@ export const apiEndpoints: ApiEndpoint[] = [
         "partner": [
           {
             "name": "att",
+            "status": "Enable-Completed"
+          },
+          {
+            "name": "tmobile",
+            "status": "Enable-Completed"
+          },
+          {
+            "name": "verizon",
             "status": "Enable-Completed"
           }
         ]
