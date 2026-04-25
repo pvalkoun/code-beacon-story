@@ -328,7 +328,7 @@ export const endpointFieldDocs: Record<string, EndpointFieldDocs> = {
     ],
     requestFields: [
       { path: "branded_caller_name", type: "String", required: true, description: "The business name to display on recipient devices", use: "Length between 1 and 32 characters" },
-      { path: "call_reason", type: "String", required: true, description: "The reason/category for the call shown on display", use: "Length between 1 and 128 characters" },
+      { path: "call_reason", type: "String", required: true, description: "The reason/category for the call shown on display", use: "Length between 1 and 60 characters" },
       { path: "image_profile_id", type: "String", required: false, description: "ID of a previously uploaded image profile for logo display", use: "Must reference a valid image profile on the account" },
       { path: "service[]", type: "Array", required: true, description: "Service objects for BCD configuration", use: "Two entries: CCID-ORIG and RICH-BCD" },
       { path: "service[].name", type: "String", required: true, description: "Service name", use: "CCID-ORIG, RICH-BCD", restrictedValues: "AUTH-BCD, NAME-BCD, AUTH-ONLY" },
