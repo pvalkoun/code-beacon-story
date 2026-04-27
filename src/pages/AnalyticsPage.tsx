@@ -47,25 +47,25 @@ const singleTnResponse = `{
       }
     ],
     "scp": {
-      "signed": 4200,
+      "signed": 13700,
       "service_providers": [
         {
           "service_provider_name": "att",
           "deposited": 4100,
           "authenticated": 3850,
-          "blocked": 18
+          "blocked": 698
         },
         {
           "service_provider_name": "t-mobile",
           "deposited": 4050,
           "authenticated": 3780,
-          "blocked": 22
+          "blocked": 673
         },
         {
           "service_provider_name": "verizon",
           "deposited": 4200,
           "authenticated": 3900,
-          "blocked": 12
+          "blocked": 712
         }
       ]
     }
@@ -73,7 +73,7 @@ const singleTnResponse = `{
   "request_params": {
     "start_time": "2026-04-01T00:00:00Z",
     "end_time": "2026-04-01T23:59:59Z",
-    "service": "bcd"
+    "service": ["bcd", "scp"]
   }
 }`;
 
@@ -95,11 +95,11 @@ const allTnsResponse = `{
           }
         ],
         "scp": {
-          "signed": 4200,
+          "signed": 13700,
           "service_providers": [
-            { "service_provider_name": "att", "deposited": 4100, "authenticated": 3850, "blocked": 18 },
-            { "service_provider_name": "t-mobile", "deposited": 4050, "authenticated": 3780, "blocked": 22 },
-            { "service_provider_name": "verizon", "deposited": 4200, "authenticated": 3900, "blocked": 12 }
+            { "service_provider_name": "att", "deposited": 4100, "authenticated": 3850, "blocked": 698 },
+            { "service_provider_name": "t-mobile", "deposited": 4050, "authenticated": 3780, "blocked": 673 },
+            { "service_provider_name": "verizon", "deposited": 4200, "authenticated": 3900, "blocked": 712 }
           ]
         }
       }
@@ -120,11 +120,11 @@ const allTnsResponse = `{
           }
         ],
         "scp": {
-          "signed": 2750,
+          "signed": 8950,
           "service_providers": [
-            { "service_provider_name": "att", "deposited": 2700, "authenticated": 2540, "blocked": 9 },
-            { "service_provider_name": "t-mobile", "deposited": 2680, "authenticated": 2495, "blocked": 14 },
-            { "service_provider_name": "verizon", "deposited": 2750, "authenticated": 2590, "blocked": 7 }
+            { "service_provider_name": "att", "deposited": 2700, "authenticated": 2540, "blocked": 459 },
+            { "service_provider_name": "t-mobile", "deposited": 2680, "authenticated": 2495, "blocked": 456 },
+            { "service_provider_name": "verizon", "deposited": 2750, "authenticated": 2590, "blocked": 467 }
           ]
         }
       }
@@ -133,7 +133,7 @@ const allTnsResponse = `{
   "request_params": {
     "start_time": "2026-04-01T00:00:00Z",
     "end_time": "2026-04-01T23:59:59Z",
-    "service": "bcd"
+    "service": ["bcd", "scp"]
   }
 }`;
 
@@ -196,14 +196,14 @@ function ParamTable({ title, params }: { title: string; params: ParamRow[] }) {
 const singleTnParams: ParamRow[] = [
   { name: "accountId", location: "path", type: "string", required: true, description: "Unique account identifier." },
   { name: "tn", location: "query", type: "string", required: true, description: "Telephone number in E.164 format (e.g. +12025551234)." },
-  { name: "service", location: "query", type: "string", required: true, description: 'Service type: "bcd" or "scp".' },
+  { name: "service", location: "query", type: "string", required: true, description: 'Service type(s): "bcd", "scp", or both as ["bcd", "scp"].' },
   { name: "start_time", location: "query", type: "date-time", required: true, description: "Start of analytics window. Must be 00:00:00Z (full UTC day start)." },
   { name: "end_time", location: "query", type: "date-time", required: true, description: "End of analytics window. Must be 23:59:59Z (full UTC day end)." },
 ];
 
 const allTnsParams: ParamRow[] = [
   { name: "accountId", location: "path", type: "string", required: true, description: "Unique account identifier." },
-  { name: "service", location: "query", type: "string", required: true, description: 'Service type: "bcd" or "scp".' },
+  { name: "service", location: "query", type: "string", required: true, description: 'Service type(s): "bcd", "scp", or both as ["bcd", "scp"].' },
   { name: "start_time", location: "query", type: "date-time", required: true, description: "Start of analytics window. Must be 00:00:00Z (full UTC day start)." },
   { name: "end_time", location: "query", type: "date-time", required: true, description: "End of analytics window. Must be 23:59:59Z (full UTC day end)." },
   { name: "X-Cursor", location: "header", type: "string", required: false, description: "Cursor token for pagination. Omit for first page." },
@@ -276,7 +276,7 @@ export default function AnalyticsPage() {
           /ccid/analytics/v1/admin/account/{"{accountId}"}/tn
         </div>
         <p>
-          Returns analytics metrics for a single telephone number. Use the <code>service</code> parameter to select BCD or SCP metrics. For BCD, the response includes per-campaign answer rates and average call durations broken down by carrier. For SCP, it returns signing counts and authentication/block statistics per carrier.
+          Returns metrics for a single telephone number. Use the <code>service</code> parameter to select BCD or SCP metrics. For BCD, the response includes per TN impression counts, answer rates, and average call durations broken down by carrier. For SCP, it returns signing, deposited, authenticated, and blocked counts by carrier.
         </p>
 
         <ParamTable title="Parameters" params={singleTnParams} />
@@ -289,7 +289,7 @@ export default function AnalyticsPage() {
       <div className="border-t pt-8 mt-8">
         <div className="flex items-center gap-3 mb-2">
           <MethodBadge method="GET" />
-          <h2 className="!mb-0 !mt-0 text-xl font-bold">Paginated TN Analytics List</h2>
+          <h2 className="!mb-0 !mt-0 text-xl font-bold">Paginated TN Analytics List by Account ID</h2>
         </div>
         <div className="mb-4 p-3 rounded-lg bg-muted font-mono text-sm">
           <span className="font-bold mr-2">GET</span>
