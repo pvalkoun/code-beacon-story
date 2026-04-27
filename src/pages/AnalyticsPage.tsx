@@ -193,24 +193,73 @@ function ParamTable({ title, params }: { title: string; params: ParamRow[] }) {
   );
 }
 
-const singleTnParams: ParamRow[] = [
-  { name: "Authorization", location: "header", type: "string", required: true, description: "Bearer access token returned by /ccid/aam/v1/login. Format: Bearer {accessToken}." },
+const singleTnPathParams: ParamRow[] = [
   { name: "accountId", location: "path", type: "string", required: true, description: "Unique account identifier." },
+];
+
+const singleTnQueryParams: ParamRow[] = [
   { name: "tn", location: "query", type: "string", required: true, description: "Telephone number in E.164 format (e.g. +12025551234)." },
   { name: "service", location: "query", type: "string", required: true, description: 'Service type(s): "bcd", "scp", or both as ["bcd", "scp"].' },
   { name: "start_time", location: "query", type: "date-time", required: true, description: "Start of analytics window. Must be 00:00:00Z (full UTC day start)." },
   { name: "end_time", location: "query", type: "date-time", required: true, description: "End of analytics window. Must be 23:59:59Z (full UTC day end)." },
 ];
 
-const allTnsParams: ParamRow[] = [
-  { name: "Authorization", location: "header", type: "string", required: true, description: "Bearer access token returned by /ccid/aam/v1/login. Format: Bearer {accessToken}." },
+const allTnsPathParams: ParamRow[] = [
   { name: "accountId", location: "path", type: "string", required: true, description: "Unique account identifier." },
+];
+
+const allTnsQueryParams: ParamRow[] = [
   { name: "service", location: "query", type: "string", required: true, description: 'Service type(s): "bcd", "scp", or both as ["bcd", "scp"].' },
   { name: "start_time", location: "query", type: "date-time", required: true, description: "Start of analytics window. Must be 00:00:00Z (full UTC day start)." },
   { name: "end_time", location: "query", type: "date-time", required: true, description: "End of analytics window. Must be 23:59:59Z (full UTC day end)." },
+];
+
+const allTnsPaginationHeaders: ParamRow[] = [
   { name: "X-Cursor", location: "header", type: "string", required: false, description: "Cursor token for pagination. Omit for first page." },
   { name: "X-Page-Size", location: "header", type: "integer", required: false, description: "Number of TN records per page. Default: 10,000. Max: 20,000." },
 ];
+
+function HeadersTable({ extra }: { extra?: ParamRow[] }) {
+  return (
+    <>
+      <h3 className="text-lg font-semibold mt-6 mb-2">Headers</h3>
+      <div className="overflow-x-auto">
+        <table className="w-full text-sm border-collapse mb-4">
+          <thead>
+            <tr className="border-b">
+              <th className="text-left py-2 px-3 font-semibold">Header</th>
+              <th className="text-left py-2 px-3 font-semibold">Type</th>
+              <th className="text-left py-2 px-3 font-semibold">Required</th>
+              <th className="text-left py-2 px-3 font-semibold">Description</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr className="border-b">
+              <td className="py-2 px-3 font-mono text-xs">Authorization</td>
+              <td className="py-2 px-3 text-xs">string</td>
+              <td className="py-2 px-3"><span className="text-xs font-semibold text-destructive">Required</span></td>
+              <td className="py-2 px-3 text-muted-foreground">Bearer access token returned by <code>/ccid/aam/v1/login</code>. Format: <code>Bearer {'{{accessToken}}'}</code>.</td>
+            </tr>
+            {extra?.map((h, i) => (
+              <tr key={i} className="border-b last:border-b-0">
+                <td className="py-2 px-3 font-mono text-xs">{h.name}</td>
+                <td className="py-2 px-3 text-xs">{h.type}</td>
+                <td className="py-2 px-3">
+                  {h.required ? (
+                    <span className="text-xs font-semibold text-destructive">Required</span>
+                  ) : (
+                    <span className="text-xs text-muted-foreground">Optional</span>
+                  )}
+                </td>
+                <td className="py-2 px-3 text-muted-foreground">{h.description}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </>
+  );
+}
 
 const bcdFields = [
   { name: "bcd_name", type: "string", description: "Branded caller name" },
