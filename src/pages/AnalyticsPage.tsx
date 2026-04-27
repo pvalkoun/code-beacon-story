@@ -289,7 +289,7 @@ export default function AnalyticsPage() {
       <div className="border-t pt-8 mt-8">
         <div className="flex items-center gap-3 mb-2">
           <MethodBadge method="GET" />
-          <h2 className="!mb-0 !mt-0 text-xl font-bold">Paginated TN Analytics List</h2>
+          <h2 className="!mb-0 !mt-0 text-xl font-bold">Paginated TN Analytics List by Account ID</h2>
         </div>
         <div className="mb-4 p-3 rounded-lg bg-muted font-mono text-sm">
           <span className="font-bold mr-2">GET</span>
