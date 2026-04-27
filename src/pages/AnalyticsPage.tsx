@@ -382,7 +382,13 @@ export default function AnalyticsPage() {
         <h3 className="text-lg font-semibold mt-6 mb-2">Response Fields — SCP Service Metrics</h3>
         <ResponseFieldsTable fields={scpFields} />
 
-        <h3 className="text-lg font-semibold mt-6 mb-2">Response — 200 OK</h3>
+        <h2>Response Example</h2>
+        <div className="flex items-center gap-2 mb-2">
+          <span className="inline-flex items-center px-2 py-0.5 rounded text-xs font-bold bg-emerald-100 text-emerald-800">
+            200
+          </span>
+          <span className="text-sm text-muted-foreground">OK</span>
+        </div>
         <CodeBlock code={singleTnResponse} title="Response" language="json" />
       </div>
 
@@ -430,7 +436,13 @@ export default function AnalyticsPage() {
         <h3 className="text-lg font-semibold mt-6 mb-2">Response Fields — SCP Service Metrics</h3>
         <ResponseFieldsTable fields={scpFields} />
 
-        <h3 className="text-lg font-semibold mt-6 mb-2">Response — 200 OK</h3>
+        <h2>Response Example</h2>
+        <div className="flex items-center gap-2 mb-2">
+          <span className="inline-flex items-center px-2 py-0.5 rounded text-xs font-bold bg-emerald-100 text-emerald-800">
+            200
+          </span>
+          <span className="text-sm text-muted-foreground">OK</span>
+        </div>
         <CodeBlock code={allTnsResponse} title="Response" language="json" />
       </div>
 
