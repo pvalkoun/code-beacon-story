@@ -648,7 +648,7 @@ export const apiEndpoints: ApiEndpoint[] = [
     category: "Image",
     name: "Create Image",
     method: "POST",
-    path: "/ccid/media/v4/admin/account/{accountId}/image",
+    path: "/ccid/media/v1/admin/account/{accountId}/image",
     description: "Upload an image via URL to the image service. The image is processed and stored internally. Save the returned image_id — it will be used when creating an image profile.",
     imageRequirements: ["Image must be exactly 256×256 pixels", "Image must be in BMP format", "Image file size must be less than 270 KB"],
     errorBody: `{
@@ -676,7 +676,7 @@ export const apiEndpoints: ApiEndpoint[] = [
     category: "Image",
     name: "Get Image",
     method: "GET",
-    path: "/ccid/media/v4/admin/account/{accountId}/image/{imageId}",
+    path: "/ccid/media/v1/admin/account/{accountId}/image/{imageId}",
     description: "Retrieve an image by ID, including its CDN URL.",
     headers: [{ key: "Accept", value: "application/json" }],
     responseBody: `{
@@ -691,7 +691,7 @@ export const apiEndpoints: ApiEndpoint[] = [
     category: "Image",
     name: "Delete Image",
     method: "DELETE",
-    path: "/ccid/media/v4/admin/account/{accountId}/image/{imageId}",
+    path: "/ccid/media/v1/admin/account/{accountId}/image/{imageId}",
     description: "Delete an image from the account. The image must not be referenced by any active image profiles.",
     headers: [{ key: "Accept", value: "application/json" }],
     responseStatus: 204,
