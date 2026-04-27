@@ -194,6 +194,7 @@ function ParamTable({ title, params }: { title: string; params: ParamRow[] }) {
 }
 
 const singleTnParams: ParamRow[] = [
+  { name: "Authorization", location: "header", type: "string", required: true, description: "Bearer access token returned by /ccid/aam/v1/login. Format: Bearer {accessToken}." },
   { name: "accountId", location: "path", type: "string", required: true, description: "Unique account identifier." },
   { name: "tn", location: "query", type: "string", required: true, description: "Telephone number in E.164 format (e.g. +12025551234)." },
   { name: "service", location: "query", type: "string", required: true, description: 'Service type(s): "bcd", "scp", or both as ["bcd", "scp"].' },
@@ -202,6 +203,7 @@ const singleTnParams: ParamRow[] = [
 ];
 
 const allTnsParams: ParamRow[] = [
+  { name: "Authorization", location: "header", type: "string", required: true, description: "Bearer access token returned by /ccid/aam/v1/login. Format: Bearer {accessToken}." },
   { name: "accountId", location: "path", type: "string", required: true, description: "Unique account identifier." },
   { name: "service", location: "query", type: "string", required: true, description: 'Service type(s): "bcd", "scp", or both as ["bcd", "scp"].' },
   { name: "start_time", location: "query", type: "date-time", required: true, description: "Start of analytics window. Must be 00:00:00Z (full UTC day start)." },
@@ -209,6 +211,48 @@ const allTnsParams: ParamRow[] = [
   { name: "X-Cursor", location: "header", type: "string", required: false, description: "Cursor token for pagination. Omit for first page." },
   { name: "X-Page-Size", location: "header", type: "integer", required: false, description: "Number of TN records per page. Default: 10,000. Max: 20,000." },
 ];
+
+const bcdFields = [
+  { name: "bcd_name", type: "string", description: "Branded caller name" },
+  { name: "type", type: "string", description: "BCD type (e.g., name_bcd, rich_bcd)" },
+  { name: "service_providers[].service_provider_name", type: "string", description: "Carrier name" },
+  { name: "service_providers[].count", type: "integer", description: "Impression count" },
+  { name: "service_providers[].answer_rate", type: "number", description: "Ratio of answered calls" },
+  { name: "service_providers[].average_duration", type: "number", description: "Average call duration in seconds" },
+];
+
+const scpFields = [
+  { name: "signed", type: "integer", description: "Total signed calls" },
+  { name: "service_providers[].service_provider_name", type: "string", description: "Carrier name" },
+  { name: "service_providers[].deposited", type: "integer", description: "Total deposited calls to the carrier" },
+  { name: "service_providers[].authenticated", type: "number", description: "Total successfully authenticated calls" },
+  { name: "service_providers[].blocked", type: "integer", description: "Total calls blocked by the carrier" },
+];
+
+function ResponseFieldsTable({ fields }: { fields: { name: string; type: string; description: string }[] }) {
+  return (
+    <div className="overflow-x-auto">
+      <table className="w-full text-sm border-collapse">
+        <thead>
+          <tr className="border-b">
+            <th className="text-left py-2 px-3 font-semibold">Field</th>
+            <th className="text-left py-2 px-3 font-semibold">Type</th>
+            <th className="text-left py-2 px-3 font-semibold">Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          {fields.map((f, i) => (
+            <tr key={i} className="border-b last:border-b-0">
+              <td className="py-2 px-3 font-mono text-xs">{f.name}</td>
+              <td className="py-2 px-3 text-xs">{f.type}</td>
+              <td className="py-2 px-3 text-muted-foreground">{f.description}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+  );
+}
 
 export default function AnalyticsPage() {
   return (
@@ -283,6 +327,12 @@ export default function AnalyticsPage() {
 
         <h3 className="text-lg font-semibold mt-6 mb-2">Response — 200 OK</h3>
         <CodeBlock code={singleTnResponse} title="Response" language="json" />
+
+        <h3 className="text-lg font-semibold mt-6 mb-2">Response Fields — BCD Service Metrics</h3>
+        <ResponseFieldsTable fields={bcdFields} />
+
+        <h3 className="text-lg font-semibold mt-6 mb-2">Response Fields — SCP Service Metrics</h3>
+        <ResponseFieldsTable fields={scpFields} />
       </div>
 
       {/* ── Endpoint 2: All TNs ── */}
@@ -323,6 +373,12 @@ export default function AnalyticsPage() {
 
         <h3 className="text-lg font-semibold mt-6 mb-2">Response — 200 OK</h3>
         <CodeBlock code={allTnsResponse} title="Response" language="json" />
+
+        <h3 className="text-lg font-semibold mt-6 mb-2">Response Fields — BCD Service Metrics</h3>
+        <ResponseFieldsTable fields={bcdFields} />
+
+        <h3 className="text-lg font-semibold mt-6 mb-2">Response Fields — SCP Service Metrics</h3>
+        <ResponseFieldsTable fields={scpFields} />
       </div>
 
       {/* ── Error Response ── */}
