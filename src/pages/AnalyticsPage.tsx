@@ -196,14 +196,14 @@ function ParamTable({ title, params }: { title: string; params: ParamRow[] }) {
 const singleTnParams: ParamRow[] = [
   { name: "accountId", location: "path", type: "string", required: true, description: "Unique account identifier." },
   { name: "tn", location: "query", type: "string", required: true, description: "Telephone number in E.164 format (e.g. +12025551234)." },
-  { name: "service", location: "query", type: "string", required: true, description: 'Service type: "bcd" or "scp".' },
+  { name: "service", location: "query", type: "string", required: true, description: 'Service type(s): "bcd", "scp", or both as ["bcd", "scp"].' },
   { name: "start_time", location: "query", type: "date-time", required: true, description: "Start of analytics window. Must be 00:00:00Z (full UTC day start)." },
   { name: "end_time", location: "query", type: "date-time", required: true, description: "End of analytics window. Must be 23:59:59Z (full UTC day end)." },
 ];
 
 const allTnsParams: ParamRow[] = [
   { name: "accountId", location: "path", type: "string", required: true, description: "Unique account identifier." },
-  { name: "service", location: "query", type: "string", required: true, description: 'Service type: "bcd" or "scp".' },
+  { name: "service", location: "query", type: "string", required: true, description: 'Service type(s): "bcd", "scp", or both as ["bcd", "scp"].' },
   { name: "start_time", location: "query", type: "date-time", required: true, description: "Start of analytics window. Must be 00:00:00Z (full UTC day start)." },
   { name: "end_time", location: "query", type: "date-time", required: true, description: "End of analytics window. Must be 23:59:59Z (full UTC day end)." },
   { name: "X-Cursor", location: "header", type: "string", required: false, description: "Cursor token for pagination. Omit for first page." },
@@ -276,7 +276,7 @@ export default function AnalyticsPage() {
           /ccid/analytics/v1/admin/account/{"{accountId}"}/tn
         </div>
         <p>
-          Returns analytics metrics for a single telephone number. Use the <code>service</code> parameter to select BCD or SCP metrics. For BCD, the response includes per-campaign answer rates and average call durations broken down by carrier. For SCP, it returns signing counts and authentication/block statistics per carrier.
+          Returns metrics for a single telephone number. Use the <code>service</code> parameter to select BCD or SCP metrics. For BCD, the response includes per TN impression counts, answer rates, and average call durations broken down by carrier. For SCP, it returns signing, deposited, authenticated, and blocked counts by carrier.
         </p>
 
         <ParamTable title="Parameters" params={singleTnParams} />
