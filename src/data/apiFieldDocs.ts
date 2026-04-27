@@ -260,10 +260,11 @@ export const endpointFieldDocs: Record<string, EndpointFieldDocs> = {
     ],
     requestFields: [
       { path: "name", type: "String", required: true, description: "Name for the image profile", use: "Length between 1 and 64 characters" },
-      { path: "image_url", type: "String", required: true, description: "CDN URL of the previously uploaded image (from Create Image response)", use: "Must reference an image_url returned by Create Image" },
+      { path: "image_id", type: "String", required: true, description: "ID of the previously uploaded image (from Create Image response)", use: "Must reference an image_id returned by Create Image" },
     ],
     responseFields: [
       { path: "id", type: "String", required: true, description: "Unique image profile ID assigned by the system", constraints: "24-character hex string" },
+      { path: "image_id", type: "String", required: true, description: "ID of the linked image" },
       { path: "image_url", type: "String", required: true, description: "CDN URL of the linked image" },
       { path: "partner_status", type: "Object", required: true, description: "Carrier partner vetting statuses", constraints: "Keys: att, verizon, tmobile" },
       { path: "vetting", type: "Object", required: true, description: "Overall vetting status and timestamp" },
