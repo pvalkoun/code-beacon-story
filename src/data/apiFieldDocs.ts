@@ -349,8 +349,13 @@ export const endpointFieldDocs: Record<string, EndpointFieldDocs> = {
     ],
     responseFields: [
       { path: "id", type: "String", required: true, description: "Unique caller profile ID assigned by the system", constraints: "24-character hex string" },
+      { path: "name", type: "String", required: true, description: "System-generated profile name (e.g., Your Company Name_SCP_20260225-212320)" },
       { path: "account_id", type: "String", required: true, description: "The account this profile belongs to" },
       { path: "service[]", type: "Array", required: true, description: "Service configuration echoed back with partner statuses" },
+      { path: "service[].name", type: "String", required: true, description: "Service name (CCID-ORIG, SPOOF-CALL-PROTECTION)" },
+      { path: "service[].partner[]", type: "Array", required: true, description: "Carrier partner status entries" },
+      { path: "service[].partner[].name", type: "String", required: true, description: "Carrier partner name", constraints: "att | tmobile | verizon" },
+      { path: "service[].partner[].status", type: "String", required: true, description: "Current partner status", constraints: "TU-Review-Requested → Enable-Requested → Enable-Processing → Enable-Completed" },
       { path: "created_by", type: "String", required: true, description: "User who created the profile" },
       { path: "created_date", type: "DateTime", required: true, description: "Creation timestamp", constraints: "RFC 1123 format" },
     ],
