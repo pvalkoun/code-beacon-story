@@ -373,6 +373,12 @@ export default function AnalyticsPage() {
 
         <h3 className="text-lg font-semibold mt-6 mb-2">Response — 200 OK</h3>
         <CodeBlock code={allTnsResponse} title="Response" language="json" />
+
+        <h3 className="text-lg font-semibold mt-6 mb-2">Response Fields — BCD Service Metrics</h3>
+        <ResponseFieldsTable fields={bcdFields} />
+
+        <h3 className="text-lg font-semibold mt-6 mb-2">Response Fields — SCP Service Metrics</h3>
+        <ResponseFieldsTable fields={scpFields} />
       </div>
 
       {/* ── Error Response ── */}
