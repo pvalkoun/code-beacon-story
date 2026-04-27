@@ -133,7 +133,7 @@ const allTnsResponse = `{
   "request_params": {
     "start_time": "2026-04-01T00:00:00Z",
     "end_time": "2026-04-01T23:59:59Z",
-    "service": "bcd"
+    "service": ["bcd", "scp"]
   }
 }`;
 
