@@ -264,9 +264,12 @@ export const endpointFieldDocs: Record<string, EndpointFieldDocs> = {
     ],
     responseFields: [
       { path: "id", type: "String", required: true, description: "Unique image profile ID assigned by the system", constraints: "24-character hex string" },
+      { path: "name", type: "String", required: true, description: "Name of the image profile" },
       { path: "image_id", type: "String", required: true, description: "ID of the linked image" },
       { path: "image_url", type: "String", required: true, description: "CDN URL of the linked image" },
-      { path: "partner_status", type: "Object", required: true, description: "Carrier partner vetting statuses", constraints: "Keys: att, verizon, tmobile" },
+      { path: "partner", type: "Array<Object>", required: true, description: "Carrier partner vetting statuses", constraints: "Each entry: { name, status }. Names: att, tmobile, verizon" },
+      { path: "partner[].name", type: "String", required: true, description: "Carrier partner name", constraints: "att | tmobile | verizon" },
+      { path: "partner[].status", type: "String", required: true, description: "Vetting/enablement status for the partner", constraints: "e.g. Enable-Requested, Enable-Completed" },
       { path: "vetting", type: "Object", required: true, description: "Overall vetting status and timestamp" },
       { path: "vetting.status", type: "String", required: true, description: "Vetting status", constraints: "e.g. VETTING_SUBMITTED, VETTING_SUCCESSFUL" },
       { path: "vetting.status_timestamp", type: "DateTime", required: true, description: "Timestamp of the vetting status", constraints: "RFC 1123 format" },
