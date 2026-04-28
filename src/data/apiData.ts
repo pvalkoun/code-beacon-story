@@ -585,6 +585,89 @@ export const apiEndpoints: ApiEndpoint[] = [
     }
   ]
 }`,
+    responseBody: `{
+  "account_id": "x59tj8rtv1",
+  "feature": [
+    "AUTH-ONLY",
+    "RICH-BCD",
+    "AUTH-BCD",
+    "NAME-BCD",
+    "SPOOF-CALL-PROTECTION",
+    "CNO"
+  ],
+  "service": [
+    {
+      "name": "SPOOF-CALL-PROTECTION",
+      "partner": [
+        {
+          "name": "att",
+          "status": "Enable-Requested"
+        },
+        {
+          "name": "tmobile",
+          "status": "Enable-Requested"
+        },
+        {
+          "name": "verizon",
+          "status": "Enable-Requested"
+        }
+      ]
+    },
+    {
+      "name": "AUTH-BCD",
+      "partner": [
+        {
+          "name": "att",
+          "status": "Enable-Requested"
+        },
+        {
+          "name": "tmobile",
+          "status": "Enable-Requested"
+        },
+        {
+          "name": "verizon",
+          "status": "Enable-Requested"
+        }
+      ]
+    },
+    {
+      "name": "RICH-BCD",
+      "partner": [
+        {
+          "name": "att",
+          "status": "Enable-Requested"
+        },
+        {
+          "name": "tmobile",
+          "status": "Enable-Requested"
+        },
+        {
+          "name": "verizon",
+          "status": "Enable-Requested"
+        }
+      ]
+    },
+    {
+      "name": "CNO",
+      "partner": [
+        {
+          "name": "att",
+          "status": "Enable-Requested"
+        },
+        {
+          "name": "tmobile",
+          "status": "Enable-Requested"
+        },
+        {
+          "name": "verizon",
+          "status": "Enable-Requested"
+        }
+      ]
+    }
+  ],
+  "created_by": "user",
+  "created_date": "Fri, 20 Feb 2026 20:31:49 GMT"
+}`,
     responseStatus: 200,
     product: ["common"]
   },
