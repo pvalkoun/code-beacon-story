@@ -275,7 +275,7 @@ export const endpointFieldDocs: Record<string, EndpointFieldDocs> = {
       { path: "accountId", type: "String", required: true, description: "Unique identifier of the account", constraints: "Length between 4 and 10" },
     ],
     requestFields: [
-      { path: "url", type: "String", required: true, description: "Publicly accessible URL of the image to upload", use: "Valid HTTPS URL; image 256×256 px, JPEG/PNG/BMP, < 270 KB" },
+      { path: "url", type: "String", required: true, description: "Publicly accessible URL of the image to upload", use: "Valid HTTPS URL; image 256×256 px, BMP/JPG/PNG, < 270 KB" },
     ],
     responseFields: [
       { path: "id", type: "String", required: true, description: "Unique image ID assigned by the system" },
