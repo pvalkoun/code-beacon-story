@@ -868,7 +868,7 @@ export const apiEndpoints: ApiEndpoint[] = [
     { "name": "verizon", "status": "Enable-Requested" }
   ],
   "vetting": {
-    "status": "VETTING_SUBMITTED",
+    "status": "VETTING_REQUESTED",
     "status_timestamp": "Mon, 17 Oct 2022 00:00:00 GMT"
   },
   "created_by": "user_v4_api_prod",
