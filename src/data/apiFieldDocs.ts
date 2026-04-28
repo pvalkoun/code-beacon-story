@@ -267,7 +267,10 @@ export const endpointFieldDocs: Record<string, EndpointFieldDocs> = {
     ],
     responseFields: [
       { path: "id", type: "String", required: true, description: "Unique image ID assigned by the system" },
+      { path: "account_id", type: "String", required: true, description: "Account that owns the image" },
       { path: "image_url", type: "String", required: true, description: "CDN-accessible URL of the processed image — use as image_url when creating an image profile" },
+      { path: "created_by", type: "String", required: true, description: "User who created the image" },
+      { path: "created_date", type: "String", required: true, description: "Timestamp when the image was created (RFC 1123)" },
     ],
   },
 
@@ -278,7 +281,12 @@ export const endpointFieldDocs: Record<string, EndpointFieldDocs> = {
     ],
     responseFields: [
       { path: "id", type: "String", required: true, description: "Image ID" },
+      { path: "account_id", type: "String", required: true, description: "Account that owns the image" },
       { path: "image_url", type: "String", required: true, description: "CDN-accessible URL of the image" },
+      { path: "created_by", type: "String", required: true, description: "User who created the image" },
+      { path: "created_date", type: "String", required: true, description: "Timestamp when the image was created (RFC 1123)" },
+      { path: "updated_by", type: "String", required: false, description: "User who last updated the image" },
+      { path: "updated_date", type: "String", required: false, description: "Timestamp when the image was last updated (RFC 1123)" },
     ],
   },
 
