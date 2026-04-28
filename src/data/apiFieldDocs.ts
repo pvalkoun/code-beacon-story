@@ -252,18 +252,6 @@ export const endpointFieldDocs: Record<string, EndpointFieldDocs> = {
     ],
   },
 
-  "get-partner-feature": {
-    pathParams: [
-      { path: "accountId", type: "String", required: true, description: "Unique identifier of the account" },
-      { path: "serviceName", type: "String", required: true, description: "Feature/service name to query", constraints: "e.g., SPOOF-CALL-PROTECTION, RICH-BCD" },
-      { path: "partnerName", type: "String", required: true, description: "Carrier partner name", constraints: "att, verizon, or tmobile" },
-    ],
-    responseFields: [
-      { path: "name", type: "String", required: true, description: "The carrier partner name" },
-      { path: "status", type: "String", required: true, description: "Current enablement status for this partner/service combination", constraints: "Enable-Completed, Enable-Processing, Enable-Requested, Disable-Completed, etc." },
-    ],
-  },
-
   "delete-feature": {
     pathParams: [
       { path: "accountId", type: "String", required: true, description: "Unique identifier of the account", constraints: "All caller profiles and TN assets must be removed first. Partner statuses must not be in *-Requested or *-Processing states." },

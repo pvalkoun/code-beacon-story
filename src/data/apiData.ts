@@ -685,21 +685,6 @@ export const apiEndpoints: ApiEndpoint[] = [
     product: ["common"]
   },
   {
-    id: "get-partner-feature",
-    category: "Features",
-    name: "Get Partner Feature Status",
-    method: "GET",
-    path: "/ccid/sdpr/v4/admin/account/{accountId}/feature/service/{serviceName}/partner/{partnerName}",
-    description: "Check the enablement status of a specific carrier partner for a given feature service.",
-    headers: [{ key: "Accept", value: "application/json" }],
-    responseBody: `{
-  "name": "att",
-  "status": "Enable-Completed"
-}`,
-    responseStatus: 200,
-    product: ["common"]
-  },
-  {
     id: "delete-feature",
     category: "Features",
     name: "Delete Features",
