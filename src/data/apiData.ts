@@ -720,13 +720,13 @@ export const apiEndpoints: ApiEndpoint[] = [
     method: "POST",
     path: "/ccid/media/v1/admin/account/{accountId}/image",
     description: "Upload an image via URL to the image service. The image is processed and stored internally. Save the returned image_id — it will be used when creating an image profile.",
-    imageRequirements: ["Image must be exactly 256×256 pixels", "Image must be in BMP format", "Image file size must be less than 270 KB"],
+    imageRequirements: ["Image must be exactly 256×256 pixels", "Image must be in BMP, JPG, or PNG format", "Image file size must be less than 270 KB"],
     errorBody: `{
   "error": "IMAGE_VALIDATION_FAILED",
   "message": "Image does not meet requirements",
   "details": [
     "Image must be exactly 256x256 pixels",
-    "Image must be in BMP format",
+    "Image must be in BMP, JPG, or PNG format",
     "Image must be less than 270KB in size"
   ]
 }`,
