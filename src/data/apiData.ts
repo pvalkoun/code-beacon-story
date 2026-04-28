@@ -726,7 +726,7 @@ export const apiEndpoints: ApiEndpoint[] = [
   "message": "Image does not meet requirements",
   "details": [
     "Image must be exactly 256x256 pixels",
-    "Image must be in BMP format",
+    "Image must be in BMP, JPG, or PNG format",
     "Image must be less than 270KB in size"
   ]
 }`,
