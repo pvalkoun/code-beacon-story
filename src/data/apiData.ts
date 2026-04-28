@@ -108,12 +108,47 @@ export const apiEndpoints: ApiEndpoint[] = [
     }
   ],
   "child_account_enabled": false,
+  "domain": "user.com",
+  "comment": "example for tech enabler setup",
+  "contact": [
+    {
+      "first_name": "james",
+      "last_name": "bond",
+      "email": "james.bond@007.com",
+      "phone": "+1.2232146979",
+      "type": "PRIMARY"
+    },
+    {
+      "first_name": "charlie",
+      "last_name": "bond",
+      "email": "acme@acme.com",
+      "phone": "+1.1134567890",
+      "type": "SECONDARY"
+    }
+  ],
+  "address": {
+    "street": "123 Main st",
+    "city": "Sterling",
+    "postal_code": "20123",
+    "state_or_province": "VA",
+    "country_code": "US"
+  },
   "start_date": "Fri, 4 Apr 2025 18:18:49 GMT",
   "end_date": "Sat, 4 Apr 2026 18:18:49 GMT",
   "application": [
     "CCID",
     "TCS"
-  ]
+  ],
+  "ein": "123456789",
+  "duns": "923456789",
+  "name_alias": [
+    "name alias2",
+    "name alias1"
+  ],
+  "vetting": {
+    "status": "PREVETTED",
+    "status_timestamp": "Fri, 4 Apr 2025 18:18:49 GMT"
+  }
 }`,
     responseBody: `{
   "id": "xi0vhua3b4",
@@ -136,12 +171,47 @@ export const apiEndpoints: ApiEndpoint[] = [
     }
   ],
   "child_account_enabled": false,
+  "domain": "user.com",
+  "comment": "example for tech enabler setup",
+  "contact": [
+    {
+      "first_name": "james",
+      "last_name": "bond",
+      "email": "james.bond@007.com",
+      "phone": "+1.2232146979",
+      "type": "PRIMARY"
+    },
+    {
+      "first_name": "charlie",
+      "last_name": "bond",
+      "email": "acme@acme.com",
+      "phone": "+1.1134567890",
+      "type": "SECONDARY"
+    }
+  ],
+  "address": {
+    "street": "123 Main st",
+    "city": "Sterling",
+    "postal_code": "20123",
+    "state_or_province": "VA",
+    "country_code": "US"
+  },
   "start_date": "Fri, 4 Apr 2025 18:18:49 GMT",
   "end_date": "Sat, 4 Apr 2026 18:18:49 GMT",
   "application": [
     "CCID",
     "TCS"
   ],
+  "ein": "123456789",
+  "duns": "923456789",
+  "name_alias": [
+    "name alias2",
+    "name alias1"
+  ],
+  "vetting": {
+    "status": "PREVETTED",
+    "status_timestamp": "Fri, 4 Apr 2025 18:18:49 GMT"
+  },
   "created_by": "user_v4_api_prod",
   "created_date": "Mon, 23 Mar 2026 16:42:42 GMT",
   "updated_by": "user_v4_api_prod",
