@@ -938,7 +938,7 @@ For more information, see https://radix-ui.com/primitives/docs/components/${t.do
   "created_date": "Fri, 20 Feb 2026 20:31:49 GMT",
   "updated_by": "user",
   "updated_date": "Wed, 25 Feb 2026 21:47:19 GMT"
-}`,responseStatus:200,product:["common"]},{id:"update-feature",category:"Features",name:"Update Features",method:"POST",path:"/ccid/sdpr/v4/admin/account/{accountId}/feature",description:"Update features on an account. Uses the same POST endpoint and full body shape as Attach Features (PUT-style — supply the complete desired feature and service set). Use this to add features, modify carrier partner enablement (Enable/Disable/Suspend/Resume), or change configuration. Partner status transitions: Enable-Requested, Disable-Requested, Suspend-Requested, Resume-Requested. MFA-ORIGID and ORIG-POLICY do not require partner distribution.",headers:[{key:"Content-Type",value:"application/json"},{key:"Accept",value:"application/json"}],requestBody:`{
+}`,responseStatus:200,product:["common"]},{id:"update-feature",category:"Features",name:"Update Features",method:"POST",path:"/ccid/sdpr/v4/admin/account/{accountId}/feature",description:"Update features on an account. Uses the same POST endpoint and full body shape as Attach Features (PUT-style — supply the complete desired feature and service set). Use this to add features, modify carrier partner enablement (Enable/Disable/Suspend/Resume), or change configuration. Valid features: AUTH-ONLY, RICH-BCD, AUTH-BCD, NAME-BCD, SPOOF-CALL-PROTECTION, CNO, MFA-TN, MFA-ORIGID, ORIG-POLICY. Partner status transitions: Enable-Requested, Disable-Requested, Suspend-Requested, Resume-Requested. MFA-TN, MFA-ORIGID, and ORIG-POLICY do not require partner distribution.",headers:[{key:"Content-Type",value:"application/json"},{key:"Accept",value:"application/json"}],requestBody:`{
   "feature": [
     "AUTH-ONLY",
     "RICH-BCD",
@@ -946,6 +946,7 @@ For more information, see https://radix-ui.com/primitives/docs/components/${t.do
     "NAME-BCD",
     "SPOOF-CALL-PROTECTION",
     "CNO",
+    "MFA-TN",
     "MFA-ORIGID",
     "ORIG-POLICY"
   ],
@@ -1037,6 +1038,7 @@ For more information, see https://radix-ui.com/primitives/docs/components/${t.do
     "NAME-BCD",
     "SPOOF-CALL-PROTECTION",
     "CNO",
+    "MFA-TN",
     "MFA-ORIGID",
     "ORIG-POLICY"
   ],
