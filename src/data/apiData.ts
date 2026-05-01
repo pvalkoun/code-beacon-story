@@ -519,6 +519,15 @@ export const apiEndpoints: ApiEndpoint[] = [
   ],
   "service": [
     {
+      "name": "AUTH-ONLY",
+      "partner": [
+        {
+          "name": "att",
+          "status": "Enable-Requested"
+        }
+      ]
+    },
+    {
       "name": "SPOOF-CALL-PROTECTION",
       "partner": [
         {
