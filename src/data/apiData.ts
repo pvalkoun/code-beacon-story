@@ -792,7 +792,6 @@ export const apiEndpoints: ApiEndpoint[] = [
     "NAME-BCD",
     "SPOOF-CALL-PROTECTION",
     "CNO",
-    "MFA-TN",
     "MFA-ORIGID",
     "ORIG-POLICY"
   ],
@@ -803,14 +802,6 @@ export const apiEndpoints: ApiEndpoint[] = [
         { "name": "att", "status": "Disable-Requested" },
         { "name": "tmobile", "status": "Suspend-Requested" },
         { "name": "verizon", "status": "Resume-Requested" }
-      ]
-    },
-    {
-      "name": "MFA-TN",
-      "partner": [
-        { "name": "att", "status": "Enable-Requested" },
-        { "name": "tmobile", "status": "Enable-Requested" },
-        { "name": "verizon", "status": "Enable-Requested" }
       ]
     }
   ]
@@ -824,7 +815,6 @@ export const apiEndpoints: ApiEndpoint[] = [
     "NAME-BCD",
     "SPOOF-CALL-PROTECTION",
     "CNO",
-    "MFA-TN",
     "MFA-ORIGID",
     "ORIG-POLICY"
   ],
@@ -835,14 +825,6 @@ export const apiEndpoints: ApiEndpoint[] = [
         { "name": "att", "status": "Disable-Requested" },
         { "name": "tmobile", "status": "Suspend-Requested" },
         { "name": "verizon", "status": "Resume-Requested" }
-      ]
-    },
-    {
-      "name": "MFA-TN",
-      "partner": [
-        { "name": "att", "status": "Enable-Requested" },
-        { "name": "tmobile", "status": "Enable-Requested" },
-        { "name": "verizon", "status": "Enable-Requested" }
       ]
     }
   ],

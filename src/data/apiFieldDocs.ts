@@ -257,9 +257,9 @@ export const endpointFieldDocs: Record<string, EndpointFieldDocs> = {
       { path: "accountId", type: "String", required: true, description: "Unique identifier of the account", constraints: "Length between 4 and 10" },
     ],
     requestFields: [
-      { path: "feature[]", type: "Array", required: true, description: "Full desired list of feature types on the account", use: "AUTH-ONLY, RICH-BCD, AUTH-BCD, NAME-BCD, SPOOF-CALL-PROTECTION, CNO, MFA-TN, MFA-ORIGID, ORIG-POLICY", restrictedValues: "DNO" },
-      { path: "service[]", type: "Array", required: false, description: "Service objects defining carrier partner state changes", use: "Include only the services whose partner status is being updated" },
-      { path: "service[].name", type: "String", required: true, description: "The service/feature name being updated", use: "SPOOF-CALL-PROTECTION, AUTH-BCD, RICH-BCD, NAME-BCD, AUTH-ONLY, CNO, MFA-TN, MFA-ORIGID, ORIG-POLICY" },
+      { path: "feature[]", type: "Array", required: true, description: "Full desired list of feature types on the account", use: "AUTH-ONLY, RICH-BCD, AUTH-BCD, NAME-BCD, SPOOF-CALL-PROTECTION, CNO, MFA-ORIGID, ORIG-POLICY", restrictedValues: "DNO" },
+      { path: "service[]", type: "Array", required: false, description: "Service objects defining carrier partner state changes", use: "Include only the services whose partner status is being updated. Not applicable to MFA-ORIGID or ORIG-POLICY." },
+      { path: "service[].name", type: "String", required: true, description: "The service/feature name being updated", use: "SPOOF-CALL-PROTECTION, AUTH-BCD, RICH-BCD, NAME-BCD, AUTH-ONLY, CNO" },
       { path: "service[].partner[]", type: "Array", required: true, description: "Partner configuration entries to update" },
       { path: "service[].partner[].name", type: "String", required: true, description: "Carrier partner name", use: "att, verizon, tmobile" },
       { path: "service[].partner[].status", type: "String", required: true, description: "Requested partner status transition", use: "Enable-Requested, Disable-Requested, Suspend-Requested, Resume-Requested" },
