@@ -519,6 +519,15 @@ export const apiEndpoints: ApiEndpoint[] = [
   ],
   "service": [
     {
+      "name": "AUTH-ONLY",
+      "partner": [
+        {
+          "name": "att",
+          "status": "Enable-Requested"
+        }
+      ]
+    },
+    {
       "name": "SPOOF-CALL-PROTECTION",
       "partner": [
         {
@@ -602,6 +611,15 @@ export const apiEndpoints: ApiEndpoint[] = [
     "ORIG-POLICY"
   ],
   "service": [
+    {
+      "name": "AUTH-ONLY",
+      "partner": [
+        {
+          "name": "att",
+          "status": "Enable-Requested"
+        }
+      ]
+    },
     {
       "name": "SPOOF-CALL-PROTECTION",
       "partner": [
@@ -700,6 +718,15 @@ export const apiEndpoints: ApiEndpoint[] = [
   ],
   "service": [
     {
+      "name": "AUTH-ONLY",
+      "partner": [
+        {
+          "name": "att",
+          "status": "Enable-Completed"
+        }
+      ]
+    },
+    {
       "name": "SPOOF-CALL-PROTECTION",
       "partner": [
         {
@@ -797,6 +824,15 @@ export const apiEndpoints: ApiEndpoint[] = [
   ],
   "service": [
     {
+      "name": "AUTH-ONLY",
+      "partner": [
+        {
+          "name": "att",
+          "status": "Enable-Completed"
+        }
+      ]
+    },
+    {
       "name": "SPOOF-CALL-PROTECTION",
       "partner": [
         {
@@ -879,6 +915,15 @@ export const apiEndpoints: ApiEndpoint[] = [
     "ORIG-POLICY"
   ],
   "service": [
+    {
+      "name": "AUTH-ONLY",
+      "partner": [
+        {
+          "name": "att",
+          "status": "Enable-Completed"
+        }
+      ]
+    },
     {
       "name": "SPOOF-CALL-PROTECTION",
       "partner": [
