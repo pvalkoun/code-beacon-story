@@ -693,7 +693,10 @@ export const apiEndpoints: ApiEndpoint[] = [
     "AUTH-BCD",
     "NAME-BCD",
     "SPOOF-CALL-PROTECTION",
-    "CNO"
+    "CNO",
+    "MFA-TN",
+    "MFA-ORIGID",
+    "ORIG-POLICY"
   ],
   "service": [
     {
