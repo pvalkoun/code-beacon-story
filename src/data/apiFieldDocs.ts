@@ -276,6 +276,7 @@ export const endpointFieldDocs: Record<string, EndpointFieldDocs> = {
     ],
   },
 
+  "delete-feature": {
     pathParams: [
       { path: "accountId", type: "String", required: true, description: "Unique identifier of the account", constraints: "All caller profiles and TN assets must be removed first. Partner statuses must not be in *-Requested or *-Processing states." },
     ],
