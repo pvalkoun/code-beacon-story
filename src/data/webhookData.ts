@@ -847,5 +847,5 @@ If your endpoint continues to fail after the cool-off period, delivery may be su
 
 For assistance, please contact TransUnion Support.
 
-— TransUnion TruContact Trusted Call Solutions`,
+— TransUnion Trusted Call Solutions`,
 };

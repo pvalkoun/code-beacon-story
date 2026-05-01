@@ -50,12 +50,12 @@ export const integrations: Integration[] = [
     id: "five9",
     name: "Five9 Integration",
     platform: "Five9",
-    description: "Native integration between TransUnion TruContact Solutions and Five9 — all configuration is managed directly within the Five9 portal with no custom development required.",
+    description: "Native integration between TransUnion Trusted Call Solutions and Five9 — all configuration is managed directly within the Five9 portal with no custom development required.",
     products: ["scp", "bcd"],
     sections: [
       {
         title: "Overview",
-        content: "Five9 is a leading cloud contact center platform trusted by thousands of enterprises worldwide. Founded in 2001 and headquartered in San Jose, California, Five9 provides a comprehensive suite of cloud-based contact center software including inbound, outbound, and blended omnichannel solutions powered by AI and automation.\n\nTransUnion and Five9 have partnered to deliver a tight, native integration for TruContact Caller Identity solutions. Unlike other platforms that require custom middleware, serverless functions, or webhook handlers, the Five9 integration is fully managed within the Five9 portal — no custom code, no external hosting, and no additional infrastructure to maintain."
+        content: "Five9 is a leading cloud contact center platform trusted by thousands of enterprises worldwide. Founded in 2001 and headquartered in San Jose, California, Five9 provides a comprehensive suite of cloud-based contact center software including inbound, outbound, and blended omnichannel solutions powered by AI and automation.\n\nTransUnion and Five9 have partnered to deliver a tight, native integration for Trusted Call Solutions Caller Identity. Unlike other platforms that require custom middleware, serverless functions, or webhook handlers, the Five9 integration is fully managed within the Five9 portal — no custom code, no external hosting, and no additional infrastructure to maintain."
       },
       {
         title: "Why Five9 + TransUnion?",

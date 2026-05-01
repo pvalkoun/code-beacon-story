@@ -24,7 +24,7 @@ const PreCallAuth = () => {
       <div className="flex items-start gap-3 p-4 mb-6 rounded-lg border border-accent bg-accent/10">
         <AlertTriangle className="h-5 w-5 text-accent-foreground mt-0.5 shrink-0" />
         <div>
-          <p className="font-semibold text-sm mb-2 !mt-0">Required for all TruContact products</p>
+          <p className="font-semibold text-sm mb-2 !mt-0">Required for all Trusted Call Solutions products</p>
           <p className="text-sm !mb-0">
             Every outbound call must be authenticated through the CCID service before{" "}
             <Link to="/products/scp" className="text-primary hover:underline">Spoofed Call Protection</Link> or{" "}

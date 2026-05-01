@@ -24,9 +24,9 @@ export const products: Product[] = [
   {
     id: "pca",
     name: "Call Authentication",
-    fullName: "TruContact Call Authentication (CCID)",
+    fullName: "Call Authentication (CCID)",
     tagline: "Verify caller identity in real-time using STIR/SHAKEN before every call",
-    description: "Call Authentication (PCA) is a standards-based REST API for verifying caller identity using IETF RFC 8224 and the ATIS SHAKEN framework. It is a prerequisite for both Spoofed Call Protection and Branded Call Display — every outbound call must be authenticated through the CCID service before any TruContact features can take effect.",
+    description: "Call Authentication (PCA) is a standards-based REST API for verifying caller identity using IETF RFC 8224 and the ATIS SHAKEN framework. It is a prerequisite for both Spoofed Call Protection and Branded Call Display — every outbound call must be authenticated through the CCID service before any Trusted Call Solutions features can take effect.",
     benefits: [
       "Required prerequisite for SCP and BCD to function",
       "Real-time caller identity verification using STIR/SHAKEN",
@@ -109,7 +109,7 @@ export const products: Product[] = [
   {
     id: "bcd",
     name: "Branded Call Display",
-    fullName: "TruContact Branded Call Display",
+    fullName: "Branded Call Display",
     tagline: "Improve customer engagement by adding rich branded content to the mobile call display",
     description: "Branded Call Display (BCD) enhances outbound calls with rich visual content displayed on the recipient's mobile device. This includes your company logo, business name, call reason, and other contextual information that helps recipients identify and trust your calls, dramatically improving answer rates.",
     benefits: [
@@ -189,7 +189,7 @@ export const products: Product[] = [
   {
     id: "scp",
     name: "Spoofed Call Protection",
-    fullName: "TruContact Spoofed Call Protection",
+    fullName: "Spoofed Call Protection",
     tagline: "Digitally sign outbound calls to prevent fraudsters from spoofing your numbers",
     description: "Spoofed Call Protection (SCP) uses STIR/SHAKEN technology to digitally sign your outbound calls, proving to carriers and call recipients that the call genuinely originates from your organization. This prevents bad actors from spoofing your phone numbers to conduct fraud, protecting both your brand reputation and your customers.",
     benefits: [

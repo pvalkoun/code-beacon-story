@@ -7,7 +7,7 @@ const Index = () => {
   return (
     <div className="docs-prose">
       <div className="mb-10">
-        <h1 className="text-4xl font-bold mb-3">TruContact Trusted Call Solutions</h1>
+        <h1 className="text-4xl font-bold mb-3">Trusted Call Solutions</h1>
         <p className="text-lg text-muted-foreground max-w-2xl">
           Transform the call experience to improve engagement, ensure legitimate calls get through,
           and protect customers against fraud.
