@@ -503,7 +503,7 @@ export const apiEndpoints: ApiEndpoint[] = [
     name: "Attach Features",
     method: "POST",
     path: "/ccid/sdpr/v4/admin/account/{accountId}/feature",
-    description: "Attach features to an account. Multiple feature types (AUTH-ONLY, RICH-BCD, AUTH-BCD, NAME-BCD, SPOOF-CALL-PROTECTION) and their carrier partner configurations can be set in a single request.",
+    description: "Attach features to an account. Multiple feature types (AUTH-ONLY, RICH-BCD, AUTH-BCD, NAME-BCD, SPOOF-CALL-PROTECTION, CNO, MFA-TN, MFA-ORIGID, ORIG-POLICY) and their carrier partner configurations can be set in a single request.",
     headers: [{ key: "Content-Type", value: "application/json" }, { key: "Accept", value: "application/json" }],
     requestBody: `{
   "feature": [
@@ -512,7 +512,10 @@ export const apiEndpoints: ApiEndpoint[] = [
     "AUTH-BCD",
     "NAME-BCD",
     "SPOOF-CALL-PROTECTION",
-    "CNO"
+    "CNO",
+    "MFA-TN",
+    "MFA-ORIGID",
+    "ORIG-POLICY"
   ],
   "service": [
     {
