@@ -271,11 +271,11 @@ const bcdFields = [
 ];
 
 const scpFields = [
-  { name: "signed", type: "integer", description: "Total signed calls" },
+  { name: "signed", type: "integer", description: "Total calls received from the enterprise regardless of termination network (MNO, MVNO, landline)" },
   { name: "service_providers[].service_provider_name", type: "string", description: "Carrier name" },
-  { name: "service_providers[].deposited", type: "integer", description: "Total deposited calls to the carrier" },
-  { name: "service_providers[].authenticated", type: "number", description: "Total successfully authenticated calls" },
-  { name: "service_providers[].blocked", type: "integer", description: "Total calls blocked by the carrier" },
+  { name: "service_providers[].deposited", type: "integer", description: "Total deposited calls to the carrier (limited to MNOs & MVNOs)" },
+  { name: "service_providers[].authenticated", type: "number", description: "Total successfully authenticated calls (limited to MNOs and select MVNOs)" },
+  { name: "service_providers[].blocked", type: "number", description: "Total Blocked Calls" },
 ];
 
 function ResponseFieldsTable({ fields }: { fields: { name: string; type: string; description: string }[] }) {
