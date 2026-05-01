@@ -503,7 +503,7 @@ export const apiEndpoints: ApiEndpoint[] = [
     name: "Attach Features",
     method: "POST",
     path: "/ccid/sdpr/v4/admin/account/{accountId}/feature",
-    description: "Attach features to an account. Multiple feature types (AUTH-ONLY, RICH-BCD, AUTH-BCD, NAME-BCD, SPOOF-CALL-PROTECTION) and their carrier partner configurations can be set in a single request.",
+    description: "Attach features to an account. Multiple feature types (AUTH-ONLY, RICH-BCD, AUTH-BCD, NAME-BCD, SPOOF-CALL-PROTECTION, CNO, MFA-TN, MFA-ORIGID, ORIG-POLICY) and their carrier partner configurations can be set in a single request.",
     headers: [{ key: "Content-Type", value: "application/json" }, { key: "Accept", value: "application/json" }],
     requestBody: `{
   "feature": [
@@ -512,7 +512,10 @@ export const apiEndpoints: ApiEndpoint[] = [
     "AUTH-BCD",
     "NAME-BCD",
     "SPOOF-CALL-PROTECTION",
-    "CNO"
+    "CNO",
+    "MFA-TN",
+    "MFA-ORIGID",
+    "ORIG-POLICY"
   ],
   "service": [
     {
@@ -593,7 +596,10 @@ export const apiEndpoints: ApiEndpoint[] = [
     "AUTH-BCD",
     "NAME-BCD",
     "SPOOF-CALL-PROTECTION",
-    "CNO"
+    "CNO",
+    "MFA-TN",
+    "MFA-ORIGID",
+    "ORIG-POLICY"
   ],
   "service": [
     {
@@ -687,7 +693,10 @@ export const apiEndpoints: ApiEndpoint[] = [
     "AUTH-BCD",
     "NAME-BCD",
     "SPOOF-CALL-PROTECTION",
-    "CNO"
+    "CNO",
+    "MFA-TN",
+    "MFA-ORIGID",
+    "ORIG-POLICY"
   ],
   "service": [
     {
@@ -756,6 +765,84 @@ export const apiEndpoints: ApiEndpoint[] = [
           "name": "verizon",
           "status": "Enable-Completed"
         }
+      ]
+    }
+  ],
+  "created_by": "user_v4_api_prod",
+  "created_date": "Fri, 20 Feb 2026 20:31:49 GMT",
+  "updated_by": "user",
+  "updated_date": "Wed, 25 Feb 2026 21:47:19 GMT"
+}`,
+    responseStatus: 200,
+    product: ["common"]
+  },
+  {
+    id: "update-feature",
+    category: "Features",
+    name: "Update Features",
+    method: "POST",
+    path: "/ccid/sdpr/v4/admin/account/{accountId}/feature",
+    description: "Update features on an account. Use the same POST endpoint to add additional features, modify carrier partner enablement (Enable/Disable/Suspend/Resume), or change configuration for existing features. The full desired feature and service set should be supplied; partner statuses can transition through Enable-Requested, Disable-Requested, Suspend-Requested, or Resume-Requested.",
+    headers: [{ key: "Content-Type", value: "application/json" }, { key: "Accept", value: "application/json" }],
+    requestBody: `{
+  "feature": [
+    "AUTH-ONLY",
+    "RICH-BCD",
+    "AUTH-BCD",
+    "NAME-BCD",
+    "SPOOF-CALL-PROTECTION",
+    "CNO",
+    "MFA-TN",
+    "MFA-ORIGID",
+    "ORIG-POLICY"
+  ],
+  "service": [
+    {
+      "name": "SPOOF-CALL-PROTECTION",
+      "partner": [
+        { "name": "att", "status": "Disable-Requested" },
+        { "name": "tmobile", "status": "Suspend-Requested" },
+        { "name": "verizon", "status": "Resume-Requested" }
+      ]
+    },
+    {
+      "name": "MFA-TN",
+      "partner": [
+        { "name": "att", "status": "Enable-Requested" },
+        { "name": "tmobile", "status": "Enable-Requested" },
+        { "name": "verizon", "status": "Enable-Requested" }
+      ]
+    }
+  ]
+}`,
+    responseBody: `{
+  "account_id": "x59tj8rtv1",
+  "feature": [
+    "AUTH-ONLY",
+    "RICH-BCD",
+    "AUTH-BCD",
+    "NAME-BCD",
+    "SPOOF-CALL-PROTECTION",
+    "CNO",
+    "MFA-TN",
+    "MFA-ORIGID",
+    "ORIG-POLICY"
+  ],
+  "service": [
+    {
+      "name": "SPOOF-CALL-PROTECTION",
+      "partner": [
+        { "name": "att", "status": "Disable-Requested" },
+        { "name": "tmobile", "status": "Suspend-Requested" },
+        { "name": "verizon", "status": "Resume-Requested" }
+      ]
+    },
+    {
+      "name": "MFA-TN",
+      "partner": [
+        { "name": "att", "status": "Enable-Requested" },
+        { "name": "tmobile", "status": "Enable-Requested" },
+        { "name": "verizon", "status": "Enable-Requested" }
       ]
     }
   ],
