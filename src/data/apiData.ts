@@ -809,7 +809,7 @@ export const apiEndpoints: ApiEndpoint[] = [
     name: "Update Features",
     method: "POST",
     path: "/ccid/sdpr/v4/admin/account/{accountId}/feature",
-    description: "Update features on an account. Uses the same POST endpoint and full body shape as Attach Features (PUT-style — supply the complete desired feature and service set). Use this to add features, modify carrier partner enablement (Enable/Disable/Suspend/Resume), or change configuration. Partner status transitions: Enable-Requested, Disable-Requested, Suspend-Requested, Resume-Requested. MFA-ORIGID and ORIG-POLICY do not require partner distribution.",
+    description: "Update features on an account. Uses the same POST endpoint and full body shape as Attach Features (PUT-style — supply the complete desired feature and service set). Use this to add features, modify carrier partner enablement (Enable/Disable/Suspend/Resume), or change configuration. Valid features: AUTH-ONLY, RICH-BCD, AUTH-BCD, NAME-BCD, SPOOF-CALL-PROTECTION, CNO, MFA-TN, MFA-ORIGID, ORIG-POLICY. Partner status transitions: Enable-Requested, Disable-Requested, Suspend-Requested, Resume-Requested. MFA-TN, MFA-ORIGID, and ORIG-POLICY do not require partner distribution.",
     headers: [{ key: "Content-Type", value: "application/json" }, { key: "Accept", value: "application/json" }],
     requestBody: `{
   "feature": [
@@ -819,6 +819,7 @@ export const apiEndpoints: ApiEndpoint[] = [
     "NAME-BCD",
     "SPOOF-CALL-PROTECTION",
     "CNO",
+    "MFA-TN",
     "MFA-ORIGID",
     "ORIG-POLICY"
   ],
@@ -911,6 +912,7 @@ export const apiEndpoints: ApiEndpoint[] = [
     "NAME-BCD",
     "SPOOF-CALL-PROTECTION",
     "CNO",
+    "MFA-TN",
     "MFA-ORIGID",
     "ORIG-POLICY"
   ],
