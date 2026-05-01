@@ -15,7 +15,7 @@ export default function WebhookOverview() {
 
 
       <p>
-        Webhooks allow you to subscribe to event notifications from the TruContact Trusted Call
+        Webhooks allow you to subscribe to event notifications from the Trusted Call
         Solutions platform. When important changes occur, TransUnion automatically sends event
         payloads to your secure HTTPS endpoint, enabling your systems to react instantly.
       </p>
