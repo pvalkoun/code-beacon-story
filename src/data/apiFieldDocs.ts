@@ -252,7 +252,30 @@ export const endpointFieldDocs: Record<string, EndpointFieldDocs> = {
     ],
   },
 
-  "delete-feature": {
+  "update-feature": {
+    pathParams: [
+      { path: "accountId", type: "String", required: true, description: "Unique identifier of the account", constraints: "Length between 4 and 10" },
+    ],
+    requestFields: [
+      { path: "feature[]", type: "Array", required: true, description: "Full desired list of feature types on the account", use: "AUTH-ONLY, RICH-BCD, AUTH-BCD, NAME-BCD, SPOOF-CALL-PROTECTION, CNO, MFA-TN, MFA-ORIGID, ORIG-POLICY", restrictedValues: "DNO" },
+      { path: "service[]", type: "Array", required: false, description: "Service objects defining carrier partner state changes", use: "Include only the services whose partner status is being updated" },
+      { path: "service[].name", type: "String", required: true, description: "The service/feature name being updated", use: "SPOOF-CALL-PROTECTION, AUTH-BCD, RICH-BCD, NAME-BCD, AUTH-ONLY, CNO, MFA-TN, MFA-ORIGID, ORIG-POLICY" },
+      { path: "service[].partner[]", type: "Array", required: true, description: "Partner configuration entries to update" },
+      { path: "service[].partner[].name", type: "String", required: true, description: "Carrier partner name", use: "att, verizon, tmobile" },
+      { path: "service[].partner[].status", type: "String", required: true, description: "Requested partner status transition", use: "Enable-Requested, Disable-Requested, Suspend-Requested, Resume-Requested" },
+    ],
+    responseFields: [
+      { path: "account_id", type: "String", required: true, description: "The account identifier" },
+      { path: "feature[]", type: "Array", required: true, description: "Updated list of attached features" },
+      { path: "service[]", type: "Array", required: true, description: "Updated service configuration with partner statuses" },
+      { path: "service[].partner[].status", type: "String", required: true, description: "Current partner status after processing", constraints: "Transitions through *-Requested → *-Processing → *-Completed (or *-Failed)" },
+      { path: "created_by", type: "String", required: true, description: "User who originally created the feature attachment" },
+      { path: "created_date", type: "DateTime", required: true, description: "Original creation timestamp", constraints: "RFC 1123 format" },
+      { path: "updated_by", type: "String", required: true, description: "User who performed this update" },
+      { path: "updated_date", type: "DateTime", required: true, description: "Last update timestamp", constraints: "RFC 1123 format" },
+    ],
+  },
+
     pathParams: [
       { path: "accountId", type: "String", required: true, description: "Unique identifier of the account", constraints: "All caller profiles and TN assets must be removed first. Partner statuses must not be in *-Requested or *-Processing states." },
     ],
