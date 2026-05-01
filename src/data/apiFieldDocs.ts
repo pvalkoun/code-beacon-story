@@ -533,7 +533,7 @@ export const endpointFieldDocs: Record<string, EndpointFieldDocs> = {
       { path: "accountId", type: "String", required: true, description: "Unique identifier of the account", constraints: "Length between 4 and 10" },
     ],
     requestFields: [
-      { path: "full_ownership", type: "Boolean", required: true, description: "Whether the TN is fully owned by the customer (carrier-vetted)", use: "TRUE", restrictedValues: "FALSE (use Create TN Asset BYOC instead)" },
+      { path: "full_ownership", type: "Boolean", required: false, description: "Whether the TN is fully owned by the customer (carrier-vetted). Defaults to true when omitted.", use: "TRUE", restrictedValues: "FALSE (use Create TN Asset BYOC instead)" },
       { path: "tn.orig.start", type: "String", required: true, description: "Telephone number in E.164 format", use: "Format: +[0-9]{1,3}.[0-9]{1,14}" },
       { path: "caller_profile_id", type: "String", required: true, description: "ID of the caller profile to associate with this TN", use: "Must reference a valid caller profile on the account" },
       { path: "label[]", type: "Array", required: false, description: "User-defined labels to categorize/track telephone numbers", use: "Up to 5 labels, each 1-60 characters. Use $ as separator for structured labels" },
