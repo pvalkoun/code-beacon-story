@@ -405,7 +405,7 @@ export function generateWebhookOpenApiSpec(): Record<string, unknown> {
       title: "TransUnion TCS — Webhook Notifications API",
       version: "1.0.0",
       description:
-        "Webhook configuration, encryption, testing, and delivery log APIs for the TransUnion TruContact Trusted Call Solutions platform. Includes the inbound event delivery contract pushed to your registered HTTPS endpoint.",
+        "Webhook configuration, encryption, testing, and delivery log APIs for the TransUnion Trusted Call Solutions platform. Includes the inbound event delivery contract pushed to your registered HTTPS endpoint.",
       contact: {
         name: "TransUnion Customer Support",
         email: "calleridsupport@transunion.com",

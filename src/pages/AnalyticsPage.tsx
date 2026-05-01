@@ -309,7 +309,7 @@ export default function AnalyticsPage() {
       <div className="mb-10">
         <h1 className="text-3xl font-bold mb-3">Analytics API</h1>
         <p className="text-lg text-muted-foreground max-w-3xl">
-          The Analytics API provides visibility into call performance metrics across your TruContact services.
+          The Analytics API provides visibility into call performance metrics across your Trusted Call Solutions services.
           Query per-TN or account-wide analytics for Branded Call Display (BCD) and Spoofed Call Protection (SCP),
           including answer rates, call durations, signing volumes, and per-carrier breakdowns.
         </p>

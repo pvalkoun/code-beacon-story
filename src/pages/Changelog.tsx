@@ -50,7 +50,7 @@ export default function Changelog() {
     <div className="docs-prose">
       <h1>Changelog</h1>
       <p className="text-lg text-muted-foreground">
-        Recent updates and additions to the TruContact Solutions API platform.
+        Recent updates and additions to the Trusted Call Solutions API platform.
       </p>
 
       <div className="space-y-6 not-prose mt-6">
