@@ -855,6 +855,7 @@ export const apiEndpoints: ApiEndpoint[] = [
     product: ["common"]
   },
   {
+    id: "delete-feature",
     category: "Features",
     name: "Delete Features",
     method: "DELETE",
