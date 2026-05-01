@@ -777,7 +777,84 @@ export const apiEndpoints: ApiEndpoint[] = [
     product: ["common"]
   },
   {
-    id: "delete-feature",
+    id: "update-feature",
+    category: "Features",
+    name: "Update Features",
+    method: "POST",
+    path: "/ccid/sdpr/v4/admin/account/{accountId}/feature",
+    description: "Update features on an account. Use the same POST endpoint to add additional features, modify carrier partner enablement (Enable/Disable/Suspend/Resume), or change configuration for existing features. The full desired feature and service set should be supplied; partner statuses can transition through Enable-Requested, Disable-Requested, Suspend-Requested, or Resume-Requested.",
+    headers: [{ key: "Content-Type", value: "application/json" }, { key: "Accept", value: "application/json" }],
+    requestBody: `{
+  "feature": [
+    "AUTH-ONLY",
+    "RICH-BCD",
+    "AUTH-BCD",
+    "NAME-BCD",
+    "SPOOF-CALL-PROTECTION",
+    "CNO",
+    "MFA-TN",
+    "MFA-ORIGID",
+    "ORIG-POLICY"
+  ],
+  "service": [
+    {
+      "name": "SPOOF-CALL-PROTECTION",
+      "partner": [
+        { "name": "att", "status": "Disable-Requested" },
+        { "name": "tmobile", "status": "Suspend-Requested" },
+        { "name": "verizon", "status": "Resume-Requested" }
+      ]
+    },
+    {
+      "name": "MFA-TN",
+      "partner": [
+        { "name": "att", "status": "Enable-Requested" },
+        { "name": "tmobile", "status": "Enable-Requested" },
+        { "name": "verizon", "status": "Enable-Requested" }
+      ]
+    }
+  ]
+}`,
+    responseBody: `{
+  "account_id": "x59tj8rtv1",
+  "feature": [
+    "AUTH-ONLY",
+    "RICH-BCD",
+    "AUTH-BCD",
+    "NAME-BCD",
+    "SPOOF-CALL-PROTECTION",
+    "CNO",
+    "MFA-TN",
+    "MFA-ORIGID",
+    "ORIG-POLICY"
+  ],
+  "service": [
+    {
+      "name": "SPOOF-CALL-PROTECTION",
+      "partner": [
+        { "name": "att", "status": "Disable-Requested" },
+        { "name": "tmobile", "status": "Suspend-Requested" },
+        { "name": "verizon", "status": "Resume-Requested" }
+      ]
+    },
+    {
+      "name": "MFA-TN",
+      "partner": [
+        { "name": "att", "status": "Enable-Requested" },
+        { "name": "tmobile", "status": "Enable-Requested" },
+        { "name": "verizon", "status": "Enable-Requested" }
+      ]
+    }
+  ],
+  "created_by": "user_v4_api_prod",
+  "created_date": "Fri, 20 Feb 2026 20:31:49 GMT",
+  "updated_by": "user",
+  "updated_date": "Wed, 25 Feb 2026 21:47:19 GMT"
+}`,
+    responseStatus: 200,
+    product: ["common"]
+  },
+  {
     category: "Features",
     name: "Delete Features",
     method: "DELETE",
