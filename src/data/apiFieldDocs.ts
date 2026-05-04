@@ -367,6 +367,12 @@ export const endpointFieldDocs: Record<string, EndpointFieldDocs> = {
     ],
   },
 
+  "list-image": {
+    pathParams: [
+      { path: "accountId", type: "String", required: true, description: "Unique identifier of the account", constraints: "Length between 4 and 10" },
+    ],
+  },
+
   "view-image": {
     pathParams: [
       { path: "accountId", type: "String", required: true, description: "Unique identifier of the account (from the `image_url`)" },
