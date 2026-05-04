@@ -525,7 +525,7 @@ function ApiCategoryAccordion({
                   {isOpen ? <ChevronDown className="h-3 w-3" /> : <ChevronRight className="h-3 w-3" />}
                 </button>
                 {isOpen && catEndpoints.map(ep => {
-                  const isNew = productId === "bcd" && (ep.id === "create-image" || ep.id === "get-image" || ep.id === "delete-image" || ep.id === "create-image-profile" || ep.id === "get-image-profile" || ep.id === "delete-image-profile");
+                  const isNew = productId === "bcd" && (ep.id === "create-image" || ep.id === "create-image-data" || ep.id === "get-image" || ep.id === "view-image" || ep.id === "delete-image" || ep.id === "create-image-profile" || ep.id === "get-image-profile" || ep.id === "delete-image-profile");
                   return (
                     <SidebarMenuItem key={ep.id}>
                       <SidebarMenuButton asChild>
