@@ -367,6 +367,14 @@ export const endpointFieldDocs: Record<string, EndpointFieldDocs> = {
     ],
   },
 
+  "view-image": {
+    pathParams: [
+      { path: "accountId", type: "String", required: true, description: "Unique identifier of the account (from the `image_url`)" },
+      { path: "imageId", type: "String", required: true, description: "Unique image ID (from the `image_url`)" },
+      { path: "ext", type: "String", required: true, description: "Image file extension matching the stored format", constraints: "bmp | jpg | png" },
+    ],
+  },
+
   "delete-image": {
     pathParams: [
       { path: "accountId", type: "String", required: true, description: "Unique identifier of the account" },
