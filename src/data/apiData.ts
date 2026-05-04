@@ -1020,10 +1020,10 @@ export const apiEndpoints: ApiEndpoint[] = [
   {
     id: "create-image",
     category: "Image",
-    name: "Create Image",
+    name: "Create Image with URL",
     method: "POST",
     path: "/ccid/media/v1/admin/account/{accountId}/image",
-    description: "Upload an image via URL to the image service. The image is processed and stored internally. Save the returned image_id — it will be used when creating an image profile.",
+    description: "Upload an image by providing a publicly accessible URL. The image is downloaded, processed, and stored internally. Save the returned image id — it will be used when creating an image profile.",
     imageRequirements: ["Image must be exactly 256×256 pixels", "Image must be in BMP, JPG, or PNG format", "Image file size must be less than 270 KB"],
     errorBody: `{
   "error": "IMAGE_VALIDATION_FAILED",
@@ -1049,6 +1049,50 @@ export const apiEndpoints: ApiEndpoint[] = [
   "size": 265000,
   "note": "Smiley icon with 32-bits per pixel",
   "url": "https://www.example.biz/logo/smiley.bmp",
+  "image_url": "http://media.neustarlab.biz/ccid/media/v1/admin/account/x59tj8rtv1/image/90860ccc-9b34-4229-9d9c-29bf9074b674.bmp",
+  "account_id": "x59tj8rtv1",
+  "parent_account_id": "x0vo1z7q11",
+  "super_account_id": "x0vo1z7q11",
+  "billing_id": "tcs-neustar",
+  "created_by": "UserID",
+  "created_date": "Sun, 3 May 2026 23:53:01 GMT",
+  "updated_by": "UserID",
+  "updated_date": "Sun, 3 May 2026 23:53:01 GMT"
+}`,
+    responseStatus: 201,
+    product: ["bcd"]
+  },
+  {
+    id: "create-image-data",
+    category: "Image",
+    name: "Create Image with Data",
+    method: "POST",
+    path: "/ccid/media/v1/admin/account/{accountId}/image",
+    description: "Upload an image by providing the raw image bytes Base64-encoded in the request body. The image is processed and stored internally. Save the returned image id — it will be used when creating an image profile.",
+    imageRequirements: ["Image must be exactly 256×256 pixels", "Image must be in BMP, JPG, or PNG format", "Image file size must be less than 270 KB"],
+    errorBody: `{
+  "error": "IMAGE_VALIDATION_FAILED",
+  "message": "Image does not meet requirements",
+  "details": [
+    "Image must be exactly 256x256 pixels",
+    "Image must be in BMP, JPG, or PNG format",
+    "Image must be less than 270KB in size"
+  ]
+}`,
+    headers: [{ key: "Content-Type", value: "application/json" }, { key: "Accept", value: "application/json" }],
+    requestBody: `{
+  "name": "Smiley-Face-256x256",
+  "note": "Smiley icon with 32-bits per pixel",
+  "data": "Qk04AwAAAAAAADYAAAAoAAAAEAAAABAAAAABABgAAAAAAAIDAAAAAAAAAAAAAAAAAAAAAAAA..."
+}`,
+    responseBody: `{
+  "id": "90860ccc-9b34-4229-9d9c-29bf9074b674",
+  "name": "Smiley-Face-256x256",
+  "type": "bmp",
+  "width": 256,
+  "height": 256,
+  "size": 265000,
+  "note": "Smiley icon with 32-bits per pixel",
   "image_url": "http://media.neustarlab.biz/ccid/media/v1/admin/account/x59tj8rtv1/image/90860ccc-9b34-4229-9d9c-29bf9074b674.bmp",
   "account_id": "x59tj8rtv1",
   "parent_account_id": "x0vo1z7q11",
