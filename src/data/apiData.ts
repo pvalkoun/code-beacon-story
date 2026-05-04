@@ -1137,6 +1137,17 @@ export const apiEndpoints: ApiEndpoint[] = [
   "updated_by": "UserID",
   "updated_date": "Sun, 3 May 2026 23:53:01 GMT"
 }`,
+     responseStatus: 200,
+    product: ["bcd"]
+  },
+  {
+    id: "view-image",
+    category: "Image",
+    name: "View Image",
+    method: "GET",
+    path: "/ccid/media/v1/admin/account/{accountId}/image/{imageId}.{ext}",
+    description: "Retrieve the raw binary image bytes from the URL returned in the `image_url` field of the Get Image / Create Image response. The endpoint requires the same Bearer Token authentication as all other TCS API calls. The response Content-Type matches the image format (image/bmp, image/jpeg, or image/png).",
+    headers: [{ key: "Accept", value: "image/bmp, image/jpeg, image/png" }],
     responseStatus: 200,
     product: ["bcd"]
   },
