@@ -1071,13 +1071,17 @@ export const apiEndpoints: ApiEndpoint[] = [
     description: "Upload an image by providing the raw image bytes Base64-encoded in the request body. The image is processed and stored internally. Save the returned image id — it will be used when creating an image profile.",
     imageRequirements: ["Image must be exactly 256×256 pixels", "Image must be in BMP, JPG, or PNG format", "Image file size must be less than 270 KB"],
     errorBody: `{
-  "error": "IMAGE_VALIDATION_FAILED",
-  "message": "Image does not meet requirements",
-  "details": [
-    "Image must be exactly 256x256 pixels",
-    "Image must be in BMP, JPG, or PNG format",
-    "Image must be less than 270KB in size"
-  ]
+  "error_id": "ImageTypeNotSupported",
+  "http_status_code": 400,
+  "sip_code": 400,
+  "reason": "Image type not supported",
+  "timestamp": "Sun, 3 May 2026 23:53:00 GMT",
+  "developer_message": "Currently, BMP, PNG and JPEG images are supported",
+  "attributes": {
+    "object_type": "Image",
+    "object_field": "data",
+    "data": "227bda96274899a81e0d..."
+  }
 }`,
     headers: [{ key: "Content-Type", value: "application/json" }, { key: "Accept", value: "application/json" }],
     requestBody: `{
