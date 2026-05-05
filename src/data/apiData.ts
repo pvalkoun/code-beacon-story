@@ -1111,6 +1111,40 @@ export const apiEndpoints: ApiEndpoint[] = [
     product: ["bcd"]
   },
   {
+    id: "update-image",
+    category: "Image",
+    name: "Update Image",
+    method: "PUT",
+    path: "/ccid/media/v1/admin/account/{accountId}/image/{imageId}",
+    description: "Update an existing image's metadata. Only the `name` and `note` fields can be modified — image binary data, dimensions, type, and other attributes cannot be changed. To change the image bytes, delete the image and create a new one.",
+    headers: [{ key: "Content-Type", value: "application/json" }, { key: "Accept", value: "application/json" }],
+    requestBody: `{
+  "name": "Smiley-Face-Updated",
+  "note": "Updated note for smiley icon"
+}`,
+    responseBody: `{
+  "id": "90860ccc-9b34-4229-9d9c-29bf9074b674",
+  "name": "Smiley-Face-Updated",
+  "type": "bmp",
+  "width": 256,
+  "height": 256,
+  "size": 265000,
+  "note": "Updated note for smiley icon",
+  "url": "https://www.example.biz/logo/smiley.bmp",
+  "image_url": "https://api-rst.ccid.neustar.biz/ccid/media/v1/admin/account/x59tj8rtv1/image/90860ccc-9b34-4229-9d9c-29bf9074b674.bmp",
+  "account_id": "x59tj8rtv1",
+  "parent_account_id": "x0vo1z7q11",
+  "super_account_id": "x0vo1z7q11",
+  "billing_id": "TEwilldefine",
+  "created_by": "UserID",
+  "created_date": "Sun, 3 May 2026 23:53:01 GMT",
+  "updated_by": "UserID",
+  "updated_date": "Tue, 5 May 2026 14:22:10 GMT"
+}`,
+    responseStatus: 200,
+    product: ["bcd"]
+  },
+  {
     id: "get-image",
     category: "Image",
     name: "Get Image",

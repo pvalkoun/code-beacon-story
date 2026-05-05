@@ -367,6 +367,35 @@ export const endpointFieldDocs: Record<string, EndpointFieldDocs> = {
     ],
   },
 
+  "update-image": {
+    pathParams: [
+      { path: "accountId", type: "String", required: true, description: "Unique identifier of the account", constraints: "Length between 4 and 10" },
+      { path: "imageId", type: "String", required: true, description: "Unique image ID" },
+    ],
+    requestFields: [
+      { path: "name", type: "String", required: false, description: "Updated name associated with the image", constraints: "The length is between 1 to 255, inclusive." },
+      { path: "note", type: "String", required: false, description: "Updated note associated with the image", constraints: "The length is between 1 to 255, inclusive." },
+    ],
+    responseFields: [
+      { path: "id", type: "String", required: true, description: "Image ID" },
+      { path: "name", type: "String", required: true, description: "Client supplied name associated with the image" },
+      { path: "type", type: "String", required: true, description: "Image format (bmp, jpg, png)" },
+      { path: "width", type: "Integer", required: true, description: "Image width in pixels" },
+      { path: "height", type: "Integer", required: true, description: "Image height in pixels" },
+      { path: "size", type: "Integer", required: true, description: "Image size in bytes" },
+      { path: "note", type: "String", required: false, description: "Client supplied note associated with the image" },
+      { path: "url", type: "URI", required: false, description: "Client supplied URL used for downloading the image data" },
+      { path: "image_url", type: "String", required: true, description: "URL to image that was accepted by TransUnion and that can be accessed using Bearer Token" },
+      { path: "account_id", type: "String", required: true, description: "Account that owns the image" },
+      { path: "parent_account_id", type: "String", required: true, description: "Parent account identifier" },
+      { path: "super_account_id", type: "String", required: true, description: "Super (root) account identifier" },
+      { path: "billing_id", type: "String", required: false, description: "Billing identifier associated with the account" },
+      { path: "created_by", type: "String", required: true, description: "User who created the image" },
+      { path: "created_date", type: "String", required: true, description: "Timestamp when the image was created (RFC 1123)" },
+      { path: "updated_by", type: "String", required: false, description: "User who last updated the image" },
+      { path: "updated_date", type: "String", required: false, description: "Timestamp when the image was last updated (RFC 1123)" },
+    ],
+  },
   "list-image": {
     pathParams: [
       { path: "accountId", type: "String", required: true, description: "Unique identifier of the account", constraints: "Length between 4 and 10" },
