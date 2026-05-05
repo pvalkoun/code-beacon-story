@@ -465,6 +465,30 @@ export const endpointFieldDocs: Record<string, EndpointFieldDocs> = {
     ],
   },
 
+  "list-image-profile": {
+    pathParams: [
+      { path: "accountId", type: "String", required: true, description: "Unique identifier of the account" },
+    ],
+    responseFields: [
+      { path: "[]", type: "Array<Object>", required: true, description: "Array of image profiles for the account" },
+      { path: "[].id", type: "String", required: true, description: "Image profile ID" },
+      { path: "[].name", type: "String", required: true, description: "Image profile name" },
+      { path: "[].account_id", type: "String", required: true, description: "The account this image profile belongs to" },
+      { path: "[].image_id", type: "String", required: true, description: "ID of the linked image" },
+      { path: "[].image_url", type: "String", required: true, description: "CDN URL of the linked image" },
+      { path: "[].partner", type: "Array<Object>", required: true, description: "Carrier partner statuses populated after vetting approval", constraints: "Each entry: { name, status }" },
+      { path: "[].partner[].name", type: "String", required: true, description: "Carrier partner name", constraints: "att | tmobile | verizon" },
+      { path: "[].partner[].status", type: "String", required: true, description: "Enablement status for the partner", constraints: "e.g. Enable-Requested, Enable-Completed" },
+      { path: "[].vetting", type: "Object", required: true, description: "Vetting status and timestamp" },
+      { path: "[].vetting.status", type: "String", required: true, description: "Vetting status", constraints: "e.g. VETTING_SUBMITTED, VETTING_SUCCESSFUL" },
+      { path: "[].vetting.status_timestamp", type: "DateTime", required: true, description: "Timestamp of the vetting status" },
+      { path: "[].created_by", type: "String", required: true, description: "Creator user ID" },
+      { path: "[].created_date", type: "DateTime", required: true, description: "Creation timestamp" },
+      { path: "[].updated_by", type: "String", required: true, description: "User who last updated the profile" },
+      { path: "[].updated_date", type: "DateTime", required: true, description: "Last update timestamp" },
+    ],
+  },
+
   "delete-image-profile": {
     pathParams: [
       { path: "accountId", type: "String", required: true, description: "Unique identifier of the account" },
