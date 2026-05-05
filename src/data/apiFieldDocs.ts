@@ -396,8 +396,7 @@ export const endpointFieldDocs: Record<string, EndpointFieldDocs> = {
       { path: "updated_date", type: "String", required: false, description: "Timestamp when the image was last updated (RFC 1123)" },
     ],
   },
-
-
+  "list-image": {
     pathParams: [
       { path: "accountId", type: "String", required: true, description: "Unique identifier of the account", constraints: "Length between 4 and 10" },
     ],
