@@ -373,7 +373,7 @@ export const endpointFieldDocs: Record<string, EndpointFieldDocs> = {
       { path: "imageId", type: "String", required: true, description: "Unique image ID" },
     ],
     requestFields: [
-      { path: "name", type: "String", required: false, description: "Updated name associated with the image", constraints: "The length is between 1 to 255, inclusive." },
+      { path: "name", type: "String", required: true, description: "Updated name associated with the image", constraints: "The length is between 1 to 255, inclusive." },
       { path: "note", type: "String", required: false, description: "Updated note associated with the image", constraints: "The length is between 1 to 255, inclusive." },
     ],
     responseFields: [
