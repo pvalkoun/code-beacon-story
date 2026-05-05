@@ -1145,6 +1145,7 @@ export const apiEndpoints: ApiEndpoint[] = [
     product: ["bcd"]
   },
   {
+    id: "get-image",
     category: "Image",
     name: "Get Image",
     method: "GET",
