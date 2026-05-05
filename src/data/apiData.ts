@@ -1346,7 +1346,7 @@ export const apiEndpoints: ApiEndpoint[] = [
     "name": "smileyProfileJpg",
     "account_id": "x59tj8rtv1",
     "image_id": "smileyjpgimageid",
-    "image_url": "https://accessible-cdn-url.com/images/smileyjpgimageid.jpg",
+    "image_url": "https://api-rst.ccid.neustar.biz/ccid/media/v1/admin/account/x59tj8rtv1/image/smileyjpgimageid.jpg",
     "partner": [
       { "name": "att", "status": "Enable-Requested" },
       { "name": "tmobile", "status": "Enable-Completed" },
