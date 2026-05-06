@@ -6,6 +6,9 @@ import { ArrowRight, Mail, Lock } from "lucide-react";
 import { sampleEventPayloads, getWebhookEndpoint, coolOffEmailSample } from "@/data/webhookData";
 import { BaseUrlPanel } from "@/components/BaseUrlPanel";
 import { OnPageNav } from "@/components/OnPageNav";
+import lifecycleAccount from "@/assets/lifecycle-account.png";
+import lifecycleCallerProfile from "@/assets/lifecycle-caller-profile.png";
+import lifecycleTn from "@/assets/lifecycle-tn.png";
 
 const setupSteps = [
   {
@@ -23,8 +26,9 @@ const navSteps = [
   { step: 4, title: "Register Endpoint" },
   { step: 5, title: "Test" },
   { step: 6, title: "Event Reference" },
-  { step: 7, title: "Event Payloads" },
-  { step: 8, title: "Cool-Off Email Notifications" },
+  { step: 7, title: "Partner Status Lifecycles" },
+  { step: 8, title: "Event Payloads" },
+  { step: 9, title: "Cool-Off Email Notifications" },
 ];
 
 export default function WebhookSetupGuide() {
