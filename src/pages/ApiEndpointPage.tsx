@@ -1,10 +1,12 @@
-import { useParams } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 import { getEndpointById } from "@/data/apiData";
 import { endpointFieldDocs } from "@/data/apiFieldDocs";
 import { CodeBlock } from "@/components/CodeBlock";
 import { MethodBadge } from "@/components/MethodBadge";
 import type { FieldDoc } from "@/data/apiFieldDocs";
 import { AlertTriangle } from "lucide-react";
+
+const isPartnerStatusField = (path: string) => /partner\[\]\.status$/.test(path);
 
 function FieldTable({ title, fields }: { title: string; fields: FieldDoc[] }) {
   const useSplitColumns = fields.some((f) => f.use !== undefined || f.restrictedValues !== undefined);
@@ -46,7 +48,20 @@ function FieldTable({ title, fields }: { title: string; fields: FieldDoc[] }) {
                     <span className="text-xs text-muted-foreground">Optional</span>
                   )}
                 </td>
-                <td className="py-2 px-3 text-muted-foreground">{f.description}</td>
+                <td className="py-2 px-3 text-muted-foreground">
+                  {f.description}
+                  {isPartnerStatusField(f.path) && (
+                    <>
+                      {" "}
+                      <Link
+                        to="/resources/webhooks/guide#partner-status-lifecycles"
+                        className="text-primary underline whitespace-nowrap"
+                      >
+                        See partner status lifecycle →
+                      </Link>
+                    </>
+                  )}
+                </td>
                 {useSplitColumns ? (
                   <>
                     <td className="py-2 px-3 text-xs text-muted-foreground">{f.use || "—"}</td>
