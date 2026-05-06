@@ -6,6 +6,9 @@ import { ArrowRight, Mail, Lock } from "lucide-react";
 import { sampleEventPayloads, getWebhookEndpoint, coolOffEmailSample } from "@/data/webhookData";
 import { BaseUrlPanel } from "@/components/BaseUrlPanel";
 import { OnPageNav } from "@/components/OnPageNav";
+import lifecycleAccount from "@/assets/lifecycle-account.png";
+import lifecycleCallerProfile from "@/assets/lifecycle-caller-profile.png";
+import lifecycleTn from "@/assets/lifecycle-tn.png";
 
 const setupSteps = [
   {
@@ -23,8 +26,9 @@ const navSteps = [
   { step: 4, title: "Register Endpoint" },
   { step: 5, title: "Test" },
   { step: 6, title: "Event Reference" },
-  { step: 7, title: "Event Payloads" },
-  { step: 8, title: "Cool-Off Email Notifications" },
+  { step: 7, title: "Partner Status Lifecycles" },
+  { step: 8, title: "Event Payloads" },
+  { step: 9, title: "Cool-Off Email Notifications" },
 ];
 
 export default function WebhookSetupGuide() {
@@ -363,11 +367,75 @@ export default function WebhookSetupGuide() {
         </div>
       </div>
 
-      {/* ── Section 7 — Event Payloads ── */}
+      {/* ── Section 7 — Partner Status Lifecycles ── */}
       <div id="step-7" className="mb-10 pb-8 border-b scroll-mt-24">
         <div className="flex items-center gap-3 mb-3">
           <div className="flex items-center justify-center h-9 w-9 rounded-full bg-primary text-primary-foreground font-bold text-sm shrink-0">
             7
+          </div>
+          <h2 id="partner-status-lifecycles" className="!mt-0 !mb-0">Partner Status Lifecycles</h2>
+        </div>
+
+        <p>
+          Each <code>service[].partner[].status</code> value reported in API responses or
+          <code> partner_status</code> webhook events corresponds to a state in one of the
+          lifecycle diagrams below. Use these state machines to understand which transitions
+          your application drives via API and which ones arrive asynchronously as webhook
+          notifications.
+        </p>
+
+        <div className="p-4 rounded-lg bg-muted/40 border mb-6 not-prose">
+          <p className="text-sm font-semibold mb-3">Legend</p>
+          <div className="flex flex-wrap gap-x-6 gap-y-2 text-sm">
+            <div className="flex items-center gap-2">
+              <span className="inline-block h-4 w-6 rounded-sm border" style={{ backgroundColor: "#bfe3f0", borderColor: "#8fcfe0" }} />
+              <span><strong>Light blue</strong> — states you set via API request</span>
+            </div>
+            <div className="flex items-center gap-2">
+              <span className="inline-block h-4 w-6 rounded-sm" style={{ backgroundColor: "#0a3d66" }} />
+              <span><strong>Dark blue</strong> — terminal states delivered via webhook</span>
+            </div>
+            <div className="flex items-center gap-2">
+              <span className="inline-block h-4 w-6 rounded-sm border border-dashed" style={{ backgroundColor: "#ffffff", borderColor: "#9ca3af" }} />
+              <span><strong>White (dashed)</strong> — internal transition / processing state</span>
+            </div>
+          </div>
+        </div>
+
+        <h3 id="lifecycle-account">Account / Feature</h3>
+        <p>
+          Lifecycle for partner status at the <strong>account</strong> scope — applies when
+          enabling, disabling, suspending, or resuming a partner integration on an entire account.
+        </p>
+        <div className="not-prose mb-8 rounded-lg border bg-card p-4">
+          <img src={lifecycleAccount} alt="Account / Feature partner status state machine" className="w-full h-auto" />
+        </div>
+
+        <h3 id="lifecycle-caller-profile">Caller Profile</h3>
+        <p>
+          Lifecycle for partner status at the <strong>caller profile</strong> scope. Includes
+          the upstream TU review and partner-vetting stages that precede enable.
+        </p>
+        <div className="not-prose mb-8 rounded-lg border bg-card p-4">
+          <img src={lifecycleCallerProfile} alt="Caller Profile partner status state machine" className="w-full h-auto" />
+        </div>
+
+        <h3 id="lifecycle-tn">TN Asset</h3>
+        <p>
+          Lifecycle for partner status at the <strong>telephone number (TN)</strong> scope.
+          Each TN goes through partner vetting before it can be enabled, disabled, suspended,
+          or resumed with a partner.
+        </p>
+        <div className="not-prose mb-8 rounded-lg border bg-card p-4">
+          <img src={lifecycleTn} alt="TN asset partner status state machine" className="w-full h-auto" />
+        </div>
+      </div>
+
+      {/* ── Section 8 — Event Payloads ── */}
+      <div id="step-8" className="mb-10 pb-8 border-b scroll-mt-24">
+        <div className="flex items-center gap-3 mb-3">
+          <div className="flex items-center justify-center h-9 w-9 rounded-full bg-primary text-primary-foreground font-bold text-sm shrink-0">
+            8
           </div>
           <h2 className="!mt-0 !mb-0">Event Payloads</h2>
         </div>
@@ -399,11 +467,11 @@ export default function WebhookSetupGuide() {
         <CodeBlock code={sampleEventPayloads.tnTagging} title="TN Tagging Status Change" language="json" />
       </div>
 
-      {/* ── Section 8 — Cool-Off Email Notifications ── */}
-      <div id="step-8" className="mb-10 pb-8 border-b scroll-mt-24">
+      {/* ── Section 9 — Cool-Off Email Notifications ── */}
+      <div id="step-9" className="mb-10 pb-8 border-b scroll-mt-24">
         <div className="flex items-center gap-3 mb-3">
           <div className="flex items-center justify-center h-9 w-9 rounded-full bg-primary text-primary-foreground font-bold text-sm shrink-0">
-            8
+            9
           </div>
           <h2 className="!mt-0 !mb-0">Cool-Off Email Notifications</h2>
         </div>
