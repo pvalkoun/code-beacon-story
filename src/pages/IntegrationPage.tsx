@@ -1,4 +1,4 @@
-import { useParams } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 import { getIntegration } from "@/data/integrationData";
 import { CodeBlock } from "@/components/CodeBlock";
 
