@@ -219,8 +219,8 @@ const singleTnPathParams: ParamRow[] = [
 const singleTnQueryParams: ParamRow[] = [
   { name: "tn", location: "query", type: "string", required: true, description: "Telephone number in E.164 format (e.g. +12025551234)." },
   { name: "service", location: "query", type: "string", required: true, description: 'Service type(s): "bcd", "scp", or both as ["bcd", "scp"].' },
-  { name: "start_time", location: "query", type: "date-time", required: true, description: "Start of analytics window. Must be 00:00:00Z (full UTC day start)." },
-  { name: "end_time", location: "query", type: "date-time", required: true, description: "End of analytics window. Must be 23:59:59Z (full UTC day end)." },
+  { name: "start_time", location: "query", type: "date-time", required: true, description: "Start of analytics window in UTC. Must include the date and end in T00:00:00Z (e.g. 2026-04-01T00:00:00Z)." },
+  { name: "end_time", location: "query", type: "date-time", required: true, description: "End of analytics window in UTC. Must include the date and end in T23:59:59Z (e.g. 2026-04-01T23:59:59Z)." },
 ];
 
 const allTnsPathParams: ParamRow[] = [
@@ -229,8 +229,8 @@ const allTnsPathParams: ParamRow[] = [
 
 const allTnsQueryParams: ParamRow[] = [
   { name: "service", location: "query", type: "string", required: true, description: 'Service type(s): "bcd", "scp", or both as ["bcd", "scp"].' },
-  { name: "start_time", location: "query", type: "date-time", required: true, description: "Start of analytics window. Must be 00:00:00Z (full UTC day start)." },
-  { name: "end_time", location: "query", type: "date-time", required: true, description: "End of analytics window. Must be 23:59:59Z (full UTC day end)." },
+  { name: "start_time", location: "query", type: "date-time", required: true, description: "Start of analytics window in UTC. Must include the date and end in T00:00:00Z (e.g. 2026-04-01T00:00:00Z)." },
+  { name: "end_time", location: "query", type: "date-time", required: true, description: "End of analytics window in UTC. Must include the date and end in T23:59:59Z (e.g. 2026-04-01T23:59:59Z)." },
 ];
 
 const allTnsPaginationHeaders: ParamRow[] = [
