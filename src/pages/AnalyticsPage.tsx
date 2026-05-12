@@ -17,123 +17,129 @@ const loginResponse = `{
 }`;
 
 const singleTnResponse = `{
-  "tn": "+12025551234",
-  "account_id": "acct-001",
+  "tn": "+15555555555",
   "services": {
     "bcd": [
       {
-        "bcd_name": "My Campaign",
-        "type": "rich-bcd",
         "service_providers": [
           {
-            "service_provider_name": "att",
             "count": 1500,
+            "service_provider_name": "ATT",
+            "rcd_count": 1423,
             "answer_rate": 0.72,
             "average_duration": 185.3
           },
           {
-            "service_provider_name": "t-mobile",
-            "count": 1320,
-            "answer_rate": 0.68,
-            "average_duration": 172.5
-          },
-          {
-            "service_provider_name": "verizon",
             "count": 1410,
+            "service_provider_name": "VERIZON",
+            "rcd_count": 1358,
             "answer_rate": 0.70,
             "average_duration": 178.9
+          },
+          {
+            "count": 1320,
+            "service_provider_name": "TMOBILE",
+            "rcd_count": 1280,
+            "answer_rate": 0.68,
+            "average_duration": 172.5
           }
         ]
       }
     ],
     "scp": {
-      "signed": 13700,
       "service_providers": [
         {
-          "service_provider_name": "att",
           "deposited": 4100,
           "authenticated": 3850,
-          "blocked": 698
+          "blocked": 698,
+          "signed": 4566,
+          "service_provider_name": "ATT"
         },
         {
-          "service_provider_name": "t-mobile",
-          "deposited": 4050,
-          "authenticated": 3780,
-          "blocked": 673
-        },
-        {
-          "service_provider_name": "verizon",
           "deposited": 4200,
           "authenticated": 3900,
-          "blocked": 712
+          "blocked": 712,
+          "signed": 4680,
+          "service_provider_name": "VERIZON"
+        },
+        {
+          "deposited": 4050,
+          "authenticated": 3780,
+          "blocked": 673,
+          "signed": 4520,
+          "service_provider_name": "TMOBILE"
         }
       ]
     }
   },
+  "account_id": "xyzaccountid",
   "request_params": {
-    "start_time": "2026-04-01T00:00:00Z",
-    "end_time": "2026-04-01T23:59:59Z",
-    "service": ["bcd", "scp"]
+    "tn": "+15555555555",
+    "service": ["bcd", "scp"],
+    "account_id": "xyzaccountid",
+    "start_time": "2026-04-10T00:00:00Z",
+    "end_time": "2026-04-29T23:59:59Z"
   }
 }`;
 
 const allTnsResponse = `{
   "items": [
     {
-      "tn": "+12025551234",
-      "account_id": "acct-001",
+      "tn": "+15555555555",
       "services": {
         "bcd": [
           {
-            "bcd_name": "My Campaign",
-            "type": "rich-bcd",
             "service_providers": [
-              { "service_provider_name": "att", "count": 1500, "answer_rate": 0.72, "average_duration": 185.3 },
-              { "service_provider_name": "t-mobile", "count": 1320, "answer_rate": 0.68, "average_duration": 172.5 },
-              { "service_provider_name": "verizon", "count": 1410, "answer_rate": 0.70, "average_duration": 178.9 }
+              { "count": 50, "service_provider_name": "ATT", "rcd_count": 0, "answer_rate": 0.0, "average_duration": 0.0 },
+              { "count": 113, "service_provider_name": "VERIZON", "rcd_count": 0, "answer_rate": 0.0, "average_duration": 0.0 },
+              { "count": 76, "service_provider_name": "TMOBILE", "rcd_count": 0, "answer_rate": 0.0, "average_duration": 0.0 }
             ]
           }
         ],
         "scp": {
-          "signed": 13700,
           "service_providers": [
-            { "service_provider_name": "att", "deposited": 4100, "authenticated": 3850, "blocked": 698 },
-            { "service_provider_name": "t-mobile", "deposited": 4050, "authenticated": 3780, "blocked": 673 },
-            { "service_provider_name": "verizon", "deposited": 4200, "authenticated": 3900, "blocked": 712 }
+            { "deposited": 50, "authenticated": 50, "blocked": 3, "signed": 284, "service_provider_name": "ATT" },
+            { "deposited": 60, "authenticated": 58, "blocked": 4, "signed": 295, "service_provider_name": "VERIZON" },
+            { "deposited": 45, "authenticated": 44, "blocked": 2, "signed": 270, "service_provider_name": "TMOBILE" }
           ]
         }
       }
     },
     {
-      "tn": "+12025557890",
-      "account_id": "acct-001",
+      "tn": "+15555555556",
+      "services": {
+        "scp": {
+          "service_providers": [
+            { "deposited": 5, "authenticated": 5, "blocked": 0, "signed": 0, "service_provider_name": "ATT" }
+          ]
+        }
+      }
+    },
+    {
+      "tn": "+15555555557",
       "services": {
         "bcd": [
           {
-            "bcd_name": "Support Line",
-            "type": "rich-bcd",
             "service_providers": [
-              { "service_provider_name": "att", "count": 980, "answer_rate": 0.65, "average_duration": 142.1 },
-              { "service_provider_name": "t-mobile", "count": 875, "answer_rate": 0.61, "average_duration": 138.4 },
-              { "service_provider_name": "verizon", "count": 920, "answer_rate": 0.63, "average_duration": 140.7 }
+              { "count": 28, "service_provider_name": "ATT", "rcd_count": 0, "answer_rate": 0.0, "average_duration": 0.0 },
+              { "count": 33, "service_provider_name": "VERIZON", "rcd_count": 0, "answer_rate": 0.0, "average_duration": 0.0 },
+              { "count": 79, "service_provider_name": "TMOBILE", "rcd_count": 0, "answer_rate": 0.0, "average_duration": 0.0 }
             ]
           }
         ],
         "scp": {
-          "signed": 8950,
           "service_providers": [
-            { "service_provider_name": "att", "deposited": 2700, "authenticated": 2540, "blocked": 459 },
-            { "service_provider_name": "t-mobile", "deposited": 2680, "authenticated": 2495, "blocked": 456 },
-            { "service_provider_name": "verizon", "deposited": 2750, "authenticated": 2590, "blocked": 467 }
+            { "deposited": 28, "authenticated": 28, "blocked": 1, "signed": 234, "service_provider_name": "ATT" }
           ]
         }
       }
     }
   ],
   "request_params": {
-    "start_time": "2026-04-01T00:00:00Z",
-    "end_time": "2026-04-01T23:59:59Z",
-    "service": ["bcd", "scp"]
+    "service": ["scp", "bcd"],
+    "account_id": "xyzaccountid",
+    "start_time": "2026-04-10T00:00:00Z",
+    "end_time": "2026-04-29T23:59:59Z"
   }
 }`;
 
@@ -263,9 +269,9 @@ function HeadersTable({ extra }: { extra?: ParamRow[] }) {
 
 const bcdFields = [
   { name: "bcd_name", type: "string", description: "Branded caller name" },
-  { name: "type", type: "string", description: "BCD type (e.g., name_bcd, rich_bcd)" },
   { name: "service_providers[].service_provider_name", type: "string", description: "Carrier name" },
-  { name: "service_providers[].count", type: "integer", description: "Impression count" },
+  { name: "service_providers[].count", type: "integer", description: "Name impression count" },
+  { name: "service_providers[].rcd_count", type: "integer", description: "Rich impression count" },
   { name: "service_providers[].answer_rate", type: "number", description: "Ratio of answered calls" },
   { name: "service_providers[].average_duration", type: "number", description: "Average call duration in seconds" },
 ];
