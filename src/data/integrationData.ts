@@ -495,7 +495,7 @@ client.calls.create(
       },
       {
         title: "Step 2 — Setup AWS Secrets Manager",
-        content: "Create a secret in AWS Secrets Manager to securely store the Call Authentication API credentials.\n\n1. Open the **AWS Secrets Manager** console\n2. Click **Store a new secret**\n3. Select **Other type of secret**\n4. Add the following key-value pairs:\n\n| Key | Description | Value (Example) |\n|-----|-------------|----------------|\n| `neustarURL` | TransUnion AS REST API Endpoint | `https://ccid-aws-authn.neustarlab.biz/ccid/authn/v2/identity` |\n| `neustarAPIKey` | API key for client authentication | `4dcafb32537d91c90737f7d840c` |\n\n**Note:** The URL and API key shown are examples. Contact TransUnion Support for your actual production credentials."
+        content: "Create a secret in AWS Secrets Manager to securely store the Call Authentication API credentials.\n\n1. Open the **AWS Secrets Manager** console\n2. Click **Store a new secret**\n3. Select **Other type of secret**\n4. Add the following key-value pairs:\n\n| Key | Description | Value (Example) |\n|-----|-------------|----------------|\n| `neustarURL` | TransUnion AS REST API Endpoint | `https://tcs.ccid.neustar.biz/ccid/authn/v2/identity` |\n| `neustarAPIKey` | API key for client authentication | `4dcafb32537d91c90737f7d840c` |\n\n**Note:** The URL and API key shown are examples. Contact TransUnion Support for your actual production credentials."
       },
       {
         title: "Step 3 — Create Lambda Function",
