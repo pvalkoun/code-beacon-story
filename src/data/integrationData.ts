@@ -275,6 +275,7 @@ client.calls.create(
         title: "Step 1 — Create Integration",
         content: "This step creates the Web Services Data Actions integration that will connect to TransUnion's Call Authentication API.\n\n1. Log in to your Genesys Cloud CX organization\n2. Go to **Admin** → **Integrations**\n3. Click **Add Integration** (+) icon\n4. In the search box, type: `Web Services Data Actions`\n5. Select **Web Services Data Actions** from the results\n6. Click **Install** to proceed",
         images: [
+          { src: genesysAdminMenu, alt: "Genesys Cloud — Admin menu with Integrations highlighted", caption: "Admin menu with Integrations highlighted" },
           { src: genesysAddIntegration, alt: "Genesys Cloud — Add Integration search for Web Services Data Actions", caption: "Search for 'Web Services Data Actions' in the Add Integration dialog" }
         ]
       },
