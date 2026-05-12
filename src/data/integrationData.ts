@@ -371,7 +371,7 @@ client.calls.create(
       },
       {
         title: "Step 4 — Create Call Rule",
-        content: "Call Rules allow you to execute data actions automatically as part of your outbound campaign workflow.\n\n1. Go to **Admin** → **Outbound** → **Rule Management**\n2. Click **Create New Rule** or **Add Rule** (+) icon\n3. Set **Rule Name**: `TU CCID Authentication Rule`\n4. Configure the rule with **Call Authentication** category",
+        content: "Call Rules allow you to execute data actions automatically as part of your outbound campaign workflow.\n\n1. Go to **Admin** → **Outbound** → **Rule Management**\n2. Click **Create New Rule** or **Add Rule** (+) icon\n3. Set **Rule Name**: `TU Call Authentication Rule`\n4. Configure the rule with **Call Authentication** category",
         images: [
           { src: genesysCallRule, alt: "Genesys Cloud — Call Rule Set creation", caption: "Creating a new Call Rule Set with the Call Authentication rule" }
         ]
@@ -385,9 +385,9 @@ client.calls.create(
       },
       {
         title: "Step 5 — Add Rule to Campaign",
-        content: "Attach the rule to your outbound voice campaign.\n\n1. Go to **Admin** → **Outbound** → **Campaign Management**\n2. Select **Voice Campaigns** and locate your campaign\n3. Click **Edit** to open the campaign settings\n4. In the **Call Rule Sets** section, click **Add Rule Set**\n5. Select `TU CCID Authentication Rule`\n6. Click **Save** to apply",
+        content: "Attach the rule to your outbound voice campaign.\n\n1. Go to **Admin** → **Outbound** → **Campaign Management**\n2. Select **Voice Campaigns** and locate your campaign\n3. Click **Edit** to open the campaign settings\n4. In the **Call Rule Sets** section, click **Add Rule Set**\n5. Select `TU Call Authentication Rule`\n6. Click **Save** to apply",
         images: [
-          { src: genesysCampaignRuleset, alt: "Genesys Cloud — Campaign configuration with Call Rule Sets", caption: "Adding the TU CCID Authentication Rule to the campaign's Call Rule Sets" }
+          { src: genesysCampaignRuleset, alt: "Genesys Cloud — Campaign configuration with Call Rule Sets", caption: "Adding the TU Call Authentication Rule to the campaign's Call Rule Sets" }
         ]
       },
       {
@@ -436,8 +436,8 @@ client.calls.create(
         content: "1. Log in to the **Plivo Console**\n2. Navigate to **PHLO** → **Create New**\n3. Add a **Start** node and enable **API Request** or **Incoming Call** as the trigger\n4. The PHLO builder canvas will open with your Start node ready for configuration"
       },
       {
-        title: "Step 2 — Configure CCID HTTP Request",
-        content: "1. Drag an **HTTP Request** node into the canvas\n2. Name it: `Pre Call Authentication with CCID`\n3. Configure the following settings:\n   - **Method**: `POST`\n   - **Endpoint**: `https://tcs.ccid.neustar.biz/ccid/authn/v2/identity`\n4. Under **Params**:\n   - `apiKey` = `<your_api_key>`\n5. Under **Body** (JSON):",
+        title: "Step 2 — Configure Call Authentication HTTP Request",
+        content: "1. Drag an **HTTP Request** node into the canvas\n2. Name it: `Pre Call Authentication`\n3. Configure the following settings:\n   - **Method**: `POST`\n   - **Endpoint**: `https://tcs.ccid.neustar.biz/ccid/authn/v2/identity`\n4. Under **Params**:\n   - `apiKey` = `<your_api_key>`\n5. Under **Body** (JSON):",
         code: `{
   "from": "tel:+1{{Start.http.params.from}}",
   "to": "tel:+1{{Start.http.params.to}}"
