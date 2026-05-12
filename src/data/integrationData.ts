@@ -865,10 +865,6 @@ STIR/SHAKEN token signed successfully
         content: "- **Enable Call Authentication per number** — Turn on TransUnion authentication on a single Zoom Phone number from **Number Management → Phone Numbers**.\n- **Bulk-enable across many numbers** — Select multiple numbers and enable TransUnion in one action (default limit of 50 numbers per request; contact Zoom Support to raise the limit).\n- **Use native or BYOC numbers** — Both Zoom-native and Bring-Your-Own-Carrier numbers are supported.\n- **Visual confirmation** — Enabled numbers display a black shield icon on the Number Management page.\n- **Branded Calling Authentication page** — Manage and maintain branded calling info for numbers through the vendor's API from a dedicated section under **Related features**.\n- **Free integration** — Zoom provides the integration at no cost; you only need an active commercial relationship with TransUnion."
       },
       {
-        title: "What Gets Sent to TransUnion",
-        content: "When Call Authentication is enabled on a Zoom number, Zoom forwards outbound call information for that number to TransUnion. TransUnion then authenticates the call and powers the downstream experiences you've configured:\n\n- [**Spoof Call Protection**](/products/scp) — Detect and block calls spoofing your phone number.\n- [**Branded Call Display**](/products/bcd) — Display your business name, logo, and call reason on the recipient's device.\n\nNumbers must also be configured in TransUnion's portal — if they aren't, Zoom will still send the events but TransUnion cannot authenticate or brand the call."
-      },
-      {
         title: "Requirements",
         content: "- **Zoom account owner or admin** privileges with permission to edit account settings.\n- **A commercial relationship with TransUnion** — Zoom does not include TransUnion services; you must be onboarded with TransUnion separately.\n- **Phone numbers configured in TransUnion's portal** — Each Zoom number you enable must also exist on the TransUnion side (Account → Caller Profile → TN asset).\n- **Native or BYOC Zoom Phone numbers** — Both are supported."
       },
