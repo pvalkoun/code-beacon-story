@@ -37,12 +37,10 @@ function useBreadcrumbs() {
         }
       }
     }
-  } else if (parts[0] === "integrations") {
-    crumbs.push({ label: "Integrations", path: "/integrations" });
-    if (parts[1]) {
-      const ig = getIntegration(parts[1]);
-      if (ig) crumbs.push({ label: ig.platform, path: `/integrations/${parts[1]}` });
-    }
+  } else if (parts[0] === "integrations" && parts[1]) {
+    const ig = getIntegration(parts[1]);
+    crumbs.push({ label: "Integrations", path: "/" });
+    if (ig) crumbs.push({ label: ig.platform, path: `/integrations/${parts[1]}` });
   } else if (parts[0] === "call-auth") {
     crumbs.push({ label: "Call Authentication", path: "/call-auth" });
   } else if (parts[0] === "resources" && parts[1] === "analytics") {

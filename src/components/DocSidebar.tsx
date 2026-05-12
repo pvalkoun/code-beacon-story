@@ -209,27 +209,19 @@ export function DocSidebar() {
                     </NavLink>
                   </SidebarMenuButton>
                 </SidebarMenuItem>
-                <Collapsible defaultOpen={location.pathname.startsWith("/integrations")}>
+                <Collapsible>
                   <SidebarMenuItem>
-                    <div className="flex items-center">
-                      <SidebarMenuButton asChild className="flex-1">
-                        <NavLink to="/integrations" end activeClassName="bg-sidebar-accent text-sidebar-primary font-medium">
-                          <Plug className="h-4 w-4 mr-2" />
-                          {!collapsed && <span className="flex-1">Integrations</span>}
-                        </NavLink>
-                      </SidebarMenuButton>
-                      {!collapsed && (
-                        <CollapsibleTrigger asChild>
-                          <button
-                            type="button"
-                            aria-label="Toggle integrations"
-                            className="p-1 mr-1 rounded hover:bg-sidebar-accent text-sidebar-foreground/70"
-                          >
+                    <CollapsibleTrigger asChild>
+                      <SidebarMenuButton className="cursor-pointer">
+                        <Plug className="h-4 w-4 mr-2" />
+                        {!collapsed && (
+                          <>
+                            <span className="flex-1">Integrations</span>
                             <ChevronRight className="h-3 w-3 transition-transform [[data-state=open]_&]:rotate-90" />
-                          </button>
-                        </CollapsibleTrigger>
-                      )}
-                    </div>
+                          </>
+                        )}
+                      </SidebarMenuButton>
+                    </CollapsibleTrigger>
                     <CollapsibleContent>
                         <SidebarMenu className="ml-4 border-l border-sidebar-border pl-2 mt-1">
                         <SidebarMenuItem>
