@@ -59,7 +59,7 @@ export default function WebhookSetupGuide() {
       {setupSteps.map((step) => {
         const endpoint = getWebhookEndpoint(step.endpointId);
         return (
-          <div key={step.step} id={`step-${step.step}`} className="mb-10 pb-8 border-b scroll-mt-24">
+          <div key={step.step} id={`webhook-step-${step.step}`} className="mb-10 pb-8 border-b scroll-mt-24">
             <div className="flex items-center gap-3 mb-3">
               <div className="flex items-center justify-center h-9 w-9 rounded-full bg-primary text-primary-foreground font-bold text-sm shrink-0">
                 {step.step}
@@ -96,7 +96,7 @@ export default function WebhookSetupGuide() {
       })}
 
       {/* ── Section 2 — User Role Creation ── */}
-      <div id="step-2" className="mb-10 pb-8 border-b scroll-mt-24">
+      <div id="webhook-step-2" className="mb-10 pb-8 border-b scroll-mt-24">
         <div className="flex items-center gap-3 mb-3">
           <div className="flex items-center justify-center h-9 w-9 rounded-full bg-primary text-primary-foreground font-bold text-sm shrink-0">
             2
@@ -154,7 +154,7 @@ export default function WebhookSetupGuide() {
       </div>
 
       {/* ── Section 3 — Authentication ── */}
-      <div id="step-3" className="mb-10 pb-8 border-b scroll-mt-24">
+      <div id="webhook-step-3" className="mb-10 pb-8 border-b scroll-mt-24">
         <div className="flex items-center gap-3 mb-3">
           <div className="flex items-center justify-center h-9 w-9 rounded-full bg-primary text-primary-foreground font-bold text-sm shrink-0">
             3
@@ -212,7 +212,7 @@ export default function WebhookSetupGuide() {
       </div>
 
       {/* ── Section 4 — Register Your Webhook Endpoint ── */}
-      <div id="step-4" className="mb-10 pb-8 border-b scroll-mt-24">
+      <div id="webhook-step-4" className="mb-10 pb-8 border-b scroll-mt-24">
         <div className="flex items-center gap-3 mb-3">
           <div className="flex items-center justify-center h-9 w-9 rounded-full bg-primary text-primary-foreground font-bold text-sm shrink-0">
             4
@@ -251,7 +251,7 @@ export default function WebhookSetupGuide() {
       </div>
 
       {/* ── Section 5 — Test ── */}
-      <div id="step-5" className="mb-10 pb-8 border-b scroll-mt-24">
+      <div id="webhook-step-5" className="mb-10 pb-8 border-b scroll-mt-24">
         <div className="flex items-center gap-3 mb-3">
           <div className="flex items-center justify-center h-9 w-9 rounded-full bg-primary text-primary-foreground font-bold text-sm shrink-0">
             5
@@ -289,7 +289,7 @@ export default function WebhookSetupGuide() {
       </div>
 
       {/* ── Section 6 — Event Reference ── */}
-      <div id="step-6" className="mb-10 pb-8 border-b scroll-mt-24">
+      <div id="webhook-step-6" className="mb-10 pb-8 border-b scroll-mt-24">
         <div className="flex items-center gap-3 mb-3">
           <div className="flex items-center justify-center h-9 w-9 rounded-full bg-primary text-primary-foreground font-bold text-sm shrink-0">
             6
@@ -368,7 +368,7 @@ export default function WebhookSetupGuide() {
       </div>
 
       {/* ── Section 7 — Partner Status Lifecycles ── */}
-      <div id="step-7" className="mb-10 pb-8 border-b scroll-mt-24">
+      <div id="webhook-step-7" className="mb-10 pb-8 border-b scroll-mt-24">
         <div className="flex items-center gap-3 mb-3">
           <div className="flex items-center justify-center h-9 w-9 rounded-full bg-primary text-primary-foreground font-bold text-sm shrink-0">
             7
@@ -432,7 +432,7 @@ export default function WebhookSetupGuide() {
       </div>
 
       {/* ── Section 8 — Event Payloads ── */}
-      <div id="step-8" className="mb-10 pb-8 border-b scroll-mt-24">
+      <div id="webhook-step-8" className="mb-10 pb-8 border-b scroll-mt-24">
         <div className="flex items-center gap-3 mb-3">
           <div className="flex items-center justify-center h-9 w-9 rounded-full bg-primary text-primary-foreground font-bold text-sm shrink-0">
             8
@@ -468,7 +468,7 @@ export default function WebhookSetupGuide() {
       </div>
 
       {/* ── Section 9 — Cool-Off Email Notifications ── */}
-      <div id="step-9" className="mb-10 pb-8 border-b scroll-mt-24">
+      <div id="webhook-step-9" className="mb-10 pb-8 border-b scroll-mt-24">
         <div className="flex items-center gap-3 mb-3">
           <div className="flex items-center justify-center h-9 w-9 rounded-full bg-primary text-primary-foreground font-bold text-sm shrink-0">
             9
@@ -521,7 +521,7 @@ export default function WebhookSetupGuide() {
 
       <aside className="hidden xl:block w-56 shrink-0">
         <div className="sticky top-20">
-          <OnPageNav steps={navSteps} title="On this page" />
+          <OnPageNav steps={navSteps} title="On this page" idPrefix="webhook-step-" />
         </div>
       </aside>
     </div>
