@@ -272,6 +272,14 @@ export function DocSidebar() {
                             </NavLink>
                           </SidebarMenuButton>
                         </SidebarMenuItem>
+                        <SidebarMenuItem>
+                          <SidebarMenuButton asChild>
+                            <NavLink to="/integrations/zoom" activeClassName="bg-sidebar-accent text-sidebar-primary font-medium" className="text-xs">
+                              <Plug className="h-3.5 w-3.5 mr-2" />
+                              {!collapsed && <span>Zoom</span>}
+                            </NavLink>
+                          </SidebarMenuButton>
+                        </SidebarMenuItem>
                       </SidebarMenu>
                     </CollapsibleContent>
                   </SidebarMenuItem>
@@ -365,6 +373,14 @@ export function DocSidebar() {
                     <NavLink to="/integrations/ringcentral" activeClassName="bg-sidebar-accent text-sidebar-primary font-medium">
                       <Plug className="h-4 w-4 mr-2" />
                       {!collapsed && <span>RingCentral</span>}
+                    </NavLink>
+                  </SidebarMenuButton>
+                </SidebarMenuItem>
+                <SidebarMenuItem>
+                  <SidebarMenuButton asChild>
+                    <NavLink to="/integrations/zoom" activeClassName="bg-sidebar-accent text-sidebar-primary font-medium">
+                      <Plug className="h-4 w-4 mr-2" />
+                      {!collapsed && <span>Zoom</span>}
                     </NavLink>
                   </SidebarMenuButton>
                 </SidebarMenuItem>
