@@ -31,7 +31,7 @@ export function OnPageNav({
       </p>
       <ul className="space-y-1 border-l border-border">
         {steps.map((s) => {
-          const id = `step-${s.step}`;
+          const id = `${idPrefix}${s.step}`;
           const isActive = activeId === id;
           return (
             <li key={id}>
