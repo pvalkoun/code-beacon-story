@@ -103,7 +103,7 @@ export default function SetupGuide() {
 
       <aside className="hidden xl:block w-56 shrink-0">
         <div className="sticky top-20">
-          <OnPageNav steps={product.setupSteps.map(s => ({ step: s.step, title: s.title }))} title="On this page" />
+          <OnPageNav steps={product.setupSteps.map(s => ({ step: s.step, title: s.title }))} title="On this page" idPrefix={`${productId}-step-`} />
         </div>
       </aside>
     </div>
