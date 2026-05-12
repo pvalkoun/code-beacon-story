@@ -853,7 +853,7 @@ STIR/SHAKEN token signed successfully
     id: "zoom",
     name: "Zoom Phone Integration",
     platform: "Zoom",
-    description: "Enable TransUnion [Call Authentication](/call-auth) on your Zoom Phone numbers (native and BYOC) directly from the Zoom web portal — no code required.",
+    description: "Enable TransUnion's [Call Authentication](/call-auth) on your Zoom Phone numbers directly from the Zoom web portal — no code required.",
     products: ["scp", "bcd"],
     sections: [
       {
@@ -879,14 +879,6 @@ STIR/SHAKEN token signed successfully
       {
         title: "Enable Call Authentication on Multiple Numbers",
         content: "1. Sign in to the **Zoom web portal** as an admin.\n2. Go to **Number Management → Phone Numbers**.\n3. Select the checkboxes for the numbers you want to enable.\n4. At the top of the page, open the **Call Authentication** dropdown and select **TransUnion**.\n5. In the confirmation dialog, click **Confirm**."
-      },
-      {
-        title: "Access the Branded Calling Authentication Page",
-        content: "Use this section to manage and maintain branded calling info for numbers through the vendor's API.\n\n1. Sign in to the **Zoom web portal** as an admin.\n2. Go to **Number Management → Phone Numbers**.\n3. At the top of the page, click **Related features → Branded calling authentication**."
-      },
-      {
-        title: "Next Steps",
-        content: "- Confirm each Zoom-enabled number is also provisioned in TransUnion as an active **TN asset** under the correct **Caller Profile**. See the [Call Authentication overview](/call-auth) for the full lifecycle.\n- Validate end-to-end by placing a test call from a Zoom-enabled number and confirming the branded experience on a recipient device.\n- For Zoom-side UI changes or limits, refer to Zoom's official documentation: [Enabling call authentication for Zoom numbers](https://support.zoom.com/hc/en/article?id=zm_kb&sysparm_article=KB0081495)."
       }
     ]
   }
