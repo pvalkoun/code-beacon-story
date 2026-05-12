@@ -50,7 +50,7 @@ export const integrations: Integration[] = [
     id: "twilio",
     name: "Twilio Integration",
     platform: "Twilio",
-    description: "Integrate TransUnion Call Authentication with Twilio to digitally sign outbound calls using a Twilio Function that triggers on call initiation.",
+    description: "Integrate TransUnion [Call Authentication](/call-auth) with Twilio to digitally sign outbound calls using a Twilio Function that triggers on call initiation.",
     products: ["scp", "bcd"],
     sections: [
       {
@@ -251,7 +251,7 @@ client.calls.create(
     id: "genesys",
     name: "Genesys Cloud CX Integration",
     platform: "Genesys Cloud CX",
-    description: "Integrate TransUnion Call Authentication Authentication with Genesys Cloud CX using Web Services Data Actions for real-time call authentication of outbound calls.",
+    description: "Integrate TransUnion [Call Authentication](/call-auth) Authentication with Genesys Cloud CX using Web Services Data Actions for real-time call authentication of outbound calls.",
     products: ["scp", "bcd"],
     sections: [
       {
@@ -416,7 +416,7 @@ client.calls.create(
     id: "plivo",
     name: "Plivo Integration",
     platform: "Plivo",
-    description: "Integrate TransUnion call authentication with Plivo using PHLO visual workflows to validate destination numbers via the Call Authentication API before initiating outbound calls.",
+    description: "Integrate TransUnion call authentication with Plivo using PHLO visual workflows to validate destination numbers via the [Call Authentication](/call-auth) API before initiating outbound calls.",
     products: ["scp", "bcd"],
     sections: [
       {
@@ -474,7 +474,7 @@ client.calls.create(
     id: "amazon-connect",
     name: "Amazon Connect Integration",
     platform: "Amazon Connect",
-    description: "Integrate TransUnion Call Authentication call verification with Amazon Connect using AWS Lambda and Secrets Manager for secure, automated call authentication of outbound calls.",
+    description: "Integrate TransUnion [Call Authentication](/call-auth) call verification with Amazon Connect using AWS Lambda and Secrets Manager for secure, automated call authentication of outbound calls.",
     products: ["scp", "bcd"],
     sections: [
       {
@@ -542,7 +542,7 @@ client.calls.create(
     id: "nice-incontact",
     name: "NICE inContact Integration",
     platform: "NICE inContact",
-    description: "Integrate TransUnion Call Authentication call authentication with NICE inContact (CXone) using Studio scripts to authenticate outbound calls via the Call Authentication REST API.",
+    description: "Integrate TransUnion [Call Authentication](/call-auth) call authentication with NICE inContact (CXone) using Studio scripts to authenticate outbound calls via the Call Authentication REST API.",
     products: ["scp", "bcd"],
     sections: [
       {
@@ -644,7 +644,7 @@ ELSE
     id: "ringcentral",
     name: "RingCentral Integration",
     platform: "RingCentral",
-    description: "Integrate RingCentral with TransUnion's Call Authentication using the SDK to automatically deposit STIR/SHAKEN attestation tokens for outbound calls via WebSocket real-time notifications.",
+    description: "Integrate RingCentral with TransUnion's [Call Authentication](/call-auth) using the SDK to automatically deposit STIR/SHAKEN attestation tokens for outbound calls via WebSocket real-time notifications.",
     products: ["scp", "bcd"],
     sections: [
       {
