@@ -853,7 +853,7 @@ STIR/SHAKEN token signed successfully
     id: "zoom",
     name: "Zoom Phone Integration",
     platform: "Zoom",
-    description: "Enable TransUnion's [Call Authentication](/call-auth) on your Zoom Phone numbers directly from the Zoom web portal — no code required.",
+    description: "Enable TransUnion's Call Authentication on your Zoom Phone numbers directly from the Zoom web portal — no code required.",
     products: ["scp", "bcd"],
     sections: [
       {
