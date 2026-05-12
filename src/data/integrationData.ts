@@ -848,6 +848,51 @@ STIR/SHAKEN token signed successfully
         content: "| Type | Contact |\n|------|--------|\n| **Technical Support** | PDLTCSProductOps@transunion.com |\n| **API Key Requests** | Your TransUnion account manager |\n| **General Inquiries** | PDLTCSProductOps@transunion.com |\n\n**Success Checklist:**\n- SDK service is running: `sudo systemctl status ringcentral-stirshaken` shows \"active (running)\"\n- Logs show successful initialization with no errors\n- Test calls trigger STIR/SHAKEN token deposits in logs\n- Total latency is under 200ms\n- Recipient phones display \"Verified\" badge\n- Success rate is above 99%\n- Service auto-restarts after reboot"
       }
     ]
+  },
+  {
+    id: "zoom",
+    name: "Zoom Phone Integration",
+    platform: "Zoom",
+    description: "Enable TransUnion [Call Authentication](/call-auth) on your Zoom Phone numbers (native and BYOC) directly from the Zoom web portal — no code required.",
+    products: ["scp", "bcd"],
+    sections: [
+      {
+        title: "Overview",
+        content: "Zoom Phone offers a built-in **Call Authentication** capability in **Number Management** that hands off outbound call information to TransUnion for branded calling and spoof call protection. Once a number is enabled with the **TransUnion** vendor and the same number is configured in TransUnion's portal, Zoom will send call events to TransUnion in real time so calls can be authenticated and branded on the recipient's device.\n\nThis page summarizes what you can do with Zoom in the context of TransUnion Call Authentication. For step-by-step Zoom UI instructions, see Zoom's official article: [Enabling call authentication for Zoom numbers](https://support.zoom.com/hc/en/article?id=zm_kb&sysparm_article=KB0081495)."
+      },
+      {
+        title: "What You Can Do with Zoom",
+        content: "- **Enable Call Authentication per number** — Turn on TransUnion authentication on a single Zoom Phone number from **Number Management → Phone Numbers**.\n- **Bulk-enable across many numbers** — Select multiple numbers and enable TransUnion in one action (default limit of 50 numbers per request; contact Zoom Support to raise the limit).\n- **Use native or BYOC numbers** — Both Zoom-native and Bring-Your-Own-Carrier numbers are supported.\n- **Visual confirmation** — Enabled numbers display a black shield icon on the Number Management page.\n- **Branded Calling Authentication page** — Manage and maintain branded calling info for numbers through the vendor's API from a dedicated section under **Related features**.\n- **Free integration** — Zoom provides the integration at no cost; you only need an active commercial relationship with TransUnion."
+      },
+      {
+        title: "What Gets Sent to TransUnion",
+        content: "When Call Authentication is enabled on a Zoom number, Zoom forwards outbound call information for that number to TransUnion. TransUnion then authenticates the call and powers the downstream experiences you've configured:\n\n- [**Spoof Call Protection**](/products/scp) — Detect and block calls spoofing your phone number.\n- [**Branded Call Display**](/products/bcd) — Display your business name, logo, and call reason on the recipient's device.\n\nNumbers must also be configured in TransUnion's portal — if they aren't, Zoom will still send the events but TransUnion cannot authenticate or brand the call."
+      },
+      {
+        title: "Requirements",
+        content: "- **Zoom account owner or admin** privileges with permission to edit account settings.\n- **A commercial relationship with TransUnion** — Zoom does not include TransUnion services; you must be onboarded with TransUnion separately.\n- **Phone numbers configured in TransUnion's portal** — Each Zoom number you enable must also exist on the TransUnion side (Account → Caller Profile → TN asset).\n- **Native or BYOC Zoom Phone numbers** — Both are supported."
+      },
+      {
+        title: "Limitations",
+        content: "- Default limit of **50 phone numbers** per bulk enable action. Contact Zoom Support to request an increase.\n- Enabling Call Authentication only sends call events to TransUnion — the corresponding numbers must be provisioned in TransUnion's portal for authentication and branding to actually take effect."
+      },
+      {
+        title: "Enable Call Authentication on a Single Number",
+        content: "1. Sign in to the **Zoom web portal** as an admin.\n2. Go to **Number Management → Phone Numbers**.\n3. Click the number you want to manage.\n4. In the **Capabilities** section, next to **Call Authentication**, open the dropdown and select **TransUnion**.\n5. Click **Save**.\n\nThe number will now show the Call Authentication shield icon and Zoom will start forwarding outbound call info to TransUnion."
+      },
+      {
+        title: "Enable Call Authentication on Multiple Numbers",
+        content: "1. Sign in to the **Zoom web portal** as an admin.\n2. Go to **Number Management → Phone Numbers**.\n3. Select the checkboxes for the numbers you want to enable.\n4. At the top of the page, open the **Call Authentication** dropdown and select **TransUnion**.\n5. In the confirmation dialog, click **Confirm**."
+      },
+      {
+        title: "Access the Branded Calling Authentication Page",
+        content: "Use this section to manage and maintain branded calling info for numbers through the vendor's API.\n\n1. Sign in to the **Zoom web portal** as an admin.\n2. Go to **Number Management → Phone Numbers**.\n3. At the top of the page, click **Related features → Branded calling authentication**."
+      },
+      {
+        title: "Next Steps",
+        content: "- Confirm each Zoom-enabled number is also provisioned in TransUnion as an active **TN asset** under the correct **Caller Profile**. See the [Call Authentication overview](/call-auth) for the full lifecycle.\n- Validate end-to-end by placing a test call from a Zoom-enabled number and confirming the branded experience on a recipient device.\n- For Zoom-side UI changes or limits, refer to Zoom's official documentation: [Enabling call authentication for Zoom numbers](https://support.zoom.com/hc/en/article?id=zm_kb&sysparm_article=KB0081495)."
+      }
+    ]
   }
 ];
 
