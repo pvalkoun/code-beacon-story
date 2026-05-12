@@ -10,6 +10,7 @@ import ProductOverview from "./pages/ProductOverview";
 import SetupGuide from "./pages/SetupGuide";
 import ApiEndpointPage from "./pages/ApiEndpointPage";
 import IntegrationPage from "./pages/IntegrationPage";
+import IntegrationsOverview from "./pages/IntegrationsOverview";
 import Changelog from "./pages/Changelog";
 import PreCallAuth from "./pages/PreCallAuth";
 import AnalyticsPage from "./pages/AnalyticsPage";
@@ -38,6 +39,7 @@ const App = () => (
             <Route path="/products/:productId" element={<ProductOverview />} />
             <Route path="/products/:productId/guide" element={<SetupGuide />} />
             <Route path="/products/:productId/api/:endpointId" element={<ApiEndpointPage />} />
+            <Route path="/integrations" element={<IntegrationsOverview />} />
             <Route path="/integrations/:integrationId" element={<IntegrationPage />} />
             <Route path="/call-auth" element={<PreCallAuth />} />
             <Route path="/resources/analytics" element={<AnalyticsPage />} />
