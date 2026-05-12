@@ -6,11 +6,13 @@ type Step = { step: number; title: string };
 export function OnPageNav({
   steps,
   title = "On this page",
+  idPrefix = "step-",
 }: {
   steps: Step[];
   title?: string;
+  idPrefix?: string;
 }) {
-  const ids = steps.map((s) => `step-${s.step}`);
+  const ids = steps.map((s) => `${idPrefix}${s.step}`);
   const activeId = useScrollSpy(ids, 140);
 
   const handleClick = (e: React.MouseEvent<HTMLAnchorElement>, id: string) => {
