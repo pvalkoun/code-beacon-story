@@ -61,13 +61,21 @@ export default function IntegrationPage() {
 }
 
 function formatInlineMarkdown(text: string) {
-  const parts = text.split(/(\*\*[^*]+\*\*|`[^`]+`)/g);
+  const parts = text.split(/(\[[^\]]+\]\([^)]+\)|\*\*[^*]+\*\*|`[^`]+`)/g);
   return parts.map((part, i) => {
     if (part.startsWith("**") && part.endsWith("**")) {
       return <strong key={i}>{part.slice(2, -2)}</strong>;
     }
     if (part.startsWith("`") && part.endsWith("`")) {
       return <code key={i}>{part.slice(1, -1)}</code>;
+    }
+    const linkMatch = part.match(/^\[([^\]]+)\]\(([^)]+)\)$/);
+    if (linkMatch) {
+      const [, label, href] = linkMatch;
+      if (href.startsWith("/")) {
+        return <Link key={i} to={href} className="text-primary underline underline-offset-2 hover:no-underline">{label}</Link>;
+      }
+      return <a key={i} href={href} target="_blank" rel="noreferrer" className="text-primary underline underline-offset-2 hover:no-underline">{label}</a>;
     }
     return part;
   });
