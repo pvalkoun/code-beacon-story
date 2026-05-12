@@ -269,9 +269,9 @@ function HeadersTable({ extra }: { extra?: ParamRow[] }) {
 
 const bcdFields = [
   { name: "bcd_name", type: "string", description: "Branded caller name" },
-  { name: "type", type: "string", description: "BCD type (e.g., name_bcd, rich_bcd)" },
   { name: "service_providers[].service_provider_name", type: "string", description: "Carrier name" },
-  { name: "service_providers[].count", type: "integer", description: "Impression count" },
+  { name: "service_providers[].count", type: "integer", description: "Name impression count" },
+  { name: "service_providers[].rcd_count", type: "integer", description: "Rich impression count" },
   { name: "service_providers[].answer_rate", type: "number", description: "Ratio of answered calls" },
   { name: "service_providers[].average_duration", type: "number", description: "Average call duration in seconds" },
 ];
