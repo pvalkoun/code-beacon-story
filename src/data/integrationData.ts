@@ -26,19 +26,20 @@ import twilioDeploy from "@/assets/twilio/twilio-deploy.jpg";
 import twilioCopyUrl from "@/assets/twilio/twilio-copy-url.jpg";
 
 // Image imports for Genesys integration
-import genesysAddIntegration from "@/assets/genesys/genesys-add-integration.jpg";
-import genesysNameIntegration from "@/assets/genesys/genesys-name-integration.jpg";
-import genesysIntegrationList from "@/assets/genesys/genesys-integration-list.jpg";
-import genesysSelectIntegration from "@/assets/genesys/genesys-select-integration.jpg";
-import genesysHipaaSetting from "@/assets/genesys/genesys-hipaa-setting.jpg";
-import genesysOutputContract from "@/assets/genesys/genesys-output-contract.jpg";
+import genesysAddIntegration from "@/assets/genesys/genesys-add-integration.png";
+import genesysAdminMenu from "@/assets/genesys/genesys-admin-menu.png";
+import genesysNameIntegration from "@/assets/genesys/genesys-name-integration.png";
+import genesysIntegrationList from "@/assets/genesys/genesys-integration-list.png";
+import genesysSelectIntegration from "@/assets/genesys/genesys-select-integration.png";
+import genesysHipaaSetting from "@/assets/genesys/genesys-hipaa-setting.png";
+import genesysOutputContract from "@/assets/genesys/genesys-output-contract.png";
 import genesysConfiguration from "@/assets/genesys/genesys-configuration.jpg";
-import genesysTestResults from "@/assets/genesys/genesys-test-results.jpg";
-import genesysCallRule from "@/assets/genesys/genesys-call-rule.jpg";
-import genesysRuleConfig from "@/assets/genesys/genesys-rule-config.jpg";
-import genesysCampaignRuleset from "@/assets/genesys/genesys-campaign-ruleset.jpg";
-import genesysDataActionPerf from "@/assets/genesys/genesys-data-action-perf.jpg";
-import genesysCampaignPerf from "@/assets/genesys/genesys-campaign-perf.jpg";
+import genesysTestResults from "@/assets/genesys/genesys-test-results.png";
+import genesysCallRule from "@/assets/genesys/genesys-call-rule.png";
+import genesysRuleConfig from "@/assets/genesys/genesys-rule-config.png";
+import genesysCampaignRuleset from "@/assets/genesys/genesys-campaign-ruleset.png";
+import genesysDataActionPerf from "@/assets/genesys/genesys-data-action-perf.png";
+import genesysCampaignPerf from "@/assets/genesys/genesys-campaign-perf.png";
 
 // Image imports for Amazon Connect integration (real screenshots from PDF)
 import amazonConnectContactFlow from "@/assets/amazon-connect/amazon-connect-contact-flow.png";
