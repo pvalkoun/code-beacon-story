@@ -304,6 +304,164 @@ export const apiEndpoints: ApiEndpoint[] = [
     product: ["common"]
   },
   {
+    id: "list-account",
+    category: "Account Management",
+    name: "List Accounts",
+    method: "GET",
+    path: "/ccid/aam/v2/admin/account",
+    description: "List accounts visible to the authenticated admin. Each entry mirrors the full account object returned by Get Account. Results are returned in pages — pass the value returned in the response's `Pagination-Token` header back on the next request as the `Pagination-Token` request header. When the response omits the header, you have reached the last page.",
+    headers: [
+      { key: "Accept", value: "application/json" },
+      {
+        key: "Pagination-Token",
+        value: "{{paginationToken}}",
+        description: "Opaque cursor used to fetch the next page of results. Omit on the first request. Use the value returned in the Pagination-Token response header of the previous call. When the response does not include this header, there are no more pages.",
+      },
+    ],
+    responseBody: `[
+  {
+    "id": "xeb9ekoawz",
+    "name": "user_sample enterprise",
+    "type": "ENTERPRISE",
+    "status": "ACTIVE",
+    "relationship": "DIRECT",
+    "parent_account": [
+      "x0vo1z7q11"
+    ],
+    "billing": {
+      "id": "TUwilldefine",
+      "model": "TRANSACTION",
+      "frequency": "MONTHLY"
+    },
+    "service": [
+      {
+        "type": "STIAS",
+        "id": "571578"
+      },
+      {
+        "type": "SDPR",
+        "id": "xeb9ekoawz"
+      }
+    ],
+    "child_account_enabled": false,
+    "domain": "user.com",
+    "comment": "example for tech enabler setup",
+    "contact": [
+      {
+        "first_name": "charlie",
+        "last_name": "bond",
+        "email": "acme@acme.com",
+        "phone": "+1.1134567890",
+        "type": "SECONDARY"
+      },
+      {
+        "first_name": "james",
+        "last_name": "bond",
+        "email": "james.bond@007.com",
+        "phone": "+1.2232146979",
+        "type": "PRIMARY"
+      }
+    ],
+    "address": {
+      "street": "123 Main st",
+      "city": "Sterling",
+      "postal_code": "20123",
+      "state_or_province": "VA",
+      "country_code": "US"
+    },
+    "start_date": "Fri, 4 Apr 2025 18:18:49 GMT",
+    "end_date": "Sat, 4 Apr 2026 18:18:49 GMT",
+    "application": [
+      "CCID",
+      "TCS"
+    ],
+    "created_by": "user_v4_api_prod",
+    "created_date": "Wed, 18 Feb 2026 21:06:14 GMT",
+    "updated_by": "user_v4_api_prod",
+    "updated_date": "Wed, 18 Feb 2026 21:06:14 GMT",
+    "ein": "123456789",
+    "duns": "923456789",
+    "name_alias": [
+      "name alias2",
+      "name alias1"
+    ],
+    "vetting": {
+      "status": "PREVETTED",
+      "status_timestamp": "Fri, 4 Apr 2025 18:18:49 GMT"
+    }
+  },
+  {
+    "id": "xvm465a2g8",
+    "name": "user_enterprise_7",
+    "type": "ENTERPRISE",
+    "status": "ACTIVE",
+    "relationship": "DIRECT",
+    "parent_account": [
+      "xgvaf00cx3"
+    ],
+    "billing": {
+      "id": "user_enterprise_7",
+      "model": "TRANSACTION",
+      "frequency": "MONTHLY"
+    },
+    "service": [
+      {
+        "type": "SDPR",
+        "id": "xvm465a2g8"
+      }
+    ],
+    "child_account_enabled": true,
+    "domain": "user_enterprise_7",
+    "comment": "example for tech enabler setup for 7th account",
+    "contact": [
+      {
+        "first_name": "james",
+        "last_name": "bond",
+        "email": "valkoun.user@gmail.com",
+        "phone": "+1.2232146979",
+        "type": "PRIMARY"
+      },
+      {
+        "first_name": "charlie",
+        "last_name": "bond",
+        "email": "acme@acme.com",
+        "phone": "+1.1134567890",
+        "type": "SECONDARY"
+      }
+    ],
+    "address": {
+      "street": "456 Oak ave",
+      "city": "Reston",
+      "postal_code": "20190",
+      "state_or_province": "VA",
+      "country_code": "US"
+    },
+    "start_date": "Fri, 4 Apr 2025 18:18:49 GMT",
+    "end_date": "Sat, 4 Apr 2026 18:18:49 GMT",
+    "application": [
+      "CCID",
+      "TCS"
+    ],
+    "created_by": "user_v4_api_prod",
+    "created_date": "Thu, 19 Feb 2026 14:22:08 GMT",
+    "updated_by": "user_v4_api_prod",
+    "updated_date": "Thu, 19 Feb 2026 14:22:08 GMT",
+    "ein": "987654321",
+    "duns": "987654321",
+    "name_alias": [
+      "alt name 1",
+      "alt name 2"
+    ],
+    "vetting": {
+      "status": "PREVETTED",
+      "status_timestamp": "Fri, 4 Apr 2025 18:18:49 GMT"
+    }
+  }
+]`,
+    responseStatus: 200,
+    product: ["common"]
+  },
+  {
     id: "update-account",
     category: "Account Management",
     name: "Update Account",
@@ -459,50 +617,7 @@ export const apiEndpoints: ApiEndpoint[] = [
     responseStatus: 200,
     product: ["common"]
   },
-  {
-    id: "list-account",
-    category: "Account Management",
-    name: "List Accounts",
-    method: "GET",
-    path: "/ccid/aam/v2/admin/account",
-    description: "List accounts visible to the authenticated admin. Results are returned in pages. To page through results, pass the value returned in the response's `Pagination-Token` header back on the next request as the `Pagination-Token` request header. When the response omits the header, you have reached the last page.",
-    headers: [
-      { key: "Accept", value: "application/json" },
-      {
-        key: "Pagination-Token",
-        value: "{{paginationToken}}",
-        description: "Opaque cursor used to fetch the next page of results. Omit on the first request. Use the value returned in the Pagination-Token response header of the previous call. When the response does not include this header, there are no more pages.",
-      },
-    ],
-    responseBody: `[
-  {
-    "id": "xeb9ekoawz",
-    "name": "user_sample enterprise",
-    "type": "ENTERPRISE",
-    "status": "ACTIVE",
-    "relationship": "DIRECT",
-    "parent_account": ["x0vo1z7q11"],
-    "child_account_enabled": false,
-    "domain": "user.com",
-    "created_date": "Wed, 18 Feb 2026 21:06:14 GMT",
-    "updated_date": "Wed, 18 Feb 2026 21:06:14 GMT"
-  },
-  {
-    "id": "x59tj8rtv1",
-    "name": "user_sample enterprise1",
-    "type": "ENTERPRISE",
-    "status": "ACTIVE",
-    "relationship": "DIRECT",
-    "parent_account": ["x0vo1z7q11"],
-    "child_account_enabled": false,
-    "domain": "user1.com",
-    "created_date": "Thu, 19 Feb 2026 14:22:08 GMT",
-    "updated_date": "Thu, 19 Feb 2026 14:22:08 GMT"
-  }
-]`,
-    responseStatus: 200,
-    product: ["common"]
-  },
+
 
   // ── Account TCS ──
   {
