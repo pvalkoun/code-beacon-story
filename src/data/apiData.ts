@@ -462,6 +462,7 @@ export const apiEndpoints: ApiEndpoint[] = [
     product: ["common"]
   },
   {
+    id: "update-account",
     category: "Account Management",
     name: "Update Account",
     method: "POST",
