@@ -1478,8 +1478,12 @@ export const apiEndpoints: ApiEndpoint[] = [
     name: "List Image Profiles",
     method: "GET",
     path: "/ccid/sdpr/v4/admin/account/{accountId}/image-profile",
-    description: "Retrieve a list of all image profiles that exist under an account, including their vetting and per-carrier partner statuses.",
+    description: "Retrieve a list of all image profiles that exist under an account, including their vetting and per-carrier partner statuses. Use the `limit` and `offset` query parameters to page through large result sets.",
     headers: [{ key: "Accept", value: "application/json" }],
+    queryParams: [
+      { name: "limit", type: "integer", required: false, description: "Maximum number of image profiles to return in the response. Used to control page size when paginating. Defaults to the system maximum if omitted." },
+      { name: "offset", type: "integer", required: false, description: "Zero-based index of the first image profile to return. Combined with `limit`, this skips the specified number of records to fetch the next page (e.g. offset=100 with limit=50 returns records 101–150)." },
+    ],
     responseBody: `[
   {
     "id": "69d4a87d7b3c6e58d402225e",
@@ -1857,8 +1861,12 @@ export const apiEndpoints: ApiEndpoint[] = [
     name: "List Caller Profiles",
     method: "GET",
     path: "/ccid/sdpr/v4/admin/account/{accountId}/caller-profile",
-    description: "List all caller profiles for an account.",
+    description: "List all caller profiles for an account. Use the `limit` and `offset` query parameters to page through large result sets.",
     headers: [{ key: "Accept", value: "application/json" }],
+    queryParams: [
+      { name: "limit", type: "integer", required: false, description: "Maximum number of caller profiles to return in the response. Used to control page size when paginating. Defaults to the system maximum if omitted." },
+      { name: "offset", type: "integer", required: false, description: "Zero-based index of the first caller profile to return. Combined with `limit`, this skips the specified number of records to fetch the next page (e.g. offset=100 with limit=50 returns records 101–150)." },
+    ],
     responseBody: `[
   {
     "id": "699f684820a7a57a0a67c03a",
