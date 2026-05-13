@@ -121,31 +121,76 @@ export default function ApiEndpointPage() {
         <FieldTable title="Path Parameters" fields={fieldDocs.pathParams} />
       )}
 
-      {endpoint.headers && endpoint.headers.length > 0 && (
-        <>
-          <h2>Headers</h2>
-          <table>
-            <thead>
-              <tr>
-                <th>Header</th>
-                <th>Value</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td><code>Authorization</code></td>
-                <td><code>Bearer {'{{accessToken}}'}</code></td>
-              </tr>
-              {endpoint.headers.map((h, i) => (
-                <tr key={i}>
-                  <td><code>{h.key}</code></td>
-                  <td><code>{h.value}</code></td>
+      {endpoint.headers && endpoint.headers.length > 0 && (() => {
+        const hasDesc = endpoint.headers!.some((h) => h.description);
+        return (
+          <>
+            <h2>Headers</h2>
+            <table>
+              <thead>
+                <tr>
+                  <th>Header</th>
+                  <th>Value</th>
+                  {hasDesc && <th>Description</th>}
                 </tr>
-              ))}
-            </tbody>
-          </table>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><code>Authorization</code></td>
+                  <td><code>Bearer {'{{accessToken}}'}</code></td>
+                  {hasDesc && <td className="text-sm text-muted-foreground">Bearer access token returned by <code>/ccid/aam/v1/login</code>.</td>}
+                </tr>
+                {endpoint.headers!.map((h, i) => (
+                  <tr key={i}>
+                    <td><code>{h.key}</code></td>
+                    <td><code>{h.value}</code></td>
+                    {hasDesc && <td className="text-sm text-muted-foreground">{h.description || "—"}</td>}
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </>
+        );
+      })()}
+
+      {endpoint.queryParams && endpoint.queryParams.length > 0 && (
+        <>
+          <h2>Query Parameters</h2>
+          <div className="overflow-x-auto">
+            <table className="w-full text-sm border-collapse">
+              <thead>
+                <tr className="border-b">
+                  <th className="text-left py-2 px-3 font-semibold">Name</th>
+                  <th className="text-left py-2 px-3 font-semibold">Type</th>
+                  <th className="text-left py-2 px-3 font-semibold">Required</th>
+                  <th className="text-left py-2 px-3 font-semibold">Description</th>
+                </tr>
+              </thead>
+              <tbody>
+                {endpoint.queryParams.map((q, i) => (
+                  <tr key={i} className="border-b last:border-b-0">
+                    <td className="py-2 px-3 font-mono text-xs">{q.name}</td>
+                    <td className="py-2 px-3">
+                      <span className="inline-flex items-center px-1.5 py-0.5 rounded text-xs font-medium bg-muted text-muted-foreground">
+                        {q.type}
+                      </span>
+                    </td>
+                    <td className="py-2 px-3">
+                      {q.required ? (
+                        <span className="text-xs font-semibold text-destructive">Required</span>
+                      ) : (
+                        <span className="text-xs text-muted-foreground">Optional</span>
+                      )}
+                    </td>
+                    <td className="py-2 px-3 text-muted-foreground">{q.description}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
         </>
       )}
+
 
       {fieldDocs?.requestFields && fieldDocs.requestFields.length > 0 && (
         <FieldTable title="Request Fields" fields={fieldDocs.requestFields} />

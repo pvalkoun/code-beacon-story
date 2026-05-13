@@ -10,7 +10,8 @@ export interface ApiEndpoint {
   requestBody?: string;
   responseBody?: string;
   responseStatus?: number;
-  headers?: { key: string; value: string }[];
+  headers?: { key: string; value: string; description?: string }[];
+  queryParams?: { name: string; type: string; required: boolean; description: string }[];
   errorBody?: string;
   product?: ApiProduct[];
   imageRequirements?: string[];
@@ -455,6 +456,50 @@ export const apiEndpoints: ApiEndpoint[] = [
     path: "/ccid/aam/v2/admin/account/{accountId}",
     description: "Delete an account. All associated features, caller profiles, and TN assets must be removed before an account can be deleted.",
     headers: [{ key: "Accept", value: "application/json" }],
+    responseStatus: 200,
+    product: ["common"]
+  },
+  {
+    id: "list-account",
+    category: "Account Management",
+    name: "List Accounts",
+    method: "GET",
+    path: "/ccid/aam/v2/admin/account",
+    description: "List accounts visible to the authenticated admin. Results are returned in pages. To page through results, pass the value returned in the response's `Pagination-Token` header back on the next request as the `Pagination-Token` request header. When the response omits the header, you have reached the last page.",
+    headers: [
+      { key: "Accept", value: "application/json" },
+      {
+        key: "Pagination-Token",
+        value: "{{paginationToken}}",
+        description: "Opaque cursor used to fetch the next page of results. Omit on the first request. Use the value returned in the Pagination-Token response header of the previous call. When the response does not include this header, there are no more pages.",
+      },
+    ],
+    responseBody: `[
+  {
+    "id": "xeb9ekoawz",
+    "name": "user_sample enterprise",
+    "type": "ENTERPRISE",
+    "status": "ACTIVE",
+    "relationship": "DIRECT",
+    "parent_account": ["x0vo1z7q11"],
+    "child_account_enabled": false,
+    "domain": "user.com",
+    "created_date": "Wed, 18 Feb 2026 21:06:14 GMT",
+    "updated_date": "Wed, 18 Feb 2026 21:06:14 GMT"
+  },
+  {
+    "id": "x59tj8rtv1",
+    "name": "user_sample enterprise1",
+    "type": "ENTERPRISE",
+    "status": "ACTIVE",
+    "relationship": "DIRECT",
+    "parent_account": ["x0vo1z7q11"],
+    "child_account_enabled": false,
+    "domain": "user1.com",
+    "created_date": "Thu, 19 Feb 2026 14:22:08 GMT",
+    "updated_date": "Thu, 19 Feb 2026 14:22:08 GMT"
+  }
+]`,
     responseStatus: 200,
     product: ["common"]
   },
@@ -2065,8 +2110,12 @@ export const apiEndpoints: ApiEndpoint[] = [
     name: "List TN Account Assets",
     method: "GET",
     path: "/ccid/sdpr/v4/admin/account/{accountId}/orig/tcs/asset",
-    description: "List all TN assets for an account, including their states, vetting statuses, and partner data.",
+    description: "List all TN assets for an account, including their states, vetting statuses, and partner data. Use the `limit` and `offset` query parameters to page through large result sets.",
     headers: [{ key: "Accept", value: "application/json" }],
+    queryParams: [
+      { name: "limit", type: "integer", required: false, description: "Maximum number of TN assets to return in the response. Used to control page size when paginating. Defaults to the system maximum if omitted." },
+      { name: "offset", type: "integer", required: false, description: "Zero-based index of the first TN asset to return. Combined with `limit`, this skips the specified number of records to fetch the next page (e.g. offset=100 with limit=50 returns records 101–150)." },
+    ],
     responseBody: `[
   {
     "id": "69a088f66ccc0121aeb816d2",
