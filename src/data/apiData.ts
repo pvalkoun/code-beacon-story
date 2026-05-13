@@ -2110,8 +2110,12 @@ export const apiEndpoints: ApiEndpoint[] = [
     name: "List TN Account Assets",
     method: "GET",
     path: "/ccid/sdpr/v4/admin/account/{accountId}/orig/tcs/asset",
-    description: "List all TN assets for an account, including their states, vetting statuses, and partner data.",
+    description: "List all TN assets for an account, including their states, vetting statuses, and partner data. Use the `limit` and `offset` query parameters to page through large result sets.",
     headers: [{ key: "Accept", value: "application/json" }],
+    queryParams: [
+      { name: "limit", type: "integer", required: false, description: "Maximum number of TN assets to return in the response. Used to control page size when paginating. Defaults to the system maximum if omitted." },
+      { name: "offset", type: "integer", required: false, description: "Zero-based index of the first TN asset to return. Combined with `limit`, this skips the specified number of records to fetch the next page (e.g. offset=100 with limit=50 returns records 101–150)." },
+    ],
     responseBody: `[
   {
     "id": "69a088f66ccc0121aeb816d2",
