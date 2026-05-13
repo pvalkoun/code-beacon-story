@@ -10,7 +10,8 @@ export interface ApiEndpoint {
   requestBody?: string;
   responseBody?: string;
   responseStatus?: number;
-  headers?: { key: string; value: string }[];
+  headers?: { key: string; value: string; description?: string }[];
+  queryParams?: { name: string; type: string; required: boolean; description: string }[];
   errorBody?: string;
   product?: ApiProduct[];
   imageRequirements?: string[];
