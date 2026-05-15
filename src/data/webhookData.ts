@@ -53,68 +53,134 @@ export const webhookEndpoints: WebhookEndpoint[] = [
   {
     id: "wb-enable-account",
     category: "Account Setup",
-    name: "Enable Webhook Service",
+    name: "Update Account",
     method: "POST",
-    path: "/ccid/aam/v2/admin/account",
-    description: "Create (or provision) an AAM enterprise account with the Webhook (WB) service enabled. This is a prerequisite before registering any webhook endpoints — the WB service entry must be present in the service array alongside any other services (e.g. SDPR) the account uses.",
+    path: "/ccid/aam/v2/admin/account/{accountId}",
+    description: "Update an existing account to enable the Webhook (WB) service alongside any other services it already uses. The WB service entry must be present in the service array before any webhook endpoints can be registered for the account.",
     headers: [
       { key: "Content-Type", value: "application/json" },
       { key: "Accept", value: "application/json" },
     ],
     requestBody: `{
-  "name": "user_sample enterprise_1",
+  "id": "xvm465a2g8",
+  "name": "user_enterprise_7",
   "type": "ENTERPRISE",
   "status": "ACTIVE",
   "relationship": "DIRECT",
   "parent_account": [
-    "x0vo1z7q11"
+    "xgvaf00cx3"
   ],
   "billing": {
-    "id": "TEwilldefine",
-    "model": "OTHER",
-    "frequency": "MONTHLY"
-  },
-  "service": [
-    {
-      "type": "SDPR"
-    },
-    {
-      "type": "WB"
-    }
-  ],
-  "child_account_enabled": false,
-  "start_date": "Fri, 4 Apr 2025 18:18:49 GMT",
-  "end_date": "Sat, 4 Apr 2026 18:18:49 GMT",
-  "application": [
-    "CCID",
-    "TCS"
-  ]
-}`,
-    responseBody: `{
-  "id": "xi0vhua3b4",
-  "name": "user_sample enterprise1",
-  "type": "ENTERPRISE",
-  "status": "ACTIVE",
-  "relationship": "DIRECT",
-  "parent_account": [
-    "x0vo1z7q11"
-  ],
-  "billing": {
-    "id": "TEwilldefine",
-    "model": "OTHER",
+    "id": "user_enterprise_7",
+    "model": "TRANSACTION",
     "frequency": "MONTHLY"
   },
   "service": [
     {
       "type": "SDPR",
-      "id": "xi0vhua3b4"
+      "id": "xvm465a2g8"
+    },
+    {
+      "type": "WB"
+    }
+  ],
+  "child_account_enabled": true,
+  "domain": "user_enterprise_7",
+  "comment": "example for tech enabler setup for 7th account",
+  "contact": [
+    {
+      "first_name": "james",
+      "last_name": "bond",
+      "email": "valkoun.user@gmail.com",
+      "phone": "+1.2232146979",
+      "type": "PRIMARY"
+    },
+    {
+      "first_name": "charlie",
+      "last_name": "bond",
+      "email": "acme@acme.com",
+      "phone": "+1.1134567890",
+      "type": "SECONDARY"
+    }
+  ],
+  "address": {
+    "street": "123 Main st",
+    "city": "Sterling",
+    "postal_code": "20123",
+    "state_or_province": "VA",
+    "country_code": "US"
+  },
+  "start_date": "Fri, 4 Apr 2025 18:18:49 GMT",
+  "end_date": "Sat, 4 Apr 2026 18:18:49 GMT",
+  "application": [
+    "CCID",
+    "TCS"
+  ],
+  "ein": "123456789",
+  "duns": "923456789",
+  "name_alias": [
+    "name alias2",
+    "name alias1"
+  ],
+  "vetting": {
+    "status": "PREVETTED",
+    "status_timestamp": "Fri, 4 Apr 2025 18:18:49 GMT"
+  }
+}`,
+    responseBody: `{
+  "id": "xeb9ekoawz",
+  "name": "user_sample enterprise",
+  "type": "ENTERPRISE",
+  "status": "ACTIVE",
+  "relationship": "DIRECT",
+  "parent_account": [
+    "x0vo1z7q11"
+  ],
+  "billing": {
+    "id": "TUwilldefine",
+    "model": "TRANSACTION",
+    "frequency": "MONTHLY"
+  },
+  "service": [
+    {
+      "type": "STIAS",
+      "id": "571578"
+    },
+    {
+      "type": "SDPR",
+      "id": "xeb9ekoawz"
     },
     {
       "type": "WB",
-      "id": "xi0vhua3b4"
+      "id": "xeb9ekoawz"
     }
   ],
   "child_account_enabled": false,
+  "domain": "user.com",
+  "comment": "example for tech enabler setup",
+  "contact": [
+    {
+      "first_name": "charlie",
+      "last_name": "bond",
+      "email": "acme@acme.com",
+      "phone": "+1.1134567890",
+      "type": "SECONDARY"
+    },
+    {
+      "first_name": "james",
+      "last_name": "bond",
+      "email": "james.bond@007.com",
+      "phone": "+1.2232146979",
+      "type": "PRIMARY"
+    }
+  ],
+  "address": {
+    "street": "123 Main st",
+    "city": "Sterling",
+    "postal_code": "20123",
+    "state_or_province": "VA",
+    "country_code": "US"
+  },
   "start_date": "Fri, 4 Apr 2025 18:18:49 GMT",
   "end_date": "Sat, 4 Apr 2026 18:18:49 GMT",
   "application": [
@@ -122,11 +188,21 @@ export const webhookEndpoints: WebhookEndpoint[] = [
     "TCS"
   ],
   "created_by": "user_v4_api_prod",
-  "created_date": "Mon, 23 Mar 2026 16:42:42 GMT",
+  "created_date": "Wed, 18 Feb 2026 21:06:14 GMT",
   "updated_by": "user_v4_api_prod",
-  "updated_date": "Mon, 23 Mar 2026 16:42:42 GMT"
+  "updated_date": "Wed, 18 Feb 2026 21:43:12 GMT",
+  "ein": "123456789",
+  "duns": "923456789",
+  "name_alias": [
+    "name alias2",
+    "name alias1"
+  ],
+  "vetting": {
+    "status": "PREVETTED",
+    "status_timestamp": "Fri, 4 Apr 2025 18:18:49 GMT"
+  }
 }`,
-    responseStatus: 201,
+    responseStatus: 206,
   },
   {
     id: "wb-create-user",
