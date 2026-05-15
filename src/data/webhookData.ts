@@ -92,7 +92,7 @@ export const webhookEndpoints: WebhookEndpoint[] = [
       "first_name": "james",
       "last_name": "bond",
       "email": "firstname.lastname@gmail.com",
-      "phone": "+1.2232146979",
+      "phone": "+1.7201234567",
       "type": "PRIMARY"
     },
     {
@@ -166,7 +166,7 @@ export const webhookEndpoints: WebhookEndpoint[] = [
       "first_name": "james",
       "last_name": "bond",
       "email": "james.bond@007.com",
-      "phone": "+1.2232146979",
+      "phone": "+1.7201234567",
       "type": "PRIMARY"
     }
   ],
