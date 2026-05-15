@@ -198,6 +198,76 @@ export const webhookEndpoints: WebhookEndpoint[] = [
 }`,
     responseStatus: 200,
   },
+  {
+    id: "wb-update-user",
+    category: "Account Setup",
+    name: "Update User",
+    method: "PUT",
+    path: "/ccid/aam/v2/admin/user",
+    description: "Update an existing AAM user. Use this to modify user details, roles, status, or application access. The user must already exist in the system.",
+    headers: [
+      { key: "Content-Type", value: "application/json" },
+    ],
+    requestBody: `{
+  "user_id": "enterprise_company_admin_01",
+  "user_name": "enterprise_company_admin_01",
+  "company_id": "x0369a4otu",
+  "email": "user.lastname@transunion.com",
+  "first_name": "Lucky",
+  "last_name": "Seven",
+  "phone": "+1.7201234567",
+  "roles": {
+    "SDPR": [
+      "SDPR_ENTERPRISE_ADMIN"
+    ],
+    "AAM": [
+      "AAM_COMPANY_ADMIN"
+    ],
+    "WB": [
+      "WB_COMPANY_ADMIN"
+    ]
+  },
+  "comment": "Authorized enterprise admin access.",
+  "status": "ACTIVE",
+  "user_type": "API",
+  "application": [
+    "CCID",
+    "TCS"
+  ]
+}`,
+    responseBody: `{
+  "user_id": "enterprise_company_admin_01",
+  "user_name": "enterprise_company_admin_01",
+  "company_id": "x0369a4otu",
+  "email": "user.lastname@transunion.com",
+  "first_name": "Lucky",
+  "last_name": "Seven",
+  "phone": "+1.7201234567",
+  "roles": {
+    "SDPR": [
+      "SDPR_ENTERPRISE_ADMIN"
+    ],
+    "WB": [
+      "WB_COMPANY_ADMIN"
+    ],
+    "AAM": [
+      "AAM_COMPANY_ADMIN"
+    ]
+  },
+  "comment": "Authorized enterprise admin access.",
+  "status": "ACTIVE",
+  "user_type": "API",
+  "application": [
+    "CCID",
+    "TCS"
+  ],
+  "created_by": "neustaradminapi",
+  "created_date": "Thu, 9 Apr 2026 08:28:59 GMT",
+  "updated_by": "neustaradminapi",
+  "updated_date": "Thu, 9 Apr 2026 08:28:59 GMT"
+}`,
+    responseStatus: 200,
+  },
 
   // ── Webhook Management ──
   {
