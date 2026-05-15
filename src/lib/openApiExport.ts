@@ -160,7 +160,7 @@ export function generateOpenApiSpec(): Record<string, unknown> {
       description: "API for managing Spoofed Call Protection (SCP) and Branded Call Display (BCD) services through the TransUnion TCS platform. Includes account management, feature configuration, caller profiles, and telephone number asset provisioning.",
       contact: {
         name: "TransUnion Customer Support",
-        email: "calleridsupport@transunion.com",
+        email: "support@example.com",
         url: "https://www.transunion.com",
       },
     },
@@ -408,7 +408,7 @@ export function generateWebhookOpenApiSpec(): Record<string, unknown> {
         "Webhook configuration, encryption, testing, and delivery log APIs for the TransUnion Trusted Call Solutions platform. Includes the inbound event delivery contract pushed to your registered HTTPS endpoint.",
       contact: {
         name: "TransUnion Customer Support",
-        email: "calleridsupport@transunion.com",
+        email: "support@example.com",
         url: "https://www.transunion.com",
       },
     },

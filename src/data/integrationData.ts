@@ -847,7 +847,7 @@ STIR/SHAKEN token signed successfully
       },
       {
         title: "Support & Resources",
-        content: "| Type | Contact |\n|------|--------|\n| **Technical Support** | PDLTCSProductOps@transunion.com |\n| **API Key Requests** | Your TransUnion account manager |\n| **General Inquiries** | PDLTCSProductOps@transunion.com |\n\n**Success Checklist:**\n- SDK service is running: `sudo systemctl status ringcentral-stirshaken` shows \"active (running)\"\n- Logs show successful initialization with no errors\n- Test calls trigger STIR/SHAKEN token deposits in logs\n- Total latency is under 200ms\n- Recipient phones display \"Verified\" badge\n- Success rate is above 99%\n- Service auto-restarts after reboot"
+        content: "| Type | Contact |\n|------|--------|\n| **Technical Support** | support@example.com |\n| **API Key Requests** | Your TransUnion account manager |\n| **General Inquiries** | support@example.com |\n\n**Success Checklist:**\n- SDK service is running: `sudo systemctl status ringcentral-stirshaken` shows \"active (running)\"\n- Logs show successful initialization with no errors\n- Test calls trigger STIR/SHAKEN token deposits in logs\n- Total latency is under 200ms\n- Recipient phones display \"Verified\" badge\n- Success rate is above 99%\n- Service auto-restarts after reboot"
       }
     ]
   },
