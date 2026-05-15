@@ -143,10 +143,6 @@ export const webhookEndpoints: WebhookEndpoint[] = [
   },
   "service": [
     {
-      "type": "STIAS",
-      "id": "571578"
-    },
-    {
       "type": "SDPR",
       "id": "xeb9ekoawz"
     },
