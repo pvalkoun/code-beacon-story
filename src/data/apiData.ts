@@ -417,7 +417,7 @@ export const apiEndpoints: ApiEndpoint[] = [
       {
         "first_name": "james",
         "last_name": "bond",
-        "email": "valkoun.user@gmail.com",
+        "email": "firstname.lastname@gmail.com",
         "phone": "+1.2232146979",
         "type": "PRIMARY"
       },
@@ -496,7 +496,7 @@ export const apiEndpoints: ApiEndpoint[] = [
     {
       "first_name": "james",
       "last_name": "bond",
-      "email": "valkoun.user@gmail.com",
+      "email": "firstname.lastname@gmail.com",
       "phone": "+1.2232146979",
       "type": "PRIMARY"
     },
