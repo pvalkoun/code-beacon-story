@@ -143,7 +143,7 @@ const PreCallAuth = () => {
               <td className="py-2 px-3 font-mono text-xs">from</td>
               <td className="py-2 px-3"><span className="inline-flex items-center px-1.5 py-0.5 rounded text-xs font-medium bg-muted text-muted-foreground">string</span></td>
               <td className="py-2 px-3"><span className="text-xs font-semibold text-destructive">Required</span></td>
-              <td className="py-2 px-3 text-muted-foreground">Calling party's telephone number in TEL URI format (RFC 3966). Example: <code>tel:+12232146979</code></td>
+              <td className="py-2 px-3 text-muted-foreground">Calling party's telephone number in TEL URI format (RFC 3966). Example: <code>tel:+17201234567</code></td>
             </tr>
             <tr className="border-b">
               <td className="py-2 px-3 font-mono text-xs">to</td>
@@ -167,7 +167,7 @@ const PreCallAuth = () => {
   --header 'Content-Type: application/json' \\
   --header 'Accept: application/json' \\
   --data '{
-    "from":   "tel:+12232146979",
+    "from":   "tel:+17201234567",
     "to":     "tel:+12482989788",
     "origid": "usefulenterpriseuniquenumber"
   }'`} title="cURL" />
