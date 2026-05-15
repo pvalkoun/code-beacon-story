@@ -91,14 +91,14 @@ export const webhookEndpoints: WebhookEndpoint[] = [
     {
       "first_name": "james",
       "last_name": "bond",
-      "email": "firstname.lastname@example.com",
+      "email": "james.bond@example.com",
       "phone": "+1.7201234567",
       "type": "PRIMARY"
     },
     {
       "first_name": "charlie",
       "last_name": "bond",
-      "email": "acme@example.com",
+      "email": "charlie.bond@example.com",
       "phone": "+1.1134567890",
       "type": "SECONDARY"
     }
@@ -158,14 +158,14 @@ export const webhookEndpoints: WebhookEndpoint[] = [
     {
       "first_name": "charlie",
       "last_name": "bond",
-      "email": "acme@example.com",
+      "email": "charlie.bond@example.com",
       "phone": "+1.1134567890",
       "type": "SECONDARY"
     },
     {
       "first_name": "james",
       "last_name": "bond",
-      "email": "jane.doe@example.com",
+      "email": "james.bond@example.com",
       "phone": "+1.7201234567",
       "type": "PRIMARY"
     }
@@ -214,7 +214,7 @@ export const webhookEndpoints: WebhookEndpoint[] = [
   "user_id": "enterprise_company_admin_01",
   "user_name": "enterprise_company_admin_01",
   "company_id": "x0369a4otu",
-  "email": "user.lastname@example.com",
+  "email": "lucky.seven@example.com",
   "first_name": "Lucky",
   "last_name": "Seven",
   "phone": "+1.7201234567",
@@ -241,7 +241,7 @@ export const webhookEndpoints: WebhookEndpoint[] = [
   "user_id": "enterprise_company_admin_01",
   "user_name": "enterprise_company_admin_01",
   "company_id": "x0369a4otu",
-  "email": "user.lastname@example.com",
+  "email": "lucky.seven@example.com",
   "first_name": "Lucky",
   "last_name": "Seven",
   "phone": "+1.7201234567",
@@ -284,7 +284,7 @@ export const webhookEndpoints: WebhookEndpoint[] = [
   "user_id": "enterprise_company_admin_01",
   "user_name": "enterprise_company_admin_01",
   "company_id": "x0369a4otu",
-  "email": "user.lastname@example.com",
+  "email": "lucky.seven@example.com",
   "first_name": "Lucky",
   "last_name": "Seven",
   "phone": "+1.7201234567",
@@ -311,7 +311,7 @@ export const webhookEndpoints: WebhookEndpoint[] = [
   "user_id": "enterprise_company_admin_01",
   "user_name": "enterprise_company_admin_01",
   "company_id": "x0369a4otu",
-  "email": "user.lastname@example.com",
+  "email": "lucky.seven@example.com",
   "first_name": "Lucky",
   "last_name": "Seven",
   "phone": "+1.7201234567",
