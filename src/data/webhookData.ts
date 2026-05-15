@@ -161,6 +161,7 @@ export const webhookEndpoints: WebhookEndpoint[] = [
   "status": "ACTIVE",
   "user_type": "API",
   "application": [
+    "CCID",
     "TCS"
   ]
 }`,
@@ -187,6 +188,7 @@ export const webhookEndpoints: WebhookEndpoint[] = [
   "status": "ACTIVE",
   "user_type": "API",
   "application": [
+    "CCID",
     "TCS"
   ],
   "created_by": "neustaradminapi",
