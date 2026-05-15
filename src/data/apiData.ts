@@ -115,14 +115,14 @@ export const apiEndpoints: ApiEndpoint[] = [
     {
       "first_name": "james",
       "last_name": "bond",
-      "email": "jane.doe@example.com",
+      "email": "james.bond@example.com",
       "phone": "+1.7201234567",
       "type": "PRIMARY"
     },
     {
       "first_name": "charlie",
       "last_name": "bond",
-      "email": "acme@example.com",
+      "email": "charlie.bond@example.com",
       "phone": "+1.1134567890",
       "type": "SECONDARY"
     }
@@ -178,14 +178,14 @@ export const apiEndpoints: ApiEndpoint[] = [
     {
       "first_name": "james",
       "last_name": "bond",
-      "email": "jane.doe@example.com",
+      "email": "james.bond@example.com",
       "phone": "+1.7201234567",
       "type": "PRIMARY"
     },
     {
       "first_name": "charlie",
       "last_name": "bond",
-      "email": "acme@example.com",
+      "email": "charlie.bond@example.com",
       "phone": "+1.1134567890",
       "type": "SECONDARY"
     }
@@ -260,14 +260,14 @@ export const apiEndpoints: ApiEndpoint[] = [
     {
       "first_name": "charlie",
       "last_name": "bond",
-      "email": "acme@example.com",
+      "email": "charlie.bond@example.com",
       "phone": "+1.1134567890",
       "type": "SECONDARY"
     },
     {
       "first_name": "james",
       "last_name": "bond",
-      "email": "jane.doe@example.com",
+      "email": "james.bond@example.com",
       "phone": "+1.7201234567",
       "type": "PRIMARY"
     }
@@ -350,14 +350,14 @@ export const apiEndpoints: ApiEndpoint[] = [
       {
         "first_name": "charlie",
         "last_name": "bond",
-        "email": "acme@example.com",
+        "email": "charlie.bond@example.com",
         "phone": "+1.1134567890",
         "type": "SECONDARY"
       },
       {
         "first_name": "james",
         "last_name": "bond",
-        "email": "jane.doe@example.com",
+        "email": "james.bond@example.com",
         "phone": "+1.7201234567",
         "type": "PRIMARY"
       }
@@ -417,14 +417,14 @@ export const apiEndpoints: ApiEndpoint[] = [
       {
         "first_name": "james",
         "last_name": "bond",
-        "email": "firstname.lastname@example.com",
+        "email": "james.bond@example.com",
         "phone": "+1.7201234567",
         "type": "PRIMARY"
       },
       {
         "first_name": "charlie",
         "last_name": "bond",
-        "email": "acme@example.com",
+        "email": "charlie.bond@example.com",
         "phone": "+1.1134567890",
         "type": "SECONDARY"
       }
@@ -496,14 +496,14 @@ export const apiEndpoints: ApiEndpoint[] = [
     {
       "first_name": "james",
       "last_name": "bond",
-      "email": "firstname.lastname@example.com",
+      "email": "james.bond@example.com",
       "phone": "+1.7201234567",
       "type": "PRIMARY"
     },
     {
       "first_name": "charlie",
       "last_name": "bond",
-      "email": "acme@example.com",
+      "email": "charlie.bond@example.com",
       "phone": "+1.1134567890",
       "type": "SECONDARY"
     }
@@ -563,14 +563,14 @@ export const apiEndpoints: ApiEndpoint[] = [
     {
       "first_name": "charlie",
       "last_name": "bond",
-      "email": "acme@example.com",
+      "email": "charlie.bond@example.com",
       "phone": "+1.1134567890",
       "type": "SECONDARY"
     },
     {
       "first_name": "james",
       "last_name": "bond",
-      "email": "jane.doe@example.com",
+      "email": "james.bond@example.com",
       "phone": "+1.7201234567",
       "type": "PRIMARY"
     }
