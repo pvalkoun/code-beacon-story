@@ -703,6 +703,28 @@ export const webhookFieldDocs: Record<string, WebhookEndpointFieldDocs> = {
       { path: "message", type: "String", required: true, description: "Confirmation message" },
     ],
   },
+  "wb-update-user": {
+    requestFields: [
+      { path: "user_id", type: "String", required: true, description: "Unique user identifier" },
+      { path: "user_name", type: "String", required: true, description: "User display name" },
+      { path: "company_id", type: "String", required: true, description: "AAM company / account ID this user belongs to" },
+      { path: "email", type: "String", required: true, description: "User email address" },
+      { path: "first_name", type: "String", required: true, description: "First name" },
+      { path: "last_name", type: "String", required: true, description: "Last name" },
+      { path: "phone", type: "String", required: false, description: "Phone number" },
+      { path: "roles.WB", type: "Array<String>", required: true, description: "Webhook roles to assign", constraints: "WB_COMPANY_ADMIN" },
+      { path: "roles.SDPR", type: "Array<String>", required: false, description: "SDPR roles" },
+      { path: "roles.AAM", type: "Array<String>", required: false, description: "AAM roles" },
+      { path: "comment", type: "String", required: false, description: "Free-text comment" },
+      { path: "status", type: "String", required: true, description: "User status", constraints: "ACTIVE | INACTIVE" },
+      { path: "user_type", type: "String", required: true, description: "User type", constraints: "API | UI" },
+      { path: "application", type: "Array<String>", required: true, description: "Applications the user can access", constraints: "TCS" },
+    ],
+    responseFields: [
+      { path: "user_id", type: "String", required: true, description: "The user ID that was updated" },
+      { path: "message", type: "String", required: true, description: "Confirmation message" },
+    ],
+  },
   "wb-register": {
     pathParams: [
       { path: "accountId", type: "String", required: true, description: "The account ID (from AAM) to register the webhook under", constraints: "Account must have WB service enabled" },
