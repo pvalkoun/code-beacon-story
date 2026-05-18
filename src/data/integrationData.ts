@@ -883,6 +883,35 @@ STIR/SHAKEN token signed successfully
         content: "1. Sign in to the **Zoom web portal** as an admin.\n2. Go to **Number Management → Phone Numbers**.\n3. Select the checkboxes for the numbers you want to enable.\n4. At the top of the page, open the **Call Authentication** dropdown and select **TransUnion**.\n5. In the confirmation dialog, click **Confirm**."
       }
     ]
+  },
+  {
+    id: "sinch",
+    name: "Sinch Integration",
+    platform: "Sinch",
+    description: "Enable TransUnion [Call Authentication](/call-auth) on your Sinch Elastic SIP Trunk numbers — no code required. Sinch configures the integration upon request once requirements are met.",
+    products: ["scp", "bcd"],
+    sections: [
+      {
+        title: "Overview",
+        content: "Sinch is a TransUnion Technology Enablement Partner and provides call authentication that enables TransUnion to deliver Branded Call Display, Spoofed Call Protection, and Caller Name Optimization to end user customers on Sinch Voice services."
+      },
+      {
+        title: "Services Enabled",
+        content: "- **Branded Call Display** — Allows a brand's logo to be displayed on calls to cell phones, which helps improve customer engagement\n- **Spoofed Call Protection** — Blocks calls that attempt to spoof a customer's phone number, which helps prevent spoofers from using your brand\n- **Caller Name Optimization** — Mitigates legitimate calls being tagged as spam, which helps customer engagement"
+      },
+      {
+        title: "Requirements",
+        content: "- Customer must have a commercial agreement and relationship with TransUnion, who provides these three services\n- Customer must have a commercial agreement with Sinch for Elastic SIP Trunks and use Elastic SIP Trunks for outbound calling\n- Customer must have Sinch phone numbers\n- Sinch will provide call authentication for the customer through an API call to TransUnion that includes customer call information to enable these services\n- Applicable numbers must be configured in the TransUnion portal"
+      },
+      {
+        title: "How It Works",
+        content: "This integration does not require any code on your part. Once the requirements are met, contact Sinch to request configuration. Sinch will set up call authentication on your behalf by making API calls to TransUnion that include your customer call information, enabling Branded Call Display, Spoofed Call Protection, and Caller Name Optimization for your outbound calls."
+      },
+      {
+        title: "Next Steps",
+        content: "For more information or to request this integration, please contact Sinch Support at: support@example.com"
+      }
+    ]
   }
 ];
 
