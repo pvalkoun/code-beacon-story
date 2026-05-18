@@ -12,7 +12,7 @@ interface ChangelogEntry {
 
 const changelog: ChangelogEntry[] = [
   {
-    date: "2026-07-01",
+    date: "2026-04-28",
     title: "Image Upload Handling for Branded Call Display",
     description:
       "Release date: July 1, 2026. Introduced new Image Profile endpoints (POST, GET, DELETE) to streamline logo and image management for BCD. Upload a publicly accessible image URL to the new Image endpoint and receive a TransUnion-hosted image URL along with an image_profile_id, which can then be referenced when creating Rich BCD caller profiles to display your company logo on recipient devices.",
