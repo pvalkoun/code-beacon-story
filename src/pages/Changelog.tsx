@@ -22,17 +22,17 @@ const changelog: ChangelogEntry[] = [
     ],
   },
   {
-    date: "2026-06-01",
+    date: "2026-04-28",
     title: "Analytics API for BCD and SCP",
     description:
-      "Release date: June 1, 2026. Launched the Analytics API under the Resources section, providing per-TN and account-wide call performance metrics for both Branded Call Display (BCD) and Spoofed Call Protection (SCP). Includes full authentication flow, cursor-based pagination, and detailed response schemas to help you measure delivery, engagement, and authentication outcomes.",
+      "Release date: May 16, 2026. Launched the Analytics API under the Resources section, providing per-TN and account-wide call performance metrics for both Branded Call Display (BCD) and Spoofed Call Protection (SCP). Includes full authentication flow, cursor-based pagination, and detailed response schemas to help you measure delivery, engagement, and authentication outcomes.",
     tags: ["Analytics", "New", "API"],
     links: [
       { label: "Analytics API", to: "/resources/analytics" },
     ],
   },
   {
-    date: "2026-06-01",
+    date: "2026-04-28",
     title: "Webhook Notifications",
     description:
       "Release date: June 1, 2026. Released the Webhooks module, enabling real-time push notifications for account, caller profile, and TN-level events (vetting and tagging). Includes endpoints to configure callback URLs, manage encryption, send test events, and review delivery logs, plus a documented inbound event delivery contract with retry and cool-off behavior.",
