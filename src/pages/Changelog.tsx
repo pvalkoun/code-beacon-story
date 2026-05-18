@@ -10,11 +10,9 @@ interface ChangelogEntry {
   links?: { label: string; to: string }[];
 }
 
-const today = new Date().toISOString().slice(0, 10);
-
 const changelog: ChangelogEntry[] = [
   {
-    date: today,
+    date: "2026-07-01",
     title: "Image Upload Handling for Branded Call Display",
     description:
       "Release date: July 1, 2026. Introduced new Image Profile endpoints (POST, GET, DELETE) to streamline logo and image management for BCD. Upload a publicly accessible image URL to the new Image endpoint and receive a TransUnion-hosted image URL along with an image_profile_id, which can then be referenced when creating Rich BCD caller profiles to display your company logo on recipient devices.",
@@ -24,7 +22,7 @@ const changelog: ChangelogEntry[] = [
     ],
   },
   {
-    date: today,
+    date: "2026-06-01",
     title: "Analytics API for BCD and SCP",
     description:
       "Release date: June 1, 2026. Launched the Analytics API under the Resources section, providing per-TN and account-wide call performance metrics for both Branded Call Display (BCD) and Spoofed Call Protection (SCP). Includes full authentication flow, cursor-based pagination, and detailed response schemas to help you measure delivery, engagement, and authentication outcomes.",
@@ -34,7 +32,7 @@ const changelog: ChangelogEntry[] = [
     ],
   },
   {
-    date: today,
+    date: "2026-06-01",
     title: "Webhook Notifications",
     description:
       "Release date: June 1, 2026. Released the Webhooks module, enabling real-time push notifications for account, caller profile, and TN-level events (vetting and tagging). Includes endpoints to configure callback URLs, manage encryption, send test events, and review delivery logs, plus a documented inbound event delivery contract with retry and cool-off behavior.",
