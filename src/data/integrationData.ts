@@ -916,4 +916,7 @@ STIR/SHAKEN token signed successfully
 ];
 
 export const getIntegration = (id: string) => integrations.find(i => i.id === id);
-export const getIntegrationsForProduct = (productId: string) => integrations.filter(i => i.products.includes(productId as "scp" | "bcd"));
+export const getIntegrationsForProduct = (productId: string) =>
+  integrations
+    .filter(i => i.products.includes(productId as "scp" | "bcd"))
+    .sort((a, b) => a.platform.localeCompare(b.platform));
