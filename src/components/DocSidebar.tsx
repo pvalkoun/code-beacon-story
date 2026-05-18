@@ -226,9 +226,9 @@ export function DocSidebar() {
                         <SidebarMenu className="ml-4 border-l border-sidebar-border pl-2 mt-1">
                         <SidebarMenuItem>
                           <SidebarMenuButton asChild>
-                            <NavLink to="/integrations/twilio" activeClassName="bg-sidebar-accent text-sidebar-primary font-medium" className="text-xs">
+                            <NavLink to="/integrations/amazon-connect" activeClassName="bg-sidebar-accent text-sidebar-primary font-medium" className="text-xs">
                               <Plug className="h-3.5 w-3.5 mr-2" />
-                              {!collapsed && <span>Twilio</span>}
+                              {!collapsed && <span>Amazon Connect</span>}
                             </NavLink>
                           </SidebarMenuButton>
                         </SidebarMenuItem>
@@ -242,22 +242,6 @@ export function DocSidebar() {
                         </SidebarMenuItem>
                         <SidebarMenuItem>
                           <SidebarMenuButton asChild>
-                            <NavLink to="/integrations/plivo" activeClassName="bg-sidebar-accent text-sidebar-primary font-medium" className="text-xs">
-                              <Plug className="h-3.5 w-3.5 mr-2" />
-                              {!collapsed && <span>Plivo</span>}
-                            </NavLink>
-                          </SidebarMenuButton>
-                        </SidebarMenuItem>
-                        <SidebarMenuItem>
-                          <SidebarMenuButton asChild>
-                            <NavLink to="/integrations/amazon-connect" activeClassName="bg-sidebar-accent text-sidebar-primary font-medium" className="text-xs">
-                              <Plug className="h-3.5 w-3.5 mr-2" />
-                              {!collapsed && <span>Amazon Connect</span>}
-                            </NavLink>
-                          </SidebarMenuButton>
-                        </SidebarMenuItem>
-                        <SidebarMenuItem>
-                          <SidebarMenuButton asChild>
                             <NavLink to="/integrations/nice-incontact" activeClassName="bg-sidebar-accent text-sidebar-primary font-medium" className="text-xs">
                               <Plug className="h-3.5 w-3.5 mr-2" />
                               {!collapsed && <span>NICE inContact</span>}
@@ -266,9 +250,33 @@ export function DocSidebar() {
                         </SidebarMenuItem>
                         <SidebarMenuItem>
                           <SidebarMenuButton asChild>
+                            <NavLink to="/integrations/plivo" activeClassName="bg-sidebar-accent text-sidebar-primary font-medium" className="text-xs">
+                              <Plug className="h-3.5 w-3.5 mr-2" />
+                              {!collapsed && <span>Plivo</span>}
+                            </NavLink>
+                          </SidebarMenuButton>
+                        </SidebarMenuItem>
+                        <SidebarMenuItem>
+                          <SidebarMenuButton asChild>
                             <NavLink to="/integrations/ringcentral" activeClassName="bg-sidebar-accent text-sidebar-primary font-medium" className="text-xs">
                               <Plug className="h-3.5 w-3.5 mr-2" />
                               {!collapsed && <span>RingCentral</span>}
+                            </NavLink>
+                          </SidebarMenuButton>
+                        </SidebarMenuItem>
+                        <SidebarMenuItem>
+                          <SidebarMenuButton asChild>
+                            <NavLink to="/integrations/sinch" activeClassName="bg-sidebar-accent text-sidebar-primary font-medium" className="text-xs">
+                              <Plug className="h-3.5 w-3.5 mr-2" />
+                              {!collapsed && <span>Sinch</span>}
+                            </NavLink>
+                          </SidebarMenuButton>
+                        </SidebarMenuItem>
+                        <SidebarMenuItem>
+                          <SidebarMenuButton asChild>
+                            <NavLink to="/integrations/twilio" activeClassName="bg-sidebar-accent text-sidebar-primary font-medium" className="text-xs">
+                              <Plug className="h-3.5 w-3.5 mr-2" />
+                              {!collapsed && <span>Twilio</span>}
                             </NavLink>
                           </SidebarMenuButton>
                         </SidebarMenuItem>
@@ -330,9 +338,9 @@ export function DocSidebar() {
               <SidebarMenu>
                 <SidebarMenuItem>
                   <SidebarMenuButton asChild>
-                    <NavLink to="/integrations/twilio" activeClassName="bg-sidebar-accent text-sidebar-primary font-medium">
+                    <NavLink to="/integrations/amazon-connect" activeClassName="bg-sidebar-accent text-sidebar-primary font-medium">
                       <Plug className="h-4 w-4 mr-2" />
-                      {!collapsed && <span>Twilio</span>}
+                      {!collapsed && <span>Amazon Connect</span>}
                     </NavLink>
                   </SidebarMenuButton>
                 </SidebarMenuItem>
@@ -346,22 +354,6 @@ export function DocSidebar() {
                 </SidebarMenuItem>
                 <SidebarMenuItem>
                   <SidebarMenuButton asChild>
-                    <NavLink to="/integrations/plivo" activeClassName="bg-sidebar-accent text-sidebar-primary font-medium">
-                      <Plug className="h-4 w-4 mr-2" />
-                      {!collapsed && <span>Plivo</span>}
-                    </NavLink>
-                  </SidebarMenuButton>
-                </SidebarMenuItem>
-                <SidebarMenuItem>
-                  <SidebarMenuButton asChild>
-                    <NavLink to="/integrations/amazon-connect" activeClassName="bg-sidebar-accent text-sidebar-primary font-medium">
-                      <Plug className="h-4 w-4 mr-2" />
-                      {!collapsed && <span>Amazon Connect</span>}
-                    </NavLink>
-                  </SidebarMenuButton>
-                </SidebarMenuItem>
-                <SidebarMenuItem>
-                  <SidebarMenuButton asChild>
                     <NavLink to="/integrations/nice-incontact" activeClassName="bg-sidebar-accent text-sidebar-primary font-medium">
                       <Plug className="h-4 w-4 mr-2" />
                       {!collapsed && <span>NICE inContact</span>}
@@ -370,9 +362,33 @@ export function DocSidebar() {
                 </SidebarMenuItem>
                 <SidebarMenuItem>
                   <SidebarMenuButton asChild>
+                    <NavLink to="/integrations/plivo" activeClassName="bg-sidebar-accent text-sidebar-primary font-medium">
+                      <Plug className="h-4 w-4 mr-2" />
+                      {!collapsed && <span>Plivo</span>}
+                    </NavLink>
+                  </SidebarMenuButton>
+                </SidebarMenuItem>
+                <SidebarMenuItem>
+                  <SidebarMenuButton asChild>
                     <NavLink to="/integrations/ringcentral" activeClassName="bg-sidebar-accent text-sidebar-primary font-medium">
                       <Plug className="h-4 w-4 mr-2" />
                       {!collapsed && <span>RingCentral</span>}
+                    </NavLink>
+                  </SidebarMenuButton>
+                </SidebarMenuItem>
+                <SidebarMenuItem>
+                  <SidebarMenuButton asChild>
+                    <NavLink to="/integrations/sinch" activeClassName="bg-sidebar-accent text-sidebar-primary font-medium">
+                      <Plug className="h-4 w-4 mr-2" />
+                      {!collapsed && <span>Sinch</span>}
+                    </NavLink>
+                  </SidebarMenuButton>
+                </SidebarMenuItem>
+                <SidebarMenuItem>
+                  <SidebarMenuButton asChild>
+                    <NavLink to="/integrations/twilio" activeClassName="bg-sidebar-accent text-sidebar-primary font-medium">
+                      <Plug className="h-4 w-4 mr-2" />
+                      {!collapsed && <span>Twilio</span>}
                     </NavLink>
                   </SidebarMenuButton>
                 </SidebarMenuItem>
