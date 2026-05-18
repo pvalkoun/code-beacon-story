@@ -909,7 +909,7 @@ STIR/SHAKEN token signed successfully
       },
       {
         title: "Next Steps",
-        content: "For more information or to request this integration, please contact Sinch Support at: support@example.com"
+        content: "For more information or to request this integration, please contact Sinch at: askSinch@sinch.com"
       }
     ]
   }
