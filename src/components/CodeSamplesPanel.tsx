@@ -138,11 +138,30 @@ function escapeHtml(s: string) {
 }
 
 function highlightJsonStr(code: string): string {
-  return escapeHtml(code)
-    .replace(/(&quot;[^&]*?&quot;)(\s*:)/g, '<span class="code-key">$1</span>$2')
-    .replace(/:\s*(&quot;[^&]*?&quot;)/g, ': <span class="code-string">$1</span>')
-    .replace(/\b(true|false|null)\b/g, '<span class="code-boolean">$1</span>')
-    .replace(/(-?\b\d+\.?\d*\b)/g, '<span class="code-number">$1</span>');
+  // Tokenize first, then escape — Postman-style colors
+  const tokenRe = /("(?:\\.|[^"\\])*"\s*:)|("(?:\\.|[^"\\])*")|\b(true|false|null)\b|(-?\d+\.?\d*(?:[eE][+-]?\d+)?)|([{}\[\],:])/g;
+  let out = "";
+  let last = 0;
+  let m: RegExpExecArray | null;
+  while ((m = tokenRe.exec(code)) !== null) {
+    out += escapeHtml(code.slice(last, m.index));
+    if (m[1]) {
+      // key with trailing colon
+      const key = m[1].replace(/\s*:$/, "");
+      out += `<span class="code-key">${escapeHtml(key)}</span><span class="code-punctuation">:</span>`;
+    } else if (m[2]) {
+      out += `<span class="code-string">${escapeHtml(m[2])}</span>`;
+    } else if (m[3]) {
+      out += `<span class="code-boolean">${m[3]}</span>`;
+    } else if (m[4]) {
+      out += `<span class="code-number">${m[4]}</span>`;
+    } else if (m[5]) {
+      out += `<span class="code-punctuation">${m[5]}</span>`;
+    }
+    last = m.index + m[0].length;
+  }
+  out += escapeHtml(code.slice(last));
+  return out;
 }
 
 function highlightGeneric(code: string, opts: {
