@@ -111,6 +111,8 @@
 .code-number { color: hsl(140 60% 60%); }
 .code-boolean { color: hsl(286 60% 67%); }
 .code-punctuation { color: hsl(210 14% 60%); }
+.code-keyword { color: hsl(286 60% 67%); }
+.code-comment { color: hsl(210 14% 50%); font-style: italic; }
 
 /* Method badges */
 .method-get { @apply bg-emerald-100 text-emerald-800; }
