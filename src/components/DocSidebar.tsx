@@ -101,7 +101,7 @@ export function DocSidebar() {
                 <SidebarMenuItem>
                   <SidebarMenuButton onClick={downloadWebhookOpenApiSpec}>
                     <Download className="h-4 w-4 mr-2" />
-                    {!collapsed && <span>Download OpenAPI</span>}
+                    {!collapsed && <span>Download OpenAPI spec</span>}
                   </SidebarMenuButton>
                 </SidebarMenuItem>
               </SidebarMenu>
@@ -473,7 +473,7 @@ export function DocSidebar() {
               <SidebarMenuItem>
                 <SidebarMenuButton onClick={downloadOpenApiSpec}>
                   <Download className="h-4 w-4 mr-2" />
-                  {!collapsed && <span>Download OpenAPI Spec</span>}
+                  {!collapsed && <span>Download OpenAPI spec</span>}
                 </SidebarMenuButton>
               </SidebarMenuItem>
             </SidebarMenu>
