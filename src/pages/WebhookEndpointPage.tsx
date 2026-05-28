@@ -3,6 +3,7 @@ import { getWebhookEndpoint, webhookFieldDocs, sampleEventPayloads } from "@/dat
 import { CodeBlock } from "@/components/CodeBlock";
 import { MethodBadge } from "@/components/MethodBadge";
 import { AuthTypesPanel } from "@/components/AuthTypesPanel";
+import { CodeSamplesPanel } from "@/components/CodeSamplesPanel";
 import type { WebhookFieldDoc } from "@/data/webhookData";
 
 function FieldTable({ title, fields }: { title: string; fields: WebhookFieldDoc[] }) {
