@@ -3,7 +3,7 @@ import { Check, Copy } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 
-type Lang = "curl" | "javascript" | "nodejs" | "php" | "python";
+type Lang = "curl" | "javascript" | "nodejs" | "php" | "python" | "json";
 
 const TABS: { key: Lang; label: string }[] = [
   { key: "curl", label: "cURL" },
@@ -11,6 +11,7 @@ const TABS: { key: Lang; label: string }[] = [
   { key: "nodejs", label: "Node.js" },
   { key: "php", label: "PHP" },
   { key: "python", label: "Python" },
+  { key: "json", label: "JSON" },
 ];
 
 interface CodeSamplesPanelProps {
@@ -24,7 +25,6 @@ interface CodeSamplesPanelProps {
 const DEFAULT_BASE_URL = "https://api-rst.ccid.neustar.biz";
 
 function buildHeaders(headers: { key: string; value: string }[]) {
-  // Always include Authorization unless explicitly overridden
   const hasAuth = headers.some((h) => h.key.toLowerCase() === "authorization");
   const out = [...headers];
   if (!hasAuth) out.unshift({ key: "Authorization", value: "Bearer {{accessToken}}" });
@@ -79,7 +79,7 @@ try {
 
 function genPhp(method: string, url: string, headers: { key: string; value: string }[], body?: string) {
   const headerArr = headers.map((h) => `    "${h.key}: ${h.value}"`).join(",\n");
-  const bodyLine = body ? `\nCURLOPT_POSTFIELDS => ${JSON.stringify(body)},` : "";
+  const bodyLine = body ? `\n  CURLOPT_POSTFIELDS => ${JSON.stringify(body)},` : "";
   return `<?php
 
 $curl = curl_init();
@@ -122,6 +122,94 @@ response = requests.request("${method}", url, headers=headers${dataArg})
 print(response.text)`;
 }
 
+function genJson(body?: string) {
+  if (!body) return "// No request body";
+  try {
+    return JSON.stringify(JSON.parse(body), null, 2);
+  } catch {
+    return body;
+  }
+}
+
+/* ---------- Syntax highlighting ---------- */
+
+function escapeHtml(s: string) {
+  return s.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+}
+
+function highlightJsonStr(code: string): string {
+  return escapeHtml(code)
+    .replace(/(&quot;[^&]*?&quot;)(\s*:)/g, '<span class="code-key">$1</span>$2')
+    .replace(/:\s*(&quot;[^&]*?&quot;)/g, ': <span class="code-string">$1</span>')
+    .replace(/\b(true|false|null)\b/g, '<span class="code-boolean">$1</span>')
+    .replace(/(-?\b\d+\.?\d*\b)/g, '<span class="code-number">$1</span>');
+}
+
+function highlightGeneric(code: string, opts: {
+  keywords?: string[];
+  comment?: RegExp; // single-line
+  blockComment?: RegExp;
+}): string {
+  let html = escapeHtml(code);
+
+  // strings (double and single)
+  html = html.replace(/(&quot;[^&\n]*?&quot;|&#39;[^&\n]*?&#39;|'[^'\n]*'|"[^"\n]*")/g,
+    (m) => `<span class="code-string">${m}</span>`);
+
+  // numbers
+  html = html.replace(/\b(-?\d+\.?\d*)\b/g, '<span class="code-number">$1</span>');
+
+  // booleans / null / None
+  html = html.replace(/\b(true|false|null|None|True|False)\b/g, '<span class="code-boolean">$1</span>');
+
+  // keywords
+  if (opts.keywords && opts.keywords.length) {
+    const re = new RegExp(`\\b(${opts.keywords.join("|")})\\b`, "g");
+    html = html.replace(re, '<span class="code-keyword">$1</span>');
+  }
+
+  // comments (apply after, may overlap but ok for our snippets)
+  if (opts.comment) {
+    html = html.replace(opts.comment, (m) => `<span class="code-comment">${m}</span>`);
+  }
+  return html;
+}
+
+function highlightCurl(code: string): string {
+  let html = escapeHtml(code);
+  html = html.replace(/('[^']*')/g, '<span class="code-string">$1</span>');
+  html = html.replace(/(^|\s)(curl)\b/g, '$1<span class="code-keyword">$2</span>');
+  html = html.replace(/(--[a-z-]+)/g, '<span class="code-key">$1</span>');
+  return html;
+}
+
+function highlight(lang: Lang, code: string): string {
+  switch (lang) {
+    case "json":
+      return highlightJsonStr(code);
+    case "curl":
+      return highlightCurl(code);
+    case "javascript":
+    case "nodejs":
+      return highlightGeneric(code, {
+        keywords: ["const", "let", "var", "import", "from", "try", "catch", "await", "async", "return", "new", "function"],
+        comment: /\/\/[^\n]*/g,
+      });
+    case "php":
+      return highlightGeneric(code, {
+        keywords: ["echo", "if", "else", "function", "return", "true", "false"],
+        comment: /\/\/[^\n]*/g,
+      }).replace(/(\$[a-zA-Z_]\w*)/g, '<span class="code-key">$1</span>');
+    case "python":
+      return highlightGeneric(code, {
+        keywords: ["import", "from", "as", "def", "return", "print", "if", "else", "for", "in"],
+        comment: /#[^\n]*/g,
+      });
+    default:
+      return escapeHtml(code);
+  }
+}
+
 export function CodeSamplesPanel({ method, path, headers = [], body, baseUrl = DEFAULT_BASE_URL }: CodeSamplesPanelProps) {
   const [active, setActive] = useState<Lang>("curl");
   const [copied, setCopied] = useState(false);
@@ -135,9 +223,11 @@ export function CodeSamplesPanel({ method, path, headers = [], body, baseUrl = D
     nodejs: genNodeJs(method, url, fullHeaders, body),
     php: genPhp(method, url, fullHeaders, body),
     python: genPython(method, url, fullHeaders, body),
+    json: genJson(body),
   }), [method, url, fullHeaders, body]);
 
   const current = samples[active];
+  const highlighted = useMemo(() => highlight(active, current), [active, current]);
 
   const handleCopy = async () => {
     await navigator.clipboard.writeText(current);
@@ -174,7 +264,7 @@ export function CodeSamplesPanel({ method, path, headers = [], body, baseUrl = D
       </div>
       <div className="code-block">
         <pre className="p-4 overflow-x-auto text-sm leading-relaxed whitespace-pre" style={{ userSelect: "text" }}>
-          <code>{current}</code>
+          <code dangerouslySetInnerHTML={{ __html: highlighted }} />
         </pre>
       </div>
     </div>
