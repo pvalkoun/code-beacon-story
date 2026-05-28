@@ -3,6 +3,7 @@ import { getWebhookEndpoint, webhookFieldDocs, sampleEventPayloads } from "@/dat
 import { CodeBlock } from "@/components/CodeBlock";
 import { MethodBadge } from "@/components/MethodBadge";
 import { AuthTypesPanel } from "@/components/AuthTypesPanel";
+import { CodeSamplesPanel } from "@/components/CodeSamplesPanel";
 import type { WebhookFieldDoc } from "@/data/webhookData";
 
 function FieldTable({ title, fields }: { title: string; fields: WebhookFieldDoc[] }) {
@@ -114,10 +115,15 @@ export default function WebhookEndpointPage() {
         </>
       )}
 
-      {endpoint.requestBody && (
+      {(endpoint.requestBody || endpoint.method === "GET" || endpoint.method === "DELETE") && (
         <>
-          <h2>Request Body Example</h2>
-          <CodeBlock code={endpoint.requestBody} title="JSON" language="json" />
+          <h2>Request</h2>
+          <CodeSamplesPanel
+            method={endpoint.method}
+            path={endpoint.path}
+            headers={endpoint.headers}
+            body={endpoint.requestBody}
+          />
         </>
       )}
 
