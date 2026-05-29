@@ -198,7 +198,7 @@ export const webhookEndpoints: WebhookEndpoint[] = [
     "status_timestamp": "Fri, 4 Apr 2025 18:18:49 GMT"
   }
 }`,
-    responseStatus: 206,
+    responseStatus: 200,
   },
   {
     id: "wb-create-user",
