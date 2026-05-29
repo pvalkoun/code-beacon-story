@@ -462,6 +462,9 @@ export default function AnalyticsPage() {
         <h3 className="text-lg font-semibold mt-6 mb-2">Response Fields — SCP Service Metrics</h3>
         <ResponseFieldsTable fields={scpFields} />
 
+        <h2>Request</h2>
+        <CodeSamplesPanel method="GET" path="/ccid/analytics/v1/admin/account/{accountId}/tns" />
+
         <h2>Response Example</h2>
         <div className="flex items-center gap-2 mb-2">
           <span className="inline-flex items-center px-2 py-0.5 rounded text-xs font-bold bg-emerald-100 text-emerald-800">
