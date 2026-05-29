@@ -480,7 +480,7 @@ export const apiEndpoints: ApiEndpoint[] = [
   ],
   "billing": {
     "id": "user_enterprise_7",
-    "model": "TRANSACTION",
+    "model": "OTHER",
     "frequency": "MONTHLY"
   },
   "service": [
