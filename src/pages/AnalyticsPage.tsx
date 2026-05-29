@@ -406,7 +406,10 @@ export default function AnalyticsPage() {
         <ResponseFieldsTable fields={scpFields} />
 
         <h2>Request</h2>
-        <CodeSamplesPanel method="GET" path="/ccid/analytics/v1/admin/account/{accountId}/tn" />
+        <CodeSamplesPanel
+          method="GET"
+          path="/ccid/analytics/v1/admin/account/{accountId}/tn?tn=%2B15555555555&service=bcd&service=scp&start_time=2026-04-10T00%3A00%3A00Z&end_time=2026-04-29T23%3A59%3A59Z"
+        />
 
         <h2>Response Example</h2>
         <div className="flex items-center gap-2 mb-2">
@@ -463,7 +466,10 @@ export default function AnalyticsPage() {
         <ResponseFieldsTable fields={scpFields} />
 
         <h2>Request</h2>
-        <CodeSamplesPanel method="GET" path="/ccid/analytics/v1/admin/account/{accountId}/tns" />
+        <CodeSamplesPanel
+          method="GET"
+          path="/ccid/analytics/v1/admin/account/{accountId}/tns?service=scp&service=bcd&start_time=2026-04-10T00%3A00%3A00Z&end_time=2026-04-29T23%3A59%3A59Z"
+        />
 
         <h2>Response Example</h2>
         <div className="flex items-center gap-2 mb-2">
