@@ -2115,7 +2115,7 @@ export const apiEndpoints: ApiEndpoint[] = [
   "account_id": "x59tj8rtv1",
   "vetter": "NEUSTAR",
   "priority": 0,
-  "full_ownership": true,
+  "full_ownership": false,
   "owner_type": "enterprise",
   "parent_account_id": "x0vo1z7q11",
   "super_account_id": "x0vo1z7q11",
