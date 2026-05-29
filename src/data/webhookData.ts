@@ -72,7 +72,7 @@ export const webhookEndpoints: WebhookEndpoint[] = [
   ],
   "billing": {
     "id": "user_enterprise_7",
-    "model": "TRANSACTION",
+    "model": "OTHER",
     "frequency": "MONTHLY"
   },
   "service": [
@@ -138,7 +138,7 @@ export const webhookEndpoints: WebhookEndpoint[] = [
   ],
   "billing": {
     "id": "TUwilldefine",
-    "model": "TRANSACTION",
+    "model": "OTHER",
     "frequency": "MONTHLY"
   },
   "service": [
