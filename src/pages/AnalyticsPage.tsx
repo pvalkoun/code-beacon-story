@@ -1,4 +1,5 @@
 import { CodeBlock } from "@/components/CodeBlock";
+import { CodeSamplesPanel } from "@/components/CodeSamplesPanel";
 import { MethodBadge } from "@/components/MethodBadge";
 import { Link } from "react-router-dom";
 import { ArrowRight } from "lucide-react";
