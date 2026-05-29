@@ -2105,8 +2105,8 @@ export const apiEndpoints: ApiEndpoint[] = [
   },
   "caller_profile_id": "{{profileId}}",
   "label": [
-    "test$label1",
-    "test$label8"
+    "reallyimportantnumber",
+    "customercare"
   ]
 }`,
     responseBody: `{
