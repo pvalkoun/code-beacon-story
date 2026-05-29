@@ -2236,7 +2236,7 @@ For more information, see https://radix-ui.com/primitives/docs/components/${A.do
     "status": "PREVETTED",
     "status_timestamp": "Fri, 4 Apr 2025 18:18:49 GMT"
   }
-}`,responseStatus:206},{id:"wb-create-user",category:"Account Setup",name:"Create Webhook Admin User",method:"POST",path:"/ccid/aam/v2/admin/user",description:"Create a user in AAM and assign the WB_COMPANY_ADMIN role so they can register, update, test, and manage webhooks for the account. Webhook management APIs are protected by service-specific authorization — even existing company administrators must be explicitly granted the Webhook role. The company must already be subscribed to the Webhook service before this role can be assigned.",headers:[{key:"Content-Type",value:"application/json"}],requestBody:`{
+}`,responseStatus:200},{id:"wb-create-user",category:"Account Setup",name:"Create Webhook Admin User",method:"POST",path:"/ccid/aam/v2/admin/user",description:"Create a user in AAM and assign the WB_COMPANY_ADMIN role so they can register, update, test, and manage webhooks for the account. Webhook management APIs are protected by service-specific authorization — even existing company administrators must be explicitly granted the Webhook role. The company must already be subscribed to the Webhook service before this role can be assigned.",headers:[{key:"Content-Type",value:"application/json"}],requestBody:`{
   "user_id": "enterprise_company_admin_01",
   "user_name": "enterprise_company_admin_01",
   "company_id": "x0369a4otu",
