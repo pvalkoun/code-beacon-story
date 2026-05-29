@@ -2,6 +2,7 @@ import { useParams, Link } from "react-router-dom";
 import { getEndpointById } from "@/data/apiData";
 import { endpointFieldDocs } from "@/data/apiFieldDocs";
 import { CodeBlock } from "@/components/CodeBlock";
+import { CodeSamplesPanel } from "@/components/CodeSamplesPanel";
 import { MethodBadge } from "@/components/MethodBadge";
 import type { FieldDoc } from "@/data/apiFieldDocs";
 import { AlertTriangle } from "lucide-react";
@@ -196,10 +197,15 @@ export default function ApiEndpointPage() {
         <FieldTable title="Request Fields" fields={fieldDocs.requestFields} />
       )}
 
-      {endpoint.requestBody && (
+      {(endpoint.requestBody || endpoint.method === "GET" || endpoint.method === "DELETE") && (
         <>
-          <h2>Request Body Example</h2>
-          <CodeBlock code={endpoint.requestBody} title="JSON" language="json" />
+          <h2>Request</h2>
+          <CodeSamplesPanel
+            method={endpoint.method}
+            path={endpoint.path}
+            headers={endpoint.headers}
+            body={endpoint.requestBody}
+          />
         </>
       )}
 
