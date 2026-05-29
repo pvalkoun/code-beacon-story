@@ -542,8 +542,8 @@ export const apiEndpoints: ApiEndpoint[] = [
     "x0vo1z7q11"
   ],
   "billing": {
-    "id": "TUwilldefine",
-    "model": "TRANSACTION",
+    "id": "user_enterprise_7",
+    "model": "OTHER",
     "frequency": "MONTHLY"
   },
   "service": [
