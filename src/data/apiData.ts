@@ -1945,7 +1945,7 @@ export const apiEndpoints: ApiEndpoint[] = [
   {
     id: "create-tn-asset",
     category: "TN Assets",
-    name: "Create TN Account Asset",
+    name: "Create TN Asset",
     method: "POST",
     path: "/ccid/sdpr/v4/admin/account/{accountId}/orig/tcs/asset",
     description: "Register a telephone number (TN) as an asset on the account and associate it with a caller profile created in the previous step.",
@@ -2018,7 +2018,7 @@ export const apiEndpoints: ApiEndpoint[] = [
   {
     id: "create-tn-asset-byoc",
     category: "TN Assets",
-    name: "Create TN Account Asset (BYOC)",
+    name: "Create TN Asset (BYOC)",
     method: "POST",
     path: "/ccid/sdpr/v4/admin/account/{accountId}/orig/tcs/asset",
     description: "Register a telephone number as a Bring Your Own Carrier (BYOC) asset. Use full_ownership: false when the number is managed through a third-party carrier or CPaaS platform (e.g., Twilio, Genesys). BYOC numbers go through an additional vetting process.",
@@ -2091,7 +2091,7 @@ export const apiEndpoints: ApiEndpoint[] = [
   {
     id: "update-tn-asset",
     category: "TN Assets",
-    name: "Update TN Account Asset",
+    name: "Update TN Asset",
     method: "POST",
     path: "/ccid/sdpr/v4/admin/account/{accountId}/orig/tcs/asset/{tnAssetId}",
     description: "Update an existing TN asset, for example to change ownership type, labels, or reassign to a different caller profile.",
@@ -2170,7 +2170,7 @@ export const apiEndpoints: ApiEndpoint[] = [
   {
     id: "get-tn-asset",
     category: "TN Assets",
-    name: "Get TN Account Asset",
+    name: "Get TN Asset",
     method: "GET",
     path: "/ccid/sdpr/v4/admin/account/{accountId}/orig/tcs/asset/{assetId}",
     description: "Retrieve a specific TN asset by its ID, including vetting status, partner enablement data, and caller profile association.",
@@ -2234,7 +2234,7 @@ export const apiEndpoints: ApiEndpoint[] = [
   {
     id: "list-tn-assets",
     category: "TN Assets",
-    name: "List TN Account Assets",
+    name: "List TN Assets",
     method: "GET",
     path: "/ccid/sdpr/v4/admin/account/{accountId}/orig/tcs/asset",
     description: "List all TN assets for an account, including their states, vetting statuses, and partner data. Use the `limit` and `offset` query parameters to page through large result sets.",
@@ -2307,7 +2307,7 @@ export const apiEndpoints: ApiEndpoint[] = [
   {
     id: "delete-tn-asset",
     category: "TN Assets",
-    name: "Delete TN Account Asset",
+    name: "Delete TN Asset",
     method: "DELETE",
     path: "/ccid/sdpr/v4/admin/account/{accountId}/orig/tcs/asset/{tnAssetId}",
     description: "Remove a TN asset from an account. The TN will no longer be associated with any caller profile or service.",
