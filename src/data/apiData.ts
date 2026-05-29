@@ -153,7 +153,7 @@ export const apiEndpoints: ApiEndpoint[] = [
 }`,
     responseBody: `{
   "id": "xi0vhua3b4",
-  "name": "user_sample enterprise_1",
+  "name": "user_sample enterprise1",
   "type": "ENTERPRISE",
   "status": "ACTIVE",
   "relationship": "DIRECT",
@@ -533,42 +533,46 @@ export const apiEndpoints: ApiEndpoint[] = [
   }
 }`,
     responseBody: `{
-  "id": "xvm465a2g8",
-  "name": "user_enterprise_7",
+  "id": "xeb9ekoawz",
+  "name": "user_sample enterprise",
   "type": "ENTERPRISE",
   "status": "ACTIVE",
   "relationship": "DIRECT",
   "parent_account": [
-    "xgvaf00cx3"
+    "x0vo1z7q11"
   ],
   "billing": {
-    "id": "user_enterprise_7",
+    "id": "TUwilldefine",
     "model": "TRANSACTION",
     "frequency": "MONTHLY"
   },
   "service": [
     {
+      "type": "STIAS",
+      "id": "571578"
+    },
+    {
       "type": "SDPR",
-      "id": "xvm465a2g8"
+      "id": "xeb9ekoawz"
     }
   ],
-  "child_account_enabled": true,
-  "domain": "user_enterprise_7",
-  "comment": "example for tech enabler setup for 7th account",
+  "child_account_enabled": false,
+  "domain": "user.com",
+  "comment": "example for tech enabler setup",
   "contact": [
-    {
-      "first_name": "james",
-      "last_name": "bond",
-      "email": "james.bond@example.com",
-      "phone": "+1.7201234567",
-      "type": "PRIMARY"
-    },
     {
       "first_name": "charlie",
       "last_name": "bond",
       "email": "charlie.bond@example.com",
       "phone": "+1.1134567890",
       "type": "SECONDARY"
+    },
+    {
+      "first_name": "james",
+      "last_name": "bond",
+      "email": "james.bond@example.com",
+      "phone": "+1.7201234567",
+      "type": "PRIMARY"
     }
   ],
   "address": {
@@ -585,9 +589,9 @@ export const apiEndpoints: ApiEndpoint[] = [
     "TCS"
   ],
   "created_by": "user_v4_api_prod",
-  "created_date": "Thu, 19 Feb 2026 14:22:08 GMT",
+  "created_date": "Wed, 18 Feb 2026 21:06:14 GMT",
   "updated_by": "user_v4_api_prod",
-  "updated_date": "Wed, 25 Feb 2026 21:43:12 GMT",
+  "updated_date": "Wed, 18 Feb 2026 21:43:12 GMT",
   "ein": "123456789",
   "duns": "923456789",
   "name_alias": [
@@ -599,7 +603,7 @@ export const apiEndpoints: ApiEndpoint[] = [
     "status_timestamp": "Fri, 4 Apr 2025 18:18:49 GMT"
   }
 }`,
-    responseStatus: 200,
+    responseStatus: 206,
     product: ["common"]
   },
   {
@@ -1967,7 +1971,7 @@ export const apiEndpoints: ApiEndpoint[] = [
   "super_account_id": "x0vo1z7q11",
   "tn": {
     "orig": {
-      "start": "+1.5715550123",
+      "start": "+1.5555855555",
       "count": 1
     }
   },
@@ -2040,7 +2044,7 @@ export const apiEndpoints: ApiEndpoint[] = [
   "super_account_id": "x0vo1z7q11",
   "tn": {
     "orig": {
-      "start": "+1.5555855555",
+      "start": "+1.5555655555",
       "count": 1
     }
   },
@@ -2105,9 +2109,9 @@ export const apiEndpoints: ApiEndpoint[] = [
   "id": "69aa0525232c112395eb458e",
   "state": "ACTIVE",
   "account_id": "x59tj8rtv1",
-  "vetter": "CARRIER",
+  "vetter": "NEUSTAR",
   "priority": 0,
-  "full_ownership": false,
+  "full_ownership": true,
   "owner_type": "enterprise",
   "parent_account_id": "x0vo1z7q11",
   "super_account_id": "x0vo1z7q11",
@@ -2118,8 +2122,8 @@ export const apiEndpoints: ApiEndpoint[] = [
     }
   },
   "label": [
-    "test$label1",
-    "test$label8"
+    "reallyimportantnumber",
+    "customercare"
   ],
   "vetting": {
     "request_timestamp": "Thu, 5 Mar 2026 22:35:17 GMT",
@@ -2168,18 +2172,18 @@ export const apiEndpoints: ApiEndpoint[] = [
     description: "Retrieve a specific TN asset by its ID, including vetting status, partner enablement data, and caller profile association.",
     headers: [{ key: "Accept", value: "application/json" }],
     responseBody: `{
-  "id": "69aa0525232c112395eb458e",
+  "id": "69a088f66ccc0121aeb816d2",
   "state": "ACTIVE",
   "account_id": "x59tj8rtv1",
   "vetter": "CARRIER",
   "priority": 0,
-  "full_ownership": true,
+  "full_ownership": false,
   "owner_type": "enterprise",
   "parent_account_id": "x0vo1z7q11",
   "super_account_id": "x0vo1z7q11",
   "tn": {
     "orig": {
-      "start": "+1.5715550123",
+      "start": "+1.5555555555",
       "count": 1
     }
   },
@@ -2237,21 +2241,21 @@ export const apiEndpoints: ApiEndpoint[] = [
     ],
     responseBody: `[
   {
-    "id": "69aa0525232c112395eb458e",
-    "state": "ACTIVE",
+    "id": "69a088f66ccc0121aeb816d2",
+    "state": "VETTING",
     "type": "tcstn",
     "version": "v4",
     "account_id": "x59tj8rtv1",
     "account_name": "user_sample enterprise1",
-    "vetter": "CARRIER",
+    "vetter": "NEUSTAR",
     "priority": 0,
-    "full_ownership": true,
+    "full_ownership": false,
     "owner_type": "enterprise",
     "parent_account_id": "x0vo1z7q11",
     "super_account_id": "x0vo1z7q11",
     "tn": {
       "orig": {
-        "start": "+1.5715550123",
+        "start": "+1.5555555555",
         "count": 1
       }
     },
