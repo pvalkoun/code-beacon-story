@@ -1,4 +1,5 @@
 import { CodeBlock } from "@/components/CodeBlock";
+import { CodeSamplesPanel } from "@/components/CodeSamplesPanel";
 import { MethodBadge } from "@/components/MethodBadge";
 import { Link } from "react-router-dom";
 import { ArrowRight } from "lucide-react";
@@ -368,8 +369,10 @@ export default function AnalyticsPage() {
             <MethodBadge method="POST" />
             <code className="text-sm font-mono">/ccid/aam/v1/login</code>
           </div>
-          <CodeBlock code={loginRequest} title="Request Body" language="json" />
+          <h3 className="text-base font-semibold mt-4 mb-2">Request</h3>
+          <CodeSamplesPanel method="POST" path="/ccid/aam/v1/login" body={loginRequest} />
           <CodeBlock code={loginResponse} title="Response — 200" language="json" />
+
           <Button asChild variant="link" size="sm" className="mt-2 px-0">
             <Link to="/products/bcd/api/auth-token">
               View full API reference <ArrowRight className="ml-1 h-3 w-3" />
@@ -401,6 +404,9 @@ export default function AnalyticsPage() {
 
         <h3 className="text-lg font-semibold mt-6 mb-2">Response Fields — SCP Service Metrics</h3>
         <ResponseFieldsTable fields={scpFields} />
+
+        <h2>Request</h2>
+        <CodeSamplesPanel method="GET" path="/ccid/analytics/v1/admin/account/{accountId}/tn" />
 
         <h2>Response Example</h2>
         <div className="flex items-center gap-2 mb-2">
@@ -455,6 +461,9 @@ export default function AnalyticsPage() {
 
         <h3 className="text-lg font-semibold mt-6 mb-2">Response Fields — SCP Service Metrics</h3>
         <ResponseFieldsTable fields={scpFields} />
+
+        <h2>Request</h2>
+        <CodeSamplesPanel method="GET" path="/ccid/analytics/v1/admin/account/{accountId}/tns" />
 
         <h2>Response Example</h2>
         <div className="flex items-center gap-2 mb-2">
