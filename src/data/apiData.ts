@@ -470,42 +470,46 @@ export const apiEndpoints: ApiEndpoint[] = [
     description: "Update an existing account's details including contacts, address, billing configuration, vetting information, and more.",
     headers: [{ key: "Content-Type", value: "application/json" }, { key: "Accept", value: "application/json" }],
     requestBody: `{
-  "id": "xvm465a2g8",
-  "name": "user_enterprise_7",
+  "id": "xeb9ekoawz",
+  "name": "user_sample enterprise",
   "type": "ENTERPRISE",
   "status": "ACTIVE",
   "relationship": "DIRECT",
   "parent_account": [
-    "xgvaf00cx3"
+    "x0vo1z7q11"
   ],
   "billing": {
-    "id": "user_enterprise_7",
+    "id": "TUwilldefine",
     "model": "OTHER",
     "frequency": "MONTHLY"
   },
   "service": [
     {
+      "type": "STIAS",
+      "id": "571578"
+    },
+    {
       "type": "SDPR",
-      "id": "xvm465a2g8"
+      "id": "xeb9ekoawz"
     }
   ],
-  "child_account_enabled": true,
-  "domain": "user_enterprise_7",
-  "comment": "example for tech enabler setup for 7th account",
+  "child_account_enabled": false,
+  "domain": "user.com",
+  "comment": "example for tech enabler setup",
   "contact": [
-    {
-      "first_name": "james",
-      "last_name": "bond",
-      "email": "james.bond@example.com",
-      "phone": "+1.7201234567",
-      "type": "PRIMARY"
-    },
     {
       "first_name": "charlie",
       "last_name": "bond",
       "email": "charlie.bond@example.com",
       "phone": "+1.1134567890",
       "type": "SECONDARY"
+    },
+    {
+      "first_name": "james",
+      "last_name": "bond",
+      "email": "james.bond@example.com",
+      "phone": "+1.7201234567",
+      "type": "PRIMARY"
     }
   ],
   "address": {
