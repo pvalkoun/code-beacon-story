@@ -369,8 +369,10 @@ export default function AnalyticsPage() {
             <MethodBadge method="POST" />
             <code className="text-sm font-mono">/ccid/aam/v1/login</code>
           </div>
-          <CodeBlock code={loginRequest} title="Request Body" language="json" />
+          <h3 className="text-base font-semibold mt-4 mb-2">Request</h3>
+          <CodeSamplesPanel method="POST" path="/ccid/aam/v1/login" body={loginRequest} />
           <CodeBlock code={loginResponse} title="Response — 200" language="json" />
+
           <Button asChild variant="link" size="sm" className="mt-2 px-0">
             <Link to="/products/bcd/api/auth-token">
               View full API reference <ArrowRight className="ml-1 h-3 w-3" />
