@@ -2,6 +2,7 @@ import { useParams, Link } from "react-router-dom";
 import { getEndpointById } from "@/data/apiData";
 import { endpointFieldDocs } from "@/data/apiFieldDocs";
 import { CodeBlock } from "@/components/CodeBlock";
+import { CodeSamplesPanel } from "@/components/CodeSamplesPanel";
 import { MethodBadge } from "@/components/MethodBadge";
 import type { FieldDoc } from "@/data/apiFieldDocs";
 import { AlertTriangle } from "lucide-react";
