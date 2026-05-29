@@ -1967,7 +1967,7 @@ export const apiEndpoints: ApiEndpoint[] = [
   "id": "69aa0525232c112395eb458e",
   "state": "ACTIVE",
   "account_id": "x59tj8rtv1",
-  "vetter": "CARRIER",
+  "vetter": "NEUSTAR",
   "priority": 0,
   "full_ownership": true,
   "owner_type": "enterprise",
@@ -2105,8 +2105,8 @@ export const apiEndpoints: ApiEndpoint[] = [
   },
   "caller_profile_id": "{{profileId}}",
   "label": [
-    "test$label1",
-    "test$label8"
+    "reallyimportantnumber",
+    "customercare"
   ]
 }`,
     responseBody: `{
@@ -2179,7 +2179,7 @@ export const apiEndpoints: ApiEndpoint[] = [
   "id": "69a088f66ccc0121aeb816d2",
   "state": "ACTIVE",
   "account_id": "x59tj8rtv1",
-  "vetter": "CARRIER",
+  "vetter": "NEUSTAR",
   "priority": 0,
   "full_ownership": false,
   "owner_type": "enterprise",
