@@ -321,7 +321,11 @@ function ResponseFieldsTable({ fields }: { fields: { name: string; type: string;
           ))}
         </tbody>
       </table>
-    </div>
+      </div>
+
+      <BaseUrlPanel note="All Analytics API endpoints below are relative to the base URL for your region and environment." />
+
+
   );
 }
 
