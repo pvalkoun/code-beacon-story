@@ -1,6 +1,7 @@
 import { CodeBlock } from "@/components/CodeBlock";
 import { CodeSamplesPanel } from "@/components/CodeSamplesPanel";
 import { MethodBadge } from "@/components/MethodBadge";
+import { BaseUrlPanel } from "@/components/BaseUrlPanel";
 import { Link } from "react-router-dom";
 import { ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -324,6 +325,7 @@ function ResponseFieldsTable({ fields }: { fields: { name: string; type: string;
   );
 }
 
+
 export default function AnalyticsPage() {
   return (
     <div className="docs-prose">
@@ -352,6 +354,11 @@ export default function AnalyticsPage() {
           </p>
         </div>
       </div>
+
+      <h2>Base URLs</h2>
+      <BaseUrlPanel note="All Analytics API endpoints below are relative to the base URL for your region and environment." />
+
+
 
       {/* ── Authentication ── */}
       <div className="border-t pt-8 mt-8">
