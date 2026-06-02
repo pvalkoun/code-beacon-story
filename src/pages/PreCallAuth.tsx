@@ -54,9 +54,59 @@ const PreCallAuth = () => {
         </table>
       </div>
 
-      <h2>Base URL</h2>
-      <p>All requests must be made over HTTPS. Plain HTTP is rejected. TLS 1.2 or higher is required.</p>
+      <h2>Base URLs</h2>
+      <p>
+        All requests must be made over HTTPS. Plain HTTP is rejected. TLS 1.2 or higher is required.
+        Choose the endpoint that matches your originating region. The path suffix
+        <code>/ccid/authn/v2</code> is identical across all endpoints.
+      </p>
+
+      <h3>US — Low-Latency (recommended for US traffic)</h3>
+      <p>
+        Geo-routed endpoint that resolves to the IP closest to the call originator. Use this for
+        US-based traffic when you want the lowest possible round-trip time.
+      </p>
       <CodeBlock code="https://tcs.ccid.neustar.biz/ccid/authn/v2" />
+
+      <h3>US — Standard</h3>
+      <p>
+        Standard US endpoint. Use this when you require a fixed regional endpoint (for example, for
+        firewall allowlisting) rather than geo-routed resolution.
+      </p>
+      <CodeBlock code="https://authn.ccid.neustar.biz/ccid/authn/v2" />
+
+      <h3>Canada</h3>
+      <p>Standard endpoint for Canadian originating traffic.</p>
+      <CodeBlock code="https://authn-ca.ccid.neustar.biz/ccid/authn/v2" />
+
+      <div className="overflow-x-auto mt-4">
+        <table className="w-full text-sm border-collapse">
+          <thead>
+            <tr className="border-b">
+              <th className="text-left py-2 px-3 font-semibold">Region</th>
+              <th className="text-left py-2 px-3 font-semibold">Type</th>
+              <th className="text-left py-2 px-3 font-semibold">Host</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr className="border-b">
+              <td className="py-2 px-3">US</td>
+              <td className="py-2 px-3 text-muted-foreground">Low-latency (geo-routed)</td>
+              <td className="py-2 px-3 font-mono text-xs">tcs.ccid.neustar.biz</td>
+            </tr>
+            <tr className="border-b">
+              <td className="py-2 px-3">US</td>
+              <td className="py-2 px-3 text-muted-foreground">Standard</td>
+              <td className="py-2 px-3 font-mono text-xs">authn.ccid.neustar.biz</td>
+            </tr>
+            <tr className="border-b last:border-b-0">
+              <td className="py-2 px-3">Canada</td>
+              <td className="py-2 px-3 text-muted-foreground">Standard</td>
+              <td className="py-2 px-3 font-mono text-xs">authn-ca.ccid.neustar.biz</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
 
       <div className="flex items-start gap-3 p-4 my-4 rounded-lg border border-accent bg-accent/10">
         <AlertTriangle className="h-5 w-5 text-accent-foreground mt-0.5 shrink-0" />
