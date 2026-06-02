@@ -355,6 +355,11 @@ export default function AnalyticsPage() {
         </div>
       </div>
 
+      <h2>Base URLs</h2>
+      <BaseUrlPanel note="All Analytics API endpoints below are relative to the base URL for your region and environment." />
+
+
+
       {/* ── Authentication ── */}
       <div className="border-t pt-8 mt-8">
         <div className="flex items-center gap-3 mb-3">
