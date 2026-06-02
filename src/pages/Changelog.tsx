@@ -17,9 +17,6 @@ const changelog: ChangelogEntry[] = [
     description:
       "Release date: August 1, 2026. All services described in this guide will be available in Canada. Impacted areas include Call Authentication (new Canadian authentication endpoint at authn-ca.ccid.neustar.biz), Service Provisioning (new Canadian base URLs for Production and UAT/Sandbox environments), and carrier partner distribution for all services (CCID, CNO, BCD, and SCP) extended to Canadian carriers.",
     tags: ["Canada", "Regional", "Availability"],
-    links: [
-      { label: "Call Authentication", to: "/products/ccid/api/pre-call-auth" },
-    ],
   },
   {
     date: "2026-04-28",
