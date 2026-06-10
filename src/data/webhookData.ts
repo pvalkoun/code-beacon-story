@@ -919,9 +919,9 @@ export const sampleEventPayloads = {
   },
   "data": [
     {
-      "type": "vetting_status",
-      "current_status": "VETTING_SUCCESSFUL",
-      "previous_status": "VETTING_EXCEPTION"
+      "type": "partner_status",
+      "current_status": "ENABLE_COMPLETED",
+      "previous_status": "ENABLE_PROCESSING"
     }
   ],
   "retryPolicy": {
